@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volt Impact Cards – Pokémon TCG</title>
+  <meta name="description" content="Prodej a přeprodej karet Pokémon TCG. Prozkouměte naši aktuální nabídku bulků a singlů." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080810;
+      --bg2:       #0e0e1a;
+      --surface:   rgba(255,255,255,0.04);
+      --surface2:  rgba(255,255,255,0.07);
+      --border:    rgba(255,255,255,0.08);
+      --border2:   rgba(255,255,255,0.14);
+      --yellow:    #f5c518;
+      --yellow2:   #ffd740;
+      --blue:      #4fc3f7;
+      --white:     #ffffff;
+      --grey:      #8a8a9a;
+      --radius:    16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,8,16,0.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 40px; height: 64px; gap: 12px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 40px; width: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(245,197,24,0.55)); }
+    .nav-logo-text { font-size: 0.95rem; font-weight: 800; color: var(--white); letter-spacing: 1.5px; text-transform: uppercase; }
+    .nav-logo-text span { color: var(--yellow); }
+    nav ul { list-style: none; display: flex; gap: 8px; margin-left: auto; }
+    nav ul a { color: var(--grey); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; transition: color .2s, background .2s; }
+    nav ul a:hover { color: var(--white); background: var(--surface2); }
+
+    /* ── HERO ── */
+    .hero { position: relative; text-align: center; padding: 100px 20px 80px; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse, rgba(245,197,24,0.08) 0%, rgba(79,195,247,0.05) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,197,24,0.3), transparent);
+    }
+    .hero-logo {
+      width: 240px; height: 240px; object-fit: contain; margin: 0 auto 32px;
+      display: block; filter: drop-shadow(0 0 18px rgba(245,197,24,0.5)) drop-shadow(0 0 6px rgba(245,197,24,0.3));
+      filter: drop-shadow(0 0 50px rgba(245,197,24,0.55)) drop-shadow(0 0 20px rgba(79,195,247,0.35));
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.25); color: var(--yellow);
+      font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 20px; letter-spacing: 0.8px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 900; margin-bottom: 18px;
+      letter-spacing: -1.5px; line-height: 1.1;
+      background: linear-gradient(135deg, #fff 40%, #c8c8d8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--yellow), var(--yellow2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { color: var(--grey); font-size: 1.05rem; max-width: 440px; margin: 0 auto 40px; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow); color: #000; font-weight: 700; font-size: 0.9rem;
+      padding: 13px 28px; border-radius: 40px; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,197,24,0.35); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid var(--border2); color: var(--white);
+      font-weight: 600; font-size: 0.9rem; padding: 13px 28px; border-radius: 40px; text-decoration: none;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .btn-secondary:hover { background: var(--surface2); border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 0;
+      padding: 0 40px; margin: 60px auto 0; max-width: 700px;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--surface); backdrop-filter: blur(10px); overflow: hidden;
+    }
+    .stat-item { flex: 1; padding: 20px 24px; text-align: center; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 0.75rem; color: var(--grey); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 500; }
+
+    /* ── HERO STRIP ── */
+    .hero-strip { display: flex; gap: 4px; overflow: hidden; height: 200px; margin-top: 80px; position: relative; }
+    .hero-strip::before,.hero-strip::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+    }
+    .hero-strip::before { left: 0; background: linear-gradient(90deg,var(--bg),transparent); }
+    .hero-strip::after  { right: 0; background: linear-gradient(-90deg,var(--bg),transparent); }
+    .hero-strip-img { flex: 1; object-fit: cover; filter: brightness(0.5) saturate(0.7); transition: filter .4s; border-radius: 4px; }
+    .hero-strip-img:hover { filter: brightness(0.8) saturate(1); }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 40px; position: relative; z-index: 1; }
+    .section-header { margin-bottom: 40px; }
+    .section-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--yellow); margin-bottom: 10px; }
+    .section-title { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+    .section-title span { color: var(--yellow); }
+    .section-sub { color: var(--grey); font-size: 0.95rem; margin-top: 8px; }
+    .section-divider { height: 1px; background: linear-gradient(90deg,transparent,var(--border2),transparent); margin: 0 40px; }
+
+    /* ── FILTRY ── */
+    .filters {
+      display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 32px; align-items: flex-start;
+    }
+    .filter-group { display: flex; flex-direction: column; gap: 8px; }
+    .filter-group-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--grey);
+    }
+    .filter-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill {
+      padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+      border: 1px solid var(--border2); background: var(--surface);
+      color: var(--grey); cursor: pointer; transition: all .2s; user-select: none;
+    }
+    .pill:hover { border-color: rgba(245,197,24,0.4); color: var(--white); }
+    .pill.active {
+      background: rgba(245,197,24,0.12); border-color: rgba(245,197,24,0.5);
+      color: var(--yellow);
+    }
+    .filter-count {
+      font-size: 0.78rem; color: var(--grey); margin-bottom: 8px; margin-top: -8px;
+    }
+    .filter-count span { color: var(--yellow); font-weight: 700; }
+    .product-card.hidden { display: none; }
+    .no-results {
+      display: none; grid-column: 1/-1; text-align: center;
+      padding: 60px 20px; color: var(--grey);
+    }
+    .no-results.show { display: block; }
+    .no-results svg { opacity: 0.3; margin-bottom: 12px; }
+    .no-results p { font-size: 0.95rem; }
+    .no-results small { font-size: 0.82rem; opacity: 0.6; }
+
+    /* ── PRODUCT CARDS ── */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 16px; }
+    .product-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; cursor: pointer;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      backdrop-filter: blur(8px);
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(245,197,24,0.3);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,197,24,0.1);
+    }
+    .product-img-wrap { position: relative; height: 210px; background: #0c0c18; overflow: hidden; }
+    .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+    .stock-badge {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(0,0,0,0.85); color: var(--white);
+      font-size: 0.7rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid var(--border2); backdrop-filter: blur(4px);
+    }
+    .product-type-badge {
+      position: absolute; bottom: 10px; left: 10px;
+      background: rgba(245,197,24,0.15); color: var(--yellow);
+      font-size: 0.65rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; border: 1px solid rgba(245,197,24,0.25);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .product-info { padding: 16px 18px 18px; }
+    .product-info h3 { font-size: 0.88rem; font-weight: 500; color: #c8c8d8; margin-bottom: 10px; line-height: 1.4; }
+    .product-price { font-size: 1.4rem; font-weight: 800; color: var(--yellow); letter-spacing: -0.5px; }
+    .product-price small { font-size: 0.8rem; font-weight: 600; opacity: 0.7; }
+    .click-hint { font-size: 0.72rem; color: var(--grey); margin-top: 8px; display: flex; align-items: center; gap: 4px; }
+
+    /* ── SINGLES SECTION ── */
+    .singles-section { background: radial-gradient(ellipse at 50% 0%, rgba(79,195,247,0.05) 0%, transparent 60%); }
+    .singles-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 16px; }
+    .single-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; cursor: pointer;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .single-card:hover { transform: translateY(-5px); border-color: rgba(79,195,247,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .single-img-wrap { height: 260px; background: #0c0c18; overflow: hidden; }
+    .single-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .4s; }
+    .single-card:hover .single-img-wrap img { transform: scale(1.06); }
+    .single-info { padding: 12px 14px 16px; }
+    .single-info h3 { font-size: 0.82rem; font-weight: 500; color: #b0b0c0; margin-bottom: 8px; line-height: 1.3; }
+    .single-price { font-size: 1.15rem; font-weight: 800; color: var(--blue); }
+    .single-price small { font-size: 0.78rem; font-weight: 600; opacity: 0.7; }
+
+    /* ── ORDER CTA ── */
+    .order-section { background: linear-gradient(135deg,rgba(245,197,24,0.06) 0%,rgba(79,195,247,0.04) 100%); border-top: 1px solid var(--border); padding: 48px 40px; text-align: center; }
+    .order-section h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+    .order-section p { color: var(--grey); font-size: 0.95rem; margin-bottom: 24px; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 400;
+      background: rgba(0,0,0,0.97);
+      align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw; max-height: 92vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+      animation: modalIn .2s ease;
+      cursor: zoom-out;
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; cursor: pointer; border-radius: 50%;
+      width: 44px; height: 44px; font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-hint {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.4); font-size: 0.78rem; letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #111120; border: 1px solid var(--border2);
+      border-radius: 20px; max-width: 700px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+      animation: modalIn .25s ease;
+    }
+    @keyframes modalIn { from{opacity:0;transform:scale(0.95) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
+    .modal-img {
+      width: 100%; height: 320px; object-fit: cover; border-radius: 20px 20px 0 0;
+      cursor: zoom-in; transition: filter .2s;
+    }
+    .modal-img:hover { filter: brightness(1.08); }
+    .modal-body { padding: 28px 32px 32px; }
+    .modal-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge-original {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(79,195,247,0.12); border: 1px solid rgba(79,195,247,0.3); color: var(--blue);
+      font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .badge-set {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.25); color: var(--yellow);
+      font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .modal-price { font-size: 2rem; font-weight: 900; color: var(--yellow); letter-spacing: -1px; margin-bottom: 20px; }
+    .modal-price small { font-size: 1.1rem; font-weight: 600; opacity: 0.7; }
+    .modal-desc { color: #b0b0c0; font-size: 0.9rem; line-height: 1.7; margin-bottom: 24px; }
+    .modal-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+    .modal-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.88rem; color: #c0c0d0;
+    }
+    .modal-feature svg { color: var(--yellow); flex-shrink: 0; }
+    .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+      color: var(--white); cursor: pointer; border-radius: 50%;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: background .2s; z-index: 10;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.15); }
+    .modal-wrapper { position: relative; }
+
+
+    /* ── MODAL GALLERY ── */
+    .modal-gallery { position: relative; }
+    .gallery-main-img {
+      width: 100%; height: 320px; object-fit: cover;
+      border-radius: 20px 20px 0 0;
+      cursor: zoom-in; transition: opacity .18s;
+      display: block;
+    }
+    .gallery-thumbs {
+      display: flex; gap: 6px; padding: 8px 10px;
+      background: rgba(0,0,0,0.35); overflow-x: auto;
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .gallery-thumbs:empty { display: none; }
+    .gallery-thumb {
+      width: 68px; height: 68px; object-fit: cover;
+      border-radius: 8px; cursor: pointer; flex-shrink: 0;
+      opacity: 0.5; border: 2px solid transparent;
+      transition: opacity .2s, border-color .2s;
+    }
+    .gallery-thumb:hover { opacity: 0.8; }
+    .gallery-thumb.active { opacity: 1; border-color: var(--yellow); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 56px 40px 36px; }
+    .footer-inner { max-width: 900px; margin: 0 auto; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .footer-logo img { height: 36px; width: auto; }
+    .footer-logo-text { font-size: 1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+    .footer-logo-text span { color: var(--yellow); }
+    .footer-tagline { color: var(--grey); font-size: 0.88rem; margin-bottom: 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); margin-bottom: 16px; }
+    .contact-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #c0c0d0; text-decoration: none; margin-bottom: 12px; transition: color .2s; }
+    .contact-item:hover { color: var(--white); }
+    .contact-item svg, .delivery-item svg { opacity: 0.6; flex-shrink: 0; }
+    .delivery-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #c0c0d0; margin-bottom: 12px; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .copyright { font-size: 0.8rem; color: #444455; }
+    .footer-disclaimer { font-size: 0.75rem; color: #333344; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; } section { padding: 60px 20px; } .hero { padding: 70px 20px 60px; }
+      .hero-strip { height: 140px; margin-top: 60px; }
+      .stats-bar { flex-direction: column; margin: 40px 20px 0; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      footer { padding: 40px 20px 28px; } .order-section { padding: 40px 20px; }
+      .section-divider { margin: 0 20px; } .modal-body { padding: 20px 20px 24px; }
+      .modal-img { height: 220px; }
+    }
+    @media (max-width: 480px) {
+      nav ul { display: none; }
+      .stats-bar { margin: 32px 0 0; border-radius: 0; border-left: none; border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()"/>
+  <div class="lightbox-hint">Kliknutím nebo klávesou ESC zavřít</div>
+</div>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-wrapper">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal" id="modal-inner">
+      <div class="modal-gallery" id="modal-gallery">
+        <img class="gallery-main-img" id="modal-img" src="" alt="" onclick="openLightbox(this.src, this.alt)" title="Kliknutím přiblížit"/>
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-badges" id="modal-badges"></div>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-price" id="modal-price"></div>
+        <div class="modal-desc" id="modal-desc"></div>
+        <div class="modal-features" id="modal-features"></div>
+        <div class="modal-actions">
+          <a href="mailto:voltimpactcards@gmail.com" class="btn-primary" id="modal-order">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Mám zájem
+          </a>
+          <a href="https://wa.me/420773873032" class="btn-secondary" target="_blank" rel="noopener">
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="img/logo_nav.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
+    <span class="nav-logo-text">Volt Impact <span>Cards</span></span>
+  </a>
+  <ul>
+    <li><a href="#bulk">Bulk</a></li>
+    <li><a href="#singles">Singl</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <img class="hero-logo" src="img/logo.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
+  <div class="hero-tag">
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+    Pokémon TCG
+  </div>
+  <h1>Volt Impact<br><span class="accent">Cards</span></h1>
+  <p>Prémiový výběr Pokémon karet pro sběratele i hráče. Bulk sety, singl karty a vzácné kousky.</p>
+  <div class="hero-cta">
+    <a href="#bulk" class="btn-primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Prohlédnout nabídku
+    </a>
+    <a href="#kontakt" class="btn-secondary">Kontakt</a>
+  </div>
+</section>
+
+<!-- ── BULK NABÍDKA ── -->
+<section id="bulk">
+  <div class="section-header">
+    <div class="section-tag">↓ Nabídka</div>
+    <h2 class="section-title">Bulk <span>sety</span></h2>
+    <p class="section-sub">Kompletní sety a mix balíčky — klikněte pro detail</p>
+  </div>
+
+  <!-- FILTRY -->
+  <div class="filters">
+    <div class="filter-group">
+      <div class="filter-group-label">Cena</div>
+      <div class="filter-pills" id="filter-price">
+        <div class="pill active" data-filter="price" data-value="all">Vše</div>
+        <div class="pill" data-filter="price" data-value="0-200">Do 200 Kč</div>
+        <div class="pill" data-filter="price" data-value="200-400">200–400 Kč</div>
+        <div class="pill" data-filter="price" data-value="400+">Nad 400 Kč</div>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-label">Série</div>
+      <div class="filter-pills" id="filter-series">
+        <div class="pill active" data-filter="series" data-value="all">Vše</div>
+        <div class="pill" data-filter="series" data-value="sv151">SV: 151</div>
+        <div class="pill" data-filter="series" data-value="sfa">Shrouded Fable</div>
+        <div class="pill" data-filter="series" data-value="flames">Phantasmal Flames</div>
+        <div class="pill" data-filter="series" data-value="japan">Japan</div>
+        <div class="pill" data-filter="series" data-value="mega">Mega Evolutions</div>
+      </div>
+    </div>
+  </div>
+  <div class="filter-count" id="filter-count">Zobrazeno <span id="count-num">…</span> z <span id="count-total">…</span> produktů</div>
+
+  <div class="product-grid" id="product-grid">
+    <div class="no-results" id="no-results">
+      <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <p>Žádné produkty neodpovídají filtru</p>
+      <small>Zkus jiná kritéria nebo zobraz vše</small>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── SINGL NABÍDKA ── -->
+<section id="singles" class="singles-section">
+  <div class="section-header">
+    <div class="section-tag">✦ Singl karty</div>
+    <h2 class="section-title">Singl <span>karty</span></h2>
+    <p class="section-sub">Vybrané karty pro doplnění kolekce — klikněte pro detail</p>
+  </div>
+  <div class="singles-grid" id="singles-grid"></div>
+</section>
+
+<!-- ── ORDER CTA ── -->
+<section class="order-section">
+  <h3>Zájem o karty?</h3>
+  <p>Napište nám — odpovídáme rychle na e-mail i WhatsApp.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a href="mailto:voltimpactcards@gmail.com" class="btn-primary">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Napsat e-mail
+    </a>
+    <a href="https://wa.me/420773873032" class="btn-secondary" target="_blank" rel="noopener">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="kontakt">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="img/logo_nav.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
+      <span class="footer-logo-text">Volt Impact <span>Cards</span></span>
+    </div>
+    <p class="footer-tagline">Pokémon TCG — Brno / Vyškov &amp; celá ČR</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="mailto:voltimpactcards@gmail.com" class="contact-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          voltimpactcards@gmail.com
+        </a>
+        <a href="tel:+420773873032" class="contact-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.92 1.18 2 2 0 012.92 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +420 773 873 032
+        </a>
+        <a href="https://wa.me/420773873032" class="contact-item" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Doprava &amp; předání</h4>
+        <div class="delivery-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Osobní předání Brno / Vyškov
+        </div>
+        <div class="delivery-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Zásilkovna / Balíkovna po celé ČR
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="copyright">© 2026 Volt Impact Cards. Všechna práva vyhrazena.</span>
+      <span class="footer-disclaimer">Nejsme partnerem ani sponzorem The Pokémon Company.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── GALLERY ──
+let _galleryImgs = [];
+let _galleryIdx = 0;
+
+function gallerySelect(idx) {
+  _galleryIdx = idx;
+  const img = document.getElementById('modal-img');
+  img.style.opacity = '0';
+  setTimeout(() => { img.src = _galleryImgs[idx]; img.style.opacity = '1'; }, 140);
+  document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+
+function openModal(data) {
+  const imgs = data.imgs || (data.img ? [data.img] : []);
+  _galleryImgs = imgs;
+  _galleryIdx = 0;
+
+  const img = document.getElementById('modal-img');
+  img.src = imgs[0] || '';
+  img.alt = data.title;
+  img.style.opacity = '1';
+
+  // Thumbnails
+  const thumbsEl = document.getElementById('gallery-thumbs');
+  thumbsEl.innerHTML = imgs.length > 1 ? imgs.map((src, i) =>
+    `<img class="gallery-thumb${i===0?' active':''}" src="${src}" alt="" onclick="gallerySelect(${i})"/>`
+  ).join('') : '';
+
+  document.getElementById('modal-title').textContent = data.title;
+  document.getElementById('modal-price').innerHTML = data.price + ' <small>Kč</small>';
+  document.getElementById('modal-desc').innerHTML = data.desc;
+
+  // Badges
+  document.getElementById('modal-badges').innerHTML =
+    '<span class="badge-original"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Originální karty</span>' +
+    '<span class="badge-set">' + data.set + '</span>' +
+    '<span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#ccc;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px">Skladem: ' + data.stock + '</span>';
+
+  // Features
+  document.getElementById('modal-features').innerHTML = data.features.map(f =>
+    '<div class="modal-feature"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' + f + '</div>'
+  ).join('');
+
+  // Email subject
+  document.getElementById('modal-order').href =
+    'mailto:voltimpactcards@gmail.com?subject=Zájem o: ' + encodeURIComponent(data.title) + '&body=Dobrý den, mám zájem o: ' + encodeURIComponent(data.title) + '%0A%0APočet kusů: 1%0A%0AKontakt:';
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── FILTRY ──
+const activeFilters = { price: 'all', series: 'all' };
+
+document.querySelectorAll('.pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const group = pill.dataset.filter;
+    const value = pill.dataset.value;
+    activeFilters[group] = value;
+
+    // Aktualizuj aktivní pill
+    document.querySelectorAll(`.pill[data-filter="${group}"]`).forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+
+    applyFilters();
+  });
+});
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.product-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const price = parseInt(card.dataset.price);
+    const series = card.dataset.series || '';
+
+    const priceOk = checkPrice(price, activeFilters.price);
+    const seriesOk = activeFilters.series === 'all' || series.includes(activeFilters.series);
+
+    if (priceOk && seriesOk) {
+      card.classList.remove('hidden');
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('count-num').textContent = visible;
+  document.getElementById('no-results').classList.toggle('show', visible === 0);
+}
+
+function checkPrice(price, filter) {
+  if (filter === 'all') return true;
+  if (filter === '0-200') return price <= 200;
+  if (filter === '200-400') return price > 200 && price <= 400;
+  if (filter === '400+') return price > 400;
+  return true;
+}
+
+function openLightbox(src, alt) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt || '';
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+// ── NAČTENÍ PRODUKTŮ Z products.json ──
+const HINT_SVG = '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>';
+
+let _allProducts = [];
+
+function buildBulkCard(p) {
+  const stockStr = p.stock + ' ks';
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, set:p.set, type:p.type, desc:p.desc, features:p.features});
+  return `<div class="product-card" data-price="${p.price}" data-series="${p.series}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+    <div class="product-img-wrap">
+      <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
+      <span class="stock-badge">${stockStr}</span>
+      <span class="product-type-badge">${p.seriesLabel}</span>
+    </div>
+    <div class="product-info">
+      <h3>${p.title}</h3>
+      <div class="product-price">${p.price} <small>Kč</small></div>
+      <div class="click-hint">${HINT_SVG} Zobrazit detail</div>
+    </div>
+  </div>`;
+}
+
+function buildSingleCard(p) {
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
+  return `<div class="single-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/></div>
+    <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
+  </div>`;
+}
+
+async function loadProducts() {
+  try {
+    const res = await fetch('./products.json?v=' + Date.now());
+    const data = await res.json();
+    _allProducts = data;
+
+    const grid = document.getElementById('product-grid');
+    const noRes = document.getElementById('no-results');
+    grid.innerHTML = '';
+    grid.appendChild(noRes);
+    data.bulks.forEach(p => grid.insertAdjacentHTML('afterbegin', buildBulkCard(p)));
+
+    document.getElementById('singles-grid').innerHTML = data.singles.map(buildSingleCard).join('');
+
+    const total = data.bulks.length;
+    document.getElementById('count-total').textContent = total;
+    document.getElementById('count-num').textContent = total;
+
+    applyFilters();
+  } catch(e) {
+    console.error('Chyba načítání produktů:', e);
+  }
+}
+
+loadProducts();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      closeLightbox();
+    } else {
+      closeModal();
+    }
+  }
+  if (document.getElementById('modal').classList.contains('open')) {
+    if (e.key === 'ArrowRight') gallerySelect(Math.min(_galleryIdx+1, _galleryImgs.length-1));
+    if (e.key === 'ArrowLeft') gallerySelect(Math.max(_galleryIdx-1, 0));
+  }
+});
+
+</script>
+
+</body>
+</html>

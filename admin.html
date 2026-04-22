@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volt Impact Cards – Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080810; --bg2: #0e0e1a; --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.18);
+      --yellow: #f5c518; --blue: #4fc3f7; --green: #4caf50; --red: #ef5350;
+      --white: #fff; --grey: #8a8a9a; --radius: 12px;
+    }
+    body { font-family: 'Inter','Segoe UI',Arial,sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; padding: 40px 20px; }
+    h1 { font-size: 1.6rem; font-weight: 800; color: var(--yellow); margin-bottom: 6px; }
+    .subtitle { color: var(--grey); font-size: 0.9rem; margin-bottom: 32px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+    .btn:hover { opacity: 0.85; }
+    .btn-yellow { background: var(--yellow); color: #000; }
+    .btn-green  { background: var(--green); color: #fff; }
+    .btn-grey   { background: rgba(255,255,255,0.1); color: var(--white); }
+    .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    #file-name { color: var(--blue); font-size: 0.85rem; padding: 6px 12px; background: var(--surface); border: 1px solid var(--border2); border-radius: 6px; display: none; }
+    #status { padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: none; margin-bottom: 16px; }
+    #status.ok  { background: rgba(76,175,80,0.15); border: 1px solid var(--green); color: var(--green); display: block; }
+    #status.err { background: rgba(239,83,80,0.15); border: 1px solid var(--red); color: var(--red); display: block; }
+    .section-title { font-size: 1rem; font-weight: 700; color: var(--yellow); margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface); }
+    .name-cell { font-size: 0.9rem; font-weight: 500; }
+    input[type="number"] { background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; color: var(--white); padding: 6px 10px; font-size: 0.9rem; width: 90px; }
+    input[type="number"]:focus { outline: none; border-color: var(--yellow); }
+    .stock-input { width: 70px; }
+    .save-bar { position: sticky; bottom: 0; background: rgba(8,8,16,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); padding: 16px 0; margin-top: 32px; display: flex; align-items: center; gap: 16px; }
+    .unsaved { background: rgba(245,197,24,0.15); border: 1px solid var(--yellow); color: var(--yellow); border-radius: 6px; padding: 4px 10px; font-size: 0.8rem; font-weight: 600; display: none; }
+    #empty { text-align: center; padding: 60px 20px; color: var(--grey); }
+    #editor { display: none; }
+  </style>
+</head>
+<body>
+
+<h1>⚡ Volt Impact Cards — Admin</h1>
+<p class="subtitle">Načti index.html, uprav ceny a zásoby, ulož zpět</p>
+
+<div class="topbar">
+  <button class="btn btn-yellow" onclick="openFile()">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    Otevřít index.html
+  </button>
+  <span id="file-name"></span>
+</div>
+
+<div id="status"></div>
+<div id="empty"><p>Klikni na „Otevřít index.html" a vyber soubor webu</p></div>
+
+<div id="editor">
+  <div class="section-title" id="bulk-title">Bulk produkty</div>
+  <table><thead><tr><th>Název</th><th>Cena (Kč)</th><th>Sklad (ks)</th></tr></thead>
+    <tbody id="bulk-body"></tbody>
+  </table>
+
+  <div class="section-title" id="singles-title">Singl karty</div>
+  <table><thead><tr><th>Název</th><th>Cena (Kč)</th><th>Sklad (ks)</th></tr></thead>
+    <tbody id="singles-body"></tbody>
+  </table>
+
+  <div class="save-bar">
+    <button class="btn btn-green" onclick="saveFile()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Uložit změny
+    </button>
+    <span class="unsaved" id="unsaved">● Neuložené změny</span>
+    <button class="btn btn-grey" onclick="openFile()" style="margin-left:auto">Znovu načíst</button>
+  </div>
+</div>
+
+<script>
+let fileHandle = null;
+let rawHtml = '';
+let items = []; // { id, type, title, imgKey, price, stock }
+
+async function openFile() {
+  try {
+    [fileHandle] = await window.showOpenFilePicker({
+      types: [{ description: 'HTML', accept: { 'text/html': ['.html'] } }]
+    });
+    const file = await fileHandle.getFile();
+    rawHtml = await file.text();
+    document.getElementById('file-name').textContent = file.name;
+    document.getElementById('file-name').style.display = 'inline-block';
+    parseProducts();
+    document.getElementById('empty').style.display = 'none';
+    document.getElementById('editor').style.display = 'block';
+    showStatus('Načteno: ' + file.name + ' (' + items.length + ' produktů)', 'ok');
+  } catch(e) {
+    if (e.name !== 'AbortError') showStatus('Chyba: ' + e.message, 'err');
+  }
+}
+
+function parseProducts() {
+  items = [];
+  // Use DOMParser for reliable extraction
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(rawHtml, 'text/html');
+
+  // Bulk: .product-card
+  doc.querySelectorAll('.product-card').forEach((el, i) => {
+    const onclick = el.getAttribute('onclick') || '';
+    const title = extract(onclick, 'title') || 'Produkt ' + (i+1);
+    const price = extract(onclick, 'price') || '0';
+    const stock = (extract(onclick, 'stock') || '1 ks').replace(/[^0-9]/g,'') || '1';
+    const imgs  = extractImgs(onclick);
+    items.push({ id: 'bulk-' + i, type: 'bulk', title, price, stock, imgs });
+  });
+
+  // Singles: .single-card
+  doc.querySelectorAll('.single-card').forEach((el, i) => {
+    const onclick = el.getAttribute('onclick') || '';
+    const title = extract(onclick, 'title') || 'Single ' + (i+1);
+    const price = extract(onclick, 'price') || '0';
+    const stock = (extract(onclick, 'stock') || '1 ks').replace(/[^0-9]/g,'') || '1';
+    const imgs  = extractImgs(onclick);
+    items.push({ id: 'single-' + i, type: 'single', title, price, stock, imgs });
+  });
+
+  renderTables();
+}
+
+function extract(str, key) {
+  const m = str.match(new RegExp(key + ":'([^']*)'"));
+  return m ? m[1] : null;
+}
+
+function extractImgs(str) {
+  const m = str.match(/imgs:\[([^\]]*)\]/);
+  if (!m) return '';
+  return m[1].replace(/'/g,'').split(',')[0].trim(); // first image
+}
+
+function renderTables() {
+  const bulks   = items.filter(x => x.type === 'bulk');
+  const singles = items.filter(x => x.type === 'single');
+
+  document.getElementById('bulk-title').textContent = 'Bulk produkty (' + bulks.length + ')';
+  document.getElementById('singles-title').textContent = 'Singl karty (' + singles.length + ')';
+
+  document.getElementById('bulk-body').innerHTML = bulks.map(p => row(p)).join('');
+  document.getElementById('singles-body').innerHTML = singles.map(p => row(p)).join('');
+}
+
+function row(p) {
+  return `<tr>
+    <td class="name-cell">${p.title}</td>
+    <td><input type="number" id="price-${p.id}" value="${p.price}" min="0" step="1" oninput="markChanged()"/></td>
+    <td><input type="number" id="stock-${p.id}" value="${p.stock}" min="0" step="1" class="stock-input" oninput="markChanged()"/></td>
+  </tr>`;
+}
+
+function markChanged() {
+  document.getElementById('unsaved').style.display = 'inline-block';
+}
+
+async function saveFile() {
+  if (!fileHandle) { showStatus('Nejprve otevři soubor.', 'err'); return; }
+
+  let updated = rawHtml;
+
+  items.forEach(p => {
+    const newPrice = document.getElementById('price-' + p.id)?.value || p.price;
+    const newStock = document.getElementById('stock-' + p.id)?.value || p.stock;
+
+    if (p.type === 'bulk') {
+      // Update openModal price & stock by matching title
+      const escaped = p.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      // price in openModal
+      updated = updated.replace(
+        new RegExp("(title:'" + escaped + "'[^}]*price:')[^']*(')", 's'),
+        '$1' + newPrice + '$2'
+      );
+      // stock in openModal
+      updated = updated.replace(
+        new RegExp("(title:'" + escaped + "'[^}]*stock:')[^']*(')", 's'),
+        '$1' + newStock + ' ks$2'
+      );
+      // data-price attribute (find card by searching for the title nearby)
+      // Use imgs key as anchor for data-price
+      if (p.imgs) {
+        const imgEsc = p.imgs.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        updated = updated.replace(
+          new RegExp('(data-price=")[^"]*("\\s+data-series="[^"]*"\\s+onclick="openModal\\(\\{\\s*imgs:\\[\'' + imgEsc),
+          '$1' + newPrice + '$2'
+        );
+      }
+      // product-price display
+      updated = updated.replace(
+        new RegExp("(title:'" + escaped + "'[\\s\\S]{0,2000}?<div class=\"product-price\">)\\d+( <small>)"),
+        '$1' + newPrice + '$2'
+      );
+      // stock-badge display
+      updated = updated.replace(
+        new RegExp("(title:'" + escaped + "'[\\s\\S]{0,2000}?<span class=\"stock-badge\">)\\d+( ks</span>)"),
+        '$1' + newStock + '$2'
+      );
+    }
+
+    if (p.type === 'single') {
+      const escaped = p.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      // price in openModal
+      updated = updated.replace(
+        new RegExp("(title:'" + escaped + "'[^}]*price:')[^']*(')", 's'),
+        '$1' + newPrice + '$2'
+      );
+      // stock in openModal
+      updated = updated.replace(
+        new RegExp("(title:'" + escaped + "'[^}]*stock:')[^']*(')", 's'),
+        '$1' + newStock + ' ks$2'
+      );
+      // single-price display
+      updated = updated.replace(
+        new RegExp("(<h3>" + escaped + "</h3><div class=\"single-price\">)\\d+( Kč</div>)"),
+        '$1' + newPrice + '$2'
+      );
+    }
+  });
+
+  try {
+    const writable = await fileHandle.createWritable();
+    await writable.write(updated);
+    await writable.close();
+    rawHtml = updated;
+    document.getElementById('unsaved').style.display = 'none';
+    showStatus('✓ Uloženo!', 'ok');
+  } catch(e) {
+    showStatus('Chyba při ukládání: ' + e.message, 'err');
+  }
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = type;
+  setTimeout(() => { el.className = ''; el.style.display = 'none'; }, 4000);
+}
+</script>
+</body>
+</html>
