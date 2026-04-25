@@ -10,7 +10,7 @@
       "seriesLabel": "Deck",
       "type": "Deck",
       "desc": "Hotový deck Desert Wings připravený k hraní.",
-      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se hrou", "Near Mint (NM) stav"]
+      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
       "imgs": ["img/deck_shadowfang_2.jpg", "img/deck_shadowfang_3.jpg", "img/deck_shadowfang_1.jpg"],
@@ -22,10 +22,10 @@
       "seriesLabel": "Deck",
       "type": "Deck",
       "desc": "Hotový deck Shadow Fang připravený k hraní.",
-      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se hrou", "Near Mint (NM) stav"]
+      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
-      "imgs": ["img/deck_sledgehammer_2.jpg", "img/deck_sledgehammer_3.jpg", "img/deck_sledgehammer_1.jpg"],
+      "imgs": ["img/deck_sledgehammer_1.jpg", "img/deck_sledgehammer_2.jpg", "img/deck_sledgehammer_3.jpg"],
       "title": "Sledge Hammer",
       "price": 300,
       "stock": 1,
@@ -34,7 +34,7 @@
       "seriesLabel": "Deck",
       "type": "Deck",
       "desc": "Hotový deck Sledge Hammer připravený k hraní.",
-      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se hrou", "Near Mint (NM) stav"]
+      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
       "imgs": ["img/deck_sunmoon_2.jpg", "img/deck_sunmoon_3.jpg", "img/deck_sunmoon_1.jpg"],
@@ -46,7 +46,7 @@
       "seriesLabel": "Deck",
       "type": "Deck",
       "desc": "Hotový deck Sun & Moon připravený k hraní.",
-      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se hrou", "Near Mint (NM) stav"]
+      "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     }
   ],
   "bulks": [
