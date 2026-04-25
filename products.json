@@ -25,7 +25,7 @@
       "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
-      "imgs": ["img/sh1.jpg", "img/sh2.jpg", "img/sh3_3.jpg"],
+      "imgs": ["img/sh1.jpg", "img/sh2.jpg", "img/sh3.jpg"],
       "title": "Sledge Hammer",
       "price": 300,
       "stock": 1,
