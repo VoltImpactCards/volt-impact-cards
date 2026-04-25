@@ -1,7 +1,7 @@
 {
   "decks": [
     {
-      "imgs": ["dw1.jpg", "dw2.jpg", "dw3.jpg"],
+      "imgs": ["img/dw1.jpg", "img/dw2.jpg", "img/dw3.jpg"],
       "title": "Desert Wings",
       "price": 300,
       "stock": 1,
@@ -13,7 +13,7 @@
       "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
-      "imgs": ["sf1.jpg", "sf2.jpg", "sf3.jpg"],
+      "imgs": ["img/sf1.jpg", "img/sf2.jpg", "img/sf3.jpg"],
       "title": "Shadow Fang",
       "price": 300,
       "stock": 1,
@@ -25,7 +25,7 @@
       "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
-      "imgs": ["sh1.jpg", "sh2.jpg", "sh3_3.jpg"],
+      "imgs": ["img/sh1.jpg", "img/sh2.jpg", "img/sh3_3.jpg"],
       "title": "Sledge Hammer",
       "price": 300,
       "stock": 1,
@@ -37,7 +37,7 @@
       "features": ["Obsahuje 60 karet určených ke hře Pokemon TCG", "Nejedná se o kompetativní deck", "Vhodné pro začátečníky k seznámení se s hrou", "Near Mint (NM) stav"]
     },
     {
-      "imgs": ["sm1.jpg", "sm2.jpg", "sm3.jpg"],
+      "imgs": ["img/sm1.jpg", "img/sm2.jpg", "img/sm3.jpg"],
       "title": "Sun & Moon",
       "price": 300,
       "stock": 1,
