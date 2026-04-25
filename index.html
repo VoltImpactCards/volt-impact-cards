@@ -205,6 +205,26 @@
     .product-price small { font-size: 0.8rem; font-weight: 600; opacity: 0.7; }
     .click-hint { font-size: 0.72rem; color: var(--grey); margin-top: 8px; display: flex; align-items: center; gap: 4px; }
 
+    /* ── DECKS SECTION ── */
+    .decks-section { background: radial-gradient(ellipse at 50% 0%, rgba(76,175,80,0.06) 0%, transparent 60%); }
+    .decks-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 24px; }
+    .deck-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; cursor: pointer;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .deck-card:hover { transform: translateY(-5px); border-color: rgba(76,175,80,0.35); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .deck-img-wrap { position: relative; height: 220px; background: #0a0f0a; overflow: hidden; }
+    .deck-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .deck-card:hover .deck-img-wrap img { transform: scale(1.05); }
+    .deck-stock-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); }
+    .deck-type-badge { position: absolute; top: 10px; left: 10px; background: rgba(76,175,80,0.85); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px; }
+    .deck-info { padding: 14px 16px 18px; }
+    .deck-info h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .deck-price { font-size: 1.3rem; font-weight: 800; color: #4caf50; margin-bottom: 4px; }
+    .deck-price small { font-size: 0.8rem; font-weight: 600; opacity: 0.7; }
+    .deck-hint { font-size: 0.72rem; color: var(--grey); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+
     /* ── SINGLES SECTION ── */
     .singles-section { background: radial-gradient(ellipse at 50% 0%, rgba(79,195,247,0.05) 0%, transparent 60%); }
     .singles-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 16px; }
@@ -418,6 +438,7 @@
     <span class="nav-logo-text">Volt Impact <span>Cards</span></span>
   </a>
   <ul>
+    <li><a href="#decks">Decky</a></li>
     <li><a href="#bulk">Bulk</a></li>
     <li><a href="#singles">Singl</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
@@ -443,6 +464,20 @@
 </section>
 
 <!-- ── BULK NABÍDKA ── -->
+<!-- ── DECKS ── -->
+<section id="decks" class="decks-section">
+  <div class="section-header">
+    <div class="section-tag">♟ Decky</div>
+    <h2 class="section-title">Hotové <span>decky</span></h2>
+    <p class="section-sub">Připravené decky k hraní — klikněte pro detail</p>
+  </div>
+  <div class="decks-grid" id="decks-grid">
+    <p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <section id="bulk">
   <div class="section-header">
     <div class="section-tag">↓ Nabídka</div>
@@ -694,6 +729,22 @@ function buildBulkCard(p) {
   </div>`;
 }
 
+function buildDeckCard(p) {
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
+  return `<div class="deck-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+    <div class="deck-img-wrap">
+      <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
+      <span class="deck-stock-badge">${p.stock} ks</span>
+      <span class="deck-type-badge">${p.seriesLabel || 'Deck'}</span>
+    </div>
+    <div class="deck-info">
+      <h3>${p.title}</h3>
+      <div class="deck-price">${p.price} <small>Kč</small></div>
+      <div class="deck-hint">${HINT_SVG} Zobrazit detail</div>
+    </div>
+  </div>`;
+}
+
 function buildSingleCard(p) {
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
   return `<div class="single-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
@@ -713,6 +764,12 @@ async function loadProducts() {
     grid.innerHTML = '';
     grid.appendChild(noRes);
     data.bulks.forEach(p => grid.insertAdjacentHTML('afterbegin', buildBulkCard(p)));
+
+    // Decks
+    const decksGrid = document.getElementById('decks-grid');
+    if (data.decks && data.decks.length > 0) {
+      decksGrid.innerHTML = data.decks.map(buildDeckCard).join('');
+    }
 
     document.getElementById('singles-grid').innerHTML = data.singles.map(buildSingleCard).join('');
 
