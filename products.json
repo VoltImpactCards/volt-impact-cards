@@ -1,7 +1,96 @@
 {
+  "decks": [
+    {
+      "imgs": [
+        "img/dw1.jpg",
+        "img/dw2.jpg",
+        "img/dw3.jpg"
+      ],
+      "title": "Desert Wings",
+      "price": 300,
+      "stock": 1,
+      "set": "Deck",
+      "series": "decks",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Hotový deck Desert Wings připravený k hraní.",
+      "features": [
+        "Obsahuje 60 karet určených ke hře Pokemon TCG",
+        "Nejedná se o kompetativní deck",
+        "Vhodné pro začátečníky k seznámení se s hrou",
+        "Near Mint (NM) stav"
+      ]
+    },
+    {
+      "imgs": [
+        "img/sf1.jpg",
+        "img/sf2.jpg",
+        "img/sf3.jpg"
+      ],
+      "title": "Shadow Fang",
+      "price": 300,
+      "stock": 1,
+      "set": "Deck",
+      "series": "decks",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Hotový deck Shadow Fang připravený k hraní.",
+      "features": [
+        "Obsahuje 60 karet určených ke hře Pokemon TCG",
+        "Nejedná se o kompetativní deck",
+        "Vhodné pro začátečníky k seznámení se s hrou",
+        "Near Mint (NM) stav"
+      ]
+    },
+    {
+      "imgs": [
+        "img/sh1.jpg",
+        "img/sh2.jpg",
+        "img/sh3.jpg"
+      ],
+      "title": "Sledge Hammer",
+      "price": 300,
+      "stock": 1,
+      "set": "Deck",
+      "series": "decks",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Hotový deck Sledge Hammer připravený k hraní.",
+      "features": [
+        "Obsahuje 60 karet určených ke hře Pokemon TCG",
+        "Nejedná se o kompetativní deck",
+        "Vhodné pro začátečníky k seznámení se s hrou",
+        "Near Mint (NM) stav"
+      ]
+    },
+    {
+      "imgs": [
+        "img/sm1.jpg",
+        "img/sm2.jpg",
+        "img/sm3.jpg"
+      ],
+      "title": "Sun & Moon",
+      "price": 300,
+      "stock": 1,
+      "set": "Deck",
+      "series": "decks",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Hotový deck Sun & Moon připravený k hraní.",
+      "features": [
+        "Obsahuje 60 karet určených ke hře Pokemon TCG",
+        "Nejedná se o kompetativní deck",
+        "Vhodné pro začátečníky k seznámení se s hrou",
+        "Near Mint (NM) stav"
+      ]
+    }
+  ],
   "bulks": [
     {
-      "imgs": ["img/flames71_1.jpg", "img/flames71_2.jpg"],
+      "imgs": [
+        "img/flames71_1.jpg",
+        "img/flames71_2.jpg"
+      ],
       "title": "Phantasmal Flames Bulk (71 ks)",
       "price": 250,
       "stock": 3,
@@ -10,34 +99,57 @@
       "seriesLabel": "Phantasmal Flames",
       "type": "Bulk",
       "desc": "71 karet z kolekce Mega Evolutions: Phantasmal Flames bez duplicit. Unikátní karty s ohňovými a záhadnými Pokémony.",
-      "features": ["71 karet bez duplicit", "Kolekce Phantasmal Flames", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "71 karet bez duplicit",
+        "Kolekce Phantasmal Flames",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/flames34_1.jpg", "img/flames34_2.jpg"],
+      "imgs": [
+        "img/flames34_1.jpg",
+        "img/flames34_2.jpg"
+      ],
       "title": "Phantasmal Flames Bulk (34 ks)",
       "price": 100,
-      "stock": 1,
+      "stock": 3,
       "set": "Mega Evolutions: Phantasmal Flames",
       "series": "flames",
       "seriesLabel": "Phantasmal Flames",
       "type": "Bulk",
       "desc": "34 karet z kolekce Mega Evolutions: Phantasmal Flames bez duplicit. Menší balíček pro doplnění kolekce.",
-      "features": ["34 karet bez duplicit", "Kolekce Phantasmal Flames", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "34 karet bez duplicit",
+        "Kolekce Phantasmal Flames",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/japan_500_1.jpg", "img/japan_500_2.jpg"],
-      "title": "Japan/Korean Bulk (500+ ks)",
+      "imgs": [
+        "img/japan_500_1.jpg",
+        "img/japan_500_2.jpg"
+      ],
+      "title": "Japonsko/Korejský Bulk (500+ ks)",
       "price": 1200,
-      "stock": 4,
-      "set": "Japan",
+      "stock": 3,
+      "set": "Japonsko/Korejský",
       "series": "japan",
-      "seriesLabel": "Japan",
+      "seriesLabel": "Japan/Korea",
       "type": "Bulk",
-      "desc": "500+ karet z japonských edic bez duplicit. Velký balíček japonských originálů pro sběratele i hráče.",
-      "features": ["500+ karet s duplicitami", "Japonské a korejské edice", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "desc": "500+ karet z japonských a korejských edic bez duplicit. Velký balíček originálů pro sběratele i hráče.",
+      "features": [
+        "500+ karet bez duplicit",
+        "Japonské edice",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/me_56_1.jpg"],
+      "imgs": [
+        "img/me_56_1.jpg"
+      ],
       "title": "Mega Evolutions Bulk (56 ks)",
       "price": 200,
       "stock": 3,
@@ -46,10 +158,18 @@
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
       "desc": "56 karet z kolekce Mega Evolutions bez duplicit. Klasické mega evoluce pro sběratele.",
-      "features": ["56 karet bez duplicit", "Kolekce Mega Evolutions", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "56 karet bez duplicit",
+        "Kolekce Mega Evolutions",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/me_88_1.jpg", "img/me_88_2.jpg"],
+      "imgs": [
+        "img/me_88_1.jpg",
+        "img/me_88_2.jpg"
+      ],
       "title": "Mega Evolutions Bulk (88 ks)",
       "price": 300,
       "stock": 3,
@@ -58,22 +178,39 @@
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
       "desc": "88 karet z kolekce Mega Evolutions bez duplicit. Větší balíček s mega evolucemi.",
-      "features": ["88 karet bez duplicit", "Kolekce Mega Evolutions", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "88 karet bez duplicit",
+        "Kolekce Mega Evolutions",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/me_trainers_1.jpg"],
+      "imgs": [
+        "img/me_trainers_1.jpg"
+      ],
       "title": "Mega Evolutions Trainers (39 ks)",
       "price": 200,
-      "stock": 1,
+      "stock": 3,
       "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Trainers",
       "desc": "39 trainer karet z kolekce Mega Evolutions. Ideální doplněk paluby.",
-      "features": ["39 trainer karet", "3 kusy od každé karty", "Kolekce Mega Evolutions", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "39 trainer karet",
+        "Kolekce Mega Evolutions",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/sv151_118_1.jpg", "img/sv151_118_2.jpg", "img/sv151_118_3.jpg", "img/sv151_118_4.jpg"],
+      "imgs": [
+        "img/sv151_118_1.jpg",
+        "img/sv151_118_2.jpg",
+        "img/sv151_118_3.jpg",
+        "img/sv151_118_4.jpg"
+      ],
       "title": "SV: 151 Bulk (118 ks)",
       "price": 350,
       "stock": 3,
@@ -82,10 +219,19 @@
       "seriesLabel": "SV: 151",
       "type": "Bulk",
       "desc": "118 karet z kolekce Scarlet & Violet 151 bez duplicit. Kompletní základ sbírky.",
-      "features": ["118 karet bez duplicit", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "118 karet bez duplicit",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/sv151_88_1.jpg", "img/sv151_88_2.jpg", "img/sv151_88_3.jpg"],
+      "imgs": [
+        "img/sv151_88_1.jpg",
+        "img/sv151_88_2.jpg",
+        "img/sv151_88_3.jpg"
+      ],
       "title": "SV: 151 Bulk (88 ks)",
       "price": 250,
       "stock": 3,
@@ -94,10 +240,17 @@
       "seriesLabel": "SV: 151",
       "type": "Bulk",
       "desc": "88 karet z kolekce Scarlet & Violet 151 bez duplicit.",
-      "features": ["88 karet bez duplicit", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "88 karet bez duplicit",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/sv151_evomix_1.jpg"],
+      "imgs": [
+        "img/sv151_evomix_1.jpg"
+      ],
       "title": "SV: 151 Evoluce mix (30 ks)",
       "price": 100,
       "stock": 3,
@@ -106,10 +259,40 @@
       "seriesLabel": "SV: 151",
       "type": "Bulk",
       "desc": "30 evolučních karet z kolekce SV: 151. Mix evolucí pro doplnění kolekce.",
-      "features": ["30 evolučních karet", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "30 evolučních karet",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     },
     {
-      "imgs": ["img/sfa_48_1.jpg", "img/sfa_48_2.jpg", "img/sfa_48_3.jpg"],
+      "imgs": [
+        "img/jt_mix100_1.jpg",
+        "img/jt_mix100_2.jpg"
+      ],
+      "title": "Journey Together Mix (100 ks)",
+      "price": 250,
+      "stock": 3,
+      "set": "SV: Journey Together",
+      "series": "jt",
+      "seriesLabel": "Journey Together",
+      "type": "Bulk",
+      "desc": "100 karet z kolekce SV: Journey Together. Může obsahovat duplicity. Množstevní sleva: 200 ks za 400 Kč, 400 ks za 700 Kč.",
+      "features": [
+        "100 karet",
+        "Kolekce SV: Journey Together",
+        "Může obsahovat duplicity",
+        "Near Mint (NM) stav",
+        "Množstevní sleva: 200 ks / 400 Kč, 400 ks / 700 Kč"
+      ]
+    },
+    {
+      "imgs": [
+        "img/sfa_48_1.jpg",
+        "img/sfa_48_2.jpg",
+        "img/sfa_48_3.jpg"
+      ],
       "title": "Shrouded Fable Bulk (48 ks)",
       "price": 150,
       "stock": 3,
@@ -118,12 +301,20 @@
       "seriesLabel": "Shrouded Fable",
       "type": "Bulk",
       "desc": "48 karet z kolekce SV: Shrouded Fable bez duplicit. Unikátní karty s tajemnými Pokémony.",
-      "features": ["48 karet bez duplicit", "Kolekce Shrouded Fable", "Near Mint (NM) stav", "Originální neporušené karty"]
+      "features": [
+        "48 karet bez duplicit",
+        "Kolekce Shrouded Fable",
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     }
   ],
   "singles": [
     {
-      "imgs": ["img/sv151_s_bulbasaur.jpg"],
+      "imgs": [
+        "img/sv151_s_bulbasaur.jpg",
+        "img/sv151_s_n8.jpg"
+      ],
       "title": "Bulbasaur – SV: 151",
       "price": 20,
       "stock": 1,
@@ -131,10 +322,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Bulbasaur single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_charmander.jpg"],
+      "imgs": [
+        "img/sv151_s_charmander.jpg",
+        "img/sv151_s_n5.jpg"
+      ],
       "title": "Charmander – SV: 151",
       "price": 20,
       "stock": 1,
@@ -142,10 +341,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Charmander single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_eevee.jpg"],
+      "imgs": [
+        "img/sv151_s_eevee.jpg",
+        "img/sv151_s_n6.jpg"
+      ],
       "title": "Eevee – SV: 151",
       "price": 20,
       "stock": 1,
@@ -153,10 +360,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Eevee single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_ivysaur.jpg"],
+      "imgs": [
+        "img/sv151_s_ivysaur.jpg",
+        "img/sv151_s_n7.jpg"
+      ],
       "title": "Ivysaur – SV: 151",
       "price": 20,
       "stock": 1,
@@ -164,10 +379,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Ivysaur single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_oldamber.jpg"],
+      "imgs": [
+        "img/sv151_s_oldamber.jpg",
+        "img/sv151_s_n9.jpg"
+      ],
       "title": "Old Amber – SV: 151",
       "price": 20,
       "stock": 1,
@@ -175,10 +398,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Old Amber single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_pidgeotto.jpg"],
+      "imgs": [
+        "img/sv151_s_pidgeotto.jpg",
+        "img/sv151_s_n1.jpg"
+      ],
       "title": "Pidgeotto – SV: 151",
       "price": 20,
       "stock": 1,
@@ -186,10 +417,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Pidgeotto single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_pikachu.jpg"],
+      "imgs": [
+        "img/sv151_s_pikachu.jpg",
+        "img/sv151_s_n3.jpg"
+      ],
       "title": "Pikachu – SV: 151",
       "price": 20,
       "stock": 1,
@@ -197,10 +436,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Pikachu single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_snorlax.jpg"],
+      "imgs": [
+        "img/sv151_s_snorlax.jpg",
+        "img/sv151_s_n2.jpg"
+      ],
       "title": "Snorlax – SV: 151",
       "price": 20,
       "stock": 1,
@@ -208,10 +455,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Snorlax single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/sv151_s_squirtle.jpg"],
+      "imgs": [
+        "img/sv151_s_squirtle.jpg",
+        "img/sv151_s_n4.jpg"
+      ],
       "title": "Squirtle – SV: 151",
       "price": 20,
       "stock": 1,
@@ -219,10 +474,18 @@
       "series": "sv151",
       "type": "Single",
       "desc": "Squirtle single karta z kolekce SV: 151.",
-      "features": ["Single karta", "Kolekce SV: 151", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Kolekce SV: 151",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_sylveon.jpg"],
+      "imgs": [
+        "img/misc_s_sylveon.jpg",
+        "img/misc_s_sylveon2.jpg"
+      ],
       "title": "Sylveon 022/064",
       "price": 30,
       "stock": 1,
@@ -230,10 +493,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Sylveon single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_suicune.jpg"],
+      "imgs": [
+        "img/misc_s_suicune.jpg",
+        "img/misc_s_suicune2.jpg"
+      ],
       "title": "Suicune 026/094",
       "price": 30,
       "stock": 1,
@@ -241,10 +511,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Suicune single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_togekiss.jpg"],
+      "imgs": [
+        "img/misc_s_togekiss.jpg",
+        "img/misc_s_togekiss2.jpg"
+      ],
       "title": "Togekiss 072/191",
       "price": 30,
       "stock": 1,
@@ -252,10 +529,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Togekiss single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_rotomex.jpg"],
+      "imgs": [
+        "img/misc_s_rotomex.jpg",
+        "img/misc_s_rotomex2.jpg"
+      ],
       "title": "Rotom EX 029/094",
       "price": 50,
       "stock": 1,
@@ -263,10 +547,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Rotom EX single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_darkrai.jpg"],
+      "imgs": [
+        "img/misc_s_darkrai.jpg",
+        "img/misc_s_darkrai2.jpg"
+      ],
       "title": "Darkrai 136/197",
       "price": 30,
       "stock": 1,
@@ -274,10 +565,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Darkrai single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_reshiram.jpg"],
+      "imgs": [
+        "img/misc_s_reshiram.jpg",
+        "img/misc_s_reshiram2.jpg"
+      ],
       "title": "Reshiram 017/094",
       "price": 30,
       "stock": 1,
@@ -285,10 +583,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Reshiram single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_megagengarex.jpg"],
+      "imgs": [
+        "img/misc_s_megagengarex.jpg",
+        "img/misc_s_megagengarex2.jpg"
+      ],
       "title": "Mega Gengar EX 056/094",
       "price": 100,
       "stock": 1,
@@ -296,10 +601,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Mega Gengar EX single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_thundurus.jpg"],
+      "imgs": [
+        "img/misc_s_thundurus.jpg",
+        "img/misc_s_thundurus2.jpg"
+      ],
       "title": "Thundurus 070/191",
       "price": 30,
       "stock": 1,
@@ -307,10 +619,17 @@
       "series": "mix",
       "type": "Single",
       "desc": "Thundurus single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     },
     {
-      "imgs": ["img/misc_s_kyogre.jpg"],
+      "imgs": [
+        "img/misc_s_kyogre.jpg",
+        "img/misc_s_kyogre2.jpg"
+      ],
       "title": "Kyogre 035/132",
       "price": 30,
       "stock": 1,
@@ -318,7 +637,11 @@
       "series": "mix",
       "type": "Single",
       "desc": "Kyogre single karta.",
-      "features": ["Single karta", "Near Mint (NM) stav", "Originální neporušená karta"]
+      "features": [
+        "Single karta",
+        "Near Mint (NM) stav",
+        "Originální neporušená karta"
+      ]
     }
   ]
 }

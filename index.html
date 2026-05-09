@@ -184,7 +184,7 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,197,24,0.1);
     }
     .product-img-wrap { position: relative; height: 210px; background: #0c0c18; overflow: hidden; }
-    .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .product-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform .4s; }
     .product-card:hover .product-img-wrap img { transform: scale(1.06); }
     .stock-badge {
       position: absolute; top: 10px; right: 10px;
@@ -205,6 +205,26 @@
     .product-price small { font-size: 0.8rem; font-weight: 600; opacity: 0.7; }
     .click-hint { font-size: 0.72rem; color: var(--grey); margin-top: 8px; display: flex; align-items: center; gap: 4px; }
 
+    /* ── DECKS SECTION ── */
+    .decks-section { background: radial-gradient(ellipse at 50% 0%, rgba(76,175,80,0.06) 0%, transparent 60%); }
+    .decks-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 24px; }
+    .deck-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; cursor: pointer;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .deck-card:hover { transform: translateY(-5px); border-color: rgba(76,175,80,0.35); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .deck-img-wrap { position: relative; height: 220px; background: #0a0f0a; overflow: hidden; }
+    .deck-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform .4s; }
+    .deck-card:hover .deck-img-wrap img { transform: scale(1.05); }
+    .deck-stock-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); }
+    .deck-type-badge { position: absolute; top: 10px; left: 10px; background: rgba(76,175,80,0.85); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px; }
+    .deck-info { padding: 14px 16px 18px; }
+    .deck-info h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .deck-price { font-size: 1.3rem; font-weight: 800; color: var(--yellow); margin-bottom: 4px; }
+    .deck-price small { font-size: 0.8rem; font-weight: 600; opacity: 0.7; }
+    .deck-hint { font-size: 0.72rem; color: var(--grey); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+
     /* ── SINGLES SECTION ── */
     .singles-section { background: radial-gradient(ellipse at 50% 0%, rgba(79,195,247,0.05) 0%, transparent 60%); }
     .singles-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 16px; }
@@ -215,11 +235,11 @@
     }
     .single-card:hover { transform: translateY(-5px); border-color: rgba(79,195,247,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
     .single-img-wrap { height: 260px; background: #0c0c18; overflow: hidden; }
-    .single-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .4s; }
+    .single-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform .4s; }
     .single-card:hover .single-img-wrap img { transform: scale(1.06); }
     .single-info { padding: 12px 14px 16px; }
     .single-info h3 { font-size: 0.82rem; font-weight: 500; color: #b0b0c0; margin-bottom: 8px; line-height: 1.3; }
-    .single-price { font-size: 1.15rem; font-weight: 800; color: var(--blue); }
+    .single-price { font-size: 1.15rem; font-weight: 800; color: var(--yellow); }
     .single-price small { font-size: 0.78rem; font-weight: 600; opacity: 0.7; }
 
     /* ── ORDER CTA ── */
@@ -314,28 +334,42 @@
     .modal-wrapper { position: relative; }
 
 
-    /* ── MODAL GALLERY ── */
-    .modal-gallery { position: relative; }
-    .gallery-main-img {
-      width: 100%; height: 320px; object-fit: cover;
-      border-radius: 20px 20px 0 0;
-      cursor: zoom-in; transition: opacity .18s;
-      display: block;
+    /* ── FOTO GALLERY (D) ── */
+    .modal-img-d {
+      position: relative; background: #080810;
+      border-radius: 20px 20px 0 0; overflow: hidden; cursor: pointer;
     }
-    .gallery-thumbs {
-      display: flex; gap: 6px; padding: 8px 10px;
-      background: rgba(0,0,0,0.35); overflow-x: auto;
-      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+    .modal-main-img {
+      width: 100%; height: 320px; object-fit: cover; display: block;
+      transition: opacity .18s; cursor: zoom-in;
     }
-    .gallery-thumbs:empty { display: none; }
-    .gallery-thumb {
-      width: 68px; height: 68px; object-fit: cover;
-      border-radius: 8px; cursor: pointer; flex-shrink: 0;
-      opacity: 0.5; border: 2px solid transparent;
-      transition: opacity .2s, border-color .2s;
+    .modal-zoom-hint {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(0,0,0,0.6); color: rgba(255,255,255,0.7);
+      font-size: 0.68rem; padding: 3px 8px; border-radius: 8px;
+      pointer-events: none; letter-spacing: 0.3px;
     }
-    .gallery-thumb:hover { opacity: 0.8; }
-    .gallery-thumb.active { opacity: 1; border-color: var(--yellow); }
+    .modal-dots {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 7px;
+    }
+    .modal-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); border: none; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .modal-dot.active { background: var(--yellow); transform: scale(1.25); }
+    .modal-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; cursor: pointer; border-radius: 50%;
+      width: 36px; height: 36px; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s; z-index: 5;
+    }
+    .modal-nav-btn:hover { background: rgba(0,0,0,0.8); }
+    .modal-nav-prev { left: 10px; }
+    .modal-nav-next { right: 10px; }
 
     /* ── FOOTER ── */
     footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 56px 40px 36px; }
@@ -387,9 +421,12 @@
   <div class="modal-wrapper">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal" id="modal-inner">
-      <div class="modal-gallery" id="modal-gallery">
-        <img class="gallery-main-img" id="modal-img" src="" alt="" onclick="openLightbox(this.src, this.alt)" title="Kliknutím přiblížit"/>
-        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      <div class="modal-img-d" id="modal-img-d">
+        <img class="modal-main-img" id="modal-main-img" src="" alt="" onclick="openLightbox(this.src, this.alt)"/>
+        <div class="modal-zoom-hint">🔍 přiblížit</div>
+        <button class="modal-nav-btn modal-nav-prev" id="modal-nav-prev" onclick="selectImg(_modalIdx - 1)" style="display:none">&#8592;</button>
+        <button class="modal-nav-btn modal-nav-next" id="modal-nav-next" onclick="selectImg(_modalIdx + 1)" style="display:none">&#8594;</button>
+        <div class="modal-dots" id="modal-dots"></div>
       </div>
       <div class="modal-body">
         <div class="modal-badges" id="modal-badges"></div>
@@ -418,6 +455,7 @@
     <span class="nav-logo-text">Volt Impact <span>Cards</span></span>
   </a>
   <ul>
+    <li><a href="#decks">Decky</a></li>
     <li><a href="#bulk">Bulk</a></li>
     <li><a href="#singles">Singl</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
@@ -443,6 +481,20 @@
 </section>
 
 <!-- ── BULK NABÍDKA ── -->
+<!-- ── DECKS ── -->
+<section id="decks" class="decks-section">
+  <div class="section-header">
+    <div class="section-tag">♟ Decky</div>
+    <h2 class="section-title">Hotové <span>decky</span></h2>
+    <p class="section-sub">Připravené decky k hraní — klikněte pro detail</p>
+  </div>
+  <div class="decks-grid" id="decks-grid">
+    <p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <section id="bulk">
   <div class="section-header">
     <div class="section-tag">↓ Nabídka</div>
@@ -470,6 +522,7 @@
         <div class="pill" data-filter="series" data-value="flames">Phantasmal Flames</div>
         <div class="pill" data-filter="series" data-value="japan">Japan</div>
         <div class="pill" data-filter="series" data-value="mega">Mega Evolutions</div>
+        <div class="pill" data-filter="series" data-value="jt">Journey Together</div>
       </div>
     </div>
   </div>
@@ -556,35 +609,43 @@
 </footer>
 
 <script>
-// ── GALLERY ──
-let _galleryImgs = [];
-let _galleryIdx = 0;
+// ── FOTO GALLERY (D) ──
+let _modalImgs = [];
+let _modalIdx = 0;
 
-function gallerySelect(idx) {
-  _galleryIdx = idx;
-  const img = document.getElementById('modal-img');
-  img.style.opacity = '0';
-  setTimeout(() => { img.src = _galleryImgs[idx]; img.style.opacity = '1'; }, 140);
-  document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
-    t.classList.toggle('active', i === idx);
-  });
+function buildImgD(imgs) {
+  _modalImgs = imgs;
+  _modalIdx = 0;
+  const mainImg = document.getElementById('modal-main-img');
+  mainImg.src = imgs[0] || '';
+  mainImg.style.opacity = '1';
+  const dots = document.getElementById('modal-dots');
+  const hasMultiple = imgs.length > 1;
+  dots.innerHTML = hasMultiple
+    ? imgs.map((_,i) => `<button class="modal-dot${i===0?' active':''}" onclick="event.stopPropagation();selectImg(${i})"></button>`).join('')
+    : '';
+  const prevBtn = document.getElementById('modal-nav-prev');
+  const nextBtn = document.getElementById('modal-nav-next');
+  if (prevBtn) prevBtn.style.display = hasMultiple ? 'flex' : 'none';
+  if (nextBtn) nextBtn.style.display = hasMultiple ? 'flex' : 'none';
+}
+
+function selectImg(idx) {
+  _modalIdx = (idx + _modalImgs.length) % _modalImgs.length;
+  const mainImg = document.getElementById('modal-main-img');
+  mainImg.style.opacity = '0';
+  setTimeout(() => { mainImg.src = _modalImgs[_modalIdx]; mainImg.style.opacity = '1'; }, 160);
+  document.querySelectorAll('.modal-dot').forEach((d,i) => d.classList.toggle('active', i === _modalIdx));
+}
+
+function nextImg() {
+  if (_modalImgs.length <= 1) return;
+  selectImg(_modalIdx + 1);
 }
 
 function openModal(data) {
   const imgs = data.imgs || (data.img ? [data.img] : []);
-  _galleryImgs = imgs;
-  _galleryIdx = 0;
-
-  const img = document.getElementById('modal-img');
-  img.src = imgs[0] || '';
-  img.alt = data.title;
-  img.style.opacity = '1';
-
-  // Thumbnails
-  const thumbsEl = document.getElementById('gallery-thumbs');
-  thumbsEl.innerHTML = imgs.length > 1 ? imgs.map((src, i) =>
-    `<img class="gallery-thumb${i===0?' active':''}" src="${src}" alt="" onclick="gallerySelect(${i})"/>`
-  ).join('') : '';
+  buildImgD(imgs);
 
   document.getElementById('modal-title').textContent = data.title;
   document.getElementById('modal-price').innerHTML = data.price + ' <small>Kč</small>';
@@ -694,6 +755,22 @@ function buildBulkCard(p) {
   </div>`;
 }
 
+function buildDeckCard(p) {
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
+  return `<div class="deck-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+    <div class="deck-img-wrap">
+      <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
+      <span class="deck-stock-badge">${p.stock} ks</span>
+      <span class="deck-type-badge">${p.seriesLabel || 'Deck'}</span>
+    </div>
+    <div class="deck-info">
+      <h3>${p.title}</h3>
+      <div class="deck-price">${p.price} <small>Kč</small></div>
+      <div class="deck-hint">${HINT_SVG} Zobrazit detail</div>
+    </div>
+  </div>`;
+}
+
 function buildSingleCard(p) {
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
   return `<div class="single-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
@@ -713,6 +790,12 @@ async function loadProducts() {
     grid.innerHTML = '';
     grid.appendChild(noRes);
     data.bulks.forEach(p => grid.insertAdjacentHTML('afterbegin', buildBulkCard(p)));
+
+    // Decks
+    const decksGrid = document.getElementById('decks-grid');
+    if (data.decks && data.decks.length > 0) {
+      decksGrid.innerHTML = data.decks.map(buildDeckCard).join('');
+    }
 
     document.getElementById('singles-grid').innerHTML = data.singles.map(buildSingleCard).join('');
 
@@ -737,8 +820,8 @@ document.addEventListener('keydown', e => {
     }
   }
   if (document.getElementById('modal').classList.contains('open')) {
-    if (e.key === 'ArrowRight') gallerySelect(Math.min(_galleryIdx+1, _galleryImgs.length-1));
-    if (e.key === 'ArrowLeft') gallerySelect(Math.max(_galleryIdx-1, 0));
+    if (e.key === 'ArrowRight') selectImg(_modalIdx + 1);
+    if (e.key === 'ArrowLeft') selectImg(_modalIdx - 1);
   }
 });
 
