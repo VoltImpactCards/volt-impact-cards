@@ -5,246 +5,689 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Volt Impact Cards – Admin</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #080810; --bg2: #0e0e1a; --surface: rgba(255,255,255,0.04);
-      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.18);
-      --yellow: #f5c518; --blue: #4fc3f7; --green: #4caf50; --red: #ef5350;
-      --white: #fff; --grey: #8a8a9a; --radius: 12px;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#080810;--bg2:#0e0e1a;--bg3:#13131f;
+      --surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.08);
+      --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);
+      --yellow:#f5c518;--blue:#4fc3f7;--green:#4caf50;--red:#ef5350;
+      --white:#fff;--grey:#8a8a9a;--radius:12px;
     }
-    body { font-family: 'Inter','Segoe UI',Arial,sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; padding: 40px 20px; }
-    h1 { font-size: 1.6rem; font-weight: 800; color: var(--yellow); margin-bottom: 6px; }
-    .subtitle { color: var(--grey); font-size: 0.9rem; margin-bottom: 32px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity .2s; }
-    .btn:hover { opacity: 0.85; }
-    .btn-yellow { background: var(--yellow); color: #000; }
-    .btn-green  { background: var(--green); color: #fff; }
-    .btn-grey   { background: rgba(255,255,255,0.1); color: var(--white); }
-    .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
-    #file-name { color: var(--blue); font-size: 0.85rem; padding: 6px 12px; background: var(--surface); border: 1px solid var(--border2); border-radius: 6px; display: none; }
-    #status { padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: none; margin-bottom: 16px; }
-    #status.ok  { background: rgba(76,175,80,0.15); border: 1px solid var(--green); color: var(--green); display: block; }
-    #status.err { background: rgba(239,83,80,0.15); border: 1px solid var(--red); color: var(--red); display: block; }
-    .section-title { font-size: 1rem; font-weight: 700; color: var(--yellow); margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); padding: 8px 12px; border-bottom: 1px solid var(--border); }
-    td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--surface); }
-    .name-cell { font-size: 0.9rem; font-weight: 500; }
-    input[type="number"] { background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; color: var(--white); padding: 6px 10px; font-size: 0.9rem; width: 90px; }
-    input[type="number"]:focus { outline: none; border-color: var(--yellow); }
-    .stock-input { width: 70px; }
-    .save-bar { position: sticky; bottom: 0; background: rgba(8,8,16,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); padding: 16px 0; margin-top: 32px; display: flex; align-items: center; gap: 16px; }
-    .unsaved { background: rgba(245,197,24,0.15); border: 1px solid var(--yellow); color: var(--yellow); border-radius: 6px; padding: 4px 10px; font-size: 0.8rem; font-weight: 600; display: none; }
-    #empty { text-align: center; padding: 60px 20px; color: var(--grey); }
-    #editor { display: none; }
+    body{font-family:'Inter','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--white);min-height:100vh}
+
+    /* NAV */
+    nav{background:rgba(8,8,16,0.95);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+    .nav-logo{font-size:1rem;font-weight:800;color:var(--white);letter-spacing:1px;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:8px}
+    .nav-logo span{color:var(--yellow)}
+    .nav-badge{background:rgba(245,197,24,0.15);border:1px solid rgba(245,197,24,0.3);color:var(--yellow);font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:0.5px;text-transform:uppercase}
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .gh-status{font-size:0.78rem;padding:5px 12px;border-radius:20px;font-weight:600;border:1px solid var(--border2);background:var(--surface)}
+    .gh-status.connected{border-color:rgba(76,175,80,0.4);color:var(--green);background:rgba(76,175,80,0.08)}
+    .gh-status.disconnected{border-color:rgba(239,83,80,0.4);color:var(--red);background:rgba(239,83,80,0.08)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:8px;border:none;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .btn:hover{opacity:0.85;transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+    .btn-yellow{background:var(--yellow);color:#000}
+    .btn-green{background:var(--green);color:#fff}
+    .btn-red{background:var(--red);color:#fff}
+    .btn-ghost{background:var(--surface2);border:1px solid var(--border2);color:var(--white)}
+    .btn-sm{padding:5px 12px;font-size:0.78rem}
+    .btn-icon{padding:6px;width:32px;height:32px;justify-content:center;border-radius:7px}
+
+    /* MAIN LAYOUT */
+    .main{max-width:1100px;margin:0 auto;padding:32px 20px}
+
+    /* GITHUB SETTINGS CARD */
+    .settings-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:28px}
+    .settings-card h2{font-size:0.85rem;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .settings-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .token-input{flex:1;min-width:220px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--white);padding:9px 14px;font-size:0.85rem;font-family:monospace}
+    .token-input:focus{outline:none;border-color:var(--yellow)}
+    .token-hint{font-size:0.75rem;color:var(--grey);margin-top:8px}
+    .token-hint a{color:var(--blue);text-decoration:none}
+
+    /* TABS */
+    .tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:0}
+    .tab{padding:10px 20px;border-radius:8px 8px 0 0;font-size:0.85rem;font-weight:600;cursor:pointer;color:var(--grey);border:1px solid transparent;border-bottom:none;transition:all .2s;margin-bottom:-1px;background:transparent}
+    .tab:hover{color:var(--white);background:var(--surface)}
+    .tab.active{color:var(--yellow);border-color:var(--border);border-bottom-color:var(--bg);background:var(--bg2)}
+    .tab-count{background:var(--surface2);border-radius:10px;padding:1px 7px;font-size:0.7rem;margin-left:4px}
+
+    /* TOOLBAR */
+    .toolbar{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+    .toolbar-right{margin-left:auto;display:flex;gap:8px}
+
+    /* PRODUCT TABLE */
+    .product-table{width:100%;border-collapse:collapse;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .product-table th{text-align:left;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--grey);padding:10px 14px;border-bottom:1px solid var(--border);background:var(--bg3)}
+    .product-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:0.88rem}
+    .product-table tr:last-child td{border-bottom:none}
+    .product-table tr:hover td{background:var(--surface)}
+    .prod-img{width:44px;height:44px;object-fit:contain;border-radius:6px;background:#0c0c18;border:1px solid var(--border)}
+    .prod-name{font-weight:600;color:var(--white)}
+    .prod-set{font-size:0.75rem;color:var(--grey);margin-top:2px}
+    .price-badge{background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.25);color:var(--yellow);font-size:0.8rem;font-weight:700;padding:3px 10px;border-radius:20px}
+    .stock-badge-ok{background:rgba(76,175,80,0.1);border:1px solid rgba(76,175,80,0.25);color:var(--green);font-size:0.78rem;font-weight:700;padding:3px 10px;border-radius:20px}
+    .stock-badge-low{background:rgba(239,83,80,0.1);border:1px solid rgba(239,83,80,0.25);color:var(--red);font-size:0.78rem;font-weight:700;padding:3px 10px;border-radius:20px}
+    .actions-cell{display:flex;gap:6px}
+    .empty-state{text-align:center;padding:60px 20px;color:var(--grey)}
+
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);z-index:200;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.open{display:flex}
+    .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0;transform:scale(0.96) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .modal-header{padding:22px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .modal-header h3{font-size:1.1rem;font-weight:800}
+    .modal-close{background:var(--surface2);border:1px solid var(--border);color:var(--white);cursor:pointer;border-radius:7px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .2s}
+    .modal-close:hover{background:var(--surface)}
+    .modal-body{padding:24px}
+    .modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+
+    /* FORM */
+    .form-group{margin-bottom:18px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    label{display:block;font-size:0.75rem;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px}
+    input[type=text],input[type=number],select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--white);padding:9px 14px;font-size:0.88rem;font-family:inherit;transition:border-color .2s}
+    input[type=text]:focus,input[type=number]:focus,select:focus,textarea:focus{outline:none;border-color:var(--yellow)}
+    select option{background:var(--bg2)}
+    textarea{resize:vertical;min-height:72px}
+
+    /* FEATURES LIST */
+    .features-list{display:flex;flex-direction:column;gap:6px}
+    .feature-row{display:flex;gap:8px;align-items:center}
+    .feature-row input{flex:1}
+
+    /* IMAGE SECTION */
+    .img-section{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px}
+    .img-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .img-item{position:relative;width:72px}
+    .img-item img{width:72px;height:72px;object-fit:contain;border-radius:6px;background:#0c0c18;border:1px solid var(--border2)}
+    .img-item .img-remove{position:absolute;top:-5px;right:-5px;width:18px;height:18px;background:var(--red);border:none;border-radius:50%;color:#fff;font-size:0.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+    .upload-zone{border:1px dashed var(--border2);border-radius:8px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;color:var(--grey);font-size:0.82rem}
+    .upload-zone:hover{border-color:var(--yellow);color:var(--yellow);background:rgba(245,197,24,0.04)}
+    #img-file-input{display:none}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:0.85rem;font-weight:600;z-index:999;animation:slideIn .3s ease;max-width:340px}
+    .toast.ok{background:rgba(76,175,80,0.95);color:#fff;border:1px solid rgba(76,175,80,0.5)}
+    .toast.err{background:rgba(239,83,80,0.95);color:#fff;border:1px solid rgba(239,83,80,0.5)}
+    .toast.info{background:rgba(79,195,247,0.95);color:#000;border:1px solid rgba(79,195,247,0.5)}
+    @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+    /* LOADING */
+    .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.2);border-top-color:var(--yellow);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loading-overlay{display:none;position:fixed;inset:0;background:rgba(8,8,16,0.7);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-size:0.9rem;color:var(--grey)}
+    .loading-overlay.open{display:flex}
+    .loading-overlay .spinner{width:36px;height:36px;border-width:3px}
+
+    /* RESPONSIVE */
+    @media(max-width:600px){.form-row{grid-template-columns:1fr}.nav{padding:0 16px}.main{padding:20px 12px}}
+
+    /* DELETE CONFIRM */
+    .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;align-items:center;justify-content:center;padding:20px}
+    .confirm-overlay.open{display:flex}
+    .confirm-box{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:28px;max-width:380px;width:100%;text-align:center}
+    .confirm-box h3{font-size:1rem;font-weight:700;margin-bottom:10px}
+    .confirm-box p{color:var(--grey);font-size:0.88rem;margin-bottom:22px}
+    .confirm-actions{display:flex;gap:10px;justify-content:center}
   </style>
 </head>
 <body>
 
-<h1>⚡ Volt Impact Cards — Admin</h1>
-<p class="subtitle">Načti index.html, uprav ceny a zásoby, ulož zpět</p>
-
-<div class="topbar">
-  <button class="btn btn-yellow" onclick="openFile()">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-    Otevřít index.html
-  </button>
-  <span id="file-name"></span>
+<!-- LOADING -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <span id="loading-text">Načítám...</span>
 </div>
 
-<div id="status"></div>
-<div id="empty"><p>Klikni na „Otevřít index.html" a vyber soubor webu</p></div>
-
-<div id="editor">
-  <div class="section-title" id="bulk-title">Bulk produkty</div>
-  <table><thead><tr><th>Název</th><th>Cena (Kč)</th><th>Sklad (ks)</th></tr></thead>
-    <tbody id="bulk-body"></tbody>
-  </table>
-
-  <div class="section-title" id="singles-title">Singl karty</div>
-  <table><thead><tr><th>Název</th><th>Cena (Kč)</th><th>Sklad (ks)</th></tr></thead>
-    <tbody id="singles-body"></tbody>
-  </table>
-
-  <div class="save-bar">
-    <button class="btn btn-green" onclick="saveFile()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-      Uložit změny
-    </button>
-    <span class="unsaved" id="unsaved">● Neuložené změny</span>
-    <button class="btn btn-grey" onclick="openFile()" style="margin-left:auto">Znovu načíst</button>
+<!-- DELETE CONFIRM -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Smazat produkt?</h3>
+    <p id="confirm-name">Tato akce je nevratná.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Zrušit</button>
+      <button class="btn btn-red" onclick="confirmDelete()">Smazat</button>
+    </div>
   </div>
 </div>
 
+<!-- EDIT/ADD MODAL -->
+<div class="modal-overlay" id="edit-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Upravit produkt</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="f-idx"/>
+      <input type="hidden" id="f-type"/>
+
+      <div class="form-group">
+        <label>Název</label>
+        <input type="text" id="f-title" placeholder="např. SV: 151 Bulk (88 ks)"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cena (Kč)</label>
+          <input type="number" id="f-price" min="0" step="1"/>
+        </div>
+        <div class="form-group">
+          <label>Skladem (ks)</label>
+          <input type="number" id="f-stock" min="0" step="1"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Série (set)</label>
+          <input type="text" id="f-set" placeholder="např. SV: 151"/>
+        </div>
+        <div class="form-group">
+          <label>Série klíč (filter)</label>
+          <select id="f-series">
+            <option value="sv151">SV: 151</option>
+            <option value="sfa">Shrouded Fable</option>
+            <option value="flames">Phantasmal Flames</option>
+            <option value="japan">Japan/Korea</option>
+            <option value="mega">Mega Evolutions</option>
+            <option value="jt">Journey Together</option>
+            <option value="mix">Mix</option>
+            <option value="decks">Decky</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Popis</label>
+        <textarea id="f-desc" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Vlastnosti (features)</label>
+        <div class="features-list" id="features-list"></div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="addFeatureRow()">+ Přidat řádek</button>
+      </div>
+      <div class="form-group">
+        <label>Fotky</label>
+        <div class="img-section">
+          <div class="img-list" id="img-list"></div>
+          <div class="upload-zone" onclick="document.getElementById('img-file-input').click()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline-block;vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Nahrát fotku (JPG/PNG) — uloží se na GitHub
+          </div>
+          <input type="file" id="img-file-input" accept="image/*" multiple onchange="handleImgUpload(this)"/>
+          <p style="font-size:0.73rem;color:var(--grey);margin-top:8px">Nebo zadej cestu ručně:</p>
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <input type="text" id="f-img-manual" placeholder="img/nazev.jpg" style="flex:1;font-size:0.82rem"/>
+            <button class="btn btn-ghost btn-sm" onclick="addImgManual()">Přidat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Zrušit</button>
+      <button class="btn btn-yellow" onclick="saveProduct()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Uložit produkt
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" target="_blank">⚡ Volt Impact <span>Cards</span></a>
+  <span class="nav-badge">Admin</span>
+  <div class="nav-right">
+    <span class="gh-status disconnected" id="gh-status">● Nepřipojeno</span>
+    <button class="btn btn-ghost btn-sm" onclick="loadFromGitHub()" id="btn-load">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4"/></svg>
+      Načíst z GitHubu
+    </button>
+    <button class="btn btn-green btn-sm" onclick="saveToGitHub()" id="btn-save" disabled>
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+      Uložit &amp; nasadit
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- GITHUB SETTINGS -->
+  <div class="settings-card" id="settings-card">
+    <h2>
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub nastavení
+    </h2>
+    <div class="settings-row">
+      <input type="password" class="token-input" id="gh-token" placeholder="GitHub Personal Access Token (ghp_...)" value=""/>
+      <button class="btn btn-yellow" onclick="connectGitHub()">Připojit</button>
+      <button class="btn btn-ghost" onclick="toggleSettings()">Skrýt</button>
+    </div>
+    <p class="token-hint">
+      Token vytvořeš na <a href="https://github.com/settings/tokens/new?scopes=repo&description=VoltAdmin" target="_blank">github.com/settings/tokens</a> — potřebuješ scope <strong>repo</strong>. Token se uloží v prohlížeči.
+    </p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('bulks')" id="tab-bulks">Bulk sety <span class="tab-count" id="cnt-bulks">0</span></div>
+    <div class="tab" onclick="switchTab('singles')" id="tab-singles">Singl karty <span class="tab-count" id="cnt-singles">0</span></div>
+    <div class="tab" onclick="switchTab('decks')" id="tab-decks">Decky <span class="tab-count" id="cnt-decks">0</span></div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <span style="font-size:0.85rem;color:var(--grey)" id="tab-desc">Bulk sety a mix balíčky</span>
+    <div class="toolbar-right">
+      <button class="btn btn-yellow btn-sm" onclick="openAddModal()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Přidat produkt
+      </button>
+    </div>
+  </div>
+
+  <!-- PRODUCT LIST -->
+  <div id="product-list"></div>
+
+</div>
+
 <script>
-let fileHandle = null;
-let rawHtml = '';
-let items = []; // { id, type, title, imgKey, price, stock }
+// ── CONFIG ──
+const REPO_OWNER = 'VoltImpactCards';
+const REPO_NAME  = 'volt-impact-cards';
+const FILE_PATH  = 'products.json';
+const IMG_DIR    = 'img';
 
-async function openFile() {
-  try {
-    [fileHandle] = await window.showOpenFilePicker({
-      types: [{ description: 'HTML', accept: { 'text/html': ['.html'] } }]
-    });
-    const file = await fileHandle.getFile();
-    rawHtml = await file.text();
-    document.getElementById('file-name').textContent = file.name;
-    document.getElementById('file-name').style.display = 'inline-block';
-    parseProducts();
-    document.getElementById('empty').style.display = 'none';
-    document.getElementById('editor').style.display = 'block';
-    showStatus('Načteno: ' + file.name + ' (' + items.length + ' produktů)', 'ok');
-  } catch(e) {
-    if (e.name !== 'AbortError') showStatus('Chyba: ' + e.message, 'err');
+// ── STATE ──
+let ghToken = localStorage.getItem('vic_gh_token') || '';
+let data = { bulks: [], singles: [], decks: [] };
+let fileSha = '';
+let currentTab = 'bulks';
+let deleteTarget = null;
+let editImgs = [];
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  if (ghToken) {
+    document.getElementById('gh-token').value = ghToken;
+    verifyToken();
   }
+});
+
+// ── GITHUB CONNECTION ──
+function connectGitHub() {
+  ghToken = document.getElementById('gh-token').value.trim();
+  if (!ghToken) { toast('Zadej GitHub token', 'err'); return; }
+  localStorage.setItem('vic_gh_token', ghToken);
+  verifyToken();
 }
 
-function parseProducts() {
-  items = [];
-  // Use DOMParser for reliable extraction
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(rawHtml, 'text/html');
+async function verifyToken() {
+  try {
+    const r = await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}`);
+    if (r.id) {
+      setStatus(true);
+      loadFromGitHub();
+    } else setStatus(false);
+  } catch { setStatus(false); }
+}
 
-  // Bulk: .product-card
-  doc.querySelectorAll('.product-card').forEach((el, i) => {
-    const onclick = el.getAttribute('onclick') || '';
-    const title = extract(onclick, 'title') || 'Produkt ' + (i+1);
-    const price = extract(onclick, 'price') || '0';
-    const stock = (extract(onclick, 'stock') || '1 ks').replace(/[^0-9]/g,'') || '1';
-    const imgs  = extractImgs(onclick);
-    items.push({ id: 'bulk-' + i, type: 'bulk', title, price, stock, imgs });
+function setStatus(ok) {
+  const el = document.getElementById('gh-status');
+  el.textContent = ok ? '● Připojeno' : '● Nepřipojeno';
+  el.className = 'gh-status ' + (ok ? 'connected' : 'disconnected');
+  document.getElementById('btn-save').disabled = !ok;
+}
+
+function toggleSettings() {
+  const card = document.getElementById('settings-card');
+  card.style.display = card.style.display === 'none' ? '' : 'none';
+}
+
+// ── GITHUB API ──
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/${path}`, {
+    headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github.v3+json' }
   });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
 
-  // Singles: .single-card
-  doc.querySelectorAll('.single-card').forEach((el, i) => {
-    const onclick = el.getAttribute('onclick') || '';
-    const title = extract(onclick, 'title') || 'Single ' + (i+1);
-    const price = extract(onclick, 'price') || '0';
-    const stock = (extract(onclick, 'stock') || '1 ks').replace(/[^0-9]/g,'') || '1';
-    const imgs  = extractImgs(onclick);
-    items.push({ id: 'single-' + i, type: 'single', title, price, stock, imgs });
+async function ghPut(path, body) {
+  const r = await fetch(`https://api.github.com/${path}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${ghToken}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
   });
-
-  renderTables();
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.message || r.status);
+  }
+  return r.json();
 }
 
-function extract(str, key) {
-  const m = str.match(new RegExp(key + ":'([^']*)'"));
-  return m ? m[1] : null;
+// ── LOAD FROM GITHUB ──
+async function loadFromGitHub() {
+  if (!ghToken) { toast('Nejdřív se připoj k GitHubu', 'err'); return; }
+  showLoading('Načítám products.json...');
+  try {
+    const file = await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
+    fileSha = file.sha;
+    const json = atob(file.content.replace(/\n/g, ''));
+    data = JSON.parse(json);
+    renderAll();
+    toast('Načteno z GitHubu ✓', 'ok');
+  } catch(e) {
+    toast('Chyba načítání: ' + e.message, 'err');
+  } finally { hideLoading(); }
 }
 
-function extractImgs(str) {
-  const m = str.match(/imgs:\[([^\]]*)\]/);
-  if (!m) return '';
-  return m[1].replace(/'/g,'').split(',')[0].trim(); // first image
+// ── SAVE TO GITHUB ──
+async function saveToGitHub() {
+  if (!ghToken) { toast('Nejdřív se připoj k GitHubu', 'err'); return; }
+  if (!fileSha) { toast('Nejdřív načti data z GitHubu', 'err'); return; }
+  showLoading('Ukládám na GitHub a nasazuji web...');
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const result = await ghPut(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+      message: 'Admin: aktualizace produktů',
+      content,
+      sha: fileSha
+    });
+    fileSha = result.content.sha;
+    toast('Uloženo! Web se nasazuje (~30s) ✓', 'ok');
+  } catch(e) {
+    toast('Chyba ukládání: ' + e.message, 'err');
+  } finally { hideLoading(); }
 }
 
-function renderTables() {
-  const bulks   = items.filter(x => x.type === 'bulk');
-  const singles = items.filter(x => x.type === 'single');
-
-  document.getElementById('bulk-title').textContent = 'Bulk produkty (' + bulks.length + ')';
-  document.getElementById('singles-title').textContent = 'Singl karty (' + singles.length + ')';
-
-  document.getElementById('bulk-body').innerHTML = bulks.map(p => row(p)).join('');
-  document.getElementById('singles-body').innerHTML = singles.map(p => row(p)).join('');
+// ── RENDER ──
+function renderAll() {
+  updateCounts();
+  renderTab(currentTab);
 }
 
-function row(p) {
+function updateCounts() {
+  document.getElementById('cnt-bulks').textContent   = data.bulks.length;
+  document.getElementById('cnt-singles').textContent = data.singles.length;
+  document.getElementById('cnt-decks').textContent   = data.decks.length;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  const descs = { bulks: 'Bulk sety a mix balíčky', singles: 'Singl karty', decks: 'Hotové decky k hraní' };
+  document.getElementById('tab-desc').textContent = descs[tab];
+  renderTab(tab);
+}
+
+function renderTab(tab) {
+  const list = document.getElementById('product-list');
+  const items = data[tab] || [];
+  if (!items.length) {
+    list.innerHTML = '<div class="empty-state"><p>Žádné produkty. Přidej první kliknutím na "Přidat produkt".</p></div>';
+    return;
+  }
+  list.innerHTML = `
+    <table class="product-table">
+      <thead><tr>
+        <th>Foto</th><th>Název</th><th>Cena</th><th>Sklad</th><th>Série</th><th style="width:100px"></th>
+      </tr></thead>
+      <tbody>
+        ${items.map((p, i) => productRow(p, i, tab)).join('')}
+      </tbody>
+    </table>`;
+}
+
+function productRow(p, i, tab) {
+  const imgSrc = (p.imgs && p.imgs[0]) ? p.imgs[0] : '';
+  const stockBadge = p.stock > 0
+    ? `<span class="stock-badge-ok">${p.stock} ks</span>`
+    : `<span class="stock-badge-low">0 ks</span>`;
   return `<tr>
-    <td class="name-cell">${p.title}</td>
-    <td><input type="number" id="price-${p.id}" value="${p.price}" min="0" step="1" oninput="markChanged()"/></td>
-    <td><input type="number" id="stock-${p.id}" value="${p.stock}" min="0" step="1" class="stock-input" oninput="markChanged()"/></td>
+    <td><img class="prod-img" src="${imgSrc}" onerror="this.style.opacity='0.2'" alt=""/></td>
+    <td><div class="prod-name">${p.title}</div><div class="prod-set">${p.set || ''}</div></td>
+    <td><span class="price-badge">${p.price} Kč</span></td>
+    <td>${stockBadge}</td>
+    <td style="font-size:0.78rem;color:var(--grey)">${p.seriesLabel || p.series || ''}</td>
+    <td>
+      <div class="actions-cell">
+        <button class="btn btn-ghost btn-icon btn-sm" onclick="openEditModal('${tab}', ${i})" title="Upravit">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-icon btn-sm" onclick="openDeleteConfirm('${tab}', ${i})" title="Smazat" style="color:var(--red)">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </div>
+    </td>
   </tr>`;
 }
 
-function markChanged() {
-  document.getElementById('unsaved').style.display = 'inline-block';
+// ── EDIT MODAL ──
+function openEditModal(tab, idx) {
+  const p = data[tab][idx];
+  document.getElementById('modal-title').textContent = 'Upravit produkt';
+  document.getElementById('f-idx').value   = idx;
+  document.getElementById('f-type').value  = tab;
+  document.getElementById('f-title').value = p.title || '';
+  document.getElementById('f-price').value = p.price || 0;
+  document.getElementById('f-stock').value = p.stock || 0;
+  document.getElementById('f-set').value   = p.set || '';
+  document.getElementById('f-desc').value  = p.desc || '';
+
+  const serEl = document.getElementById('f-series');
+  serEl.value = p.series || 'mix';
+
+  // Features
+  renderFeatures(p.features || []);
+
+  // Images
+  editImgs = [...(p.imgs || [])];
+  renderImgList();
+
+  document.getElementById('edit-modal').classList.add('open');
 }
 
-async function saveFile() {
-  if (!fileHandle) { showStatus('Nejprve otevři soubor.', 'err'); return; }
+function openAddModal() {
+  document.getElementById('modal-title').textContent = 'Přidat produkt';
+  document.getElementById('f-idx').value   = '-1';
+  document.getElementById('f-type').value  = currentTab;
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-stock').value = 1;
+  document.getElementById('f-set').value   = '';
+  document.getElementById('f-desc').value  = '';
+  document.getElementById('f-series').value = currentTab === 'decks' ? 'decks' : 'sv151';
+  renderFeatures(['Near Mint (NM) stav', 'Originální neporušené karty']);
+  editImgs = [];
+  renderImgList();
+  document.getElementById('edit-modal').classList.add('open');
+}
 
-  let updated = rawHtml;
+function closeModal() {
+  document.getElementById('edit-modal').classList.remove('open');
+}
 
-  items.forEach(p => {
-    const newPrice = document.getElementById('price-' + p.id)?.value || p.price;
-    const newStock = document.getElementById('stock-' + p.id)?.value || p.stock;
+function renderFeatures(features) {
+  const list = document.getElementById('features-list');
+  list.innerHTML = features.map((f, i) => `
+    <div class="feature-row">
+      <input type="text" value="${f}" id="feat-${i}" placeholder="Vlastnost..."/>
+      <button class="btn btn-ghost btn-icon btn-sm" onclick="this.parentElement.remove()">✕</button>
+    </div>`).join('');
+}
 
-    if (p.type === 'bulk') {
-      // Update openModal price & stock by matching title
-      const escaped = p.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      // price in openModal
-      updated = updated.replace(
-        new RegExp("(title:'" + escaped + "'[^}]*price:')[^']*(')", 's'),
-        '$1' + newPrice + '$2'
-      );
-      // stock in openModal
-      updated = updated.replace(
-        new RegExp("(title:'" + escaped + "'[^}]*stock:')[^']*(')", 's'),
-        '$1' + newStock + ' ks$2'
-      );
-      // data-price attribute (find card by searching for the title nearby)
-      // Use imgs key as anchor for data-price
-      if (p.imgs) {
-        const imgEsc = p.imgs.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        updated = updated.replace(
-          new RegExp('(data-price=")[^"]*("\\s+data-series="[^"]*"\\s+onclick="openModal\\(\\{\\s*imgs:\\[\'' + imgEsc),
-          '$1' + newPrice + '$2'
-        );
-      }
-      // product-price display
-      updated = updated.replace(
-        new RegExp("(title:'" + escaped + "'[\\s\\S]{0,2000}?<div class=\"product-price\">)\\d+( <small>)"),
-        '$1' + newPrice + '$2'
-      );
-      // stock-badge display
-      updated = updated.replace(
-        new RegExp("(title:'" + escaped + "'[\\s\\S]{0,2000}?<span class=\"stock-badge\">)\\d+( ks</span>)"),
-        '$1' + newStock + '$2'
-      );
+function addFeatureRow() {
+  const list = document.getElementById('features-list');
+  const div = document.createElement('div');
+  div.className = 'feature-row';
+  const i = list.children.length;
+  div.innerHTML = `<input type="text" id="feat-${i}" placeholder="Vlastnost..."/>
+    <button class="btn btn-ghost btn-icon btn-sm" onclick="this.parentElement.remove()">✕</button>`;
+  list.appendChild(div);
+}
+
+function getFeatures() {
+  return [...document.getElementById('features-list').querySelectorAll('input')]
+    .map(i => i.value.trim()).filter(Boolean);
+}
+
+// ── IMAGE HANDLING ──
+function renderImgList() {
+  const list = document.getElementById('img-list');
+  list.innerHTML = editImgs.map((src, i) => `
+    <div class="img-item">
+      <img src="${src}" onerror="this.style.opacity='0.2'" alt="foto ${i+1}"/>
+      <button class="img-remove" onclick="removeImg(${i})">✕</button>
+    </div>`).join('');
+}
+
+function removeImg(i) {
+  editImgs.splice(i, 1);
+  renderImgList();
+}
+
+function addImgManual() {
+  const val = document.getElementById('f-img-manual').value.trim();
+  if (!val) return;
+  editImgs.push(val);
+  document.getElementById('f-img-manual').value = '';
+  renderImgList();
+}
+
+async function handleImgUpload(input) {
+  if (!ghToken) { toast('Nejdřív se připoj k GitHubu', 'err'); return; }
+  const files = [...input.files];
+  if (!files.length) return;
+  showLoading(`Nahrávám ${files.length} foto...`);
+  for (const file of files) {
+    try {
+      const base64 = await fileToBase64(file);
+      const filename = file.name.toLowerCase().replace(/\s+/g, '_');
+      const path = `${IMG_DIR}/${filename}`;
+      // Check if file exists (get SHA)
+      let sha = undefined;
+      try {
+        const existing = await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`);
+        sha = existing.sha;
+      } catch {}
+      const body = { message: `Admin: upload ${filename}`, content: base64 };
+      if (sha) body.sha = sha;
+      await ghPut(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, body);
+      editImgs.push(path);
+      renderImgList();
+      toast(`Nahráno: ${filename}`, 'ok');
+    } catch(e) {
+      toast(`Chyba uploadu ${file.name}: ` + e.message, 'err');
     }
-
-    if (p.type === 'single') {
-      const escaped = p.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      // price in openModal
-      updated = updated.replace(
-        new RegExp("(title:'" + escaped + "'[^}]*price:')[^']*(')", 's'),
-        '$1' + newPrice + '$2'
-      );
-      // stock in openModal
-      updated = updated.replace(
-        new RegExp("(title:'" + escaped + "'[^}]*stock:')[^']*(')", 's'),
-        '$1' + newStock + ' ks$2'
-      );
-      // single-price display
-      updated = updated.replace(
-        new RegExp("(<h3>" + escaped + "</h3><div class=\"single-price\">)\\d+( Kč</div>)"),
-        '$1' + newPrice + '$2'
-      );
-    }
-  });
-
-  try {
-    const writable = await fileHandle.createWritable();
-    await writable.write(updated);
-    await writable.close();
-    rawHtml = updated;
-    document.getElementById('unsaved').style.display = 'none';
-    showStatus('✓ Uloženo!', 'ok');
-  } catch(e) {
-    showStatus('Chyba při ukládání: ' + e.message, 'err');
   }
+  input.value = '';
+  hideLoading();
 }
 
-function showStatus(msg, type) {
-  const el = document.getElementById('status');
-  el.textContent = msg;
-  el.className = type;
-  setTimeout(() => { el.className = ''; el.style.display = 'none'; }, 4000);
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
+
+// ── SAVE PRODUCT ──
+function saveProduct() {
+  const tab   = document.getElementById('f-type').value;
+  const idx   = parseInt(document.getElementById('f-idx').value);
+  const title = document.getElementById('f-title').value.trim();
+  const price = parseInt(document.getElementById('f-price').value) || 0;
+  const stock = parseInt(document.getElementById('f-stock').value) || 0;
+  const set   = document.getElementById('f-set').value.trim();
+  const series = document.getElementById('f-series').value;
+  const desc  = document.getElementById('f-desc').value.trim();
+  const features = getFeatures();
+
+  if (!title) { toast('Zadej název produktu', 'err'); return; }
+  if (!editImgs.length) { toast('Přidej alespoň jednu fotku', 'err'); return; }
+
+  const seriesLabels = {sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',mix:'Mix',decks:'Deck'};
+
+  const product = {
+    imgs: editImgs,
+    title, price, stock, set, series,
+    seriesLabel: seriesLabels[series] || series,
+    type: tab === 'bulks' ? 'Bulk' : tab === 'singles' ? 'Single' : 'Deck',
+    desc, features
+  };
+
+  if (idx === -1) {
+    data[tab].push(product);
+    toast('Produkt přidán ✓', 'ok');
+  } else {
+    data[tab][idx] = product;
+    toast('Produkt upraven ✓', 'ok');
+  }
+
+  renderAll();
+  closeModal();
+}
+
+// ── DELETE ──
+function openDeleteConfirm(tab, idx) {
+  deleteTarget = { tab, idx };
+  document.getElementById('confirm-name').textContent = data[tab][idx].title;
+  document.getElementById('confirm-overlay').classList.add('open');
+}
+
+function closeConfirm() {
+  deleteTarget = null;
+  document.getElementById('confirm-overlay').classList.remove('open');
+}
+
+function confirmDelete() {
+  if (!deleteTarget) return;
+  data[deleteTarget.tab].splice(deleteTarget.idx, 1);
+  renderAll();
+  closeConfirm();
+  toast('Produkt smazán', 'info');
+}
+
+// ── HELPERS ──
+function showLoading(text) {
+  document.getElementById('loading-text').textContent = text || 'Načítám...';
+  document.getElementById('loading').classList.add('open');
+}
+function hideLoading() {
+  document.getElementById('loading').classList.remove('open');
+}
+
+let _toastTimer;
+function toast(msg, type) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  clearTimeout(_toastTimer);
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type || 'info');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  _toastTimer = setTimeout(() => el.remove(), 3500);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeConfirm();
+  }
+});
 </script>
 </body>
 </html>
