@@ -388,7 +388,7 @@ async function loadFromGitHub() {
   try {
     const file = await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
     fileSha = file.sha;
-    const json = atob(file.content.replace(/\n/g, ''));
+    const json = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
     data = JSON.parse(json);
     renderAll();
     toast('Načteno z GitHubu ✓', 'ok');
