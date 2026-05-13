@@ -517,24 +517,7 @@
         "Originální neporušená karta"
       ]
     },
-    {
-      "imgs": [
-        "img/misc_s_rotomex.jpg",
-        "img/misc_s_rotomex2.jpg"
-      ],
-      "title": "Rotom EX 029/094",
-      "price": 50,
-      "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "type": "Single",
-      "desc": "Rotom EX single karta.",
-      "features": [
-        "Single karta",
-        "Near Mint (NM) stav",
-        "Originální neporušená karta"
-      ]
-    },
+
     {
       "imgs": [
         "img/misc_s_darkrai.jpg",
@@ -571,24 +554,7 @@
         "Originální neporušená karta"
       ]
     },
-    {
-      "imgs": [
-        "img/misc_s_megagengarex.jpg",
-        "img/misc_s_megagengarex2.jpg"
-      ],
-      "title": "Mega Gengar EX 056/094",
-      "price": 100,
-      "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "type": "Single",
-      "desc": "Mega Gengar EX single karta.",
-      "features": [
-        "Single karta",
-        "Near Mint (NM) stav",
-        "Originální neporušená karta"
-      ]
-    },
+
     {
       "imgs": [
         "img/misc_s_thundurus.jpg",
