@@ -295,7 +295,7 @@
       ],
       "title": "Shrouded Fable Bulk (48 ks)",
       "price": 150,
-      "stock": 3,
+      "stock": 2,
       "set": "SV: Shrouded Fable",
       "series": "sfa",
       "seriesLabel": "Shrouded Fable",
@@ -310,25 +310,7 @@
     }
   ],
   "singles": [
-    {
-      "imgs": [
-        "img/sv151_s_bulbasaur.jpg",
-        "img/sv151_s_n8.jpg"
-      ],
-      "title": "Bulbasaur – SV: 151",
-      "price": 20,
-      "stock": 1,
-      "set": "SV: 151",
-      "series": "sv151",
-      "type": "Single",
-      "desc": "Bulbasaur single karta z kolekce SV: 151.",
-      "features": [
-        "Single karta",
-        "Kolekce SV: 151",
-        "Near Mint (NM) stav",
-        "Originální neporušená karta"
-      ]
-    },
+   
     {
       "imgs": [
         "img/sv151_s_charmander.jpg",
@@ -535,24 +517,7 @@
         "Originální neporušená karta"
       ]
     },
-    {
-      "imgs": [
-        "img/misc_s_rotomex.jpg",
-        "img/misc_s_rotomex2.jpg"
-      ],
-      "title": "Rotom EX 029/094",
-      "price": 50,
-      "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "type": "Single",
-      "desc": "Rotom EX single karta.",
-      "features": [
-        "Single karta",
-        "Near Mint (NM) stav",
-        "Originální neporušená karta"
-      ]
-    },
+
     {
       "imgs": [
         "img/misc_s_darkrai.jpg",
@@ -589,24 +554,7 @@
         "Originální neporušená karta"
       ]
     },
-    {
-      "imgs": [
-        "img/misc_s_megagengarex.jpg",
-        "img/misc_s_megagengarex2.jpg"
-      ],
-      "title": "Mega Gengar EX 056/094",
-      "price": 100,
-      "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "type": "Single",
-      "desc": "Mega Gengar EX single karta.",
-      "features": [
-        "Single karta",
-        "Near Mint (NM) stav",
-        "Originální neporušená karta"
-      ]
-    },
+
     {
       "imgs": [
         "img/misc_s_thundurus.jpg",
