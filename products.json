@@ -134,16 +134,16 @@
       "title": "Japonsko/KorejskÃ½ Bulk (500+ ks)",
       "price": 1200,
       "stock": 3,
-      "set": "Japonsko/KorejskÃ½",
+      "set": "Japonsko/Korejský",
       "series": "japan",
       "seriesLabel": "Japan/Korea",
       "type": "Bulk",
-      "desc": "500+ karet z japonskÃ½ch a korejskÃ½ch edic bez duplicit. VelkÃ½ balÃ­Äek originÃ¡lÅ¯ pro sbÄratele i hrÃ¡Äe.",
+      "desc": "500+ karet z japonských a korejsksých edic bez duplicit. Velký balíček originálních karet vhodný pro hráče i sběratele",
       "features": [
         "500+ karet bez duplicit",
-        "JaponskÃ© edice",
+        "Japonská edice",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ© karty"
+        "Originální neporušené karty"
       ]
     },
     {
@@ -314,7 +314,7 @@
       "imgs": [
         "img/sv151_s_charmander.jpg"
       ],
-      "title": "Charmander â SV: 151",
+      "title": "Charmander",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
@@ -326,26 +326,26 @@
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální neporušená karta"
       ]
     },
     {
       "imgs": [
-        "img/sv151_s_eevee.jpg",
-        "img/sv151_s_n6.jpg"
+        "img/sv151_s_eevee.jpg"
       ],
       "title": "Eevee â SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Eevee single karta z kolekce SV: 151.",
       "features": [
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální neporušená karta"
       ]
     },
     {
