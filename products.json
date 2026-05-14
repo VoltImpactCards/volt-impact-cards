@@ -300,12 +300,12 @@
       "series": "sfa",
       "seriesLabel": "Shrouded Fable",
       "type": "Bulk",
-      "desc": "48 karet z kolekce SV: Shrouded Fable bez duplicit. UnikÃ¡tnÃ­ karty s tajemnÃ½mi PokÃ©mony.",
+      "desc": "48 karet z kolekce SV: Shrouded Fable bez duplicit.",
       "features": [
         "48 karet bez duplicit",
         "Kolekce Shrouded Fable",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ© karty"
+        "Originální neporušené karty"
       ]
     }
   ],
@@ -353,11 +353,12 @@
         "img/sv151_s_ivysaur.jpg",
         "img/sv151_s_n7.jpg"
       ],
-      "title": "Ivysaur â SV: 151",
+      "title": "Ivysaur SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Ivysaur single karta z kolekce SV: 151.",
       "features": [
@@ -372,37 +373,38 @@
         "img/sv151_s_oldamber.jpg",
         "img/sv151_s_n9.jpg"
       ],
-      "title": "Old Amber â SV: 151",
+      "title": "Old Amber  SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Old Amber single karta z kolekce SV: 151.",
       "features": [
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/sv151_s_pidgeotto.jpg",
-        "img/sv151_s_n1.jpg"
+        "img/sv151_s_pidgeotto.jpg"
       ],
-      "title": "Pidgeotto â SV: 151",
+      "title": "Pidgeotto SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Pidgeotto single karta z kolekce SV: 151.",
       "features": [
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
@@ -410,56 +412,57 @@
         "img/sv151_s_pikachu.jpg",
         "img/sv151_s_n3.jpg"
       ],
-      "title": "Pikachu â SV: 151",
+      "title": "Pikachu SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Pikachu single karta z kolekce SV: 151.",
       "features": [
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/sv151_s_snorlax.jpg",
-        "img/sv151_s_n2.jpg"
+        "img/sv151_s_snorlax.jpg"
       ],
-      "title": "Snorlax â SV: 151",
+      "title": "Snorlax  SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Snorlax single karta z kolekce SV: 151.",
       "features": [
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/sv151_s_squirtle.jpg",
-        "img/sv151_s_n4.jpg"
+        "img/sv151_s_squirtle.jpg"
       ],
-      "title": "Squirtle â SV: 151",
+      "title": "Squirtle  SV: 151",
       "price": 20,
       "stock": 1,
       "set": "SV: 151",
       "series": "sv151",
+      "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Squirtle single karta z kolekce SV: 151.",
       "features": [
         "Single karta",
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
