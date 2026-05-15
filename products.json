@@ -316,7 +316,7 @@
       ],
       "title": "Charmander",
       "price": 20,
-      "stock": 1,
+      "stock": 4,
       "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
@@ -590,6 +590,57 @@
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1298.jpg"
+      ],
+      "title": "Charmander 026/197",
+      "price": 15,
+      "stock": 1,
+      "set": "",
+      "series": "sv151",
+      "seriesLabel": "SV: 151",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální karta"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1299.jpg"
+      ],
+      "title": "Clefairy 081/197",
+      "price": 15,
+      "stock": 2,
+      "set": "Scarlet&Violet",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1300.jpg"
+      ],
+      "title": "Cleffa 080/197",
+      "price": 15,
+      "stock": 1,
+      "set": "Scarlet&Violet",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální karty"
       ]
     }
   ]
