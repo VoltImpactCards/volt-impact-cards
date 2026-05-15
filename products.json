@@ -327,6 +327,24 @@
         "Bez duplicit",
         "Originální karty"
       ]
+    },
+    {
+      "imgs": [
+        "img/img_1302.jpg"
+      ],
+      "title": "Obsidian Flames Mix (100 ks)",
+      "price": 300,
+      "stock": 1,
+      "set": "Scarlet&Violet",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
+      "type": "Bulk",
+      "desc": "Mix karet ze série Obsidian flames bez duplicit.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální karty",
+        "Bez duplicit"
+      ]
     }
   ],
   "singles": [
