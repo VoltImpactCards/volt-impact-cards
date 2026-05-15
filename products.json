@@ -91,7 +91,7 @@
         "img/flames71_1.jpg",
         "img/flames71_2.jpg"
       ],
-      "title": "Bulk (71 ks)",
+      "title": "Phatasmal Flames Bulk (71 ks)",
       "price": 250,
       "stock": 3,
       "set": "Mega Evolutions",
@@ -111,14 +111,14 @@
         "img/flames34_1.jpg",
         "img/flames34_2.jpg"
       ],
-      "title": "Bulk (34 ks)",
+      "title": "Phatasmal Flames Bulk (34 ks)",
       "price": 100,
       "stock": 3,
       "set": "Mega Evolutions",
       "series": "flames",
       "seriesLabel": "Phantasmal Flames",
       "type": "Bulk",
-      "desc": "34 karet z kolekce Mega Evolutions: Phantasmal Flames bez duplicit. Menší balíček pro doplnění kolekce",
+      "desc": "34 karet z kolekce Mega Evolutions: Phantasmal Flames bez duplicit. Menší balíček pro doplnění kolekce.",
       "features": [
         "34 karet bez duplicit",
         "Kolekce Phantasmal Flames",
@@ -150,7 +150,7 @@
       "imgs": [
         "img/me_56_1.jpg"
       ],
-      "title": "Bulk (56 ks)",
+      "title": "Mega Evolutions Bulk (56 ks)",
       "price": 200,
       "stock": 3,
       "set": "Mega Evolutions",
@@ -162,7 +162,7 @@
         "56 karet bez duplicit",
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ© karty"
+        "Originální karty"
       ]
     },
     {
@@ -170,14 +170,14 @@
         "img/me_88_1.jpg",
         "img/me_88_2.jpg"
       ],
-      "title": "Bulk (88 ks)",
+      "title": "Mega Evolutions Bulk (88 ks)",
       "price": 300,
       "stock": 3,
       "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
-      "desc": "88 karet z kolekce Mega Evolutions bez duplicit. VÄtÅ¡Ã­ balÃ­Äek s mega evolucemi.",
+      "desc": "88 karet z kolekce Mega Evolutions bez duplicit.",
       "features": [
         "88 karet bez duplicit",
         "Kolekce Mega Evolutions",
@@ -189,14 +189,14 @@
       "imgs": [
         "img/me_trainers_1.jpg"
       ],
-      "title": "Trainers Bulk (39 ks)",
+      "title": "Mega Evolutions Trainers Bulk (39 ks)",
       "price": 200,
       "stock": 3,
       "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
-      "desc": "39 trainer karet z kolekce Mega Evolutions. IdeÃ¡lnÃ­ doplnÄk paluby.",
+      "desc": "39 trainer karet z kolekce Mega Evolutions. Ideální k doplnění herního decku.",
       "features": [
         "39 trainer karet",
         "Kolekce Mega Evolutions",
@@ -211,7 +211,7 @@
         "img/sv151_118_3.jpg",
         "img/sv151_118_4.jpg"
       ],
-      "title": "Bulk (118 ks)",
+      "title": "SV: 151 Bulk (118 ks)",
       "price": 350,
       "stock": 3,
       "set": "Scarlet&Violet",
@@ -232,7 +232,7 @@
         "img/sv151_88_2.jpg",
         "img/sv151_88_3.jpg"
       ],
-      "title": "Bulk (88 ks)",
+      "title": "SV: 151 Bulk (88 ks)",
       "price": 250,
       "stock": 3,
       "set": "Scarlet&Violet",
@@ -278,13 +278,13 @@
       "series": "jt",
       "seriesLabel": "Journey Together",
       "type": "Bulk",
-      "desc": "100 karet z kolekce SV: Journey Together. MÅ¯Å¾e obsahovat duplicity. MnoÅ¾stevnÃ­ sleva: 200 ks za 400 KÄ, 400 ks za 700 KÄ.",
+      "desc": "100 karet z kolekce SV: Journey Together. Může obsahovat duplicity. Množstevní sleva: 200 ks za 400 Kč, 400 ks za 700 Kč.",
       "features": [
         "100 karet",
         "Kolekce SV: Journey Together",
-        "MÅ¯Å¾e obsahovat duplicity",
+        "Může obsahovat duplicity",
         "Near Mint (NM) stav",
-        "MnoÅ¾stevnÃ­ sleva: 200 ks / 400 KÄ, 400 ks / 700 KÄ"
+        "Množstevní sleva: 200 ks 400 Kč, 400 ks 700 Kč."
       ]
     },
     {
@@ -305,7 +305,7 @@
         "48 karet bez duplicit",
         "Kolekce Shrouded Fable",
         "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Originální karty"
       ]
     }
   ],
@@ -475,120 +475,121 @@
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Sylveon single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/misc_s_suicune.jpg",
-        "img/misc_s_suicune2.jpg"
+        "img/misc_s_suicune.jpg"
       ],
       "title": "Suicune 026/094",
       "price": 30,
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Suicune single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/misc_s_togekiss.jpg",
-        "img/misc_s_togekiss2.jpg"
+        "img/misc_s_togekiss.jpg"
       ],
       "title": "Togekiss 072/191",
       "price": 30,
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Togekiss single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/misc_s_darkrai.jpg",
-        "img/misc_s_darkrai2.jpg"
+        "img/misc_s_darkrai.jpg"
       ],
       "title": "Darkrai 136/197",
       "price": 30,
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Darkrai single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/misc_s_reshiram.jpg",
-        "img/misc_s_reshiram2.jpg"
+        "img/misc_s_reshiram.jpg"
       ],
       "title": "Reshiram 017/094",
       "price": 30,
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Reshiram single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/misc_s_thundurus.jpg",
-        "img/misc_s_thundurus2.jpg"
+        "img/misc_s_thundurus.jpg"
       ],
       "title": "Thundurus 070/191",
       "price": 30,
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Thundurus single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     },
     {
       "imgs": [
-        "img/misc_s_kyogre.jpg",
-        "img/misc_s_kyogre2.jpg"
+        "img/misc_s_kyogre.jpg"
       ],
       "title": "Kyogre 035/132",
       "price": 30,
       "stock": 1,
       "set": "Mix",
       "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "Kyogre single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
-        "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
+        "Originální karta"
       ]
     }
   ]
