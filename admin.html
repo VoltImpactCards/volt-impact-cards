@@ -196,6 +196,8 @@
             <option value="japan">Japan/Korea</option>
             <option value="mega">Mega Evolutions</option>
             <option value="jt">Journey Together</option>
+            <option value="prismatic">Prismatic Evolutions</option>
+            <option value="obsidian">Obsidian Flames</option>
             <option value="mix">Mix</option>
             <option value="decks">Decky</option>
           </select>
@@ -625,7 +627,7 @@ function saveProduct() {
   if (!title) { toast('Zadej název produktu', 'err'); return; }
   if (!editImgs.length) { toast('Přidej alespoň jednu fotku', 'err'); return; }
 
-  const seriesLabels = {sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',mix:'Mix',decks:'Deck'};
+  const seriesLabels = {sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',prismatic:'Prismatic Evolutions',obsidian:'Obsidian Flames',mix:'Mix',decks:'Deck'};
 
   const product = {
     imgs: editImgs,
