@@ -206,35 +206,13 @@
     },
     {
       "imgs": [
-        "img/sv151_118_1.jpg",
-        "img/sv151_118_2.jpg",
-        "img/sv151_118_3.jpg",
-        "img/sv151_118_4.jpg"
-      ],
-      "title": "SV: 151 Bulk (118 ks)",
-      "price": 350,
-      "stock": 3,
-      "set": "Scarlet&Violet",
-      "series": "sv151",
-      "seriesLabel": "SV: 151",
-      "type": "Bulk",
-      "desc": "118 karet z kolekce Scarlet & Violet 151 bez duplicit. Kompletní základ sbírky.",
-      "features": [
-        "118 karet bez duplicit",
-        "Kolekce SV: 151",
-        "Near Mint (NM) stav",
-        "Originální karty"
-      ]
-    },
-    {
-      "imgs": [
         "img/sv151_88_1.jpg",
         "img/sv151_88_2.jpg",
         "img/sv151_88_3.jpg"
       ],
       "title": "SV: 151 Bulk (88 ks)",
       "price": 250,
-      "stock": 3,
+      "stock": 1,
       "set": "Scarlet&Violet",
       "series": "sv151",
       "seriesLabel": "SV: 151",
@@ -253,7 +231,7 @@
       ],
       "title": "SV: 151 Evoluce mix (30 ks)",
       "price": 100,
-      "stock": 3,
+      "stock": 1,
       "set": "Scarlet&Violet",
       "series": "sv151",
       "seriesLabel": "SV: 151",
