@@ -307,6 +307,44 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ]
+    },
+    {
+      "imgs": [
+        "img/img_1295.jpg",
+        "img/img_1296.jpg",
+        "img/img_1297.jpg"
+      ],
+      "title": "Obsidian Flames Bulk (82 ks)",
+      "price": 300,
+      "stock": 2,
+      "set": "Scarlet&Violet",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
+      "type": "Bulk",
+      "desc": "82 karet ze série Obsidian Flames bez duplicit.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Bez duplicit",
+        "Originální karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1302.jpg"
+      ],
+      "title": "Obsidian Flames Mix (100 ks)",
+      "price": 300,
+      "stock": 1,
+      "set": "Scarlet&Violet",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
+      "type": "Bulk",
+      "desc": "Mix karet ze série Obsidian flames bez duplicit.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální karty",
+        "Bez duplicit"
+      ]
     }
   ],
   "singles": [
