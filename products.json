@@ -324,6 +324,25 @@
         "Originální karty",
         "Bez duplicit"
       ]
+    },
+    {
+      "imgs": [
+        "img/img_1324.heic",
+        "img/img_1325.heic"
+      ],
+      "title": "Prismatic Evolutions Bulk (50 ks)",
+      "price": 150,
+      "stock": 4,
+      "set": "Scarlet&Violet",
+      "series": "prismatic",
+      "seriesLabel": "Prismatic Evolutions",
+      "type": "Bulk",
+      "desc": "Prismatic Evolutions Bulk 50 ks bez duplicit.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální karty",
+        "Bez duplicit"
+      ]
     }
   ],
   "singles": [
