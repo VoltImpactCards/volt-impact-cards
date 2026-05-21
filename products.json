@@ -88,9 +88,9 @@
   "bulks": [
     {
       "imgs": [
-        "img/img_1320.heic",
-        "img/img_1321.heic",
-        "img/img_1322.heic"
+        "img/img_1321.jpg",
+        "img/img_1320.jpg",
+        "img/img_1322.jpg"
       ],
       "title": "Phantasmal Flames Bulk (71 ks)",
       "price": 250,
@@ -327,8 +327,8 @@
     },
     {
       "imgs": [
-        "img/img_1324.heic",
-        "img/img_1325.heic"
+        "img/img_1324.jpg",
+        "img/img_1325.jpg"
       ],
       "title": "Prismatic Evolutions Bulk (50 ks)",
       "price": 150,
