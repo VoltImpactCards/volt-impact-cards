@@ -83,6 +83,26 @@
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
       ]
+    },
+    {
+      "imgs": [
+        "img/img_1366.jpg",
+        "img/img_1365.jpg",
+        "img/img_1364.jpg"
+      ],
+      "title": "Volt Impact",
+      "price": 300,
+      "stock": 1,
+      "set": "Mix",
+      "series": "decks",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Herní set vhodný pro začátečníky",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "60 ks karet"
+      ]
     }
   ],
   "bulks": [
@@ -342,26 +362,6 @@
         "Near Mint (NM) stav",
         "Originální karty",
         "Bez duplicit"
-      ]
-    },
-    {
-      "imgs": [
-        "img/img_1366.jpg",
-        "img/img_1365.jpg",
-        "img/img_1364.jpg"
-      ],
-      "title": "Volt Impact",
-      "price": 300,
-      "stock": 1,
-      "set": "Mix",
-      "series": "decks",
-      "seriesLabel": "Deck",
-      "type": "Bulk",
-      "desc": "Herní deck pro začátečníky",
-      "features": [
-        "Near Mint (NM) stav",
-        "Originální neporušené karty",
-        "60 ks karet"
       ]
     }
   ],
