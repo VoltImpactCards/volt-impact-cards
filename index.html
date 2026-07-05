@@ -339,9 +339,11 @@
       position: relative; background: #080810;
       border-radius: 20px 20px 0 0; overflow: hidden; cursor: pointer;
     }
-    .modal-main-img {
-      width: 100%; height: 320px; object-fit: contain; display: block;
-      transition: opacity .18s; cursor: zoom-in; background: #080810;
+    .modal-slider { overflow: hidden; width: 100%; }
+    .modal-track { display: flex; height: 320px; transition: transform .3s ease; touch-action: pan-y; }
+    .modal-slide {
+      flex: 0 0 100%; width: 100%; height: 100%; object-fit: contain;
+      display: block; cursor: zoom-in; background: #080810;
     }
     .modal-zoom-hint {
       position: absolute; top: 10px; right: 10px;
@@ -349,16 +351,16 @@
       font-size: 0.68rem; padding: 3px 8px; border-radius: 8px;
       pointer-events: none; letter-spacing: 0.3px;
     }
-    .modal-dots {
-      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 7px;
+    .modal-thumbs {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+      padding: 10px 12px 12px; background: #080810;
     }
-    .modal-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: rgba(255,255,255,0.3); border: none; cursor: pointer;
-      transition: background .2s, transform .2s;
+    .modal-thumb {
+      width: 46px; height: 62px; object-fit: cover; border-radius: 6px;
+      cursor: pointer; border: 2px solid transparent; opacity: .55;
+      transition: opacity .2s, border-color .2s; background: #0c0c18;
     }
-    .modal-dot.active { background: var(--yellow); transform: scale(1.25); }
+    .modal-thumb.active { border-color: var(--yellow); opacity: 1; }
     .modal-nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
       background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.15);
@@ -399,7 +401,7 @@
       .footer-grid { grid-template-columns: 1fr; gap: 24px; }
       footer { padding: 40px 20px 28px; } .order-section { padding: 40px 20px; }
       .section-divider { margin: 0 20px; } .modal-body { padding: 20px 20px 24px; }
-      .modal-img { height: 220px; }
+      .modal-img { height: 220px; } .modal-track { height: 220px; }
     }
     @media (max-width: 480px) {
       nav ul { display: none; }
@@ -422,12 +424,14 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal" id="modal-inner">
       <div class="modal-img-d" id="modal-img-d">
-        <img class="modal-main-img" id="modal-main-img" src="" alt="" onclick="openLightbox(this.src, this.alt)"/>
+        <div class="modal-slider" id="modal-slider">
+          <div class="modal-track" id="modal-track"></div>
+        </div>
         <div class="modal-zoom-hint">🔍 přiblížit</div>
         <button class="modal-nav-btn modal-nav-prev" id="modal-nav-prev" onclick="selectImg(_modalIdx - 1)" style="display:none">&#8592;</button>
         <button class="modal-nav-btn modal-nav-next" id="modal-nav-next" onclick="selectImg(_modalIdx + 1)" style="display:none">&#8594;</button>
-        <div class="modal-dots" id="modal-dots"></div>
       </div>
+      <div class="modal-thumbs" id="modal-thumbs" style="display:none"></div>
       <div class="modal-body">
         <div class="modal-badges" id="modal-badges"></div>
         <div class="modal-title" id="modal-title"></div>
@@ -616,14 +620,19 @@ let _modalIdx = 0;
 function buildImgD(imgs) {
   _modalImgs = imgs;
   _modalIdx = 0;
-  const mainImg = document.getElementById('modal-main-img');
-  mainImg.src = imgs[0] || '';
-  mainImg.style.opacity = '1';
-  const dots = document.getElementById('modal-dots');
+  const track = document.getElementById('modal-track');
+  track.style.transition = 'none';
+  track.style.transform = 'translateX(0)';
+  track.innerHTML = imgs.map(src =>
+    `<img class="modal-slide" src="${src}" alt="" onclick="openLightbox(this.src, this.alt)"/>`
+  ).join('');
+  requestAnimationFrame(() => { track.style.transition = 'transform .3s ease'; });
   const hasMultiple = imgs.length > 1;
-  dots.innerHTML = hasMultiple
-    ? imgs.map((_,i) => `<button class="modal-dot${i===0?' active':''}" onclick="event.stopPropagation();selectImg(${i})"></button>`).join('')
+  const thumbs = document.getElementById('modal-thumbs');
+  thumbs.innerHTML = hasMultiple
+    ? imgs.map((src,i) => `<img class="modal-thumb${i===0?' active':''}" src="${src}" alt="" onclick="selectImg(${i})"/>`).join('')
     : '';
+  thumbs.style.display = hasMultiple ? 'flex' : 'none';
   const prevBtn = document.getElementById('modal-nav-prev');
   const nextBtn = document.getElementById('modal-nav-next');
   if (prevBtn) prevBtn.style.display = hasMultiple ? 'flex' : 'none';
@@ -631,11 +640,10 @@ function buildImgD(imgs) {
 }
 
 function selectImg(idx) {
+  if (!_modalImgs.length) return;
   _modalIdx = (idx + _modalImgs.length) % _modalImgs.length;
-  const mainImg = document.getElementById('modal-main-img');
-  mainImg.style.opacity = '0';
-  setTimeout(() => { mainImg.src = _modalImgs[_modalIdx]; mainImg.style.opacity = '1'; }, 160);
-  document.querySelectorAll('.modal-dot').forEach((d,i) => d.classList.toggle('active', i === _modalIdx));
+  document.getElementById('modal-track').style.transform = 'translateX(-' + (_modalIdx * 100) + '%)';
+  document.querySelectorAll('.modal-thumb').forEach((t,i) => t.classList.toggle('active', i === _modalIdx));
 }
 
 function nextImg() {
@@ -824,6 +832,19 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') selectImg(_modalIdx - 1);
   }
 });
+
+(function(){
+  const slider = document.getElementById('modal-slider');
+  let startX = null, startY = null;
+  slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, {passive:true});
+  slider.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) selectImg(_modalIdx + (dx < 0 ? 1 : -1));
+    startX = null;
+  }, {passive:true});
+})();
 
 </script>
 
