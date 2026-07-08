@@ -523,15 +523,14 @@
     },
     {
       "imgs": [
-        "img/misc_s_sylveon.jpg",
-        "img/misc_s_sylveon2.jpg"
+        "img/misc_s_sylveon.jpg"
       ],
       "title": "Sylveon 022/064",
       "price": 30,
-      "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "stock": 3,
+      "set": "",
+      "series": "sfa",
+      "seriesLabel": "Shrouded Fable",
       "type": "Single",
       "desc": "Sylveon single karta.",
       "features": [
@@ -697,6 +696,210 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1479.jpg"
+      ],
+      "title": "Kirlia 059/132",
+      "price": 20,
+      "stock": 1,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1478.jpg"
+      ],
+      "title": "Ralts 058/132",
+      "price": 20,
+      "stock": 4,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1489.jpg"
+      ],
+      "title": "Eevee 050/064",
+      "price": 25,
+      "stock": 2,
+      "set": "",
+      "series": "sv151",
+      "seriesLabel": "SV: 151",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1490.jpg"
+      ],
+      "title": "Espeon 086/197",
+      "price": 35,
+      "stock": 3,
+      "set": "",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1493.jpg"
+      ],
+      "title": "Umbreon  130/197",
+      "price": 35,
+      "stock": 2,
+      "set": "",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1486.jpg"
+      ],
+      "title": "Battle Cage 085/094",
+      "price": 20,
+      "stock": 4,
+      "set": "Mega Evolutions",
+      "series": "flames",
+      "seriesLabel": "Phantasmal Flames",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1484.jpg"
+      ],
+      "title": "Dawn 087/094",
+      "price": 30,
+      "stock": 4,
+      "set": "Mega Evolutions",
+      "series": "flames",
+      "seriesLabel": "Phantasmal Flames",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1485.jpg"
+      ],
+      "title": "Lillie's Determination 119/132",
+      "price": 35,
+      "stock": 1,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1483.jpg"
+      ],
+      "title": "Bulbasaur 001/132",
+      "price": 20,
+      "stock": 3,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1488.jpg"
+      ],
+      "title": "Bayleef 009/132",
+      "price": 20,
+      "stock": 1,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1491.jpg"
+      ],
+      "title": "Chikorita 008/132",
+      "price": 20,
+      "stock": 1,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1482.jpg"
+      ],
+      "title": "Ivysaur 002/132",
+      "price": 20,
+      "stock": 1,
+      "set": "Mega Evolutions",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
       ]
     }
   ]
