@@ -391,6 +391,20 @@
     .modal-nav-prev { left: 10px; }
     .modal-nav-next { right: 10px; }
 
+    /* ── VYPRODÁNO ── */
+    .soldout .product-img-wrap img, .soldout .deck-img-wrap img, .soldout .single-img-wrap img { filter: grayscale(1); opacity: .78; }
+    .single-img-wrap { position: relative; }
+    .soldout-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 4; }
+    .soldout-overlay span {
+      transform: rotate(-15deg); text-transform: uppercase; letter-spacing: 2px;
+      font-weight: 800; font-size: 0.95rem; color: #ff5a58;
+      border: 2px solid #ff5a58; border-radius: 8px; padding: 5px 14px;
+      background: rgba(8,8,16,0.6);
+    }
+    .stock-badge.soldout-badge, .deck-stock-badge.soldout-badge { background: rgba(226,75,74,0.18); color: #ff7b7a; border-color: rgba(226,75,74,0.4); }
+    .modal-img-d.soldout .modal-slide { filter: grayscale(1); }
+    .modal-img-d.soldout + .modal-thumbs .modal-thumb { filter: grayscale(1); }
+
     /* ── FOOTER ── */
     footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 56px 40px 36px; }
     .footer-inner { max-width: 900px; margin: 0 auto; }
@@ -448,6 +462,7 @@
         <div class="modal-slider" id="modal-slider">
           <div class="modal-track" id="modal-track"></div>
         </div>
+        <div class="soldout-overlay" id="modal-soldout" style="display:none"><span>Vyprodáno</span></div>
         <div class="modal-zoom-hint">🔍 přiblížit</div>
         <button class="modal-nav-btn modal-nav-prev" id="modal-nav-prev" onclick="selectImg(_modalIdx - 1)" style="display:none">&#8592;</button>
         <button class="modal-nav-btn modal-nav-next" id="modal-nav-next" onclick="selectImg(_modalIdx + 1)" style="display:none">&#8594;</button>
@@ -678,6 +693,11 @@ function openModal(data) {
   const imgs = data.imgs || (data.img ? [data.img] : []);
   buildImgD(imgs);
 
+  const so = data.soldout === true;
+  _modalSoldout = so;
+  document.getElementById('modal-img-d').classList.toggle('soldout', so);
+  document.getElementById('modal-soldout').style.display = so ? 'flex' : 'none';
+
   document.getElementById('modal-title').textContent = data.title;
   document.getElementById('modal-price').innerHTML = data.price + ' <small>Kč</small>';
   document.getElementById('modal-desc').innerHTML = data.desc;
@@ -686,7 +706,7 @@ function openModal(data) {
   document.getElementById('modal-badges').innerHTML =
     '<span class="badge-original"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Originální karty</span>' +
     '<span class="badge-set">' + data.set + '</span>' +
-    '<span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#ccc;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px">Skladem: ' + data.stock + '</span>';
+    '<span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#ccc;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px">' + (so ? 'Vyprodáno' : 'Skladem: ' + data.stock) + '</span>';
 
   // Features
   document.getElementById('modal-features').innerHTML = data.features.map(f =>
@@ -743,6 +763,7 @@ function checkPrice(price, filter) {
 function openLightbox(src, alt) {
   document.getElementById('lightbox-img').src = src;
   document.getElementById('lightbox-img').alt = alt || '';
+  document.getElementById('lightbox-img').style.filter = _modalSoldout ? 'grayscale(1)' : '';
   document.getElementById('lightbox').classList.add('open');
   const multi = _modalImgs.length > 1;
   document.getElementById('lightbox-prev').classList.toggle('show', multi);
@@ -772,14 +793,20 @@ function closeLightbox() {
 const HINT_SVG = '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>';
 
 let _allProducts = [];
+let _modalSoldout = false;
+
+function isSoldOut(p) { return p.soldout === true || Number(p.stock) === 0; }
+const SOLDOUT_OVERLAY = '<div class="soldout-overlay"><span>Vyprodáno</span></div>';
 
 function buildBulkCard(p) {
-  const stockStr = p.stock + ' ks';
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, set:p.set, type:p.type, desc:p.desc, features:p.features});
-  return `<div class="product-card" data-price="${p.price}" data-series="${p.series}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  const so = isSoldOut(p);
+  const stockStr = so ? 'Vyprodáno' : p.stock + ' ks';
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
+  return `<div class="product-card${so ? ' soldout' : ''}" data-price="${p.price}" data-series="${p.series}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="product-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
-      <span class="stock-badge">${stockStr}</span>
+      ${so ? SOLDOUT_OVERLAY : ''}
+      <span class="stock-badge${so ? ' soldout-badge' : ''}">${stockStr}</span>
       <span class="product-type-badge">${p.seriesLabel}</span>
     </div>
     <div class="product-info">
@@ -791,11 +818,13 @@ function buildBulkCard(p) {
 }
 
 function buildDeckCard(p) {
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
-  return `<div class="deck-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  const so = isSoldOut(p);
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
+  return `<div class="deck-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="deck-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
-      <span class="deck-stock-badge">${p.stock} ks</span>
+      ${so ? SOLDOUT_OVERLAY : ''}
+      <span class="deck-stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span>
       <span class="deck-type-badge">${p.seriesLabel || 'Deck'}</span>
     </div>
     <div class="deck-info">
@@ -807,9 +836,10 @@ function buildDeckCard(p) {
 }
 
 function buildSingleCard(p) {
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features});
-  return `<div class="single-card" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
-    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/></div>
+  const so = isSoldOut(p);
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
+  return `<div class="single-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${so ? SOLDOUT_OVERLAY : ''}</div>
     <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
 }
@@ -824,15 +854,16 @@ async function loadProducts() {
     const noRes = document.getElementById('no-results');
     grid.innerHTML = '';
     grid.appendChild(noRes);
-    data.bulks.forEach(p => grid.insertAdjacentHTML('afterbegin', buildBulkCard(p)));
+    const bulksOrdered = [...data.bulks.filter(isSoldOut), ...data.bulks.filter(p => !isSoldOut(p))];
+    bulksOrdered.forEach(p => grid.insertAdjacentHTML('afterbegin', buildBulkCard(p)));
 
     // Decks
     const decksGrid = document.getElementById('decks-grid');
     if (data.decks && data.decks.length > 0) {
-      decksGrid.innerHTML = data.decks.map(buildDeckCard).join('');
+      decksGrid.innerHTML = [...data.decks.filter(p => !isSoldOut(p)), ...data.decks.filter(isSoldOut)].map(buildDeckCard).join('');
     }
 
-    document.getElementById('singles-grid').innerHTML = data.singles.map(buildSingleCard).join('');
+    document.getElementById('singles-grid').innerHTML = [...data.singles.filter(p => !isSoldOut(p)), ...data.singles.filter(isSoldOut)].map(buildSingleCard).join('');
 
     const total = data.bulks.length;
     document.getElementById('count-total').textContent = total;
