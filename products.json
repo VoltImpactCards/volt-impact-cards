@@ -391,7 +391,7 @@
       ],
       "title": "Eevee",
       "price": 20,
-      "stock": 1,
+      "stock": 2,
       "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
@@ -489,7 +489,7 @@
       ],
       "title": "Snorlax  SV: 151",
       "price": 20,
-      "stock": 1,
+      "stock": 2,
       "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
@@ -653,10 +653,10 @@
       ],
       "title": "Charmander 026/197",
       "price": 15,
-      "stock": 1,
+      "stock": 4,
       "set": "",
-      "series": "sv151",
-      "seriesLabel": "SV: 151",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
       "type": "Single",
       "desc": "",
       "features": [
@@ -895,6 +895,125 @@
       "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1501.jpg"
+      ],
+      "title": "Eevee 074/131",
+      "price": 25,
+      "stock": 3,
+      "set": "",
+      "series": "prismatic",
+      "seriesLabel": "Prismatic Evolutions",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1495.jpg"
+      ],
+      "title": "Pikachu 051/162",
+      "price": 25,
+      "stock": 2,
+      "set": "",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1503.jpg"
+      ],
+      "title": "Raichu 052/162",
+      "price": 25,
+      "stock": 2,
+      "set": "",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1499.jpg"
+      ],
+      "title": "Turtwig 010/162",
+      "price": 20,
+      "stock": 1,
+      "set": "",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1500.jpg"
+      ],
+      "title": "Grotle 011/162",
+      "price": 20,
+      "stock": 1,
+      "set": "",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1497.jpg"
+      ],
+      "title": "Totodile 039/162",
+      "price": 20,
+      "stock": 2,
+      "set": "",
+      "series": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1498.jpg"
+      ],
+      "title": "Croconaw 040/162",
+      "price": 20,
+      "stock": 1,
+      "set": "",
+      "series": "mix",
+      "seriesLabel": "Mix",
       "type": "Single",
       "desc": "",
       "features": [
