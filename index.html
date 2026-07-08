@@ -839,7 +839,7 @@ function buildSingleCard(p) {
   const so = isSoldOut(p);
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
   return `<div class="single-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
-    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${so ? SOLDOUT_OVERLAY : ''}</div>
+    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
     <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
 }
