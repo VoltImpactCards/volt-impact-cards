@@ -373,18 +373,18 @@
         "img/img_1512.jpg",
         "img/img_1513.jpg"
       ],
-      "title": "Mix Bulk 100 ks",
+      "title": "Mix Bulk (100 ks)",
       "price": 250,
       "stock": 1,
       "series": "mix",
+      "era": "sv",
       "seriesLabel": "Mix",
       "type": "Bulk",
       "desc": "100 náhodně namíchaných karet z éry Scarlet and Violet",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ],
-      "era": "sv"
+      ]
     }
   ],
   "singles": [
@@ -638,9 +638,10 @@
         "img/misc_s_thundurus.jpg"
       ],
       "title": "Thundurus 070/191",
-      "price": 15,
+      "price": 30,
       "stock": 1,
       "series": "surging",
+      "era": "sv",
       "seriesLabel": "Surging Sparks",
       "type": "Single",
       "desc": "Thundurus single karta.",
@@ -648,17 +649,17 @@
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ],
-      "era": "sv"
+      ]
     },
     {
       "imgs": [
         "img/misc_s_kyogre.jpg"
       ],
       "title": "Kyogre 035/132",
-      "price": 15,
+      "price": 30,
       "stock": 1,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
       "desc": "Kyogre single karta.",
@@ -666,8 +667,7 @@
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ],
-      "era": "mega"
+      ]
     },
     {
       "imgs": [
