@@ -184,11 +184,26 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Série (set)</label>
-          <input type="text" id="f-set" placeholder="např. SV: 151"/>
+          <label>Éra</label>
+          <select id="f-era">
+            <option value="sv">Scarlet & Violet</option>
+            <option value="mega">Mega Evolution</option>
+            <option value="swsh">Sword & Shield</option>
+            <option value="sm">Sun & Moon</option>
+            <option value="xy">XY</option>
+            <option value="bw">Black & White</option>
+            <option value="hgss">HeartGold & SoulSilver</option>
+            <option value="platinum">Platinum</option>
+            <option value="dp">Diamond & Pearl</option>
+            <option value="ex">EX</option>
+            <option value="ecard">e-Card</option>
+            <option value="neo">Neo</option>
+            <option value="original">Original</option>
+            <option value="mix">Mix / různé</option>
+          </select>
         </div>
         <div class="form-group">
-          <label>Série klíč (filter)</label>
+          <label>Série</label>
           <select id="f-series">
             <option value="sv151">SV: 151</option>
             <option value="sfa">Shrouded Fable</option>
@@ -198,6 +213,8 @@
             <option value="jt">Journey Together</option>
             <option value="prismatic">Prismatic Evolutions</option>
             <option value="obsidian">Obsidian Flames</option>
+            <option value="surging">Surging Sparks</option>
+            <option value="temporal">Temporal Forces</option>
             <option value="mix">Mix</option>
             <option value="decks">Decky</option>
           </select>
@@ -464,7 +481,7 @@ function productRow(p, i, tab) {
     : `<span class="stock-badge-low">0 ks</span>`;
   return `<tr>
     <td><img class="prod-img" src="${imgSrc}" onerror="this.style.opacity='0.2'" alt=""/></td>
-    <td><div class="prod-name">${p.title}</div><div class="prod-set">${p.set || ''}</div></td>
+    <td><div class="prod-name">${p.title}</div><div class="prod-set">${p.seriesLabel || ''}</div></td>
     <td><span class="price-badge">${p.price} Kč</span></td>
     <td>${stockBadge}</td>
     <td style="font-size:0.78rem;color:var(--grey)">${p.seriesLabel || p.series || ''}</td>
@@ -490,7 +507,7 @@ function openEditModal(tab, idx) {
   document.getElementById('f-title').value = p.title || '';
   document.getElementById('f-price').value = p.price || 0;
   document.getElementById('f-stock').value = p.stock || 0;
-  document.getElementById('f-set').value   = p.set || '';
+  document.getElementById('f-era').value   = p.era || 'sv';
   document.getElementById('f-desc').value  = p.desc || '';
 
   const serEl = document.getElementById('f-series');
@@ -513,7 +530,7 @@ function openAddModal() {
   document.getElementById('f-title').value = '';
   document.getElementById('f-price').value = '';
   document.getElementById('f-stock').value = 1;
-  document.getElementById('f-set').value   = '';
+  document.getElementById('f-era').value   = 'sv';
   document.getElementById('f-desc').value  = '';
   document.getElementById('f-series').value = currentTab === 'decks' ? 'decks' : 'sv151';
   renderFeatures(['Near Mint (NM) stav', 'Originální neporušené karty']);
@@ -619,7 +636,7 @@ function saveProduct() {
   const title = document.getElementById('f-title').value.trim();
   const price = parseInt(document.getElementById('f-price').value) || 0;
   const stock = parseInt(document.getElementById('f-stock').value) || 0;
-  const set   = document.getElementById('f-set').value.trim();
+  const era   = document.getElementById('f-era').value;
   const series = document.getElementById('f-series').value;
   const desc  = document.getElementById('f-desc').value.trim();
   const features = getFeatures();
@@ -627,11 +644,11 @@ function saveProduct() {
   if (!title) { toast('Zadej název produktu', 'err'); return; }
   if (!editImgs.length) { toast('Přidej alespoň jednu fotku', 'err'); return; }
 
-  const seriesLabels = {sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',prismatic:'Prismatic Evolutions',obsidian:'Obsidian Flames',mix:'Mix',decks:'Deck'};
+  const seriesLabels = {sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',prismatic:'Prismatic Evolutions',obsidian:'Obsidian Flames',surging:'Surging Sparks',temporal:'Temporal Forces',mix:'Mix',decks:'Deck'};
 
   const product = {
     imgs: editImgs,
-    title, price, stock, set, series,
+    title, price, stock, series, era,
     seriesLabel: seriesLabels[series] || series,
     type: tab === 'bulks' ? 'Bulk' : tab === 'singles' ? 'Single' : 'Deck',
     desc, features

@@ -193,7 +193,7 @@
     }
     .product-type-badge {
       position: absolute; bottom: 10px; left: 10px;
-      background: rgba(245,197,24,0.15); color: var(--yellow);
+      background: rgba(0,0,0,0.82); backdrop-filter: blur(4px); color: var(--yellow);
       font-size: 0.65rem; font-weight: 700; padding: 3px 10px;
       border-radius: 20px; border: 1px solid rgba(245,197,24,0.25);
       text-transform: uppercase; letter-spacing: 0.5px;
@@ -553,6 +553,23 @@
         <option value="obsidian">Obsidian Flames</option>
       </select>
     </div>
+    <div class="filter-group">
+      <div class="filter-group-label">Éra</div>
+      <select class="filter-select" id="filter-era" onchange="activeFilters.era=this.value;applyFilters()">
+        <option value="all">Všechny éry</option>
+        <option value="original">Original (1999–2003)</option>
+        <option value="ex">EX (2003–2007)</option>
+        <option value="dp">Diamond &amp; Pearl (2007–2009)</option>
+        <option value="platinum">Platinum (2009–2010)</option>
+        <option value="hgss">HeartGold &amp; SoulSilver (2010–2011)</option>
+        <option value="bw">Black &amp; White (2011–2013)</option>
+        <option value="xy">XY (2014–2016)</option>
+        <option value="sm">Sun &amp; Moon (2017–2019)</option>
+        <option value="swsh">Sword &amp; Shield (2020–2022)</option>
+        <option value="sv">Scarlet &amp; Violet (2023–2025)</option>
+        <option value="mega">Mega Evolution (2025–)</option>
+      </select>
+    </div>
   </div>
   <div class="filter-count" id="filter-count">Zobrazeno <span id="count-num">…</span> z <span id="count-total">…</span> produktů</div>
 
@@ -705,7 +722,8 @@ function openModal(data) {
   // Badges
   document.getElementById('modal-badges').innerHTML =
     '<span class="badge-original"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Originální karty</span>' +
-    '<span class="badge-set">' + data.set + '</span>' +
+    '<span class="badge-set">' + (data.series || '') + '</span>' +
+    (ERA_LABELS[data.era] ? '<span class="badge-set">' + ERA_LABELS[data.era] + '</span>' : '') +
     '<span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#ccc;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px">' + (so ? 'Vyprodáno' : 'Skladem: ' + data.stock) + '</span>';
 
   // Features
@@ -727,7 +745,7 @@ function closeModal() {
 }
 
 // ── FILTRY ──
-const activeFilters = { price: 'all', series: 'all' };
+const activeFilters = { price: 'all', series: 'all', era: 'all' };
 
 function applyFilters() {
   const cards = document.querySelectorAll('.product-card');
@@ -739,8 +757,9 @@ function applyFilters() {
 
     const priceOk = checkPrice(price, activeFilters.price);
     const seriesOk = activeFilters.series === 'all' || series.includes(activeFilters.series);
+    const eraOk = activeFilters.era === 'all' || (card.dataset.era || '') === activeFilters.era;
 
-    if (priceOk && seriesOk) {
+    if (priceOk && seriesOk && eraOk) {
       card.classList.remove('hidden');
       visible++;
     } else {
@@ -797,12 +816,13 @@ let _modalSoldout = false;
 
 function isSoldOut(p) { return p.soldout === true || Number(p.stock) === 0; }
 const SOLDOUT_OVERLAY = '<div class="soldout-overlay"><span>Vyprodáno</span></div>';
+const ERA_LABELS = {original:'Original', neo:'Neo', ecard:'e-Card', ex:'EX', dp:'Diamond & Pearl', platinum:'Platinum', hgss:'HeartGold & SoulSilver', bw:'Black & White', xy:'XY', sm:'Sun & Moon', swsh:'Sword & Shield', sv:'Scarlet & Violet', mega:'Mega Evolution'};
 
 function buildBulkCard(p) {
   const so = isSoldOut(p);
   const stockStr = so ? 'Vyprodáno' : p.stock + ' ks';
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
-  return `<div class="product-card${so ? ' soldout' : ''}" data-price="${p.price}" data-series="${p.series}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so});
+  return `<div class="product-card${so ? ' soldout' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="product-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
       ${so ? SOLDOUT_OVERLAY : ''}
@@ -819,7 +839,7 @@ function buildBulkCard(p) {
 
 function buildDeckCard(p) {
   const so = isSoldOut(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so});
   return `<div class="deck-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="deck-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
@@ -837,7 +857,7 @@ function buildDeckCard(p) {
 
 function buildSingleCard(p) {
   const so = isSoldOut(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', set:p.set, type:p.type, desc:p.desc, features:p.features, soldout:so});
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so});
   return `<div class="single-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
     <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>

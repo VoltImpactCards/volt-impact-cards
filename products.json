@@ -9,7 +9,6 @@
       "title": "Desert Wings",
       "price": 300,
       "stock": 0,
-      "set": "Deck",
       "series": "decks",
       "seriesLabel": "Deck",
       "type": "Deck",
@@ -19,7 +18,8 @@
         "Nejedná se o kompetitivní deck",
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
-      ]
+      ],
+      "era": "mix"
     },
     {
       "imgs": [
@@ -30,7 +30,6 @@
       "title": "Shadow Fang",
       "price": 300,
       "stock": 0,
-      "set": "Deck",
       "series": "decks",
       "seriesLabel": "Deck",
       "type": "Deck",
@@ -40,7 +39,8 @@
         "Nejedná se o kompetitivní deck",
         "Vhodné pro začátečníky pro seznámení se s hrou",
         "Near Mint (NM) stav"
-      ]
+      ],
+      "era": "mix"
     },
     {
       "imgs": [
@@ -51,7 +51,6 @@
       "title": "Sledge Hammer",
       "price": 300,
       "stock": 1,
-      "set": "Deck",
       "series": "decks",
       "seriesLabel": "Deck",
       "type": "Deck",
@@ -61,7 +60,8 @@
         "Nejedná se o kompetitivní deck",
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
-      ]
+      ],
+      "era": "mix"
     },
     {
       "imgs": [
@@ -72,7 +72,6 @@
       "title": "Sun & Moon",
       "price": 300,
       "stock": 0,
-      "set": "Deck",
       "series": "decks",
       "seriesLabel": "Deck",
       "type": "Deck",
@@ -82,7 +81,8 @@
         "Nejedná se o kompetitivní deck",
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
-      ]
+      ],
+      "era": "sm"
     },
     {
       "imgs": [
@@ -93,7 +93,6 @@
       "title": "Volt Impact",
       "price": 300,
       "stock": 0,
-      "set": "Mix",
       "series": "decks",
       "seriesLabel": "Deck",
       "type": "Deck",
@@ -102,7 +101,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty",
         "60 ks karet"
-      ]
+      ],
+      "era": "mix"
     }
   ],
   "bulks": [
@@ -115,7 +115,6 @@
       "title": "Phantasmal Flames Bulk (71 ks)",
       "price": 250,
       "stock": 3,
-      "set": "Mega Evolutions",
       "series": "flames",
       "seriesLabel": "Phantasmal Flames",
       "type": "Bulk",
@@ -125,7 +124,8 @@
         "Kolekce Phantasmal Flames",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -135,7 +135,6 @@
       "title": "Phatasmal Flames Bulk (34 ks)",
       "price": 100,
       "stock": 3,
-      "set": "Mega Evolutions",
       "series": "flames",
       "seriesLabel": "Phantasmal Flames",
       "type": "Bulk",
@@ -145,7 +144,8 @@
         "Kolekce Phantasmal Flames",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -155,7 +155,6 @@
       "title": "Japonsko/Korejský Bulk (500+ ks)",
       "price": 1200,
       "stock": 3,
-      "set": "Japonsko/Korejský",
       "series": "japan",
       "seriesLabel": "Japan/Korea",
       "type": "Bulk",
@@ -165,7 +164,8 @@
         "Japonská edice",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "mix"
     },
     {
       "imgs": [
@@ -174,7 +174,6 @@
       "title": "Mega Evolutions Bulk (56 ks)",
       "price": 200,
       "stock": 3,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
@@ -184,7 +183,8 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -197,7 +197,6 @@
       "title": "Mega Evolutions Bulk (95 ks)",
       "price": 300,
       "stock": 3,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
@@ -207,7 +206,8 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -216,7 +216,6 @@
       "title": "Mega Evolutions Trainers Bulk (39 ks)",
       "price": 200,
       "stock": 3,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
@@ -226,7 +225,8 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -237,7 +237,6 @@
       "title": "SV: 151 Bulk (88 ks)",
       "price": 250,
       "stock": 1,
-      "set": "Scarlet&Violet",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Bulk",
@@ -247,7 +246,8 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -256,7 +256,6 @@
       "title": "SV: 151 Evoluce mix (30 ks)",
       "price": 100,
       "stock": 0,
-      "set": "Scarlet&Violet",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Bulk",
@@ -266,7 +265,8 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -276,7 +276,6 @@
       "title": "Journey Together Mix (100 ks)",
       "price": 250,
       "stock": 3,
-      "set": "SV: Journey Together",
       "series": "jt",
       "seriesLabel": "Journey Together",
       "type": "Bulk",
@@ -287,7 +286,8 @@
         "Může obsahovat duplicity",
         "Near Mint (NM) stav",
         "Množstevní sleva: 200 ks 400 Kč, 400 ks 700 Kč."
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -298,7 +298,6 @@
       "title": "Shrouded Fable Bulk (48 ks)",
       "price": 150,
       "stock": 2,
-      "set": "SV: Shrouded Fable",
       "series": "sfa",
       "seriesLabel": "Shrouded Fable",
       "type": "Bulk",
@@ -308,7 +307,8 @@
         "Kolekce Shrouded Fable",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -319,7 +319,6 @@
       "title": "Obsidian Flames Bulk (82 ks)",
       "price": 250,
       "stock": 2,
-      "set": "Scarlet&Violet",
       "series": "obsidian",
       "seriesLabel": "Obsidian Flames",
       "type": "Bulk",
@@ -328,7 +327,8 @@
         "Near Mint (NM) stav",
         "Bez duplicit",
         "Originální karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -337,7 +337,6 @@
       "title": "Obsidian Flames Mix (100 ks)",
       "price": 300,
       "stock": 1,
-      "set": "Scarlet&Violet",
       "series": "obsidian",
       "seriesLabel": "Obsidian Flames",
       "type": "Bulk",
@@ -346,7 +345,8 @@
         "Near Mint (NM) stav",
         "Originální karty",
         "Bez duplicit"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -356,7 +356,6 @@
       "title": "Prismatic Evolutions Bulk (50 ks)",
       "price": 150,
       "stock": 4,
-      "set": "Scarlet&Violet",
       "series": "prismatic",
       "seriesLabel": "Prismatic Evolutions",
       "type": "Bulk",
@@ -365,6 +364,7 @@
         "Near Mint (NM) stav",
         "Originální karty",
         "Bez duplicit"
+<<<<<<< Updated upstream
       ]
     },
     {
@@ -385,6 +385,10 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ]
+=======
+      ],
+      "era": "sv"
+>>>>>>> Stashed changes
     }
   ],
   "singles": [
@@ -393,9 +397,8 @@
         "img/sv151_s_charmander.jpg"
       ],
       "title": "Charmander",
-      "price": 20,
+      "price": 15,
       "stock": 4,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -405,16 +408,16 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální neporušená karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/sv151_s_eevee.jpg"
       ],
       "title": "Eevee",
-      "price": 20,
+      "price": 15,
       "stock": 2,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -424,7 +427,8 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální neporušená karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -432,9 +436,8 @@
         "img/sv151_s_n7.jpg"
       ],
       "title": "Ivysaur SV: 151",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -444,7 +447,8 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -452,9 +456,8 @@
         "img/sv151_s_n9.jpg"
       ],
       "title": "Old Amber  SV: 151",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -464,16 +467,16 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/sv151_s_pidgeotto.jpg"
       ],
       "title": "Pidgeotto SV: 151",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -483,7 +486,8 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -491,9 +495,8 @@
         "img/sv151_s_n3.jpg"
       ],
       "title": "Pikachu SV: 151",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -503,16 +506,16 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/sv151_s_snorlax.jpg"
       ],
       "title": "Snorlax  SV: 151",
-      "price": 20,
+      "price": 15,
       "stock": 2,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -522,16 +525,16 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/sv151_s_squirtle.jpg"
       ],
       "title": "Squirtle  SV: 151",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "SV: 151",
       "series": "sv151",
       "seriesLabel": "SV: 151",
       "type": "Single",
@@ -541,7 +544,8 @@
         "Kolekce SV: 151",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -550,7 +554,6 @@
       "title": "Sylveon 022/064",
       "price": 30,
       "stock": 3,
-      "set": "",
       "series": "sfa",
       "seriesLabel": "Shrouded Fable",
       "type": "Single",
@@ -559,25 +562,26 @@
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/misc_s_suicune.jpg"
       ],
       "title": "Suicune 026/094",
-      "price": 30,
+      "price": 15,
       "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "flames",
+      "seriesLabel": "Phantasmal Flames",
       "type": "Single",
       "desc": "Suicune single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -586,16 +590,16 @@
       "title": "Togekiss 072/191",
       "price": 30,
       "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "surging",
+      "seriesLabel": "Surging Sparks",
       "type": "Single",
       "desc": "Togekiss single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -604,70 +608,70 @@
       "title": "Darkrai 136/197",
       "price": 30,
       "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
       "type": "Single",
       "desc": "Darkrai single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/misc_s_reshiram.jpg"
       ],
       "title": "Reshiram 017/094",
-      "price": 30,
+      "price": 15,
       "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "flames",
+      "seriesLabel": "Phantasmal Flames",
       "type": "Single",
       "desc": "Reshiram single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/misc_s_thundurus.jpg"
       ],
       "title": "Thundurus 070/191",
-      "price": 30,
+      "price": 15,
       "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "surging",
+      "seriesLabel": "Surging Sparks",
       "type": "Single",
       "desc": "Thundurus single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/misc_s_kyogre.jpg"
       ],
       "title": "Kyogre 035/132",
-      "price": 30,
+      "price": 15,
       "stock": 1,
-      "set": "Mix",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "mega",
+      "seriesLabel": "Mega Evolutions",
       "type": "Single",
       "desc": "Kyogre single karta.",
       "features": [
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
@@ -676,7 +680,6 @@
       "title": "Charmander 026/197",
       "price": 15,
       "stock": 4,
-      "set": "",
       "series": "obsidian",
       "seriesLabel": "Obsidian Flames",
       "type": "Single",
@@ -684,7 +687,8 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -693,15 +697,15 @@
       "title": "Clefairy 081/197",
       "price": 15,
       "stock": 2,
-      "set": "Scarlet&Violet",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -710,24 +714,23 @@
       "title": "Cleffa 080/197",
       "price": 15,
       "stock": 1,
-      "set": "Scarlet&Violet",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "obsidian",
+      "seriesLabel": "Obsidian Flames",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1479.jpg"
       ],
       "title": "Kirlia 059/132",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -735,16 +738,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1478.jpg"
       ],
       "title": "Ralts 058/132",
-      "price": 20,
+      "price": 15,
       "stock": 4,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -752,33 +755,33 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1489.jpg"
       ],
       "title": "Eevee 050/064",
-      "price": 25,
+      "price": 15,
       "stock": 2,
-      "set": "",
-      "series": "sv151",
-      "seriesLabel": "SV: 151",
+      "series": "sfa",
+      "seriesLabel": "Shrouded Fable",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1490.jpg"
       ],
       "title": "Espeon 086/197",
-      "price": 35,
+      "price": 30,
       "stock": 3,
-      "set": "",
       "series": "obsidian",
       "seriesLabel": "Obsidian Flames",
       "type": "Single",
@@ -786,16 +789,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1493.jpg"
       ],
       "title": "Umbreon  130/197",
-      "price": 35,
+      "price": 30,
       "stock": 2,
-      "set": "",
       "series": "obsidian",
       "seriesLabel": "Obsidian Flames",
       "type": "Single",
@@ -803,16 +806,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1486.jpg"
       ],
       "title": "Battle Cage 085/094",
-      "price": 20,
+      "price": 15,
       "stock": 4,
-      "set": "Mega Evolutions",
       "series": "flames",
       "seriesLabel": "Phantasmal Flames",
       "type": "Single",
@@ -820,16 +823,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1484.jpg"
       ],
       "title": "Dawn 087/094",
-      "price": 30,
+      "price": 15,
       "stock": 4,
-      "set": "Mega Evolutions",
       "series": "flames",
       "seriesLabel": "Phantasmal Flames",
       "type": "Single",
@@ -837,16 +840,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1485.jpg"
       ],
       "title": "Lillie's Determination 119/132",
-      "price": 35,
+      "price": 30,
       "stock": 1,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -854,16 +857,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1483.jpg"
       ],
       "title": "Bulbasaur 001/132",
-      "price": 20,
+      "price": 15,
       "stock": 3,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -871,16 +874,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1488.jpg"
       ],
       "title": "Bayleef 009/132",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -888,16 +891,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1491.jpg"
       ],
       "title": "Chikorita 008/132",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -905,16 +908,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1482.jpg"
       ],
       "title": "Ivysaur 002/132",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
@@ -922,16 +925,16 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "mega"
     },
     {
       "imgs": [
         "img/img_1501.jpg"
       ],
       "title": "Eevee 074/131",
-      "price": 25,
+      "price": 15,
       "stock": 3,
-      "set": "",
       "series": "prismatic",
       "seriesLabel": "Prismatic Evolutions",
       "type": "Single",
@@ -939,109 +942,110 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1495.jpg"
       ],
       "title": "Pikachu 051/162",
-      "price": 25,
+      "price": 15,
       "stock": 2,
-      "set": "",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "temporal",
+      "seriesLabel": "Temporal Forces",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1503.jpg"
       ],
       "title": "Raichu 052/162",
-      "price": 25,
+      "price": 15,
       "stock": 2,
-      "set": "",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "temporal",
+      "seriesLabel": "Temporal Forces",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1499.jpg"
       ],
       "title": "Turtwig 010/162",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "temporal",
+      "seriesLabel": "Temporal Forces",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1500.jpg"
       ],
       "title": "Grotle 011/162",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "temporal",
+      "seriesLabel": "Temporal Forces",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1497.jpg"
       ],
       "title": "Totodile 039/162",
-      "price": 20,
+      "price": 15,
       "stock": 2,
-      "set": "",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "temporal",
+      "seriesLabel": "Temporal Forces",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
         "img/img_1498.jpg"
       ],
       "title": "Croconaw 040/162",
-      "price": 20,
+      "price": 15,
       "stock": 1,
-      "set": "",
-      "series": "mix",
-      "seriesLabel": "Mix",
+      "series": "temporal",
+      "seriesLabel": "Temporal Forces",
       "type": "Single",
       "desc": "",
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "era": "sv"
     }
   ]
 }
