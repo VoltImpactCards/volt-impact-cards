@@ -364,8 +364,8 @@
         "Near Mint (NM) stav",
         "Originální karty",
         "Bez duplicit"
-<<<<<<< Updated upstream
-      ]
+      ],
+      "era": "sv"
     },
     {
       "imgs": [
@@ -376,7 +376,6 @@
       "title": "Mix Bulk 100 ks",
       "price": 250,
       "stock": 1,
-      "set": "Scarlet&Violet",
       "series": "mix",
       "seriesLabel": "Mix",
       "type": "Bulk",
@@ -384,11 +383,8 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
-=======
       ],
       "era": "sv"
->>>>>>> Stashed changes
     }
   ],
   "singles": [
