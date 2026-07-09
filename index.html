@@ -159,7 +159,8 @@
       font-size: 0.78rem; color: var(--grey); margin-bottom: 8px; margin-top: -8px;
     }
     .filter-count span { color: var(--yellow); font-weight: 700; }
-    .product-card.hidden { display: none; }
+    .product-card.hidden, .deck-card.hidden, .single-card.hidden { display: none; }
+    .grid-empty { display: none; color: var(--grey); font-size: 0.9rem; text-align: center; padding: 30px 0; grid-column: 1/-1; }
     .no-results {
       display: none; grid-column: 1/-1; text-align: center;
       padding: 60px 20px; color: var(--grey);
@@ -595,6 +596,7 @@
   <div class="decks-grid" id="decks-grid">
     <p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>
   </div>
+  <p class="grid-empty" id="decks-empty">Žádné decky neodpovídají filtru</p>
 </section>
 
 <div class="section-divider"></div>
@@ -607,6 +609,7 @@
     <p class="section-sub">Vybrané karty pro doplnění kolekce — klikněte pro detail</p>
   </div>
   <div class="singles-grid" id="singles-grid"></div>
+  <p class="grid-empty" id="singles-empty">Žádné singl karty neodpovídají filtru</p>
 </section>
 
 <!-- ── ORDER CTA ── -->
@@ -749,10 +752,10 @@ function closeModal() {
 const activeFilters = { price: 'all', series: 'all', era: 'all' };
 
 function applyFilters() {
-  const cards = document.querySelectorAll('.product-card');
   let visible = 0;
+  const perGrid = {};
 
-  cards.forEach(card => {
+  document.querySelectorAll('.product-card, .deck-card, .single-card').forEach(card => {
     const price = parseInt(card.dataset.price);
     const series = card.dataset.series || '';
 
@@ -760,16 +763,23 @@ function applyFilters() {
     const seriesOk = activeFilters.series === 'all' || series.includes(activeFilters.series);
     const eraOk = activeFilters.era === 'all' || (card.dataset.era || '') === activeFilters.era;
 
+    const grid = card.parentElement ? card.parentElement.id : '';
+    perGrid[grid] = perGrid[grid] || 0;
     if (priceOk && seriesOk && eraOk) {
       card.classList.remove('hidden');
       visible++;
+      perGrid[grid]++;
     } else {
       card.classList.add('hidden');
     }
   });
 
   document.getElementById('count-num').textContent = visible;
-  document.getElementById('no-results').classList.toggle('show', visible === 0);
+  document.getElementById('no-results').classList.toggle('show', (perGrid['product-grid'] || 0) === 0);
+  const deckEmpty = document.getElementById('decks-empty');
+  if (deckEmpty) deckEmpty.style.display = (perGrid['decks-grid'] || 0) === 0 ? 'block' : 'none';
+  const singlesEmpty = document.getElementById('singles-empty');
+  if (singlesEmpty) singlesEmpty.style.display = (perGrid['singles-grid'] || 0) === 0 ? 'block' : 'none';
 }
 
 function checkPrice(price, filter) {
@@ -841,7 +851,7 @@ function buildBulkCard(p) {
 function buildDeckCard(p) {
   const so = isSoldOut(p);
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so});
-  return `<div class="deck-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  return `<div class="deck-card${so ? ' soldout' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="deck-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
       ${so ? SOLDOUT_OVERLAY : ''}
@@ -859,7 +869,7 @@ function buildDeckCard(p) {
 function buildSingleCard(p) {
   const so = isSoldOut(p);
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so});
-  return `<div class="single-card${so ? ' soldout' : ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  return `<div class="single-card${so ? ' soldout' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
     <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
@@ -886,7 +896,7 @@ async function loadProducts() {
 
     document.getElementById('singles-grid').innerHTML = [...data.singles.filter(p => !isSoldOut(p)), ...data.singles.filter(isSoldOut)].map(buildSingleCard).join('');
 
-    const total = data.bulks.length;
+    const total = data.bulks.length + (data.decks ? data.decks.length : 0) + data.singles.length;
     document.getElementById('count-total').textContent = total;
     document.getElementById('count-num').textContent = total;
 
