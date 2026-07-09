@@ -188,17 +188,20 @@
     },
     {
       "imgs": [
-        "img/me_88_1.jpg",
-        "img/me_88_2.jpg"
+        "img/img_1506.jpg",
+        "img/img_1507.jpg",
+        "img/img_1508.jpg",
+        "img/img_1509.jpg",
+        "img/img_1510.jpg"
       ],
-      "title": "Mega Evolutions Bulk (88 ks)",
+      "title": "Mega Evolutions Bulk (95 ks)",
       "price": 300,
       "stock": 3,
       "set": "Mega Evolutions",
       "series": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
-      "desc": "88 karet z kolekce Mega Evolutions bez duplicit.",
+      "desc": "95 karet z kolekce Mega Evolutions bez duplicit.",
       "features": [
         "88 karet bez duplicit",
         "Kolekce Mega Evolutions",
