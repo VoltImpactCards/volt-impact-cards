@@ -169,12 +169,14 @@
     },
     {
       "imgs": [
-        "img/me_56_1.jpg"
+        "img/img_1603.jpg",
+        "img/img_1604.jpg"
       ],
       "title": "Mega Evolutions Bulk (56 ks)",
       "price": 200,
       "stock": 3,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
       "desc": "56 karet z kolekce Mega Evolutions bez duplicit.",
@@ -183,8 +185,7 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ],
-      "era": "mega"
+      ]
     },
     {
       "imgs": [
@@ -211,12 +212,14 @@
     },
     {
       "imgs": [
-        "img/me_trainers_1.jpg"
+        "img/img_1605.jpg",
+        "img/img_1607.jpg"
       ],
       "title": "Mega Evolutions Trainers Bulk (39 ks)",
       "price": 200,
-      "stock": 3,
+      "stock": 1,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Bulk",
       "desc": "39 trainer karet z kolekce Mega Evolutions. Ideální k doplnění herního decku.",
@@ -225,8 +228,7 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ],
-      "era": "mega"
+      ]
     },
     {
       "imgs": [
