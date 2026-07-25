@@ -182,6 +182,13 @@
           <label>Skladem (ks)</label>
           <input type="number" id="f-stock" min="0" step="1"/>
         </div>
+        <div class="form-group">
+          <label>Doporučený produkt</label>
+          <select id="f-featured">
+            <option value="no">Ne</option>
+            <option value="yes">Ano — zvýraznit ⭐</option>
+          </select>
+        </div>
       </div>
       <div class="form-row">
         <div class="form-group">
@@ -508,6 +515,7 @@ function openEditModal(tab, idx) {
   document.getElementById('f-title').value = p.title || '';
   document.getElementById('f-price').value = p.price || 0;
   document.getElementById('f-stock').value = p.stock || 0;
+  document.getElementById('f-featured').value = p.featured === true ? 'yes' : 'no';
   document.getElementById('f-era').value   = p.era || 'sv';
   document.getElementById('f-desc').value  = p.desc || '';
 
@@ -531,6 +539,7 @@ function openAddModal() {
   document.getElementById('f-title').value = '';
   document.getElementById('f-price').value = '';
   document.getElementById('f-stock').value = 1;
+  document.getElementById('f-featured').value = 'no';
   document.getElementById('f-era').value   = 'sv';
   document.getElementById('f-desc').value  = '';
   document.getElementById('f-series').value = currentTab === 'decks' ? 'decks' : 'sv151';
@@ -637,6 +646,7 @@ function saveProduct() {
   const title = document.getElementById('f-title').value.trim();
   const price = parseInt(document.getElementById('f-price').value) || 0;
   const stock = parseInt(document.getElementById('f-stock').value) || 0;
+  const featured = document.getElementById('f-featured').value === 'yes';
   const era   = document.getElementById('f-era').value;
   const series = document.getElementById('f-series').value;
   const desc  = document.getElementById('f-desc').value.trim();
@@ -652,7 +662,7 @@ function saveProduct() {
     title, price, stock, series, era,
     seriesLabel: seriesLabels[series] || series,
     type: tab === 'bulks' ? 'Bulk' : tab === 'singles' ? 'Single' : 'Deck',
-    desc, features
+    desc, features, featured
   };
 
   if (idx === -1) {

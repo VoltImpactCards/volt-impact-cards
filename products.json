@@ -19,7 +19,8 @@
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
       ],
-      "era": "mix"
+      "era": "mix",
+      "featured": false
     },
     {
       "imgs": [
@@ -40,7 +41,8 @@
         "Vhodné pro začátečníky pro seznámení se s hrou",
         "Near Mint (NM) stav"
       ],
-      "era": "mix"
+      "era": "mix",
+      "featured": false
     },
     {
       "imgs": [
@@ -61,7 +63,8 @@
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
       ],
-      "era": "mix"
+      "era": "mix",
+      "featured": false
     },
     {
       "imgs": [
@@ -82,7 +85,8 @@
         "Vhodné pro začátečníky k seznámení s hrou",
         "Near Mint (NM) stav"
       ],
-      "era": "sm"
+      "era": "sm",
+      "featured": false
     },
     {
       "imgs": [
@@ -102,7 +106,8 @@
         "Originální neporušené karty",
         "60 ks karet"
       ],
-      "era": "mix"
+      "era": "mix",
+      "featured": false
     },
     {
       "imgs": [
@@ -121,7 +126,8 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "featured": false
     }
   ],
   "bulks": [
@@ -144,7 +150,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -164,7 +171,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -184,7 +192,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "mix"
+      "era": "mix",
+      "featured": false
     },
     {
       "imgs": [
@@ -204,7 +213,8 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "featured": false
     },
     {
       "imgs": [
@@ -227,7 +237,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -247,7 +258,8 @@
         "Kolekce Mega Evolutions",
         "Near Mint (NM) stav",
         "Originální karty"
-      ]
+      ],
+      "featured": false
     },
     {
       "imgs": [
@@ -268,7 +280,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -287,7 +300,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -308,7 +322,8 @@
         "Near Mint (NM) stav",
         "Množstevní sleva: 200 ks 400 Kč, 400 ks 700 Kč."
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -329,7 +344,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -349,7 +365,8 @@
         "Bez duplicit",
         "Originální karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -367,7 +384,8 @@
         "Originální karty",
         "Bez duplicit"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -386,7 +404,8 @@
         "Originální karty",
         "Bez duplicit"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -405,7 +424,8 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
-      ]
+      ],
+      "featured": false
     },
     {
       "imgs": [
@@ -428,7 +448,8 @@
         "100 ks bez duplicit",
         "Více seríí ve jednom balíčku",
         "Obsahuje evoluční řady"
-      ]
+      ],
+      "featured": true
     }
   ],
   "singles": [
@@ -449,7 +470,8 @@
         "Near Mint (NM) stav",
         "Originální neporušená karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -468,7 +490,8 @@
         "Near Mint (NM) stav",
         "Originální neporušená karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -488,7 +511,8 @@
         "Near Mint (NM) stav",
         "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -508,7 +532,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -527,7 +552,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -547,7 +573,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -566,7 +593,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -585,7 +613,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -603,7 +632,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -621,7 +651,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -639,7 +670,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -657,7 +689,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -675,7 +708,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -693,7 +727,8 @@
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "featured": false
     },
     {
       "imgs": [
@@ -711,7 +746,8 @@
         "Single karta",
         "Near Mint (NM) stav",
         "Originální karta"
-      ]
+      ],
+      "featured": false
     },
     {
       "imgs": [
@@ -728,7 +764,8 @@
         "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -745,7 +782,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -762,7 +800,8 @@
         "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -779,7 +818,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -796,7 +836,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -813,7 +854,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -830,7 +872,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -847,7 +890,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -864,7 +908,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -881,7 +926,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -898,7 +944,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -915,7 +962,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -932,7 +980,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -949,7 +998,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -966,7 +1016,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega"
+      "era": "mega",
+      "featured": false
     },
     {
       "imgs": [
@@ -983,7 +1034,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -1000,7 +1052,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -1017,7 +1070,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -1034,7 +1088,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -1051,7 +1106,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -1068,7 +1124,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     },
     {
       "imgs": [
@@ -1085,7 +1142,8 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "sv"
+      "era": "sv",
+      "featured": false
     }
   ]
 }
