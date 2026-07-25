@@ -103,6 +103,25 @@
         "60 ks karet"
       ],
       "era": "mix"
+    },
+    {
+      "imgs": [
+        "img/img_1625.jpg",
+        "img/img_1623.jpg",
+        "img/img_1624.jpg"
+      ],
+      "title": "Shadowy Envoy",
+      "price": 300,
+      "stock": 2,
+      "series": "decks",
+      "era": "sv",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Herní deck sestavený pro začátečníky",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ]
     }
   ],
   "bulks": [
@@ -386,6 +405,29 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty"
+      ]
+    },
+    {
+      "imgs": [
+        "img/img_1616.jpg",
+        "img/img_1617.jpg",
+        "img/img_1618.jpg",
+        "img/img_1620.jpg"
+      ],
+      "title": "Ultra Pack (100 ks)",
+      "price": 300,
+      "stock": 8,
+      "series": "mix",
+      "era": "mix",
+      "seriesLabel": "Mix",
+      "type": "Bulk",
+      "desc": "Mix karet skládající se ze sérií Shrouded Fable, Phatasmal Flames a Temporal Foreces. 100 unikátních karet ideální pro doplnění sbírky nebo herního decku.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "100 ks bez duplicit",
+        "Více seríí ve jednom balíčku",
+        "Obsahuje evoluční řady"
       ]
     }
   ],
