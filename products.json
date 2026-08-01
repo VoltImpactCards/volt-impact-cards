@@ -450,6 +450,31 @@
         "Obsahuje evoluční řady"
       ],
       "featured": true
+    },
+    {
+      "imgs": [
+        "img/img_1659.heic",
+        "img/img_1657.jpg",
+        "img/img_1658.jpg",
+        "img/img_1656.jpg",
+        "img/img_1660.jpg",
+        "img/img_1661.jpg"
+      ],
+      "title": "Evolution set - Lost Origin",
+      "price": 300,
+      "stock": 1,
+      "series": "lost",
+      "era": "swsh",
+      "seriesLabel": "Lost Origin",
+      "type": "Bulk",
+      "desc": "Obsahuje zejména evoluční linie karet ze série Lost Origin. Karty jsou originální ve stavu Lightly played - někdy drobné oděrky. Bez duplicit.",
+      "features": [
+        "Lightly played (LP)",
+        "Originální karty",
+        "Bez duplicit",
+        "80 ks"
+      ],
+      "featured": true
     }
   ],
   "singles": [
