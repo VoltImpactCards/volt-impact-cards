@@ -192,7 +192,7 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Éra</label>
+          <label>Éra <span style="opacity:.6;font-weight:400">(doplní se podle série)</span></label>
           <select id="f-era">
             <option value="sv">Scarlet & Violet</option>
             <option value="mega">Mega Evolution</option>
@@ -213,18 +213,44 @@
         <div class="form-group">
           <label>Série</label>
           <select id="f-series">
-            <option value="sv151">SV: 151</option>
-            <option value="sfa">Shrouded Fable</option>
-            <option value="flames">Phantasmal Flames</option>
-            <option value="japan">Japan/Korea</option>
-            <option value="mega">Mega Evolutions</option>
-            <option value="jt">Journey Together</option>
-            <option value="prismatic">Prismatic Evolutions</option>
-            <option value="obsidian">Obsidian Flames</option>
-            <option value="surging">Surging Sparks</option>
-            <option value="temporal">Temporal Forces</option>
-            <option value="mix">Mix</option>
-            <option value="decks">Decky</option>
+            <optgroup label="Scarlet &amp; Violet">
+              <option value="sv151">SV: 151</option>
+              <option value="sfa">Shrouded Fable</option>
+              <option value="jt">Journey Together</option>
+              <option value="prismatic">Prismatic Evolutions</option>
+              <option value="obsidian">Obsidian Flames</option>
+              <option value="surging">Surging Sparks</option>
+              <option value="temporal">Temporal Forces</option>
+            </optgroup>
+            <optgroup label="Mega Evolution">
+              <option value="mega">Mega Evolutions</option>
+              <option value="flames">Phantasmal Flames</option>
+            </optgroup>
+            <optgroup label="Sword &amp; Shield">
+              <option value="swshbase">Sword &amp; Shield (base)</option>
+              <option value="rebel">Rebel Clash</option>
+              <option value="darkness">Darkness Ablaze</option>
+              <option value="champions">Champion&#39;s Path</option>
+              <option value="vivid">Vivid Voltage</option>
+              <option value="shining">Shining Fates</option>
+              <option value="battle">Battle Styles</option>
+              <option value="chilling">Chilling Reign</option>
+              <option value="evolving">Evolving Skies</option>
+              <option value="celebrations">Celebrations</option>
+              <option value="fusion">Fusion Strike</option>
+              <option value="brilliant">Brilliant Stars</option>
+              <option value="astral">Astral Radiance</option>
+              <option value="pokemongo">Pokémon GO</option>
+              <option value="lost">Lost Origin</option>
+              <option value="silver">Silver Tempest</option>
+              <option value="crown">Crown Zenith</option>
+            </optgroup>
+            <optgroup label="Ostatní">
+              <option value="japan">Japan/Korea</option>
+              <option value="korean">Korean</option>
+              <option value="mix">Mix</option>
+              <option value="decks">Decky</option>
+            </optgroup>
           </select>
         </div>
       </div>
@@ -543,11 +569,36 @@ function openAddModal() {
   document.getElementById('f-era').value   = 'sv';
   document.getElementById('f-desc').value  = '';
   document.getElementById('f-series').value = currentTab === 'decks' ? 'decks' : 'sv151';
+  document.getElementById('f-era').value = SERIES_ERA[document.getElementById('f-series').value] || 'sv';
   renderFeatures(['Near Mint (NM) stav', 'Originální neporušené karty']);
   editImgs = [];
   renderImgList();
   document.getElementById('edit-modal').classList.add('open');
 }
+
+const SERIES_ERA = {
+  sv151:'sv', sfa:'sv', jt:'sv', prismatic:'sv', obsidian:'sv', surging:'sv', temporal:'sv',
+  mega:'mega', flames:'mega',
+  swshbase:'swsh', rebel:'swsh', darkness:'swsh', champions:'swsh', vivid:'swsh', shining:'swsh',
+  battle:'swsh', chilling:'swsh', evolving:'swsh', celebrations:'swsh', fusion:'swsh',
+  brilliant:'swsh', astral:'swsh', pokemongo:'swsh', lost:'swsh', silver:'swsh', crown:'swsh',
+  japan:'mix', korean:'mix', mix:'mix', decks:'mix'
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ser = document.getElementById('f-series');
+  const era = document.getElementById('f-era');
+  if (!ser || !era) return;
+  ser.addEventListener('change', () => {
+    const auto = SERIES_ERA[ser.value];
+    if (auto && era.value !== auto) {
+      era.value = auto;
+      era.style.transition = 'box-shadow .2s';
+      era.style.boxShadow = '0 0 0 2px rgba(245,197,24,0.55)';
+      setTimeout(() => { era.style.boxShadow = ''; }, 900);
+    }
+  });
+});
 
 function closeModal() {
   document.getElementById('edit-modal').classList.remove('open');
@@ -655,7 +706,7 @@ function saveProduct() {
   if (!title) { toast('Zadej název produktu', 'err'); return; }
   if (!editImgs.length) { toast('Přidej alespoň jednu fotku', 'err'); return; }
 
-  const seriesLabels = {sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',prismatic:'Prismatic Evolutions',obsidian:'Obsidian Flames',surging:'Surging Sparks',temporal:'Temporal Forces',mix:'Mix',decks:'Deck'};
+  const seriesLabels = {swshbase:'Sword & Shield (base)',rebel:'Rebel Clash',darkness:'Darkness Ablaze',champions:'Champion\'s Path',vivid:'Vivid Voltage',shining:'Shining Fates',battle:'Battle Styles',chilling:'Chilling Reign',evolving:'Evolving Skies',celebrations:'Celebrations',fusion:'Fusion Strike',brilliant:'Brilliant Stars',astral:'Astral Radiance',pokemongo:'Pokémon GO',lost:'Lost Origin',silver:'Silver Tempest',crown:'Crown Zenith',sv151:'SV: 151',sfa:'Shrouded Fable',flames:'Phantasmal Flames',japan:'Japan/Korea',mega:'Mega Evolutions',jt:'Journey Together',prismatic:'Prismatic Evolutions',obsidian:'Obsidian Flames',surging:'Surging Sparks',temporal:'Temporal Forces',korean:'Korean',mix:'Mix',decks:'Deck'};
 
   const product = {
     imgs: editImgs,
