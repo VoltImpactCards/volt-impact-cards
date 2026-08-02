@@ -128,6 +128,28 @@
         "Originální neporušené karty"
       ],
       "featured": false
+    },
+    {
+      "imgs": [
+        "img/img_9812.jpeg",
+        "img/img_9806.jpeg",
+        "img/img_9809.jpeg"
+      ],
+      "title": "Dragon Fist",
+      "price": 300,
+      "stock": 2,
+      "series": "decks",
+      "era": "bw",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Hotový deck Dragon Fist připravený k hraní.",
+      "features": [
+        "Obsahuje 60 karet určených k hraní Pokémon TCG",
+        "Nejedná se o kompetitivní deck",
+        "Vhodné pro začátečníky k seznámení s hrou",
+        "Near Mint (NM) stav"
+      ],
+      "featured": false
     }
   ],
   "bulks": [
