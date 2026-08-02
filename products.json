@@ -497,6 +497,28 @@
         "80 ks"
       ],
       "featured": true
+    },
+    {
+      "imgs": [
+        "img/img_9819.jpeg",
+        "img/img_9818.jpeg",
+        "img/img_9817.jpeg"
+      ],
+      "title": "Black & White Pack (100 ks)",
+      "price": 300,
+      "stock": 3,
+      "series": "mix",
+      "era": "bw",
+      "seriesLabel": "Mix",
+      "type": "Bulk",
+      "desc": "Mix karet skládající se ze sérií Black & White. 100 unikátních karet ideální pro doplnění sbírky nebo herního decku.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "100 ks bez duplicit",
+        "Obsahuje evoluční řady"
+      ],
+      "featured": false
     }
   ],
   "singles": [
