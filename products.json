@@ -1220,17 +1220,17 @@
         "img/swsh_s_pikachu_052196_2.jpg"
       ],
       "title": "Pikachu 052/196",
-      "price": 15,
-      "stock": 1,
+      "price": 40,
+      "stock": 4,
       "series": "lost",
+      "era": "swsh",
       "seriesLabel": "Lost Origin",
       "type": "Single",
       "desc": "Základní Pokémon karta Pikachu (HP 60) ze série Lost Origin. Schopnost Pika Dash, útok Whimsy Tackle za 50 poškození. Karta č. 052/196, ilustrace kurumitsu.",
       "features": [
-        "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Lightly played (LP)",
+        "Originální karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1240,9 +1240,10 @@
         "img/go_s_pikachu_027078_2.jpg"
       ],
       "title": "Pikachu 027/078",
-      "price": 15,
-      "stock": 1,
+      "price": 30,
+      "stock": 2,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Základní Pokémon karta Pikachu (HP 60) ze série Pokémon GO. Útok Buddy Bolt za 30+ poškození. Karta č. 027/078, ilustrace N-DESIGN Inc.",
@@ -1250,7 +1251,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1263,14 +1263,14 @@
       "price": 15,
       "stock": 1,
       "series": "swshbase",
+      "era": "swsh",
       "seriesLabel": "Sword & Shield (base)",
       "type": "Single",
       "desc": "Základní Pokémon karta Morpeko (HP 90) ze základní série Sword & Shield. Útok Attack the Wound za 10+ poškození. Rare karta č. 078/202, ilustrace Megumi Mizutani.",
       "features": [
-        "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Lightly played (LP)",
+        "Originální karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1281,16 +1281,16 @@
       ],
       "title": "Charmander 008/078",
       "price": 15,
-      "stock": 1,
+      "stock": 5,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Základní Pokémon karta Charmander (HP 60) ze série Pokémon GO. Útok Tail on Fire za 10 poškození. Karta č. 008/078, ilustrace soino misaki.",
       "features": [
         "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Originální karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1301,16 +1301,16 @@
       ],
       "title": "Charmeleon 009/078",
       "price": 15,
-      "stock": 1,
+      "stock": 3,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Pokémon karta Charmeleon (HP 90, Stage 1) ze série Pokémon GO. Útoky Scratch za 30 a Flamethrower za 100 poškození. Uncommon karta č. 009/078.",
       "features": [
         "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Originální karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1321,16 +1321,16 @@
       ],
       "title": "Ivysaur 002/078",
       "price": 15,
-      "stock": 1,
+      "stock": 5,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Pokémon karta Ivysaur (HP 100, Stage 1) ze série Pokémon GO. Útoky Summoning Aroma a Razor Leaf za 60 poškození. Uncommon karta č. 002/078, ilustrace zig.",
       "features": [
         "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Originální karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1341,8 +1341,9 @@
       ],
       "title": "Bulbasaur 001/078",
       "price": 15,
-      "stock": 1,
+      "stock": 6,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Základní Pokémon karta Bulbasaur (HP 70) ze série Pokémon GO. Útoky Vine Whip za 10 a Razor Leaf za 20 poškození. Karta č. 001/078, ilustrace sowsow.",
@@ -1350,7 +1351,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1360,9 +1360,10 @@
         "img/go_s_wartortle_016078_2.jpg"
       ],
       "title": "Wartortle 016/078",
-      "price": 15,
-      "stock": 1,
+      "price": 20,
+      "stock": 3,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Pokémon karta Wartortle (HP 90, Stage 1) ze série Pokémon GO. Útoky Water Gun za 30 a Hydro Pump za 50+ poškození. Uncommon karta č. 016/078, ilustrace kurumitsu.",
@@ -1370,7 +1371,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1381,8 +1381,9 @@
       ],
       "title": "Squirtle 015/078",
       "price": 15,
-      "stock": 1,
+      "stock": 5,
       "series": "pokemongo",
+      "era": "swsh",
       "seriesLabel": "Pokémon GO",
       "type": "Single",
       "desc": "Základní Pokémon karta Squirtle (HP 70) ze série Pokémon GO. Útok Water Gun za 20 poškození. Karta č. 015/078, ilustrace sowsow.",
@@ -1390,7 +1391,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     },
@@ -1400,9 +1400,10 @@
         "img/astral_s_glaceon_038189_2.jpg"
       ],
       "title": "Glaceon 038/189",
-      "price": 30,
-      "stock": 1,
+      "price": 40,
+      "stock": 2,
       "series": "astral",
+      "era": "swsh",
       "seriesLabel": "Astral Radiance",
       "type": "Single",
       "desc": "Pokémon karta Glaceon (HP 110, Stage 1, vývoj Eevee) ze série Astral Radiance. Útoky Frost Wall za 30 a Ice Blast za 120 poškození. Rare karta č. 038/189, ilustrace soino misaki.",
@@ -1410,7 +1411,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "swsh",
       "featured": false,
       "addedAt": "2026-08-08"
     }
