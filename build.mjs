@@ -49,6 +49,16 @@ h1{font-size:1.7rem;line-height:1.25;margin-bottom:10px;letter-spacing:-.5px}
 .cta a{text-decoration:none;border-radius:10px;padding:12px 20px;font-size:.88rem;font-weight:700;display:inline-flex;align-items:center;gap:8px}
 .cta .p{background:linear-gradient(135deg,var(--yellow),#ffd740);color:#1a1400}
 .cta .s{background:var(--surface);border:1px solid var(--border);color:#fff}
+.cta button{font-family:inherit;cursor:pointer;border:none;text-decoration:none;border-radius:10px;padding:12px 20px;font-size:.88rem;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.mp{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(4,4,10,.75)}
+.mp.open{display:flex}
+.mp-box{background:var(--bg2);border:1px solid rgba(255,255,255,.14);border-radius:18px;width:100%;max-width:380px;padding:22px}
+.mp-box h3{font-size:1.05rem;margin-bottom:4px}
+.mp-box .n{color:var(--grey);font-size:.82rem;margin-bottom:16px}
+.mp-opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:10px;color:#fff;padding:12px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;font-size:.88rem;text-decoration:none}
+.mp-opt:hover{border-color:rgba(245,197,24,.45);background:rgba(255,255,255,.11)}
+.mp-opt small{display:block;color:var(--grey);font-size:.74rem}
+.mp-close{background:none;border:none;color:var(--grey);cursor:pointer;font-family:inherit;font-size:.82rem;padding:8px 0 0;width:100%}
 .more{margin-top:56px}
 .more h2{font-size:1.1rem;margin-bottom:16px}
 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
@@ -170,12 +180,30 @@ function productPage(p, similar) {
     ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ''}
     ${(p.features || []).length ? `<ul class="feat">${p.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
     <div class="cta">
-      ${so ? '' : `<a class="p" href="mailto:${MAIL}?subject=${encodeURIComponent('Zájem o: ' + p.title)}&body=${mailBody}">Mám zájem</a>
+      ${so ? '' : `<button class="p" type="button" onclick="openMail()">Mám zájem</button>
       <a class="s" href="https://wa.me/${WA}?text=${waText}" rel="noopener">WhatsApp</a>`}
       <a class="s" href="${SITE}/#p=${p.slug}">Zobrazit v nabídce</a>
     </div>
   </div>
 </div>
+${so ? '' : `<div class="mp" id="mp" onclick="if(event.target===this)closeMail()">
+  <div class="mp-box">
+    <h3>Odeslat e-mailem</h3>
+    <div class="n">Vyber, kde máš e-mail — zpráva se předvyplní.</div>
+    <a class="mp-opt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=${encodeURIComponent(MAIL)}&amp;su=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}" target="_blank" rel="noopener"><b>Gmail</b><small>Otevře se v prohlížeči</small></a>
+    <a class="mp-opt" href="https://email.seznam.cz/newMessage?to=${encodeURIComponent(MAIL)}&amp;subject=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}" target="_blank" rel="noopener"><b>Seznam.cz</b><small>Otevře se v prohlížeči</small></a>
+    <a class="mp-opt" href="https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(MAIL)}&amp;subject=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}" target="_blank" rel="noopener"><b>Outlook</b><small>Otevře se v prohlížeči</small></a>
+    <a class="mp-opt" href="mailto:${MAIL}?subject=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}"><b>Poštovní aplikace</b><small>Mail, Outlook v počítači…</small></a>
+    <button class="mp-opt" type="button" onclick="copyMail(this)"><b>Zkopírovat adresu</b><small>${MAIL}</small></button>
+    <button class="mp-close" type="button" onclick="closeMail()">Zavřít</button>
+  </div>
+</div>
+<script>
+function openMail(){document.getElementById('mp').classList.add('open')}
+function closeMail(){document.getElementById('mp').classList.remove('open')}
+function copyMail(b){var m='${MAIL}';if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(m).then(function(){b.querySelector('b').textContent='Zkopírováno ✓';setTimeout(closeMail,700)})}else{prompt('E-mail:',m)}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMail()});
+<\/script>`}
 ${similar.length ? `<div class="more">
   <h2>Další z ${esc(p.seriesLabel || 'nabídky')}</h2>
   <div class="mgrid">${similar.map(s => `<a class="mcard" href="${SITE}/${OUT}/${s.slug}/">
