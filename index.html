@@ -942,6 +942,10 @@
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           Zásilkovna / Balíkovna po celé ČR
         </div>
+        <a href="/karta/" class="delivery-item" style="text-decoration:none;margin-top:14px;color:var(--yellow)">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          Seznam všech karet
+        </a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1042,7 +1046,8 @@ function openModal(data) {
 }
 
 function productLink(slug) {
-  return location.origin + location.pathname + '#p=' + slug;
+  const base = location.origin && location.origin !== 'null' ? location.origin : 'https://voltimpactcards.com';
+  return base + '/karta/' + slug + '/';
 }
 
 function openFromHash() {

@@ -1,0 +1,13 @@
+[build]
+  command = "node build.mjs || echo 'build.mjs selhal — nasazuji web bez generovaných stránek'"
+  publish = "."
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/products.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
