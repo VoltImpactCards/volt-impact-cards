@@ -259,7 +259,18 @@
         <textarea id="f-desc" rows="3"></textarea>
       </div>
       <div class="form-group">
-        <label>Vlastnosti (features)</label>
+        <label>Stav karty</label>
+        <select id="f-condition">
+          <option value="Near Mint (NM) stav">Near Mint (NM)</option>
+          <option value="Lightly Played (LP) stav">Lightly Played (LP)</option>
+          <option value="Moderately Played (MP) stav">Moderately Played (MP)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Další vlastnosti</label>
+        <div style="font-size:0.82rem;opacity:.7;margin-bottom:8px">
+          Automaticky se přidá: <b>Originální neporušené karty</b>
+        </div>
         <div class="features-list" id="features-list"></div>
         <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="addFeatureRow()">+ Přidat řádek</button>
       </div>
@@ -570,7 +581,7 @@ function openAddModal() {
   document.getElementById('f-desc').value  = '';
   document.getElementById('f-series').value = currentTab === 'decks' ? 'decks' : 'sv151';
   document.getElementById('f-era').value = SERIES_ERA[document.getElementById('f-series').value] || 'sv';
-  renderFeatures(['Near Mint (NM) stav', 'Originální neporušené karty']);
+  renderFeatures([]);
   editImgs = [];
   renderImgList();
   document.getElementById('edit-modal').classList.add('open');
@@ -604,9 +615,29 @@ function closeModal() {
   document.getElementById('edit-modal').classList.remove('open');
 }
 
+const CONDITIONS = ['Near Mint (NM) stav', 'Lightly Played (LP) stav', 'Moderately Played (MP) stav'];
+const ORIGINAL_FEATURE = 'Originální neporušené karty';
+
+function isCondition(f) {
+  return CONDITIONS.includes(f) || /^(near mint|lightly played|moderately played)/i.test(f);
+}
+
+function normalizeCondition(f) {
+  if (CONDITIONS.includes(f)) return f;
+  if (/^near mint/i.test(f)) return CONDITIONS[0];
+  if (/^lightly played/i.test(f)) return CONDITIONS[1];
+  if (/^moderately played/i.test(f)) return CONDITIONS[2];
+  return CONDITIONS[0];
+}
+
 function renderFeatures(features) {
+  features = features || [];
+  const cond = features.find(isCondition);
+  document.getElementById('f-condition').value = cond ? normalizeCondition(cond) : CONDITIONS[0];
+
+  const extras = features.filter(f => !isCondition(f) && f.trim() !== ORIGINAL_FEATURE);
   const list = document.getElementById('features-list');
-  list.innerHTML = features.map((f, i) => `
+  list.innerHTML = extras.map((f, i) => `
     <div class="feature-row">
       <input type="text" value="${f}" id="feat-${i}" placeholder="Vlastnost..."/>
       <button class="btn btn-ghost btn-icon btn-sm" onclick="this.parentElement.remove()">✕</button>
@@ -624,8 +655,10 @@ function addFeatureRow() {
 }
 
 function getFeatures() {
-  return [...document.getElementById('features-list').querySelectorAll('input')]
-    .map(i => i.value.trim()).filter(Boolean);
+  const extras = [...document.getElementById('features-list').querySelectorAll('input')]
+    .map(i => i.value.trim())
+    .filter(f => f && !isCondition(f) && f !== ORIGINAL_FEATURE);
+  return [document.getElementById('f-condition').value, ORIGINAL_FEATURE, ...extras];
 }
 
 // ── IMAGE HANDLING ──
