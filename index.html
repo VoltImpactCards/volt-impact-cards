@@ -184,6 +184,29 @@
       display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; align-items: flex-end;
     }
     .filter-group { display: flex; flex-direction: column; gap: 6px; }
+    .filter-group.grow { flex: 1 1 220px; min-width: 200px; }
+    .search-wrap { position: relative; display: flex; align-items: center; }
+    .search-wrap svg { position: absolute; left: 12px; color: var(--grey); pointer-events: none; }
+    .search-input {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px;
+      color: var(--white); padding: 8px 34px 8px 36px; font-size: 0.85rem; font-family: inherit;
+      transition: border-color .2s;
+    }
+    .search-input::placeholder { color: var(--grey); }
+    .search-input:focus { outline: none; border-color: rgba(245,197,24,0.5); }
+    .search-clear {
+      position: absolute; right: 8px; background: none; border: none; color: var(--grey);
+      cursor: pointer; font-size: 1rem; line-height: 1; padding: 4px; display: none;
+    }
+    .search-clear.show { display: block; }
+    .search-clear:hover { color: var(--white); }
+    .copy-link {
+      background: none; border: 1px solid var(--border2); color: var(--grey);
+      border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 0.78rem;
+      font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: color .2s, border-color .2s;
+    }
+    .copy-link:hover { color: var(--white); border-color: var(--border2); }
+    .copy-link.done { color: #6ee7a8; border-color: rgba(110,231,168,0.4); }
     .filter-group-label {
       font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
       letter-spacing: 1px; color: var(--grey);
@@ -514,6 +537,71 @@
     .modal-img-d.soldout .modal-slide { filter: grayscale(1); }
     .modal-img-d.soldout + .modal-thumbs .modal-thumb { filter: grayscale(1); }
 
+    /* ── POPTÁVKA ── */
+    .inq-bar {
+      position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 140%);
+      z-index: 300; display: flex; align-items: center; gap: 14px;
+      background: rgba(14,14,26,0.92); backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid rgba(245,197,24,0.35); border-radius: 999px;
+      padding: 10px 12px 10px 20px; box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+      transition: transform .3s cubic-bezier(.2,.8,.3,1); max-width: calc(100vw - 24px);
+    }
+    .inq-bar.show { transform: translate(-50%, 0); }
+    .inq-sum { font-size: 0.85rem; color: var(--white); white-space: nowrap; }
+    .inq-sum b { color: var(--yellow); }
+    .inq-bar button {
+      border: none; border-radius: 999px; cursor: pointer; font-family: inherit;
+      font-size: 0.8rem; font-weight: 700; padding: 8px 16px; white-space: nowrap;
+    }
+    .inq-open { background: rgba(255,255,255,0.08); color: var(--white); }
+    .inq-open:hover { background: rgba(255,255,255,0.16); }
+    .inq-send { background: linear-gradient(135deg, var(--yellow), var(--yellow2)); color: #1a1400; }
+
+    .inq-panel {
+      position: fixed; inset: 0; z-index: 310; display: none;
+      align-items: center; justify-content: center; padding: 20px;
+      background: rgba(4,4,10,0.75); backdrop-filter: blur(6px);
+    }
+    .inq-panel.open { display: flex; }
+    .inq-box {
+      background: var(--bg2); border: 1px solid var(--border2); border-radius: 18px;
+      width: 100%; max-width: 480px; max-height: 82vh; overflow: auto; padding: 22px;
+      animation: modalIn .2s ease;
+    }
+    .inq-box h3 { font-size: 1.15rem; margin-bottom: 4px; }
+    .inq-box .inq-note { color: var(--grey); font-size: 0.82rem; margin-bottom: 16px; }
+    .inq-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .inq-item-t { flex: 1; font-size: 0.86rem; }
+    .inq-item-t small { display: block; color: var(--grey); font-size: 0.75rem; }
+    .inq-qty { display: flex; align-items: center; gap: 6px; }
+    .inq-qty button {
+      width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border2);
+      background: var(--surface2); color: var(--white); cursor: pointer; font-size: 0.9rem; line-height: 1;
+    }
+    .inq-qty span { min-width: 20px; text-align: center; font-size: 0.85rem; }
+    .inq-del { background: none; border: none; color: var(--grey); cursor: pointer; font-size: 0.95rem; padding: 4px; }
+    .inq-del:hover { color: #ff7b7a; }
+    .inq-total { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; font-size: 0.95rem; }
+    .inq-total b { color: var(--yellow); font-size: 1.15rem; }
+    .inq-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .inq-actions a, .inq-actions button {
+      flex: 1 1 140px; text-align: center; text-decoration: none; border-radius: 10px;
+      padding: 11px 14px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      border: 1px solid var(--border2); background: var(--surface2); color: var(--white);
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .inq-actions .prim { background: linear-gradient(135deg, var(--yellow), var(--yellow2)); color: #1a1400; border: none; }
+    .inq-actions .clear { flex: 0 0 auto; color: var(--grey); background: none; }
+    .inq-empty { color: var(--grey); font-size: 0.86rem; padding: 18px 0; text-align: center; }
+    @media (max-width: 520px) {
+      .inq-bar { gap: 8px; padding: 8px 8px 8px 14px; }
+      .inq-sum { font-size: 0.78rem; }
+      .inq-bar button { padding: 7px 12px; font-size: 0.75rem; }
+    }
+
     /* ── FOOTER ── */
     footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 56px 40px 36px; }
     .footer-inner { max-width: 900px; margin: 0 auto; }
@@ -590,9 +678,17 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             Mám zájem
           </a>
-          <a href="https://wa.me/420605886256" class="btn-secondary" target="_blank" rel="noopener">
+          <a href="https://wa.me/420605886256" class="btn-secondary" id="modal-wa" target="_blank" rel="noopener">
             WhatsApp
           </a>
+          <button class="btn-secondary" id="modal-add" type="button" onclick="addToInquiry()">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            Přidat do poptávky
+          </button>
+          <button class="copy-link" type="button" onclick="copyProductLink(this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+            Kopírovat odkaz
+          </button>
         </div>
       </div>
     </div>
@@ -641,6 +737,14 @@
 
   <!-- FILTRY -->
   <div class="filters">
+    <div class="filter-group grow">
+      <div class="filter-group-label">Hledat</div>
+      <div class="search-wrap">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" class="search-input" id="filter-search" placeholder="Název nebo číslo karty…" autocomplete="off"/>
+        <button class="search-clear" id="search-clear" type="button" aria-label="Vymazat hledání">&#10005;</button>
+      </div>
+    </div>
     <div class="filter-group">
       <div class="filter-group-label">Cena</div>
       <select class="filter-select" id="filter-price" onchange="activeFilters.price=this.value;applyFilters()">
@@ -710,6 +814,16 @@
         <option value="mega">Mega Evolution (2025–)</option>
       </select>
     </div>
+    <div class="filter-group">
+      <div class="filter-group-label">Řadit</div>
+      <select class="filter-select" id="filter-sort" onchange="activeSort=this.value;applySort();applyFilters()">
+        <option value="default">Doporučené</option>
+        <option value="new">Nejnovější</option>
+        <option value="cheap">Nejlevnější</option>
+        <option value="expensive">Nejdražší</option>
+        <option value="stock">Nejvíc skladem</option>
+      </select>
+    </div>
   </div>
   <div class="filter-count" id="filter-count">Zobrazeno <span id="count-num">…</span> z <span id="count-total">…</span> produktů</div>
 
@@ -765,6 +879,34 @@
     </a>
   </div>
 </section>
+
+<!-- ── POPTÁVKA ── -->
+<div class="inq-bar" id="inq-bar">
+  <span class="inq-sum" id="inq-sum"></span>
+  <button class="inq-open" type="button" onclick="openInquiry()">Zobrazit</button>
+  <button class="inq-send" type="button" onclick="openInquiry()">Odeslat</button>
+</div>
+
+<div class="inq-panel" id="inq-panel" onclick="if(event.target===this)closeInquiry()">
+  <div class="inq-box">
+    <h3>Poptávka</h3>
+    <div class="inq-note">Pošli nám seznam jednou zprávou — ozveme se s dostupností a cenou vč. dopravy.</div>
+    <div id="inq-list"></div>
+    <div class="inq-total">Celkem <b id="inq-total">0 Kč</b></div>
+    <div class="inq-actions">
+      <a class="prim" id="inq-wa" href="#" target="_blank" rel="noopener">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.2-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        WhatsApp
+      </a>
+      <a id="inq-mail" href="#">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        E-mail
+      </a>
+      <button class="clear" type="button" onclick="clearInquiry()">Vyprázdnit</button>
+      <button class="clear" type="button" onclick="closeInquiry()">Zavřít</button>
+    </div>
+  </div>
+</div>
 
 <!-- ── FOOTER ── -->
 <footer id="kontakt">
@@ -877,21 +1019,115 @@ function openModal(data) {
     '<div class="modal-feature"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' + f + '</div>'
   ).join('');
 
-  // Email subject
+  // Predvyplnene zpravy
+  _modalSlug = data.slug || slugify(data.title);
+  _modalProduct = { title: data.title, price: parseInt(data.price) || 0, slug: _modalSlug };
+
+  const link = productLink(_modalSlug);
+  const mailBody = 'Dobrý den,\n\nmám zájem o: ' + data.title + ' (' + data.price + ' Kč)\nPočet kusů: 1\n\nOdkaz: ' + link + '\n\nDěkuji,\n';
   document.getElementById('modal-order').href =
-    'mailto:voltimpactcards@gmail.com?subject=Zájem o: ' + encodeURIComponent(data.title) + '&body=Dobrý den, mám zájem o: ' + encodeURIComponent(data.title) + '%0A%0APočet kusů: 1%0A%0AKontakt:';
+    'mailto:voltimpactcards@gmail.com?subject=' + encodeURIComponent('Zájem o: ' + data.title) + '&body=' + encodeURIComponent(mailBody);
+
+  const waText = 'Dobrý den, mám zájem o: ' + data.title + ' (' + data.price + ' Kč). ' + link;
+  const wa = document.getElementById('modal-wa');
+  if (wa) wa.href = 'https://wa.me/420605886256?text=' + encodeURIComponent(waText);
+
+  const addBtn = document.getElementById('modal-add');
+  if (addBtn) addBtn.style.display = data.soldout === true ? 'none' : 'inline-flex';
+
+  if (_modalSlug) history.replaceState(null, '', location.pathname + location.search + '#p=' + _modalSlug);
 
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
+function productLink(slug) {
+  return location.origin + location.pathname + '#p=' + slug;
+}
+
+function openFromHash() {
+  const m = (location.hash || '').match(/^#p=(.+)$/);
+  if (!m) return;
+  const slug = decodeURIComponent(m[1]);
+  const card = document.querySelector('[data-slug="' + slug.replace(/"/g, '') + '"]');
+  if (card) setTimeout(() => card.click(), 60);
+}
+
+function copyProductLink(btn) {
+  const slug = _modalSlug;
+  if (!slug) return;
+  const url = productLink(slug);
+  const done = () => {
+    btn.classList.add('done');
+    const orig = btn.dataset.orig || btn.innerHTML;
+    btn.dataset.orig = orig;
+    btn.innerHTML = '&#10003; Zkopírováno';
+    setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = orig; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(done).catch(() => prompt('Odkaz na produkt:', url));
+  } else {
+    prompt('Odkaz na produkt:', url);
+  }
+}
+
+(function(){
+  const inp = document.getElementById('filter-search');
+  const clr = document.getElementById('search-clear');
+  if (!inp) return;
+  let t = null;
+  const run = () => {
+    activeFilters.q = norm(inp.value.trim());
+    clr.classList.toggle('show', inp.value.length > 0);
+    applyFilters();
+  };
+  inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 120); });
+  clr.addEventListener('click', () => { inp.value = ''; run(); inp.focus(); });
+})();
+
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
+  if ((location.hash || '').indexOf('#p=') === 0) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
 }
 
 // ── FILTRY ──
-const activeFilters = { price: 'all', series: 'all', era: 'all' };
+const activeFilters = { price: 'all', series: 'all', era: 'all', q: '' };
+let activeSort = 'default';
+
+function applySort() {
+  const grids = ['product-grid', 'decks-grid', 'singles-grid'];
+  grids.forEach(id => {
+    const grid = document.getElementById(id);
+    if (!grid) return;
+    const cards = [...grid.querySelectorAll('.product-card, .deck-card, .single-card')];
+    if (!cards.length) return;
+    const val = c => ({
+      cheap: +c.dataset.price,
+      expensive: -c.dataset.price,
+      stock: -(+c.dataset.stock),
+      new: -(+c.dataset.added)
+    })[activeSort];
+    const sorted = activeSort === 'default'
+      ? cards.sort((a, b) => (+a.dataset.ord) - (+b.dataset.ord))
+      : cards.sort((a, b) => {
+          const sa = a.classList.contains('soldout') ? 1 : 0;
+          const sb = b.classList.contains('soldout') ? 1 : 0;
+          if (sa !== sb) return sa - sb;
+          const d = val(a) - val(b);
+          return d !== 0 ? d : (+a.dataset.ord) - (+b.dataset.ord);
+        });
+    sorted.forEach(c => grid.appendChild(c));
+  });
+}
+
+function rememberOrder() {
+  document.querySelectorAll('.product-card, .deck-card, .single-card').forEach((c, i) => {
+    if (c.dataset.ord === undefined) c.dataset.ord = i;
+  });
+}
 
 function applyFilters() {
   let visible = 0;
@@ -904,10 +1140,11 @@ function applyFilters() {
     const priceOk = checkPrice(price, activeFilters.price);
     const seriesOk = activeFilters.series === 'all' || series.includes(activeFilters.series);
     const eraOk = activeFilters.era === 'all' || (card.dataset.era || '') === activeFilters.era;
+    const qOk = !activeFilters.q || (card.dataset.title || '').includes(activeFilters.q) || (card.dataset.slug || '').includes(activeFilters.q);
 
     const grid = card.parentElement ? card.parentElement.id : '';
     perGrid[grid] = perGrid[grid] || 0;
-    if (priceOk && seriesOk && eraOk) {
+    if (priceOk && seriesOk && eraOk && qOk) {
       card.classList.remove('hidden');
       visible++;
       perGrid[grid]++;
@@ -966,6 +1203,7 @@ const HINT_SVG = '<svg width="12" height="12" fill="none" stroke="currentColor" 
 
 let _allProducts = [];
 let _modalSoldout = false;
+let _modalSlug = '';
 
 function isSoldOut(p) { return p.soldout === true || Number(p.stock) === 0; }
 function isFeatured(p) { return p.featured === true && !isSoldOut(p); }
@@ -977,6 +1215,17 @@ function isNew(p) {
   return (Date.now() - t) < NEW_DAYS * 86400000;
 }
 const NEW_BADGE = '<span class="new-badge">Novinka</span>';
+
+function norm(s) {
+  return (s || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+function slugify(s) {
+  return norm(s).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+function addedTs(p) {
+  const t = p.addedAt ? Date.parse(p.addedAt) : NaN;
+  return isNaN(t) ? 0 : t;
+}
 const FEATURED_BADGE = '<span class="featured-badge">\u2b50 Doporučujeme</span>';
 const SOLDOUT_OVERLAY = '<div class="soldout-overlay"><span>Vyprodáno</span></div>';
 const ERA_LABELS = {original:'Original', neo:'Neo', ecard:'e-Card', ex:'EX', dp:'Diamond & Pearl', platinum:'Platinum', hgss:'HeartGold & SoulSilver', bw:'Black & White', xy:'XY', sm:'Sun & Moon', swsh:'Sword & Shield', sv:'Scarlet & Violet', mega:'Mega Evolution'};
@@ -986,8 +1235,8 @@ function buildBulkCard(p) {
   const stockStr = so ? 'Vyprodáno' : p.stock + ' ks';
   const ft = isFeatured(p);
   const nw = isNew(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw});
-  return `<div class="product-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title)});
+  return `<div class="product-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="product-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
       ${so ? SOLDOUT_OVERLAY : ''}
@@ -1007,8 +1256,8 @@ function buildDeckCard(p) {
   const so = isSoldOut(p);
   const ft = isFeatured(p);
   const nw = isNew(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw});
-  return `<div class="deck-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title)});
+  return `<div class="deck-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="deck-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
       ${so ? SOLDOUT_OVERLAY : ''}
@@ -1028,8 +1277,8 @@ function buildSingleCard(p) {
   const so = isSoldOut(p);
   const ft = isFeatured(p);
   const nw = isNew(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw});
-  return `<div class="single-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title)});
+  return `<div class="single-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
     <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
@@ -1083,16 +1332,102 @@ async function loadProducts() {
     document.getElementById('count-total').textContent = total;
     document.getElementById('count-num').textContent = total;
 
+    rememberOrder();
+    applySort();
     applyFilters();
+    openFromHash();
   } catch(e) {
     clearSkeletons();
     console.error('Chyba načítání produktů:', e);
   }
 }
 
+
+/* ── POPTÁVKA ── */
+let _modalProduct = null;
+let _inquiry = [];
+
+function inqLoad() {
+  try {
+    const raw = localStorage.getItem('vic_inquiry');
+    _inquiry = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(_inquiry)) _inquiry = [];
+  } catch(e) { _inquiry = []; }
+}
+function inqSave() {
+  try { localStorage.setItem('vic_inquiry', JSON.stringify(_inquiry)); } catch(e) {}
+}
+
+function addToInquiry() {
+  if (!_modalProduct) return;
+  const ex = _inquiry.find(i => i.slug === _modalProduct.slug);
+  if (ex) { ex.qty++; } else { _inquiry.push({ ..._modalProduct, qty: 1 }); }
+  inqSave(); renderInquiry();
+  const btn = document.getElementById('modal-add');
+  if (btn) {
+    const orig = btn.dataset.orig || btn.innerHTML;
+    btn.dataset.orig = orig;
+    btn.innerHTML = '&#10003; Přidáno';
+    setTimeout(() => { btn.innerHTML = orig; }, 1500);
+  }
+}
+
+function inqChange(slug, delta) {
+  const it = _inquiry.find(i => i.slug === slug);
+  if (!it) return;
+  it.qty += delta;
+  if (it.qty < 1) _inquiry = _inquiry.filter(i => i.slug !== slug);
+  inqSave(); renderInquiry();
+}
+function inqRemove(slug) {
+  _inquiry = _inquiry.filter(i => i.slug !== slug);
+  inqSave(); renderInquiry();
+}
+function clearInquiry() {
+  _inquiry = []; inqSave(); renderInquiry(); closeInquiry();
+}
+function openInquiry() { renderInquiry(); document.getElementById('inq-panel').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeInquiry() { document.getElementById('inq-panel').classList.remove('open'); if (!document.getElementById('modal').classList.contains('open')) document.body.style.overflow = ''; }
+
+function inqTotal() { return _inquiry.reduce((s, i) => s + i.price * i.qty, 0); }
+function inqCount() { return _inquiry.reduce((s, i) => s + i.qty, 0); }
+
+function inqMessage() {
+  const lines = _inquiry.map(i => '• ' + i.title + ' — ' + i.qty + '× (' + (i.price * i.qty) + ' Kč)');
+  return 'Dobrý den,\n\nmám zájem o:\n' + lines.join('\n') + '\n\nCelkem: ' + inqTotal() + ' Kč\n\nDěkuji,\n';
+}
+
+function renderInquiry() {
+  const bar = document.getElementById('inq-bar');
+  const n = inqCount();
+  bar.classList.toggle('show', n > 0);
+  document.getElementById('inq-sum').innerHTML = n + (n === 1 ? ' položka' : (n < 5 ? ' položky' : ' položek')) + ' · <b>' + inqTotal() + ' Kč</b>';
+
+  const list = document.getElementById('inq-list');
+  list.innerHTML = _inquiry.length ? _inquiry.map(i => `
+    <div class="inq-item">
+      <div class="inq-item-t">${i.title}<small>${i.price} Kč / ks</small></div>
+      <div class="inq-qty">
+        <button type="button" onclick="inqChange('${i.slug}',-1)">−</button>
+        <span>${i.qty}</span>
+        <button type="button" onclick="inqChange('${i.slug}',1)">+</button>
+      </div>
+      <button class="inq-del" type="button" onclick="inqRemove('${i.slug}')" aria-label="Odebrat">&#10005;</button>
+    </div>`).join('') : '<div class="inq-empty">Zatím nic nevybráno. Otevři produkt a klikni na „Přidat do poptávky".</div>';
+
+  document.getElementById('inq-total').textContent = inqTotal() + ' Kč';
+  const msg = inqMessage();
+  document.getElementById('inq-wa').href = 'https://wa.me/420605886256?text=' + encodeURIComponent(msg);
+  document.getElementById('inq-mail').href = 'mailto:voltimpactcards@gmail.com?subject=' + encodeURIComponent('Poptávka — ' + n + ' položek') + '&body=' + encodeURIComponent(msg);
+}
+
+inqLoad();
+renderInquiry();
+
 loadProducts();
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('inq-panel').classList.contains('open')) { closeInquiry(); return; }
   if (e.key === 'Escape') {
     if (document.getElementById('lightbox').classList.contains('open')) {
       closeLightbox();
