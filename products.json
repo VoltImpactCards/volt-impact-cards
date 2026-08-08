@@ -128,6 +128,28 @@
         "Originální neporušené karty"
       ],
       "featured": false
+    },
+    {
+      "imgs": [
+        "img/img_9812.jpeg",
+        "img/img_9806.jpeg",
+        "img/img_9809.jpeg"
+      ],
+      "title": "Dragon Fist",
+      "price": 300,
+      "stock": 2,
+      "series": "decks",
+      "era": "bw",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Hotový deck Dragon Fist připravený k hraní.",
+      "features": [
+        "Obsahuje 60 karet určených k hraní Pokémon TCG",
+        "Nejedná se o kompetitivní deck",
+        "Vhodné pro začátečníky k seznámení s hrou",
+        "Near Mint (NM) stav"
+      ],
+      "featured": false
     }
   ],
   "bulks": [
@@ -450,6 +472,53 @@
         "Obsahuje evoluční řady"
       ],
       "featured": true
+    },
+    {
+      "imgs": [
+        "img/img_1659.jpg",
+        "img/img_1657.jpg",
+        "img/img_1658.jpg",
+        "img/img_1656.jpg",
+        "img/img_1660.jpg",
+        "img/img_1661.jpg"
+      ],
+      "title": "Evolution set - Lost Origin",
+      "price": 300,
+      "stock": 1,
+      "series": "lost",
+      "era": "swsh",
+      "seriesLabel": "Lost Origin",
+      "type": "Bulk",
+      "desc": "Obsahuje zejména evoluční linie karet ze série Lost Origin. Karty jsou originální ve stavu Lightly played - někdy drobné oděrky. Bez duplicit.",
+      "features": [
+        "Lightly played (LP)",
+        "Originální karty",
+        "Bez duplicit",
+        "80 ks"
+      ],
+      "featured": true
+    },
+    {
+      "imgs": [
+        "img/img_9818.jpeg",
+        "img/img_9817.jpeg",
+        "img/img_9819.jpeg"
+      ],
+      "title": "Black & White Pack (100 ks)",
+      "price": 300,
+      "stock": 3,
+      "series": "mix",
+      "era": "bw",
+      "seriesLabel": "Mix",
+      "type": "Bulk",
+      "desc": "Mix karet skládající se ze sérií Black & White. 100 unikátních karet ideální pro doplnění sbírky nebo herního decku.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "100 ks bez duplicit",
+        "Obsahuje evoluční řady"
+      ],
+      "featured": false
     }
   ],
   "singles": [
