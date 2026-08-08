@@ -537,6 +537,25 @@
     .modal-img-d.soldout .modal-slide { filter: grayscale(1); }
     .modal-img-d.soldout + .modal-thumbs .modal-thumb { filter: grayscale(1); }
 
+    /* ── VÝBĚR POŠTOVNÍ SLUŽBY ── */
+    .mail-panel { position: fixed; inset: 0; z-index: 320; display: none; align-items: center; justify-content: center;
+      padding: 20px; background: rgba(4,4,10,0.75); backdrop-filter: blur(6px); }
+    .mail-panel.open { display: flex; }
+    .mail-box { background: var(--bg2); border: 1px solid var(--border2); border-radius: 18px;
+      width: 100%; max-width: 380px; padding: 22px; animation: modalIn .2s ease; }
+    .mail-box h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .mail-box .mail-note { color: var(--grey); font-size: 0.82rem; margin-bottom: 16px; }
+    .mail-opt { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--white); padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
+      font-family: inherit; font-size: 0.88rem; text-decoration: none; transition: border-color .2s, background .2s; }
+    .mail-opt:hover { border-color: rgba(245,197,24,0.45); background: rgba(255,255,255,0.08); }
+    .mail-opt b { font-weight: 700; }
+    .mail-opt small { display: block; color: var(--grey); font-size: 0.74rem; }
+    .mail-close { background: none; border: none; color: var(--grey); cursor: pointer;
+      font-family: inherit; font-size: 0.82rem; padding: 8px 0 0; width: 100%; }
+    .mail-close:hover { color: var(--white); }
+
     /* ── POPTÁVKA ── */
     .inq-bar {
       position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 140%);
@@ -674,7 +693,7 @@
         <div class="modal-desc" id="modal-desc"></div>
         <div class="modal-features" id="modal-features"></div>
         <div class="modal-actions">
-          <a href="mailto:voltimpactcards@gmail.com" class="btn-primary" id="modal-order">
+          <a href="#" class="btn-primary" id="modal-order" onclick="event.preventDefault();openMailMenu(_mailSubject,_mailBody)">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             Mám zájem
           </a>
@@ -880,6 +899,16 @@
   </div>
 </section>
 
+<!-- ── VÝBĚR POŠTOVNÍ SLUŽBY ── -->
+<div class="mail-panel" id="mail-panel" onclick="if(event.target===this)closeMailMenu()">
+  <div class="mail-box">
+    <h3>Odeslat e-mailem</h3>
+    <div class="mail-note">Vyber, kde máš e-mail — zpráva se předvyplní.</div>
+    <div id="mail-opts"></div>
+    <button class="mail-close" type="button" onclick="closeMailMenu()">Zavřít</button>
+  </div>
+</div>
+
 <!-- ── POPTÁVKA ── -->
 <div class="inq-bar" id="inq-bar">
   <span class="inq-sum" id="inq-sum"></span>
@@ -898,7 +927,7 @@
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.2-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
         WhatsApp
       </a>
-      <a id="inq-mail" href="#">
+      <a id="inq-mail" href="#" onclick="event.preventDefault();openMailMenu('Poptávka — ' + inqCount() + ' položek', inqMessage())">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
         E-mail
       </a>
@@ -1028,9 +1057,8 @@ function openModal(data) {
   _modalProduct = { title: data.title, price: parseInt(data.price) || 0, slug: _modalSlug };
 
   const link = productLink(_modalSlug);
-  const mailBody = 'Dobrý den,\n\nmám zájem o: ' + data.title + ' (' + data.price + ' Kč)\nPočet kusů: 1\n\nOdkaz: ' + link + '\n\nDěkuji,\n';
-  document.getElementById('modal-order').href =
-    'mailto:voltimpactcards@gmail.com?subject=' + encodeURIComponent('Zájem o: ' + data.title) + '&body=' + encodeURIComponent(mailBody);
+  _mailSubject = 'Zájem o: ' + data.title;
+  _mailBody = 'Dobrý den,\n\nmám zájem o: ' + data.title + ' (' + data.price + ' Kč)\nPočet kusů: 1\n\nOdkaz: ' + link + '\n\nDěkuji,\n';
 
   const waText = 'Dobrý den, mám zájem o: ' + data.title + ' (' + data.price + ' Kč). ' + link;
   const wa = document.getElementById('modal-wa');
@@ -1209,6 +1237,7 @@ const HINT_SVG = '<svg width="12" height="12" fill="none" stroke="currentColor" 
 let _allProducts = [];
 let _modalSoldout = false;
 let _modalSlug = '';
+let _mailSubject = '', _mailBody = '';
 
 function isSoldOut(p) { return p.soldout === true || Number(p.stock) === 0; }
 function isFeatured(p) { return p.featured === true && !isSoldOut(p); }
@@ -1348,6 +1377,41 @@ async function loadProducts() {
 }
 
 
+/* ── VÝBĚR POŠTOVNÍ SLUŽBY ── */
+const MAIL_TO = 'voltimpactcards@gmail.com';
+
+function mailServices(subject, body) {
+  const s = encodeURIComponent(subject), b = encodeURIComponent(body), to = encodeURIComponent(MAIL_TO);
+  return [
+    { n: 'Gmail', d: 'Otevře se v prohlížeči', u: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + s + '&body=' + b },
+    { n: 'Seznam.cz', d: 'Otevře se v prohlížeči', u: 'https://email.seznam.cz/newMessage?to=' + to + '&subject=' + s + '&body=' + b },
+    { n: 'Outlook', d: 'Otevře se v prohlížeči', u: 'https://outlook.live.com/mail/0/deeplink/compose?to=' + to + '&subject=' + s + '&body=' + b },
+    { n: 'Poštovní aplikace', d: 'Mail, Outlook v počítači…', u: 'mailto:' + MAIL_TO + '?subject=' + s + '&body=' + b }
+  ];
+}
+
+function openMailMenu(subject, body) {
+  document.getElementById('mail-opts').innerHTML =
+    mailServices(subject, body).map(o =>
+      '<a class="mail-opt" href="' + o.u + '" target="_blank" rel="noopener" onclick="closeMailMenu()"><span><b>' + o.n + '</b><small>' + o.d + '</small></span></a>'
+    ).join('') +
+    '<button class="mail-opt" type="button" onclick="copyMailAddress(this)"><span><b>Zkopírovat adresu</b><small>' + MAIL_TO + '</small></span></button>';
+  document.getElementById('mail-panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMailMenu() {
+  document.getElementById('mail-panel').classList.remove('open');
+  if (!document.getElementById('modal').classList.contains('open') &&
+      !document.getElementById('inq-panel').classList.contains('open')) document.body.style.overflow = '';
+}
+
+function copyMailAddress(btn) {
+  const done = () => { btn.querySelector('b').textContent = 'Zkopírováno ✓'; setTimeout(closeMailMenu, 700); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(MAIL_TO).then(done).catch(() => prompt('E-mail:', MAIL_TO));
+  else prompt('E-mail:', MAIL_TO);
+}
+
 /* ── POPTÁVKA ── */
 let _modalProduct = null;
 let _inquiry = [];
@@ -1423,7 +1487,7 @@ function renderInquiry() {
   document.getElementById('inq-total').textContent = inqTotal() + ' Kč';
   const msg = inqMessage();
   document.getElementById('inq-wa').href = 'https://wa.me/420605886256?text=' + encodeURIComponent(msg);
-  document.getElementById('inq-mail').href = 'mailto:voltimpactcards@gmail.com?subject=' + encodeURIComponent('Poptávka — ' + n + ' položek') + '&body=' + encodeURIComponent(msg);
+  document.getElementById('inq-mail').href = '#';
 }
 
 inqLoad();
@@ -1432,6 +1496,7 @@ renderInquiry();
 loadProducts();
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('mail-panel').classList.contains('open')) { closeMailMenu(); return; }
   if (e.key === 'Escape' && document.getElementById('inq-panel').classList.contains('open')) { closeInquiry(); return; }
   if (e.key === 'Escape') {
     if (document.getElementById('lightbox').classList.contains('open')) {
