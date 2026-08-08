@@ -717,9 +717,11 @@ function saveProduct() {
   };
 
   if (idx === -1) {
+    product.addedAt = new Date().toISOString().slice(0, 10);
     data[tab].push(product);
     toast('Produkt přidán ✓', 'ok');
   } else {
+    if (data[tab][idx] && data[tab][idx].addedAt) product.addedAt = data[tab][idx].addedAt;
     data[tab][idx] = product;
     toast('Produkt upraven ✓', 'ok');
   }

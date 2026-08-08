@@ -226,6 +226,36 @@
       border-color: rgba(245,197,24,0.3);
       box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,197,24,0.1);
     }
+    /* ── NOVINKA ── */
+    .new-badge {
+      position: absolute; top: 10px; left: 10px; z-index: 5;
+      background: var(--blue); color: #04243a;
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(79,195,247,0.4);
+    }
+    .featured-badge + .new-badge, .product-card.featured .new-badge,
+    .deck-card.featured .new-badge, .single-card.featured .new-badge { top: 42px; }
+    .single-card .new-badge { font-size: 0.6rem; padding: 3px 7px; top: 7px; left: 7px; }
+    .single-card.featured .new-badge { top: 34px; }
+    .modal-new {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--blue); color: #04243a;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; margin-left: 6px;
+    }
+
+    /* ── SKELETON PŘI NAČÍTÁNÍ ── */
+    .skeleton { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+    .sk-img { background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+              background-size: 200% 100%; animation: skShimmer 1.4s ease-in-out infinite; }
+    .sk-line { height: 12px; border-radius: 6px; margin: 12px 14px;
+               background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+               background-size: 200% 100%; animation: skShimmer 1.4s ease-in-out infinite; }
+    .sk-line.short { width: 45%; }
+    @keyframes skShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @media (prefers-reduced-motion: reduce) { .sk-img, .sk-line { animation: none; } }
+
     /* ── DOPORUČENÝ PRODUKT ── */
     .product-card.featured, .deck-card.featured, .single-card.featured {
       border: 1px solid rgba(245,197,24,0.55);
@@ -312,7 +342,7 @@
       transition: transform .25s, border-color .25s, box-shadow .25s;
     }
     .single-card:hover { transform: translateY(-5px); border-color: rgba(79,195,247,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-    .single-img-wrap { height: 260px; background: #0c0c18; overflow: hidden; }
+    .single-img-wrap { aspect-ratio: 5 / 7; height: auto; background: #0c0c18; overflow: hidden; }
     .single-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform .4s; }
     .single-card:hover .single-img-wrap img { transform: scale(1.06); }
     .single-info { padding: 12px 14px 16px; }
@@ -549,6 +579,7 @@
       <div class="modal-thumbs" id="modal-thumbs" style="display:none"></div>
       <div class="modal-body">
         <div class="modal-featured" id="modal-featured" style="display:none">⭐ Doporučujeme</div>
+        <div class="modal-new" id="modal-new" style="display:none">Novinka</div>
         <div class="modal-badges" id="modal-badges"></div>
         <div class="modal-title" id="modal-title"></div>
         <div class="modal-price" id="modal-price"></div>
@@ -828,6 +859,8 @@ function openModal(data) {
 
   const mf = document.getElementById('modal-featured');
   if (mf) mf.style.display = data.featured === true ? 'inline-flex' : 'none';
+  const mn = document.getElementById('modal-new');
+  if (mn) mn.style.display = data.isnew === true ? 'inline-flex' : 'none';
   document.getElementById('modal-title').textContent = data.title;
   document.getElementById('modal-price').innerHTML = data.price + ' <small>Kč</small>';
   document.getElementById('modal-desc').innerHTML = data.desc;
@@ -936,6 +969,14 @@ let _modalSoldout = false;
 
 function isSoldOut(p) { return p.soldout === true || Number(p.stock) === 0; }
 function isFeatured(p) { return p.featured === true && !isSoldOut(p); }
+const NEW_DAYS = 14;
+function isNew(p) {
+  if (!p.addedAt || isSoldOut(p)) return false;
+  const t = Date.parse(p.addedAt);
+  if (isNaN(t)) return false;
+  return (Date.now() - t) < NEW_DAYS * 86400000;
+}
+const NEW_BADGE = '<span class="new-badge">Novinka</span>';
 const FEATURED_BADGE = '<span class="featured-badge">\u2b50 Doporučujeme</span>';
 const SOLDOUT_OVERLAY = '<div class="soldout-overlay"><span>Vyprodáno</span></div>';
 const ERA_LABELS = {original:'Original', neo:'Neo', ecard:'e-Card', ex:'EX', dp:'Diamond & Pearl', platinum:'Platinum', hgss:'HeartGold & SoulSilver', bw:'Black & White', xy:'XY', sm:'Sun & Moon', swsh:'Sword & Shield', sv:'Scarlet & Violet', mega:'Mega Evolution'};
@@ -944,12 +985,13 @@ function buildBulkCard(p) {
   const so = isSoldOut(p);
   const stockStr = so ? 'Vyprodáno' : p.stock + ' ks';
   const ft = isFeatured(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft});
+  const nw = isNew(p);
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw});
   return `<div class="product-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="product-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
       ${so ? SOLDOUT_OVERLAY : ''}
-      ${ft ? FEATURED_BADGE : ''}
+      ${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}
       <span class="stock-badge${so ? ' soldout-badge' : ''}">${stockStr}</span>
       <span class="product-type-badge">${p.seriesLabel}</span>
     </div>
@@ -964,12 +1006,13 @@ function buildBulkCard(p) {
 function buildDeckCard(p) {
   const so = isSoldOut(p);
   const ft = isFeatured(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft});
+  const nw = isNew(p);
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw});
   return `<div class="deck-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="deck-img-wrap">
       <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
       ${so ? SOLDOUT_OVERLAY : ''}
-      ${ft ? FEATURED_BADGE : ''}
+      ${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}
       <span class="deck-stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span>
       <span class="deck-type-badge">${p.seriesLabel || 'Deck'}</span>
     </div>
@@ -984,19 +1027,43 @@ function buildDeckCard(p) {
 function buildSingleCard(p) {
   const so = isSoldOut(p);
   const ft = isFeatured(p);
-  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft});
+  const nw = isNew(p);
+  const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw});
   return `<div class="single-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
-    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${ft ? FEATURED_BADGE : ''}${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
+    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
     <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
 }
 
+function skeletonCards(n, ratio) {
+  let out = '';
+  for (let i = 0; i < n; i++) {
+    out += '<div class="skeleton"><div class="sk-img" style="' + ratio + '"></div><div class="sk-line"></div><div class="sk-line short"></div></div>';
+  }
+  return out;
+}
+
+function showSkeletons() {
+  const g = document.getElementById('product-grid');
+  if (g) g.insertAdjacentHTML('afterbegin', skeletonCards(6, 'height:210px'));
+  const s = document.getElementById('singles-grid');
+  if (s) s.innerHTML = skeletonCards(8, 'aspect-ratio:5/7');
+  const d = document.getElementById('decks-grid');
+  if (d && !d.dataset.filled) d.insertAdjacentHTML('afterbegin', skeletonCards(3, 'height:210px'));
+}
+
+function clearSkeletons() {
+  document.querySelectorAll('.skeleton').forEach(el => el.remove());
+}
+
 async function loadProducts() {
+  showSkeletons();
   try {
     const res = await fetch('./products.json?v=' + Date.now());
     const data = await res.json();
     _allProducts = data;
 
+    clearSkeletons();
     const grid = document.getElementById('product-grid');
     const noRes = document.getElementById('no-results');
     grid.innerHTML = '';
@@ -1018,6 +1085,7 @@ async function loadProducts() {
 
     applyFilters();
   } catch(e) {
+    clearSkeletons();
     console.error('Chyba načítání produktů:', e);
   }
 }
