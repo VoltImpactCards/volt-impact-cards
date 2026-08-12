@@ -150,6 +150,27 @@
         "Near Mint (NM) stav"
       ],
       "featured": false
+    },
+    {
+      "imgs": [
+        "img/img_1706.jpg",
+        "img/img_1686.jpg",
+        "img/img_1687.jpg"
+      ],
+      "title": "Flash Impact",
+      "price": 300,
+      "stock": 1,
+      "series": "decks",
+      "era": "mix",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Elektrický herní deck sestavený z éry Swords&Shield. Vhodný pro začátečníky.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ],
+      "featured": false,
+      "addedAt": "2026-08-12"
     }
   ],
   "bulks": [
