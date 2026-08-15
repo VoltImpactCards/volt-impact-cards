@@ -540,6 +540,29 @@
         "Obsahuje evoluční řady"
       ],
       "featured": false
+    },
+    {
+      "imgs": [
+        "img/img_1710.jpg",
+        "img/img_1711.jpg",
+        "img/img_1712.jpg",
+        "img/img_1713.jpg"
+      ],
+      "title": "Mega Evolutions Bulk (84 ks)",
+      "price": 250,
+      "stock": 4,
+      "series": "mega",
+      "era": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Bulk",
+      "desc": "84 ks karet bez duplicit dle foto. Stav Near Mint. Vše ze série Mega Evolutions.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "Bez duplicit"
+      ],
+      "featured": false,
+      "addedAt": "2026-08-15"
     }
   ],
   "singles": [
