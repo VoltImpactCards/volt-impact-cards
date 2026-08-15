@@ -692,17 +692,23 @@ async function handleImgUpload(input) {
   for (const file of files) {
     try {
       const base64 = await fileToBase64(file);
-      const filename = file.name.toLowerCase().replace(/\s+/g, '_');
-      const path = `${IMG_DIR}/${filename}`;
-      // Check if file exists (get SHA)
-      let sha = undefined;
-      try {
-        const existing = await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`);
-        sha = existing.sha;
-      } catch {}
-      const body = { message: `Admin: upload ${filename}`, content: base64 };
-      if (sha) body.sha = sha;
-      await ghPut(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, body);
+      const clean = file.name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9._-]/g, '');
+      const dot = clean.lastIndexOf('.');
+      const stem = dot > 0 ? clean.slice(0, dot) : clean;
+      const ext = dot > 0 ? clean.slice(dot) : '.jpg';
+
+      // Nikdy nepřepisovat existující fotku — přidáme pořadové číslo
+      let filename = stem + ext;
+      let path = `${IMG_DIR}/${filename}`;
+      for (let n = 2; n < 50; n++) {
+        let exists = false;
+        try { await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`); exists = true; } catch {}
+        if (!exists) break;
+        filename = `${stem}_${n}${ext}`;
+        path = `${IMG_DIR}/${filename}`;
+      }
+
+      await ghPut(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, { message: `Admin: upload ${filename}`, content: base64 });
       editImgs.push(path);
       renderImgList();
       toast(`Nahráno: ${filename}`, 'ok');

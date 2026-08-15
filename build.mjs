@@ -2,7 +2,7 @@
    Spouští se automaticky při každém nasazení na Netlify (viz netlify.toml).
    Čte products.json a vytváří /karta/<slug>/index.html + /karta/index.html + sitemap.xml */
 
-import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm, readdir, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 
 const SITE = 'https://voltimpactcards.com';
@@ -225,6 +225,53 @@ ${all.map(p => `<a href="${SITE}/${OUT}/${p.slug}/">${esc(p.title)} — ${p.pric
 </div>
 ` + foot;
 }
+
+/* ── Optimalizace fotek ──
+   Fotky nahrané přes administraci jdou z telefonu v původní velikosti (často 5–7 MB)
+   a v Apple formátu MPO/HDR, který některé prohlížeče (Chrome) nezobrazí.
+   Při každém nasazení je tady zmenšíme a převedeme na čistý JPEG.
+   Originály zůstávají v gitu — mění se jen to, co se nasazuje. */
+const MAX_PX = 1600;
+const MAX_KB = 500;
+
+async function optimizeImages() {
+  let sharp;
+  try {
+    sharp = (await import('sharp')).default;
+  } catch {
+    console.warn('sharp není k dispozici — přeskakuji optimalizaci fotek.');
+    return;
+  }
+  let files = [];
+  try { files = await readdir('img'); } catch { return; }
+  let done = 0, savedKb = 0;
+  for (const f of files) {
+    if (!/\.(jpe?g|png)$/i.test(f)) continue;
+    const p = `img/${f}`;
+    try {
+      const st = await stat(p);
+      const meta = await sharp(p).metadata();
+      const tooBig = st.size > MAX_KB * 1024;
+      const tooWide = Math.max(meta.width || 0, meta.height || 0) > MAX_PX;
+      const weirdFormat = meta.format !== 'jpeg' && meta.format !== 'png';
+      if (!tooBig && !tooWide && !weirdFormat) continue;
+      const buf = await sharp(p)
+        .rotate()
+        .resize({ width: MAX_PX, height: MAX_PX, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 84, mozjpeg: true, progressive: true })
+        .toBuffer();
+      if (buf.length < st.size) {
+        await writeFile(p, buf);
+        done++; savedKb += (st.size - buf.length) / 1024;
+      }
+    } catch (e) {
+      console.warn(`Fotku ${f} se nepodařilo zpracovat: ${e.message}`);
+    }
+  }
+  if (done) console.log(`Optimalizováno ${done} fotek, úspora ${Math.round(savedKb / 1024)} MB.`);
+}
+
+await optimizeImages();
 
 const raw = JSON.parse(await readFile('products.json', 'utf8'));
 const all = [];
