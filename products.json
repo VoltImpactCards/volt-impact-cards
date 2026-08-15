@@ -171,6 +171,27 @@
       ],
       "featured": false,
       "addedAt": "2026-08-12"
+    },
+    {
+      "imgs": [
+        "img/img_1719.jpg",
+        "img/img_1717.jpg",
+        "img/img_1718.jpg"
+      ],
+      "title": "Cast-Off Shell",
+      "price": 300,
+      "stock": 1,
+      "series": "decks",
+      "era": "mix",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Herní deck 60 ks karet. Vhodné pro začatečníky k seznámení se s hrou. Nejedná se o kompetitivní deck.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ],
+      "featured": false,
+      "addedAt": "2026-08-15"
     }
   ],
   "bulks": [
