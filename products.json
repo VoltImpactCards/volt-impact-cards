@@ -1069,8 +1069,9 @@
       ],
       "title": "Lillie's Determination 119/132",
       "price": 30,
-      "stock": 1,
+      "stock": 3,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
       "desc": "",
@@ -1078,7 +1079,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega",
       "featured": false
     },
     {
@@ -1086,9 +1086,10 @@
         "img/img_1483.jpg"
       ],
       "title": "Bulbasaur 001/132",
-      "price": 15,
-      "stock": 3,
+      "price": 10,
+      "stock": 12,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
       "desc": "",
@@ -1096,7 +1097,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega",
       "featured": false
     },
     {
