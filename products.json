@@ -150,6 +150,48 @@
         "Near Mint (NM) stav"
       ],
       "featured": false
+    },
+    {
+      "imgs": [
+        "img/img_1706.jpg",
+        "img/img_1686.jpg",
+        "img/img_1687.jpg"
+      ],
+      "title": "Flash Impact",
+      "price": 300,
+      "stock": 1,
+      "series": "decks",
+      "era": "mix",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Elektrický herní deck sestavený z éry Swords&Shield. Vhodný pro začátečníky.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ],
+      "featured": false,
+      "addedAt": "2026-08-12"
+    },
+    {
+      "imgs": [
+        "img/img_1719.jpg",
+        "img/img_1717.jpg",
+        "img/img_1718.jpg"
+      ],
+      "title": "Cast-Off Shell",
+      "price": 300,
+      "stock": 1,
+      "series": "decks",
+      "era": "mix",
+      "seriesLabel": "Deck",
+      "type": "Deck",
+      "desc": "Herní deck 60 ks karet. Vhodné pro začatečníky k seznámení se s hrou. Nejedná se o kompetitivní deck.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty"
+      ],
+      "featured": false,
+      "addedAt": "2026-08-15"
     }
   ],
   "bulks": [
@@ -519,6 +561,29 @@
         "Obsahuje evoluční řady"
       ],
       "featured": false
+    },
+    {
+      "imgs": [
+        "img/img_1710.jpg",
+        "img/img_1711.jpg",
+        "img/img_1712.jpg",
+        "img/img_1713.jpg"
+      ],
+      "title": "Mega Evolutions Bulk (84 ks)",
+      "price": 250,
+      "stock": 4,
+      "series": "mega",
+      "era": "mega",
+      "seriesLabel": "Mega Evolutions",
+      "type": "Bulk",
+      "desc": "84 ks karet bez duplicit dle foto. Stav Near Mint. Vše ze série Mega Evolutions.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "Bez duplicit"
+      ],
+      "featured": false,
+      "addedAt": "2026-08-15"
     }
   ],
   "singles": [
@@ -1004,8 +1069,9 @@
       ],
       "title": "Lillie's Determination 119/132",
       "price": 30,
-      "stock": 1,
+      "stock": 3,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
       "desc": "",
@@ -1013,7 +1079,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega",
       "featured": false
     },
     {
@@ -1021,9 +1086,10 @@
         "img/img_1483.jpg"
       ],
       "title": "Bulbasaur 001/132",
-      "price": 15,
-      "stock": 3,
+      "price": 10,
+      "stock": 12,
       "series": "mega",
+      "era": "mega",
       "seriesLabel": "Mega Evolutions",
       "type": "Single",
       "desc": "",
@@ -1031,7 +1097,6 @@
         "Near Mint (NM) stav",
         "Originální neporušené karty"
       ],
-      "era": "mega",
       "featured": false
     },
     {
