@@ -240,23 +240,26 @@
     },
     {
       "imgs": [
-        "img/japan_500_1.jpg",
-        "img/japan_500_2.jpg"
+        "img/img_1795.jpg",
+        "img/img_1796.jpg",
+        "img/img_1798.jpg",
+        "img/img_1799.jpg"
       ],
-      "title": "Japonsko/Korejský Bulk (500+ ks)",
-      "price": 1200,
-      "stock": 3,
+      "title": "Japonský Bulk (500 ks)",
+      "price": 1100,
+      "stock": 4,
       "series": "japan",
+      "era": "mix",
       "seriesLabel": "Japan/Korea",
       "type": "Bulk",
-      "desc": "500+ karet z japonských a korejsksých edic bez duplicit. Velký balíček originálních karet vhodný pro hráče i sběratele",
+      "desc": "500 karet z japonských edic. Velký balíček originálních karet vhodný pro hráče i sběratele.",
       "features": [
-        "500+ karet bez duplicit",
-        "Japonská edice",
         "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "500 ks",
+        "Japonská edice",
         "Originální karty"
       ],
-      "era": "mix",
       "featured": false
     },
     {
@@ -584,6 +587,27 @@
       ],
       "featured": false,
       "addedAt": "2026-08-15"
+    },
+    {
+      "imgs": [
+        "img/img_1800.jpg",
+        "img/img_1801.jpg"
+      ],
+      "title": "Korejský Bulk (500 ks)",
+      "price": 1000,
+      "stock": 2,
+      "series": "korean",
+      "era": "mix",
+      "seriesLabel": "Korean",
+      "type": "Bulk",
+      "desc": "Bulk originálních korejských karet pokemon.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "500 ks"
+      ],
+      "featured": false,
+      "addedAt": "2026-09-02"
     }
   ],
   "singles": [
