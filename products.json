@@ -240,10 +240,11 @@
     },
     {
       "imgs": [
-        "img/img_1795.jpg",
-        "img/img_1796.jpg",
-        "img/img_1798.jpg",
-        "img/img_1799.jpg"
+        "img/img_1795_4.jpg",
+        "img/img_1796_4.jpg",
+        "img/img_1798_4.jpg",
+        "img/img_1799_4.jpg",
+        "img/img_0801.jpg"
       ],
       "title": "Japonský Bulk (500 ks)",
       "price": 1100,
@@ -590,8 +591,9 @@
     },
     {
       "imgs": [
-        "img/img_1800.jpg",
-        "img/img_1801.jpg"
+        "img/img_1800_2.jpg",
+        "img/img_1801_2.jpg",
+        "img/img_0801_2.jpg"
       ],
       "title": "Korejský Bulk (500 ks)",
       "price": 1000,
@@ -604,7 +606,8 @@
       "features": [
         "Near Mint (NM) stav",
         "Originální neporušené karty",
-        "500 ks"
+        "500 ks",
+        "Korejská edice"
       ],
       "featured": false,
       "addedAt": "2026-09-02"
