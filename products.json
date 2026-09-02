@@ -122,10 +122,13 @@
       "era": "sv",
       "seriesLabel": "Deck",
       "type": "Deck",
-      "desc": "Herní deck sestavený pro začátečníky",
+      "desc": "Hotový herní deck sestavený pro začátečníky přiravený ke hře.",
       "features": [
         "Near Mint (NM) stav",
-        "Originální neporušené karty"
+        "Originální neporušené karty",
+        "Obsahuje 60 karet určený k hraní Pokemon TCG",
+        "Nejedná se o kompetitivní deck",
+        "Vhodné pro začátečníky k seznámení s hrou"
       ],
       "featured": false
     },
@@ -240,11 +243,11 @@
     },
     {
       "imgs": [
-        "img/img_1795_4.jpg",
-        "img/img_1796_4.jpg",
-        "img/img_1798_4.jpg",
-        "img/img_1799_4.jpg",
-        "img/img_0801.jpg"
+        "img/img_1795_5.jpg",
+        "img/img_1796_5.jpg",
+        "img/img_1798_5.jpg",
+        "img/img_1799_5.jpg",
+        "img/img_0801_3.jpg"
       ],
       "title": "Japonský Bulk (500 ks)",
       "price": 1100,
