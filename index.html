@@ -1052,7 +1052,7 @@
     <div id="cart-step-3" style="display:none">
       <div class="ok-mark">&#10003;</div>
       <h3>Objednávka odeslána</h3>
-      <div class="cart-note">Kopii jsme poslali i na tvůj e-mail. Zboží odešleme po připsání platby.</div>
+      <div class="cart-note" id="mail-status">Zboží odešleme po připsání platby.</div>
 
       <div class="pay-box">
         <div class="pay-row"><span>Číslo účtu</span><b>3429264010/3030</b></div>
@@ -1769,12 +1769,35 @@ function submitOrder() {
   btn.disabled = true; btn.textContent = 'Odesílám…';
 
   const body = new URLSearchParams(data).toString();
+
+  // potvrzovací e-mail zákazníkovi (serverová funkce); objednávku neblokuje
+  const mailPayload = {
+    cislo, jmeno, email, telefon: tel,
+    doprava: SHIPPING[_ship].nazev,
+    dopravaCena: shipCost() === 0 ? 'zdarma' : shipCost() + ' Kč',
+    vydejniMisto: _ship === 'vydejni' ? pob : '',
+    adresa,
+    polozky: orderText(),
+    zboziCelkem: cartTotal() + ' Kč',
+    celkem: grandTotal() + ' Kč',
+    poznamka: pozn
+  };
+  const mailPromise = fetch('/.netlify/functions/objednavka', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(mailPayload)
+  }).then(r => r.ok).catch(() => false);
+
   fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
     .then(r => {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       _lastOrder = { cislo, celkem: grandTotal(), jmeno };
       showThanks();
       _cart = []; cartSave(); renderCart();
+      mailPromise.then(sent => {
+        const el = document.getElementById('mail-status');
+        if (el) el.textContent = sent
+          ? 'Potvrzení s údaji k platbě jsme ti poslali na ' + email + '.'
+          : 'Údaje k platbě si prosím opiš nebo použij QR platbu.';
+      });
     })
     .catch(() => {
       err.textContent = 'Objednávku se nepodařilo odeslat. Zkus to prosím znovu nebo nám ji pošli e-mailem.';

@@ -1,6 +1,7 @@
 [build]
   command = "node build.mjs || echo 'build.mjs selhal — nasazuji web bez generovaných stránek'"
   publish = "."
+  functions = "netlify/functions"
 
 [[headers]]
   for = "/img/*"

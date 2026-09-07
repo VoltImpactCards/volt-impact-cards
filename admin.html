@@ -342,6 +342,7 @@
     <div class="tab active" onclick="switchTab('bulks')" id="tab-bulks">Bulk sety <span class="tab-count" id="cnt-bulks">0</span></div>
     <div class="tab" onclick="switchTab('singles')" id="tab-singles">Singl karty <span class="tab-count" id="cnt-singles">0</span></div>
     <div class="tab" onclick="switchTab('decks')" id="tab-decks">Decky <span class="tab-count" id="cnt-decks">0</span></div>
+    <div class="tab" onclick="switchTab('faktury')" id="tab-faktury">Faktury <span class="tab-count" id="cnt-faktury">0</span></div>
   </div>
 
   <!-- TOOLBAR -->
@@ -358,6 +359,93 @@
   <!-- PRODUCT LIST -->
   <div id="product-list"></div>
 
+  <!-- FAKTURY -->
+  <div id="faktury-view" style="display:none">
+
+    <div class="settings-card" style="margin-bottom:16px">
+      <h2>Údaje dodavatele</h2>
+      <div class="form-row">
+        <div class="form-group"><label>Jméno / firma</label><input type="text" id="d-jmeno" placeholder="David Vaněček"/></div>
+        <div class="form-group"><label>IČO</label><input type="text" id="d-ico" placeholder="12345678"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Adresa</label><input type="text" id="d-adresa" placeholder="Ulice 1, 682 01 Vyškov"/></div>
+        <div class="form-group"><label>Číslo účtu</label><input type="text" id="d-ucet" placeholder="3429264010/3030"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Další číslo faktury</label><input type="text" id="d-cislo" placeholder="2026001"/></div>
+        <div class="form-group"><label>Splatnost (dní)</label><input type="number" id="d-splatnost" value="7" min="1"/></div>
+      </div>
+      <div class="settings-row" style="margin-top:8px">
+        <button class="btn btn-yellow" onclick="ulozDodavatele()">Uložit údaje</button>
+        <button class="btn btn-ghost" onclick="exportFaktur()">Zálohovat archiv</button>
+        <label class="btn btn-ghost" style="cursor:pointer">Obnovit ze zálohy<input type="file" accept="application/json" style="display:none" onchange="importFaktur(this)"/></label>
+      </div>
+      <p class="token-hint">Údaje i archiv faktur se ukládají jen ve tvém prohlížeči. Zálohu si občas stáhni — po smazání dat prohlížeče by se číselná řada ztratila.</p>
+    </div>
+
+    <div class="settings-card" style="margin-bottom:16px">
+      <h2>Objednávky z webu</h2>
+      <div class="settings-row">
+        <input type="password" class="token-input" id="nl-token" placeholder="Netlify Personal Access Token"/>
+        <button class="btn btn-yellow" onclick="nactiObjednavky()">Načíst objednávky</button>
+      </div>
+      <p class="token-hint">Token vytvoříš na <a href="https://app.netlify.com/user/applications#personal-access-tokens" target="_blank">app.netlify.com → User settings → Applications</a>. Uloží se jen ve tvém prohlížeči. Bez tokenu můžeš fakturu vystavit ručně.</p>
+      <div id="objednavky-list" style="margin-top:12px"></div>
+    </div>
+
+    <div class="toolbar">
+      <span style="font-size:0.85rem;color:var(--grey)">Vystavené faktury</span>
+      <div class="toolbar-right">
+        <button class="btn btn-yellow btn-sm" onclick="novaFaktura()">Nová faktura ručně</button>
+      </div>
+    </div>
+    <div id="faktury-list"></div>
+  </div>
+
+</div>
+
+<!-- MODAL: FAKTURA -->
+<div class="modal-overlay" id="fakt-modal" onclick="if(event.target===this)zavriFakturu()">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="fakt-title">Nová faktura</h2>
+      <button class="modal-close" onclick="zavriFakturu()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Číslo faktury</label><input type="text" id="f-cislo"/></div>
+        <div class="form-group"><label>Variabilní symbol</label><input type="text" id="f-vs"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Datum vystavení</label><input type="date" id="f-vystaveni"/></div>
+        <div class="form-group"><label>Datum splatnosti</label><input type="date" id="f-splatnost"/></div>
+      </div>
+      <div class="form-group"><label>Odběratel — jméno</label><input type="text" id="f-odb-jmeno"/></div>
+      <div class="form-group"><label>Odběratel — adresa</label><input type="text" id="f-odb-adresa" placeholder="Ulice, město, PSČ (nebo výdejní místo)"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>E-mail</label><input type="text" id="f-odb-email"/></div>
+        <div class="form-group"><label>Telefon</label><input type="text" id="f-odb-telefon"/></div>
+      </div>
+
+      <div class="form-group">
+        <label>Položky</label>
+        <div id="fakt-polozky"></div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:8px" onclick="pridejPolozku()">+ Přidat položku</button>
+      </div>
+
+      <div class="form-group">
+        <label>Poznámka na faktuře</label>
+        <input type="text" id="f-poznamka" placeholder="např. Děkujeme za nákup"/>
+      </div>
+
+      <div style="text-align:right;font-size:1.05rem;margin:12px 0"><b>Celkem: <span id="fakt-celkem">0 Kč</span></b></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="zavriFakturu()">Zrušit</button>
+      <button class="btn btn-yellow" onclick="vystavFakturu()">Vystavit a otevřít PDF</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -381,6 +469,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('gh-token').value = ghToken;
     verifyToken();
   }
+  try { fLoad(); } catch(e) { console.error('Fakturace:', e); }
 });
 
 // ── GITHUB CONNECTION ──
@@ -493,9 +582,18 @@ function updateCounts() {
 }
 
 function switchTab(tab) {
-  currentTab = tab;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
+
+  const jeFaktury = tab === 'faktury';
+  document.getElementById('faktury-view').style.display = jeFaktury ? 'block' : 'none';
+  document.getElementById('product-list').style.display = jeFaktury ? 'none' : 'block';
+  document.querySelectorAll('.main > .toolbar').forEach(t => { t.style.display = jeFaktury ? 'none' : ''; });
+  const gh = document.getElementById('settings-card');
+  if (gh) gh.style.display = jeFaktury ? 'none' : '';
+  if (jeFaktury) { renderFaktury(); renderObjednavky(); return; }
+
+  currentTab = tab;
   const descs = { bulks: 'Bulk sety a mix balíčky', singles: 'Singl karty', decks: 'Hotové decky k hraní' };
   document.getElementById('tab-desc').textContent = descs[tab];
   renderTab(tab);
@@ -659,6 +757,338 @@ function getFeatures() {
     .map(i => i.value.trim())
     .filter(f => f && !isCondition(f) && f !== ORIGINAL_FEATURE);
   return [document.getElementById('f-condition').value, ORIGINAL_FEATURE, ...extras];
+}
+
+
+/* ══════════ FAKTURACE ══════════
+   Objednávky se načítají z Netlify Forms, faktury se ukládají do prohlížeče
+   (localStorage) — zákaznické údaje se nikam neposílají a nejsou ve veřejném repozitáři. */
+
+const NL_SITE_ID = 'fa7e68d4-ac6f-4f68-8ea4-8b768c37e64c';
+let nlToken = localStorage.getItem('vic_nl_token') || '';
+let dodavatel = {};
+let faktury = [];
+let objednavky = [];
+let faktPolozky = [];
+let editFaktIdx = -1;
+
+function fLoad() {
+  try { dodavatel = JSON.parse(localStorage.getItem('vic_dodavatel') || '{}'); } catch(e) { dodavatel = {}; }
+  try { faktury = JSON.parse(localStorage.getItem('vic_faktury') || '[]'); } catch(e) { faktury = []; }
+  if (!Array.isArray(faktury)) faktury = [];
+  const g = id => document.getElementById(id);
+  g('d-jmeno').value = dodavatel.jmeno || 'David Vaněček';
+  g('d-ico').value = dodavatel.ico || '';
+  g('d-adresa').value = dodavatel.adresa || '';
+  g('d-ucet').value = dodavatel.ucet || '3429264010/3030';
+  g('d-cislo').value = dodavatel.dalsiCislo || (new Date().getFullYear() + '001');
+  g('d-splatnost').value = dodavatel.splatnost || 7;
+  g('nl-token').value = nlToken;
+  renderFaktury();
+}
+
+function ulozDodavatele() {
+  const g = id => document.getElementById(id).value.trim();
+  dodavatel = {
+    jmeno: g('d-jmeno'), ico: g('d-ico'), adresa: g('d-adresa'), ucet: g('d-ucet'),
+    dalsiCislo: g('d-cislo'), splatnost: parseInt(g('d-splatnost')) || 7
+  };
+  localStorage.setItem('vic_dodavatel', JSON.stringify(dodavatel));
+  toast('Údaje uloženy ✓', 'ok');
+}
+
+function fSave() { localStorage.setItem('vic_faktury', JSON.stringify(faktury)); }
+
+function exportFaktur() {
+  const blob = new Blob([JSON.stringify({ dodavatel, faktury }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'faktury-zaloha-' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importFaktur(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const d = JSON.parse(r.result);
+      if (d.dodavatel) { dodavatel = d.dodavatel; localStorage.setItem('vic_dodavatel', JSON.stringify(dodavatel)); }
+      if (Array.isArray(d.faktury)) { faktury = d.faktury; fSave(); }
+      fLoad();
+      toast('Záloha obnovena ✓', 'ok');
+    } catch(e) { toast('Soubor se nepodařilo načíst', 'err'); }
+  };
+  r.readAsText(file);
+  input.value = '';
+}
+
+/* ── Objednávky z Netlify ── */
+async function nactiObjednavky() {
+  const t = document.getElementById('nl-token').value.trim();
+  if (!t) { toast('Zadej Netlify token', 'err'); return; }
+  nlToken = t; localStorage.setItem('vic_nl_token', t);
+  showLoading('Načítám objednávky...');
+  try {
+    const r = await fetch(`https://api.netlify.com/api/v1/sites/${NL_SITE_ID}/submissions?per_page=100`, {
+      headers: { Authorization: 'Bearer ' + nlToken }
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const subs = await r.json();
+    objednavky = subs.map(s => {
+      const d = s.data || {};
+      return {
+        id: s.id,
+        datum: (s.created_at || '').slice(0, 10),
+        cislo: d['cislo-objednavky'] || '',
+        jmeno: d.jmeno || '', email: d.email || '', telefon: d.telefon || '',
+        doprava: d.doprava || '', dopravaCena: d['doprava-cena'] || '',
+        misto: d['vydejni-misto'] || d.adresa || '',
+        polozky: d.polozky || '', celkem: d.celkem || '', poznamka: d.poznamka || ''
+      };
+    }).filter(o => o.cislo);
+    renderObjednavky();
+    toast(`Načteno ${objednavky.length} objednávek ✓`, 'ok');
+  } catch(e) {
+    toast('Nepodařilo se načíst: ' + e.message, 'err');
+  } finally { hideLoading(); }
+}
+
+function renderObjednavky() {
+  const el = document.getElementById('objednavky-list');
+  if (!objednavky.length) { el.innerHTML = '<p style="color:var(--grey);font-size:.85rem">Žádné objednávky.</p>'; return; }
+  el.innerHTML = `<table class="product-table"><thead><tr>
+      <th>Datum</th><th>Číslo</th><th>Zákazník</th><th>Celkem</th><th>Faktura</th><th style="width:150px"></th>
+    </tr></thead><tbody>` + objednavky.map((o, i) => {
+      const f = faktury.find(x => x.vs === o.cislo);
+      return `<tr>
+        <td>${o.datum}</td><td>${o.cislo}</td>
+        <td>${esc(o.jmeno)}<br/><span style="color:var(--grey);font-size:.78rem">${esc(o.email)}</span></td>
+        <td>${esc(o.celkem)}</td>
+        <td>${f ? '<span style="color:#6ee7a8">' + f.cislo + '</span>' : '<span style="color:var(--grey)">—</span>'}</td>
+        <td><button class="btn btn-yellow btn-sm" onclick="fakturaZObjednavky(${i})">${f ? 'Vystavit znovu' : 'Vystavit fakturu'}</button></td>
+      </tr>`;
+    }).join('') + '</tbody></table>';
+}
+
+function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ── Formulář faktury ── */
+function parsePolozky(text) {
+  // "Umbreon 130/197 — 2× à 30 Kč = 60 Kč"
+  return String(text || '').split('\n').filter(Boolean).map(r => {
+    const m = r.match(/^(.*?)\s*—\s*(\d+)×\s*à\s*(\d+)\s*Kč/);
+    return m ? { nazev: m[1].trim(), pocet: +m[2], cena: +m[3] } : { nazev: r.trim(), pocet: 1, cena: 0 };
+  });
+}
+
+function novaFaktura(predvyplneno) {
+  editFaktIdx = -1;
+  const o = predvyplneno || {};
+  const g = id => document.getElementById(id);
+  const dnes = new Date();
+  const spl = new Date(dnes.getTime() + (dodavatel.splatnost || 7) * 86400000);
+  g('fakt-title').textContent = 'Nová faktura';
+  g('f-cislo').value = dodavatel.dalsiCislo || (dnes.getFullYear() + '001');
+  g('f-vs').value = o.cislo || (dodavatel.dalsiCislo || '');
+  g('f-vystaveni').value = dnes.toISOString().slice(0, 10);
+  g('f-splatnost').value = spl.toISOString().slice(0, 10);
+  g('f-odb-jmeno').value = o.jmeno || '';
+  g('f-odb-adresa').value = o.misto || '';
+  g('f-odb-email').value = o.email || '';
+  g('f-odb-telefon').value = o.telefon || '';
+  g('f-poznamka').value = 'Děkujeme za nákup.';
+  faktPolozky = o.polozky ? parsePolozky(o.polozky) : [{ nazev: '', pocet: 1, cena: 0 }];
+  if (o.dopravaCena && !/zdarma/i.test(o.dopravaCena)) {
+    faktPolozky.push({ nazev: o.doprava || 'Doprava', pocet: 1, cena: parseInt(o.dopravaCena) || 0 });
+  }
+  renderPolozky();
+  document.getElementById('fakt-modal').classList.add('open');
+}
+
+function fakturaZObjednavky(i) { novaFaktura(objednavky[i]); }
+function zavriFakturu() { document.getElementById('fakt-modal').classList.remove('open'); }
+
+function renderPolozky() {
+  document.getElementById('fakt-polozky').innerHTML = faktPolozky.map((p, i) => `
+    <div class="form-row" style="margin-bottom:6px">
+      <div class="form-group" style="flex:2"><input type="text" value="${esc(p.nazev)}" placeholder="Název" oninput="faktPolozky[${i}].nazev=this.value"/></div>
+      <div class="form-group" style="max-width:80px"><input type="number" value="${p.pocet}" min="1" oninput="faktPolozky[${i}].pocet=+this.value||1;prepocti()"/></div>
+      <div class="form-group" style="max-width:110px"><input type="number" value="${p.cena}" min="0" oninput="faktPolozky[${i}].cena=+this.value||0;prepocti()"/></div>
+      <button class="btn btn-ghost btn-icon btn-sm" onclick="faktPolozky.splice(${i},1);renderPolozky()">✕</button>
+    </div>`).join('');
+  prepocti();
+}
+function pridejPolozku() { faktPolozky.push({ nazev: '', pocet: 1, cena: 0 }); renderPolozky(); }
+function faktCelkem() { return faktPolozky.reduce((s, p) => s + (p.pocet * p.cena), 0); }
+function prepocti() { document.getElementById('fakt-celkem').textContent = faktCelkem() + ' Kč'; }
+
+function vystavFakturu() {
+  const g = id => document.getElementById(id).value.trim();
+  const polozky = faktPolozky.filter(p => p.nazev && p.pocet > 0);
+  if (!polozky.length) { toast('Přidej alespoň jednu položku', 'err'); return; }
+  if (!g('f-odb-jmeno')) { toast('Vyplň odběratele', 'err'); return; }
+
+  const f = {
+    cislo: g('f-cislo'), vs: g('f-vs') || g('f-cislo'),
+    vystaveni: g('f-vystaveni'), splatnost: g('f-splatnost'),
+    odberatel: { jmeno: g('f-odb-jmeno'), adresa: g('f-odb-adresa'), email: g('f-odb-email'), telefon: g('f-odb-telefon') },
+    polozky, celkem: faktCelkem(), poznamka: g('f-poznamka'),
+    dodavatel: { ...dodavatel, jmeno: document.getElementById('d-jmeno').value.trim(), ico: document.getElementById('d-ico').value.trim(),
+                 adresa: document.getElementById('d-adresa').value.trim(), ucet: document.getElementById('d-ucet').value.trim() }
+  };
+
+  const existuje = faktury.findIndex(x => x.cislo === f.cislo);
+  if (existuje >= 0) faktury[existuje] = f; else faktury.unshift(f);
+
+  // posun číselné řady
+  const n = String(f.cislo).match(/^(\D*)(\d+)$/);
+  if (n) {
+    dodavatel.dalsiCislo = n[1] + String(+n[2] + 1).padStart(n[2].length, '0');
+    localStorage.setItem('vic_dodavatel', JSON.stringify(dodavatel));
+    document.getElementById('d-cislo').value = dodavatel.dalsiCislo;
+  }
+  fSave(); renderFaktury(); renderObjednavky(); zavriFakturu();
+  otevriPdf(f);
+}
+
+function renderFaktury() {
+  const el = document.getElementById('faktury-list');
+  document.getElementById('cnt-faktury').textContent = faktury.length;
+  if (!faktury.length) { el.innerHTML = '<div class="empty-state"><p>Zatím žádné faktury.</p></div>'; return; }
+  el.innerHTML = `<table class="product-table"><thead><tr>
+      <th>Číslo</th><th>Vystaveno</th><th>Odběratel</th><th>Celkem</th><th style="width:180px"></th>
+    </tr></thead><tbody>` + faktury.map((f, i) => `<tr>
+      <td><b>${esc(f.cislo)}</b></td><td>${esc(f.vystaveni)}</td>
+      <td>${esc(f.odberatel.jmeno)}</td><td>${f.celkem} Kč</td>
+      <td>
+        <button class="btn btn-ghost btn-sm" onclick="otevriPdf(faktury[${i}])">PDF</button>
+        <button class="btn btn-ghost btn-icon btn-sm" onclick="smazFakturu(${i})">✕</button>
+      </td>
+    </tr>`).join('') + '</tbody></table>';
+}
+
+function smazFakturu(i) {
+  if (!confirm('Smazat fakturu ' + faktury[i].cislo + ' z archivu?')) return;
+  faktury.splice(i, 1); fSave(); renderFaktury(); renderObjednavky();
+}
+
+/* ── Tisková podoba faktury ── */
+function ibanZUctu(ucet) {
+  const m = String(ucet).match(/^(?:(\d+)-)?(\d+)\/(\d{4})$/);
+  if (!m) return '';
+  const bban = m[3] + String(m[1] || '').padStart(6, '0') + m[2].padStart(10, '0');
+  let rem = 0;
+  for (const ch of (bban + '123500')) rem = (rem * 10 + Number(ch)) % 97;
+  return 'CZ' + String(98 - rem).padStart(2, '0') + bban;
+}
+
+function otevriPdf(f) {
+  const d = f.dodavatel || dodavatel;
+  const iban = ibanZUctu(d.ucet || '');
+  const spd = `SPD*1.0*ACC:${iban}*AM:${f.celkem}.00*CC:CZK*X-VS:${f.vs}*MSG:FAKTURA ${f.cislo}`;
+  const cz = s => new Date(s).toLocaleDateString('cs-CZ');
+  const html = `<!DOCTYPE html><html lang="cs"><head><meta charset="UTF-8"/>
+<title>Faktura ${esc(f.cislo)}</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Arial, sans-serif; color: #111; font-size: 12px; margin: 0; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #111; padding-bottom: 10px; }
+  h1 { font-size: 22px; margin: 0 0 2px; }
+  .sub { color: #666; }
+  .parties { display: flex; gap: 30px; margin: 18px 0 8px; }
+  .party { flex: 1; }
+  .party h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #777; margin: 0 0 6px; }
+  .party p { margin: 2px 0; }
+  .meta { margin: 14px 0 18px; }
+  .meta table { border-collapse: collapse; }
+  .meta td { padding: 3px 18px 3px 0; }
+  .meta td:first-child { color: #666; }
+  table.items { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  table.items th { text-align: left; border-bottom: 1.5px solid #111; padding: 7px 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+  table.items td { padding: 7px 6px; border-bottom: 1px solid #e5e5e5; }
+  .num { text-align: right; white-space: nowrap; }
+  .total { margin-top: 14px; text-align: right; font-size: 16px; }
+  .total b { font-size: 20px; }
+  .pay { margin-top: 22px; display: flex; gap: 24px; align-items: flex-start; }
+  .pay .box { flex: 1; background: #f6f6f2; border-radius: 8px; padding: 12px 14px; }
+  .pay .box p { margin: 3px 0; }
+  .qr { text-align: center; }
+  .qr img { width: 130px; height: 130px; }
+  .qr span { display: block; font-size: 10px; color: #666; margin-top: 4px; }
+  .note { margin-top: 18px; color: #444; }
+  .foot { margin-top: 26px; border-top: 1px solid #ddd; padding-top: 10px; font-size: 10.5px; color: #666; }
+  .print-bar { position: fixed; top: 12px; right: 12px; }
+  .print-bar button { font: inherit; padding: 8px 16px; border-radius: 8px; border: 1px solid #111; background: #111; color: #fff; cursor: pointer; }
+  @media print { .print-bar { display: none; } }
+</style></head><body>
+<div class="print-bar"><button onclick="window.print()">Uložit jako PDF / vytisknout</button></div>
+
+<div class="head">
+  <div><h1>Faktura ${esc(f.cislo)}</h1><div class="sub">Doklad o zaplacení — neplátce DPH</div></div>
+  <div style="text-align:right"><div style="font-size:16px;font-weight:700">Volt Impact Cards</div><div class="sub">voltimpactcards.com</div></div>
+</div>
+
+<div class="parties">
+  <div class="party">
+    <h3>Dodavatel</h3>
+    <p><b>${esc(d.jmeno || '')}</b></p>
+    ${d.adresa ? `<p>${esc(d.adresa)}</p>` : ''}
+    <p>IČO: ${esc(d.ico || '—')}</p>
+    <p>Neplátce DPH</p>
+    <p>voltimpactcards@gmail.com</p>
+  </div>
+  <div class="party">
+    <h3>Odběratel</h3>
+    <p><b>${esc(f.odberatel.jmeno)}</b></p>
+    ${f.odberatel.adresa ? `<p>${esc(f.odberatel.adresa)}</p>` : ''}
+    ${f.odberatel.email ? `<p>${esc(f.odberatel.email)}</p>` : ''}
+    ${f.odberatel.telefon ? `<p>${esc(f.odberatel.telefon)}</p>` : ''}
+  </div>
+</div>
+
+<div class="meta"><table>
+  <tr><td>Datum vystavení</td><td><b>${cz(f.vystaveni)}</b></td><td>Variabilní symbol</td><td><b>${esc(f.vs)}</b></td></tr>
+  <tr><td>Datum splatnosti</td><td><b>${cz(f.splatnost)}</b></td><td>Forma úhrady</td><td><b>Bankovním převodem</b></td></tr>
+</table></div>
+
+<table class="items">
+  <thead><tr><th>Položka</th><th class="num">Počet</th><th class="num">Cena / ks</th><th class="num">Celkem</th></tr></thead>
+  <tbody>
+    ${f.polozky.map(p => `<tr><td>${esc(p.nazev)}</td><td class="num">${p.pocet}</td><td class="num">${p.cena} Kč</td><td class="num">${p.pocet * p.cena} Kč</td></tr>`).join('')}
+  </tbody>
+</table>
+
+<div class="total">Celkem k úhradě <b>${f.celkem} Kč</b></div>
+
+<div class="pay">
+  <div class="box">
+    <p><b>Údaje k platbě</b></p>
+    <p>Číslo účtu: <b>${esc(d.ucet || '')}</b></p>
+    ${iban ? `<p>IBAN: ${iban}</p>` : ''}
+    <p>Variabilní symbol: <b>${esc(f.vs)}</b></p>
+    <p>Částka: <b>${f.celkem} Kč</b></p>
+  </div>
+  ${iban ? `<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=0&data=${encodeURIComponent(spd)}" alt="QR platba"/><span>QR platba</span></div>` : ''}
+</div>
+
+${f.poznamka ? `<p class="note">${esc(f.poznamka)}</p>` : ''}
+
+<div class="foot">
+  Vystaveno v souladu se zákonem č. 89/2012 Sb. Dodavatel není plátcem DPH.
+  ${d.ico ? 'Zapsán v živnostenském rejstříku.' : ''}
+</div>
+
+<script>window.addEventListener('load', () => setTimeout(() => window.print(), 400));<\/script>
+</body></html>`;
+
+  const w = window.open('', '_blank');
+  if (!w) { toast('Povol vyskakovací okna a zkus to znovu', 'err'); return; }
+  w.document.write(html);
+  w.document.close();
 }
 
 // ── IMAGE HANDLING ──
