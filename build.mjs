@@ -171,9 +171,6 @@ function productPage(p, similar) {
   const extraLd = `<script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbs)}</script>`;
 
-  const waText = encodeURIComponent(`Dobrý den, mám zájem o: ${p.title} (${p.price} Kč). ${url}`);
-  const mailBody = encodeURIComponent(`Dobrý den,\n\nmám zájem o: ${p.title} (${p.price} Kč)\nPočet kusů: 1\n\nOdkaz: ${url}\n\nDěkuji,\n`);
-
   return head({ title, desc, url, img, extraLd }) + `
 <div class="crumbs"><a href="${SITE}/">Nabídka</a> › <a href="${SITE}/${OUT}/">Karty</a> › ${esc(p.title)}</div>
 <div class="grid">
@@ -193,30 +190,11 @@ function productPage(p, similar) {
     ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ''}
     ${(p.features || []).length ? `<ul class="feat">${p.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
     <div class="cta">
-      ${so ? '' : `<button class="p" type="button" onclick="openMail()">Mám zájem</button>
-      <a class="s" href="https://wa.me/${WA}?text=${waText}" rel="noopener">WhatsApp</a>`}
-      <a class="s" href="${SITE}/#p=${p.slug}">Zobrazit v nabídce</a>
+      ${so ? '' : `<a class="p" href="${SITE}/#p=${p.slug}">Koupit — do košíku</a>`}
+      <a class="s" href="${SITE}/">Zpět do nabídky</a>
     </div>
   </div>
 </div>
-${so ? '' : `<div class="mp" id="mp" onclick="if(event.target===this)closeMail()">
-  <div class="mp-box">
-    <h3>Odeslat e-mailem</h3>
-    <div class="n">Vyber, kde máš e-mail — zpráva se předvyplní.</div>
-    <a class="mp-opt" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=${encodeURIComponent(MAIL)}&amp;su=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}" target="_blank" rel="noopener"><b>Gmail</b><small>Otevře se v prohlížeči</small></a>
-    <a class="mp-opt" href="https://email.seznam.cz/newMessage?to=${encodeURIComponent(MAIL)}&amp;subject=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}" target="_blank" rel="noopener"><b>Seznam.cz</b><small>Otevře se v prohlížeči</small></a>
-    <a class="mp-opt" href="https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(MAIL)}&amp;subject=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}" target="_blank" rel="noopener"><b>Outlook</b><small>Otevře se v prohlížeči</small></a>
-    <a class="mp-opt" href="mailto:${MAIL}?subject=${encodeURIComponent('Zájem o: ' + p.title)}&amp;body=${mailBody}"><b>Poštovní aplikace</b><small>Mail, Outlook v počítači…</small></a>
-    <button class="mp-opt" type="button" onclick="copyMail(this)"><b>Zkopírovat adresu</b><small>${MAIL}</small></button>
-    <button class="mp-close" type="button" onclick="closeMail()">Zavřít</button>
-  </div>
-</div>
-<script>
-function openMail(){document.getElementById('mp').classList.add('open')}
-function closeMail(){document.getElementById('mp').classList.remove('open')}
-function copyMail(b){var m='${MAIL}';if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(m).then(function(){b.querySelector('b').textContent='Zkopírováno ✓';setTimeout(closeMail,700)})}else{prompt('E-mail:',m)}}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMail()});
-<\/script>`}
 ${similar.length ? `<div class="more">
   <h2>Další z ${esc(p.seriesLabel || 'nabídky')}</h2>
   <div class="mgrid">${similar.map(s => `<a class="mcard" href="${SITE}/${OUT}/${s.slug}/">
