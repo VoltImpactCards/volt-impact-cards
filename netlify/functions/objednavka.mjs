@@ -8,7 +8,7 @@ import nodemailer from 'nodemailer';
 
 const UCET = '3429264010/3030';
 const IBAN = 'CZ0430300000003429264010';
-const SELLER_NAME = 'David Vaněček';
+const SELLER_NAME = 'David Vaněček, IČO 10895060';
 const WEB = 'https://voltimpactcards.com';
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -63,8 +63,9 @@ export function zpravaProProdejce(o) {
 export default async (req) => {
   if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
 
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
+  const user = (process.env.GMAIL_USER || '').trim();
+  // Google zobrazuje heslo aplikace po čtveřicích s mezerami — SMTP je nechce
+  const pass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
   if (!user || !pass) {
     return Response.json({ ok: false, duvod: 'chybi-nastaveni' }, { status: 501 });
   }

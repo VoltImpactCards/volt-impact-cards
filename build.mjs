@@ -14,8 +14,8 @@ const OUT = 'karta';
    Doplň IČO (a případně adresu sídla) — promítne se do zápatí i do všech právních dokumentů. */
 const SELLER = {
   jmeno: 'David Vaněček',
-  ico: '',                 // např. '12345678'
-  adresa: '',              // např. 'Ulice 1, 682 01 Vyškov'
+  ico: '10895060',
+  adresa: 'Nemojany 155, 683 03 Nemojany',
   ucet: '3429264010/3030',
   dph: false               // false = neplátce DPH
 };
