@@ -1073,6 +1073,7 @@
 
       <div class="cart-actions">
         <button class="prim" type="button" onclick="closeCart()">Hotovo</button>
+        <button type="button" onclick="kopirujPlatbu(this)">Zkopírovat údaje k platbě</button>
       </div>
     </div>
 
@@ -1798,8 +1799,8 @@ function submitOrder() {
       mailPromise.then(sent => {
         const el = document.getElementById('mail-status');
         if (el) el.textContent = sent
-          ? 'Potvrzení s údaji k platbě jsme ti poslali na ' + email + '.'
-          : 'Údaje k platbě si prosím opiš nebo použij QR platbu.';
+          ? 'Potvrzení s údaji k platbě jsme ti poslali na ' + email + '. Zboží odešleme po připsání platby.'
+          : 'Údaje k platbě máš níže — zkopíruj si je nebo použij QR platbu. Zboží odešleme po připsání platby.';
       });
     })
     .catch(() => {
@@ -1832,6 +1833,25 @@ function showThanks() {
       ? 'Ozveme se ti a domluvíme místo a čas předání. Zaplatit můžeš předem převodem.'
       : 'Jakmile platba dorazí, zásilku podáme a pošleme ti sledovací číslo.';
   renderQr(o);
+}
+
+function kopirujPlatbu(btn) {
+  const o = _lastOrder;
+  if (!o) return;
+  const text = 'Volt Impact Cards — objednávka ' + o.cislo +
+    '\nČíslo účtu: ' + UCET +
+    '\nIBAN: ' + IBAN +
+    '\nČástka: ' + o.celkem + ' Kč' +
+    '\nVariabilní symbol: ' + o.cislo;
+  const hotovo = () => {
+    const orig = btn.dataset.orig || btn.textContent;
+    btn.dataset.orig = orig;
+    btn.textContent = '✓ Zkopírováno';
+    setTimeout(() => { btn.textContent = orig; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(hotovo).catch(() => prompt('Údaje k platbě:', text));
+  } else { prompt('Údaje k platbě:', text); }
 }
 
 function renderQr(o) {

@@ -82,9 +82,12 @@ export default async (req) => {
       subject: `Objednávka ${o.cislo} — údaje k platbě`,
       html: zpravaProZakaznika(o)
     });
+    // kopie prodávajícímu — když je nastaveno ORDER_NOTIFY_EMAIL, jde jinam než na odesílající schránku
+    // (Gmail zprávu sám sobě nemusí zobrazit v Doručené)
+    const komu = process.env.ORDER_NOTIFY_EMAIL || user;
     await transport.sendMail({
       from: `"Volt Impact Cards" <${user}>`,
-      to: user,
+      to: komu,
       replyTo: o.email,
       subject: `Nová objednávka ${o.cislo} — ${o.celkem}`,
       html: zpravaProProdejce(o)
