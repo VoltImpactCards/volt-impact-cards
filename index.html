@@ -638,6 +638,9 @@
     .ord-consent a { color: var(--yellow); }
     .ord-err { color: #ff7b7a; font-size: 0.82rem; margin-bottom: 12px; display: none; }
     .ord-err.show { display: block; }
+    .ord-err button { background: none; border: 1px solid rgba(255,123,122,0.5); color: #ff7b7a;
+      border-radius: 8px; padding: 6px 12px; font-family: inherit; font-size: 0.8rem; cursor: pointer; margin-top: 8px; }
+    .ord-err button:hover { background: rgba(255,123,122,0.1); }
 
     /* poděkování */
     .pay-box { background: var(--surface2); border: 1px solid var(--border2); border-radius: 12px; padding: 16px; margin: 14px 0; }
@@ -1800,15 +1803,22 @@ function submitOrder() {
       });
     })
     .catch(() => {
-      err.textContent = 'Objednávku se nepodařilo odeslat. Zkus to prosím znovu nebo nám ji pošli e-mailem.';
-      err.classList.add('show');
-      openMailMenu('Objednávka ' + cislo, 'Dobrý den,\n\nobjednávám:\n' + orderText() +
+      const zprava = 'Dobrý den,\n\nobjednávám:\n' + orderText() +
         '\n\nZboží: ' + cartTotal() + ' Kč\nDoprava: ' + SHIPPING[_ship].nazev + ' — ' + shipCost() + ' Kč\nCelkem: ' + grandTotal() +
         ' Kč\n\nJméno: ' + jmeno + '\nTelefon: ' + tel +
         (adresa ? '\nAdresa: ' + adresa : '') + (pob ? '\nVýdejní místo: ' + pob : '') +
-        (pozn ? '\nPoznámka: ' + pozn : '') + '\n');
+        (pozn ? '\nPoznámka: ' + pozn : '') + '\n';
+      _fallbackOrder = { predmet: 'Objednávka ' + cislo, telo: zprava };
+      err.innerHTML = 'Objednávku se teď nepodařilo odeslat. Zkus to prosím za chvíli znovu — nebo nám ji pošli e-mailem.' +
+        '<br/><button type="button" onclick="posliObjednavkuMailem()">Odeslat e-mailem</button>';
+      err.classList.add('show');
     })
     .finally(() => { btn.disabled = false; btn.textContent = 'Odeslat objednávku'; });
+}
+
+let _fallbackOrder = null;
+function posliObjednavkuMailem() {
+  if (_fallbackOrder) openMailMenu(_fallbackOrder.predmet, _fallbackOrder.telo);
 }
 
 function showThanks() {
