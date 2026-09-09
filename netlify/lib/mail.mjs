@@ -15,6 +15,19 @@
 import nodemailer from 'nodemailer';
 
 export function mailConfig() {
+  // A) libovolný SMTP server (Seznam, e-mail.cz, vlastní hosting…)
+  const smtpHost = (process.env.SMTP_HOST || '').trim();
+  const smtpUser = (process.env.SMTP_USER || '').trim();
+  const smtpPass = (process.env.SMTP_PASS || '').trim();
+  if (smtpHost && smtpUser && smtpPass) {
+    const port = parseInt(process.env.SMTP_PORT || '465', 10);
+    return {
+      kanal: 'smtp',
+      from: (process.env.MAIL_FROM || smtpUser).trim(),
+      transport: { host: smtpHost, port, secure: port === 465, auth: { user: smtpUser, pass: smtpPass } }
+    };
+  }
+
   const brevoLogin = (process.env.BREVO_SMTP_LOGIN || '').trim();
   const brevoKey = (process.env.BREVO_SMTP_KEY || '').trim();
   const gmailUser = (process.env.GMAIL_USER || '').trim();

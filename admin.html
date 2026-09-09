@@ -366,10 +366,10 @@
       <h2>Údaje dodavatele</h2>
       <div class="form-row">
         <div class="form-group"><label>Jméno / firma</label><input type="text" id="d-jmeno" placeholder="David Vaněček"/></div>
-        <div class="form-group"><label>IČO</label><input type="text" id="d-ico" placeholder="12345678"/></div>
+        <div class="form-group"><label>IČO</label><input type="text" id="d-ico" placeholder="10895060"/></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Adresa</label><input type="text" id="d-adresa" placeholder="Ulice 1, 682 01 Vyškov"/></div>
+        <div class="form-group"><label>Adresa</label><input type="text" id="d-adresa" placeholder="Nemojany 155, 683 03 Nemojany"/></div>
         <div class="form-group"><label>Číslo účtu</label><input type="text" id="d-ucet" placeholder="3429264010/3030"/></div>
       </div>
       <div class="form-row">
@@ -778,8 +778,8 @@ function fLoad() {
   if (!Array.isArray(faktury)) faktury = [];
   const g = id => document.getElementById(id);
   g('d-jmeno').value = dodavatel.jmeno || 'David Vaněček';
-  g('d-ico').value = dodavatel.ico || '';
-  g('d-adresa').value = dodavatel.adresa || '';
+  g('d-ico').value = dodavatel.ico || '10895060';
+  g('d-adresa').value = dodavatel.adresa || 'Nemojany 155, 683 03 Nemojany';
   g('d-ucet').value = dodavatel.ucet || '3429264010/3030';
   g('d-cislo').value = dodavatel.dalsiCislo || (new Date().getFullYear() + '001');
   g('d-splatnost').value = dodavatel.splatnost || 7;

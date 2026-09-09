@@ -5,10 +5,13 @@
    Bez nich funkce jen vrátí 501 a web zobrazí platební údaje na obrazovce. */
 
 import { mailConfig, kopieProProdejce, transporter, esc } from '../lib/mail.mjs';
+import { fakturaHtml } from './faktura.mjs';
 
 const UCET = '3429264010/3030';
 const IBAN = 'CZ0430300000003429264010';
-const SELLER_NAME = 'David Vaněček, IČO 10895060';
+const SELLER_NAME = 'David Vaněček';
+const SELLER_ICO = '10895060';
+const SELLER_ADRESA = 'Nemojany 155, 683 03 Nemojany';
 const WEB = 'https://voltimpactcards.com';
 
 
@@ -59,6 +62,41 @@ export function zpravaProProdejce(o) {
 </div>`;
 }
 
+/* Z objednávky sestaví fakturu. Číslo faktury = číslo objednávky,
+   takže je jednoznačné a řada roste s datem. Splatnost 7 dní. */
+export function fakturaZObjednavky(o) {
+  const polozky = String(o.polozky || '').split('\n').filter(Boolean).map(r => {
+    const m = r.match(/^(.*?)\s*—\s*(\d+)×\s*à\s*(\d+)\s*Kč/);
+    return m ? { nazev: m[1].trim(), pocet: +m[2], cena: +m[3] } : { nazev: r.trim(), pocet: 1, cena: 0 };
+  });
+  const dopravaKc = parseInt(String(o.dopravaCena || '').replace(/\s/g, ''), 10);
+  if (dopravaKc > 0) polozky.push({ nazev: o.doprava || 'Doprava', pocet: 1, cena: dopravaKc });
+
+  const dnes = new Date();
+  const splatnost = new Date(dnes.getTime() + 7 * 86400000);
+  const celkem = polozky.reduce((s, p) => s + p.pocet * p.cena, 0);
+  const spd = `SPD*1.0*ACC:${IBAN}*AM:${celkem}.00*CC:CZK*X-VS:${o.cislo}*MSG:FAKTURA ${o.cislo}`;
+
+  return {
+    cislo: o.cislo,
+    vs: o.cislo,
+    vystaveni: dnes.toISOString().slice(0, 10),
+    splatnost: splatnost.toISOString().slice(0, 10),
+    dodavatel: { jmeno: SELLER_NAME, ico: SELLER_ICO, adresa: SELLER_ADRESA, ucet: UCET },
+    odberatel: {
+      jmeno: o.jmeno,
+      adresa: o.adresa || o.vydejniMisto || '',
+      email: o.email,
+      telefon: o.telefon
+    },
+    polozky,
+    celkem,
+    iban: IBAN,
+    qr: 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=' + encodeURIComponent(spd),
+    poznamka: (o.doprava || '') + (o.poznamka ? ' · Poznámka: ' + o.poznamka : '')
+  };
+}
+
 export default async (req) => {
   if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
 
@@ -73,12 +111,13 @@ export default async (req) => {
 
   try {
     const t = transporter(cfg);
+    const faktura = fakturaZObjednavky(o);
     await t.sendMail({
       from: `"Volt Impact Cards" <${cfg.from}>`,
       to: o.email,
       replyTo: cfg.from,
-      subject: `Objednávka ${o.cislo} — údaje k platbě`,
-      html: zpravaProZakaznika(o)
+      subject: `Faktura ${faktura.cislo} — objednávka ${o.cislo}`,
+      html: fakturaHtml(faktura)
     });
     await t.sendMail({
       from: `"Volt Impact Cards" <${cfg.from}>`,

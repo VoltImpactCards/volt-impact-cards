@@ -1,7 +1,7 @@
 /* Odešle fakturu zákazníkovi e-mailem. Volá se z administrace.
    Nastavení odesílání viz netlify/lib/mail.mjs */
 
-import { mailConfig, kopieProProdejce, transporter, esc } from '../lib/mail.mjs';
+import { mailConfig, transporter, esc } from '../lib/mail.mjs';
 
 const WEB = 'https://voltimpactcards.com';
 
@@ -110,13 +110,6 @@ export default async (req) => {
       to: f.odberatel.email,
       replyTo: cfg.from,
       subject: `Faktura ${f.cislo} — Volt Impact Cards`,
-      html
-    });
-    await t.sendMail({
-      from: `"Volt Impact Cards" <${cfg.from}>`,
-      to: kopieProProdejce(cfg),
-      replyTo: f.odberatel.email,
-      subject: `Kopie faktury ${f.cislo} — ${f.celkem} Kč`,
       html
     });
     return Response.json({ ok: true, kanal: cfg.kanal });
