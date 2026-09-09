@@ -959,12 +959,15 @@ function renderFaktury() {
   document.getElementById('cnt-faktury').textContent = faktury.length;
   if (!faktury.length) { el.innerHTML = '<div class="empty-state"><p>Zatím žádné faktury.</p></div>'; return; }
   el.innerHTML = `<table class="product-table"><thead><tr>
-      <th>Číslo</th><th>Vystaveno</th><th>Odběratel</th><th>Celkem</th><th style="width:180px"></th>
+      <th>Číslo</th><th>Vystaveno</th><th>Odběratel</th><th>Celkem</th><th>Odesláno</th><th style="width:280px"></th>
     </tr></thead><tbody>` + faktury.map((f, i) => `<tr>
       <td><b>${esc(f.cislo)}</b></td><td>${esc(f.vystaveni)}</td>
-      <td>${esc(f.odberatel.jmeno)}</td><td>${f.celkem} Kč</td>
+      <td>${esc(f.odberatel.jmeno)}<br/><span style="color:var(--grey);font-size:.78rem">${esc(f.odberatel.email || '')}</span></td>
+      <td>${f.celkem} Kč</td>
+      <td>${f.odeslano ? '<span style="color:#6ee7a8">✓ ' + esc(f.odeslano) + '</span>' : '<span style="color:var(--grey)">—</span>'}</td>
       <td>
         <button class="btn btn-ghost btn-sm" onclick="otevriPdf(faktury[${i}])">PDF</button>
+        <button class="btn btn-yellow btn-sm" onclick="posliFakturu(${i}, this)">${f.odeslano ? 'Poslat znovu' : 'Odeslat e-mailem'}</button>
         <button class="btn btn-ghost btn-icon btn-sm" onclick="smazFakturu(${i})">✕</button>
       </td>
     </tr>`).join('') + '</tbody></table>';
@@ -973,6 +976,45 @@ function renderFaktury() {
 function smazFakturu(i) {
   if (!confirm('Smazat fakturu ' + faktury[i].cislo + ' z archivu?')) return;
   faktury.splice(i, 1); fSave(); renderFaktury(); renderObjednavky();
+}
+
+async function posliFakturu(i, btn) {
+  const f = faktury[i];
+  if (!f) return;
+  if (!f.odberatel || !f.odberatel.email) { toast('Faktura nemá e-mail odběratele', 'err'); return; }
+
+  const d = f.dodavatel || dodavatel;
+  const iban = ibanZUctu(d.ucet || '');
+  const spd = `SPD*1.0*ACC:${iban}*AM:${f.celkem}.00*CC:CZK*X-VS:${f.vs}*MSG:FAKTURA ${f.cislo}`;
+  const payload = {
+    ...f,
+    dodavatel: d,
+    iban,
+    qr: iban ? 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=' + encodeURIComponent(spd) : ''
+  };
+
+  const puvodni = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Odesílám…';
+  try {
+    const r = await fetch('/.netlify/functions/faktura', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    });
+    const v = await r.json().catch(() => ({}));
+    if (r.ok && v.ok) {
+      f.odeslano = new Date().toLocaleDateString('cs-CZ');
+      fSave(); renderFaktury();
+      toast('Faktura odeslána na ' + f.odberatel.email + ' ✓', 'ok');
+      return;
+    }
+    const duvod = v.duvod === 'chybi-nastaveni'
+      ? 'Odesílání e-mailů zatím není nastavené v Netlify.'
+      : (v.duvod || 'neznámá chyba');
+    toast('Nepodařilo se odeslat: ' + duvod, 'err');
+  } catch (e) {
+    toast('Nepodařilo se odeslat: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false; btn.textContent = puvodni;
+  }
 }
 
 /* ── Tisková podoba faktury ── */

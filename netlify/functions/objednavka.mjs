@@ -4,14 +4,13 @@
      GMAIL_APP_PASSWORD  – heslo aplikace vygenerované v Google účtu
    Bez nich funkce jen vrátí 501 a web zobrazí platební údaje na obrazovce. */
 
-import nodemailer from 'nodemailer';
+import { mailConfig, kopieProProdejce, transporter, esc } from '../lib/mail.mjs';
 
 const UCET = '3429264010/3030';
 const IBAN = 'CZ0430300000003429264010';
 const SELLER_NAME = 'David Vaněček, IČO 10895060';
 const WEB = 'https://voltimpactcards.com';
 
-const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 export function zpravaProZakaznika(o) {
   const radky = (o.polozky || '').split('\n').filter(Boolean);
@@ -63,10 +62,8 @@ export function zpravaProProdejce(o) {
 export default async (req) => {
   if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
 
-  const user = (process.env.GMAIL_USER || '').trim();
-  // Google zobrazuje heslo aplikace po čtveřicích s mezerami — SMTP je nechce
-  const pass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
-  if (!user || !pass) {
+  const cfg = mailConfig();
+  if (!cfg) {
     return Response.json({ ok: false, duvod: 'chybi-nastaveni' }, { status: 501 });
   }
 
@@ -75,25 +72,22 @@ export default async (req) => {
   if (!o || !o.cislo || !o.email || !o.polozky) return Response.json({ ok: false }, { status: 400 });
 
   try {
-    const transport = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
-    await transport.sendMail({
-      from: `"Volt Impact Cards" <${user}>`,
+    const t = transporter(cfg);
+    await t.sendMail({
+      from: `"Volt Impact Cards" <${cfg.from}>`,
       to: o.email,
-      replyTo: user,
+      replyTo: cfg.from,
       subject: `Objednávka ${o.cislo} — údaje k platbě`,
       html: zpravaProZakaznika(o)
     });
-    // kopie prodávajícímu — když je nastaveno ORDER_NOTIFY_EMAIL, jde jinam než na odesílající schránku
-    // (Gmail zprávu sám sobě nemusí zobrazit v Doručené)
-    const komu = process.env.ORDER_NOTIFY_EMAIL || user;
-    await transport.sendMail({
-      from: `"Volt Impact Cards" <${user}>`,
-      to: komu,
+    await t.sendMail({
+      from: `"Volt Impact Cards" <${cfg.from}>`,
+      to: kopieProProdejce(cfg),
       replyTo: o.email,
       subject: `Nová objednávka ${o.cislo} — ${o.celkem}`,
       html: zpravaProProdejce(o)
     });
-    return Response.json({ ok: true });
+    return Response.json({ ok: true, kanal: cfg.kanal });
   } catch (e) {
     return Response.json({ ok: false, duvod: String(e.message || e) }, { status: 502 });
   }
