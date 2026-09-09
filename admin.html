@@ -879,7 +879,7 @@ function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replac
 function parsePolozky(text) {
   // "Umbreon 130/197 — 2× à 30 Kč = 60 Kč"
   return String(text || '').split('\n').filter(Boolean).map(r => {
-    const m = r.match(/^(.*?)\s*—\s*(\d+)×\s*à\s*(\d+)\s*Kč/);
+    const m = r.match(/^(.*?)\s*—\s*(\d+)×\s*(?:à\s*)?(\d+)\s*Kč/);
     return m ? { nazev: m[1].trim(), pocet: +m[2], cena: +m[3] } : { nazev: r.trim(), pocet: 1, cena: 0 };
   });
 }

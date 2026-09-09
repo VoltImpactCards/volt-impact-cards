@@ -66,7 +66,7 @@ export function zpravaProProdejce(o) {
    takže je jednoznačné a řada roste s datem. Splatnost 7 dní. */
 export function fakturaZObjednavky(o) {
   const polozky = String(o.polozky || '').split('\n').filter(Boolean).map(r => {
-    const m = r.match(/^(.*?)\s*—\s*(\d+)×\s*à\s*(\d+)\s*Kč/);
+    const m = r.match(/^(.*?)\s*—\s*(\d+)×\s*(?:à\s*)?(\d+)\s*Kč/);
     return m ? { nazev: m[1].trim(), pocet: +m[2], cena: +m[3] } : { nazev: r.trim(), pocet: 1, cena: 0 };
   });
   const dopravaKc = parseInt(String(o.dopravaCena || '').replace(/\s/g, ''), 10);

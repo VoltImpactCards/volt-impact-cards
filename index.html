@@ -1713,7 +1713,7 @@ function orderNumber() {
 }
 
 function orderText() {
-  return _cart.map(i => i.title + ' — ' + i.qty + '× à ' + i.price + ' Kč = ' + (i.price * i.qty) + ' Kč').join('\n');
+  return _cart.map(i => i.title + ' — ' + i.qty + '× ' + i.price + ' Kč = ' + (i.price * i.qty) + ' Kč').join('\n');
 }
 
 function markErr(el, bad) { if (el) el.classList.toggle('err', !!bad); }
