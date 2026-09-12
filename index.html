@@ -95,6 +95,23 @@
     nav ul { list-style: none; display: flex; gap: 8px; margin-left: auto; }
     nav ul a { color: var(--grey); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; transition: color .2s, background .2s; }
     nav ul a:hover { color: var(--white); background: var(--surface2); }
+    .nav-cart {
+      position: relative; display: flex; align-items: center; gap: 8px;
+      background: var(--surface2); border: 1px solid var(--border2); border-radius: 999px;
+      color: var(--white); padding: 8px 16px 8px 13px; margin-left: 14px; cursor: pointer;
+      font-family: inherit; font-size: 0.82rem; font-weight: 700; white-space: nowrap;
+      transition: border-color .2s, background .2s;
+    }
+    .nav-cart:hover { border-color: rgba(245,197,24,0.5); background: rgba(245,197,24,0.08); }
+    .nav-cart.plny { border-color: rgba(245,197,24,0.55); background: rgba(245,197,24,0.1); }
+    .nav-cart-count {
+      position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px;
+      border-radius: 999px; background: var(--yellow); color: #1a1400;
+      font-size: 0.7rem; font-weight: 800; display: none;
+      align-items: center; justify-content: center; padding: 0 5px;
+    }
+    .nav-cart-count.show { display: flex; }
+    .nav-cart-sum { color: var(--yellow); }
 
     /* ── HERO ── */
     .hero { position: relative; text-align: center; padding: 100px 20px 80px; overflow: hidden; }
@@ -556,6 +573,9 @@
       font-family: inherit; font-size: 0.82rem; padding: 8px 0 0; width: 100%; }
     .mail-close:hover { color: var(--white); }
 
+    /* na desktopu stačí košík v liště, plovoucí lišta je zbytečná */
+    @media (min-width: 769px) { .cart-bar { display: none; } }
+
     /* ── KOŠÍK A OBJEDNÁVKA ── */
     .cart-bar {
       position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 140%);
@@ -715,6 +735,8 @@
     }
     @media (max-width: 480px) {
       nav ul { display: none; }
+      .nav-cart { margin-left: auto; padding: 7px 12px; font-size: 0.78rem; }
+      .nav-cart-sum { display: none; }
       .stats-bar { margin: 32px 0 0; border-radius: 0; border-left: none; border-right: none; }
     }
   </style>
@@ -781,6 +803,11 @@
     <li><a href="#singles">Singl</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
+  <button class="nav-cart" id="nav-cart" type="button" onclick="openCart()" aria-label="Zobrazit košík">
+    <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+    Košík<span class="nav-cart-sum" id="nav-cart-sum"></span>
+    <span class="nav-cart-count" id="nav-cart-count">0</span>
+  </button>
 </nav>
 
 <!-- ── HERO ── -->
@@ -996,12 +1023,12 @@
         <label class="ship-opt" id="ship-opt-vydejni">
           <input type="radio" name="doprava" value="vydejni" onchange="onShipChange()"/>
           <span class="t">Zásilkovna — výdejní místo / Z-BOX<small>Doručení do 2 pracovních dnů</small></span>
-          <span class="p">89 Kč</span>
+          <span class="p">79 Kč</span>
         </label>
         <label class="ship-opt" id="ship-opt-adresa">
           <input type="radio" name="doprava" value="adresa" onchange="onShipChange()"/>
           <span class="t">Zásilkovna — doručení na adresu<small>Kurýr až domů</small></span>
-          <span class="p">129 Kč</span>
+          <span class="p">109 Kč</span>
         </label>
         <label class="ship-opt" id="ship-opt-osobni">
           <input type="radio" name="doprava" value="osobni" onchange="onShipChange()"/>
@@ -1606,8 +1633,8 @@ function copyMailAddress(btn) {
 const IBAN = 'CZ0430300000003429264010';
 const UCET = '3429264010/3030';
 const SHIPPING = {
-  vydejni: { cena: 89,  nazev: 'Zásilkovna — výdejní místo / Z-BOX' },
-  adresa:  { cena: 129, nazev: 'Zásilkovna — doručení na adresu' },
+  vydejni: { cena: 79,  nazev: 'Zásilkovna — výdejní místo / Z-BOX' },
+  adresa:  { cena: 109, nazev: 'Zásilkovna — doručení na adresu' },
   osobni:  { cena: 0,   nazev: 'Osobní předání (Brno / Vyškov)' }
 };
 
@@ -1763,6 +1790,14 @@ function renderCart() {
   const bar = document.getElementById('cart-bar');
   const n = cartCount();
   bar.classList.toggle('show', n > 0);
+
+  const navPocet = document.getElementById('nav-cart-count');
+  const navSuma = document.getElementById('nav-cart-sum');
+  const navBtn = document.getElementById('nav-cart');
+  if (navPocet) navPocet.classList.toggle('show', n > 0);
+  if (navPocet) navPocet.textContent = n;
+  if (navSuma) navSuma.textContent = n > 0 ? ' · ' + cartTotal() + ' Kč' : '';
+  if (navBtn) navBtn.classList.toggle('plny', n > 0);
   document.getElementById('cart-sum').innerHTML =
     n + (n === 1 ? ' položka' : (n < 5 ? ' položky' : ' položek')) + ' · <b>' + cartTotal() + ' Kč</b>';
 

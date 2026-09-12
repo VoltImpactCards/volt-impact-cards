@@ -345,8 +345,8 @@ ${PRODEJCE_BLOK}
 <h2>4. Dodání zboží</h2>
 <table>
   <tr><th>Způsob</th><th>Cena</th><th>Doba dodání</th></tr>
-  <tr><td>Zásilkovna — výdejní místo / Z-BOX</td><td>89 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
-  <tr><td>Zásilkovna — doručení na adresu</td><td>129 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
+  <tr><td>Zásilkovna — výdejní místo / Z-BOX</td><td>79 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
+  <tr><td>Zásilkovna — doručení na adresu</td><td>109 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
   <tr><td>Osobní předání (Brno / Vyškov)</td><td>zdarma</td><td>dle domluvy</td></tr>
 </table>
 <p>Zásilku prodávající podá do 3 pracovních dnů od připsání platby. Zásilky jsou standardní, do hmotnosti 5 kg. Zboží je baleno tak, aby nedošlo k poškození karet při přepravě.</p>
