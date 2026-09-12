@@ -633,6 +633,23 @@
     .ship-opt .t { flex: 1; font-size: 0.87rem; }
     .ship-opt .t small { display: block; color: var(--grey); font-size: 0.75rem; margin-top: 2px; }
     .ship-opt .p { font-weight: 800; color: var(--yellow); font-size: 0.9rem; white-space: nowrap; }
+    .btn-pobocka {
+      width: 100%; background: var(--surface2); border: 1px dashed var(--border2); border-radius: 10px;
+      color: var(--white); padding: 12px 14px; font-family: inherit; font-size: 0.88rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px; transition: border-color .2s, background .2s;
+    }
+    .btn-pobocka:hover { border-color: rgba(245,197,24,0.55); background: rgba(245,197,24,0.06); }
+    .pobocka-vybrana {
+      display: flex; align-items: flex-start; gap: 10px; background: rgba(245,197,24,0.08);
+      border: 1px solid rgba(245,197,24,0.45); border-radius: 10px; padding: 11px 13px; margin-top: 8px;
+    }
+    .pobocka-vybrana .t { flex: 1; font-size: 0.86rem; }
+    .pobocka-vybrana .t small { display: block; color: var(--grey); font-size: 0.76rem; margin-top: 2px; }
+    .pobocka-vybrana button {
+      background: none; border: none; color: var(--grey); cursor: pointer; font-size: 0.78rem;
+      font-family: inherit; text-decoration: underline; padding: 0;
+    }
+    .pobocka-vybrana button:hover { color: var(--white); }
     .ord-consent { display: flex; align-items: flex-start; gap: 9px; font-size: 0.8rem; color: #c9c9d4; margin: 4px 0 16px; }
     .ord-consent input { margin-top: 2px; accent-color: var(--yellow); }
     .ord-consent a { color: var(--yellow); }
@@ -995,6 +1012,17 @@
 
       <div class="ord-group" id="fld-pobocka" style="display:none">
         <label>Výdejní místo / Z-BOX</label>
+        <div id="pobocka-vyber" style="display:none">
+          <button class="btn-pobocka" type="button" onclick="vyberPobocku()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Vybrat výdejní místo na mapě
+          </button>
+          <div class="pobocka-vybrana" id="pobocka-vybrana" style="display:none">
+            <svg width="16" height="16" fill="none" stroke="#f5c518" stroke-width="2.2" viewBox="0 0 24 24" style="margin-top:2px"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="t" id="pobocka-nazev"></span>
+            <button type="button" onclick="vyberPobocku()">Změnit</button>
+          </div>
+        </div>
         <input type="text" id="ord-pobocka" placeholder="např. Z-BOX Vyškov, Nádražní 5"/>
       </div>
 
@@ -1090,6 +1118,7 @@
   <input type="tel" name="telefon"/>
   <input type="text" name="doprava"/>
   <input type="text" name="vydejni-misto"/>
+  <input type="text" name="vydejni-misto-id"/>
   <input type="text" name="adresa"/>
   <textarea name="polozky"></textarea>
   <input type="text" name="zbozi-celkem"/>
@@ -1662,6 +1691,55 @@ function goCheckout() {
   renderTotals();
 }
 
+/* ── Výběr výdejního místa Zásilkovny ──
+   PACKETA_API_KEY získáš v klientské sekci Zásilkovny (client.packeta.com)
+   v Nastavení → API. Dokud je prázdný, zůstane textové pole pro ruční zápis. */
+const PACKETA_API_KEY = '8edab1be5218c5e9818391b0eb9851a2';
+let _pobockaId = '';
+
+function packetaPripraven(cb) {
+  if (window.Packeta && window.Packeta.Widget) { cb(true); return; }
+  const s = document.createElement('script');
+  s.src = 'https://widget.packeta.com/v6/www/js/library.js';
+  s.onload = () => cb(!!(window.Packeta && window.Packeta.Widget));
+  s.onerror = () => cb(false);
+  document.head.appendChild(s);
+}
+
+function vyberPobocku() {
+  packetaPripraven(ok => {
+    if (!ok) { prepniNaRucniZadani('Mapu se nepodařilo načíst — vypiš výdejní místo ručně.'); return; }
+    window.Packeta.Widget.pick(PACKETA_API_KEY, bod => {
+      if (!bod) return;
+      const nazev = bod.formatedValue || bod.name || '';
+      const detail = [bod.street, bod.city, bod.zip].filter(Boolean).join(', ');
+      _pobockaId = bod.id ? String(bod.id) : '';
+      document.getElementById('ord-pobocka').value = nazev;
+      document.getElementById('pobocka-nazev').innerHTML =
+        nazev + (detail ? '<small>' + detail + '</small>' : '');
+      document.getElementById('pobocka-vybrana').style.display = 'flex';
+      document.getElementById('ord-pobocka').classList.remove('err');
+      const e = document.getElementById('ord-err');
+      if (e) e.classList.remove('show');
+    }, { language: 'cs', country: 'cz' });
+  });
+}
+
+function prepniNaRucniZadani(hlaska) {
+  document.getElementById('pobocka-vyber').style.display = 'none';
+  document.getElementById('ord-pobocka').style.display = 'block';
+  if (hlaska) {
+    const e = document.getElementById('ord-err');
+    if (e) { e.textContent = hlaska; e.classList.add('show'); }
+  }
+}
+
+function nastavVyberPobocky() {
+  const maKlic = !!PACKETA_API_KEY;
+  document.getElementById('pobocka-vyber').style.display = maKlic ? 'block' : 'none';
+  document.getElementById('ord-pobocka').style.display = maKlic ? 'none' : 'block';
+}
+
 function onShipChange() {
   const sel = document.querySelector('input[name="doprava"]:checked');
   _ship = sel ? sel.value : '';
@@ -1670,6 +1748,7 @@ function onShipChange() {
     if (o) o.classList.toggle('sel', k === _ship);
   });
   document.getElementById('fld-pobocka').style.display = _ship === 'vydejni' ? 'block' : 'none';
+  if (_ship === 'vydejni') nastavVyberPobocky();
   document.getElementById('fld-adresa').style.display  = _ship === 'adresa'  ? 'block' : 'none';
   renderTotals();
 }
@@ -1761,6 +1840,7 @@ function submitOrder() {
     'telefon': tel,
     'doprava': SHIPPING[_ship].nazev,
     'vydejni-misto': _ship === 'vydejni' ? pob : '',
+    'vydejni-misto-id': _ship === 'vydejni' ? _pobockaId : '',
     'adresa': adresa,
     'polozky': orderText(),
     'zbozi-celkem': cartTotal() + ' Kč',
