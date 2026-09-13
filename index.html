@@ -219,10 +219,11 @@
     .search-clear:hover { color: var(--white); }
     .copy-link {
       background: none; border: 1px solid var(--border2); color: var(--grey);
-      border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 0.78rem;
-      font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: color .2s, border-color .2s;
+      border-radius: 40px; padding: 13px 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      font-family: inherit; display: inline-flex; align-items: center; gap: 8px;
+      transition: color .2s, border-color .2s, background .2s, transform .2s;
     }
-    .copy-link:hover { color: var(--white); border-color: var(--border2); }
+    .copy-link:hover { color: var(--white); border-color: rgba(255,255,255,0.25); background: var(--surface2); transform: translateY(-2px); }
     .copy-link.done { color: #6ee7a8; border-color: rgba(110,231,168,0.4); }
     .filter-group-label {
       font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
