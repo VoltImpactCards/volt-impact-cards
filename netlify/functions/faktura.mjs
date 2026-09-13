@@ -83,7 +83,7 @@ export function fakturaHtml(f) {
   ${f.poznamka ? `<p style="margin-top:18px;color:#444;font-size:13px">${esc(f.poznamka)}</p>` : ''}
 
   <p style="margin-top:24px;border-top:1px solid #ddd;padding-top:10px;color:#666;font-size:11.5px">
-    Fakturu si můžeš uložit vytištěním do PDF přímo z e-mailu.<br/>
+    Fakturu si můžete uložit vytištěním do PDF přímo z e-mailu.<br/>
     <a href="${WEB}/obchodni-podminky/">Obchodní podmínky</a> ·
     <a href="${WEB}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a>
   </p>

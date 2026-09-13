@@ -41,7 +41,7 @@ export function zpravaProZakaznika(o) {
 
   <p style="font-size:13px;color:#666;margin-top:24px">
     Prodávající: ${SELLER_NAME} · <a href="${WEB}">voltimpactcards.com</a><br/>
-    Máš dotaz? Stačí odpovědět na tento e-mail.<br/>
+    Máte dotaz? Stačí odpovědět na tento e-mail.<br/>
     <a href="${WEB}/obchodni-podminky/">Obchodní podmínky</a> ·
     <a href="${WEB}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a>
   </p>
@@ -58,6 +58,7 @@ export function zpravaProProdejce(o) {
   <pre style="background:#f6f6f2;padding:12px;border-radius:8px;font-size:13px">${esc(o.polozky)}</pre>
   <p>Zboží: ${esc(o.zboziCelkem)} · Doprava: ${esc(o.dopravaCena)} · <b>Celkem: ${esc(o.celkem)}</b><br/>
   Variabilní symbol: <b>${esc(o.cislo)}</b></p>
+  ${o.casSetkani ? `<p><b>Preferovaný čas předání: ${esc(o.casSetkani)}</b></p>` : ''}
   ${o.poznamka ? `<p>Poznámka: ${esc(o.poznamka)}</p>` : ''}
 </div>`;
 }
@@ -93,7 +94,7 @@ export function fakturaZObjednavky(o) {
     celkem,
     iban: IBAN,
     qr: 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=' + encodeURIComponent(spd),
-    poznamka: (o.doprava || '') + (o.poznamka ? ' · Poznámka: ' + o.poznamka : '')
+    poznamka: (o.doprava || '') + (o.casSetkani ? ' · Preferovaný čas: ' + o.casSetkani : '') + (o.poznamka ? ' · Poznámka: ' + o.poznamka : '')
   };
 }
 

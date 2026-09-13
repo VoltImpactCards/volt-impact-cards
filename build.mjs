@@ -121,7 +121,7 @@ ${extraLd || ''}
 </a>`;
 
 const foot = `<footer>
-  <p>Volt Impact Cards — Pokémon TCG, Brno / Vyškov &amp; celá ČR</p>
+  <p>Volt Impact Cards — Pokémon TCG, Brno &amp; celá ČR</p>
   <p style="margin-top:6px">Prodávající: ${SELLER.jmeno}${SELLER.ico ? ', IČO ' + SELLER.ico : ''}${SELLER.adresa ? ', ' + SELLER.adresa : ''}${SELLER.dph ? '' : ' · Neplátce DPH'}</p>
   <p style="margin-top:6px"><a href="mailto:${MAIL}">${MAIL}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="${SITE}/">Zpět na nabídku</a></p>
   <p style="margin-top:6px"><a href="${SITE}/obchodni-podminky/">Obchodní podmínky</a> · <a href="${SITE}/ochrana-osobnich-udaju/">Ochrana osobních údajů</a> · <a href="${SITE}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a></p>
@@ -144,7 +144,7 @@ function productPage(p, similar) {
     era ? `(${era})` : '',
     `za ${p.price} Kč.`,
     so ? 'Momentálně vyprodáno.' : `Skladem ${p.stock} ks.`,
-    'Osobní předání Brno / Vyškov, zaslání po celé ČR.'
+    'Osobní předání v Brně, zaslání po celé ČR.'
   ].filter(Boolean).join(' ');
 
   const ld = {
@@ -207,7 +207,7 @@ ${similar.length ? `<div class="more">
 function catalogPage(all) {
   const url = `${SITE}/${OUT}/`;
   const title = 'Všechny karty a bulky | Volt Impact Cards';
-  const desc = `Kompletní seznam ${all.length} produktů — Pokémon TCG bulk sety, singl karty a decky skladem. Brno / Vyškov a celá ČR.`;
+  const desc = `Kompletní seznam ${all.length} produktů — Pokémon TCG bulk sety, singl karty a decky skladem. Brno a celá ČR.`;
   return head({ title, desc, url, img: `${SITE}/img/logo.png` }) + `
 <div class="crumbs"><a href="${SITE}/">Nabídka</a> › Karty</div>
 <h1 style="margin-bottom:18px">Všechny produkty</h1>
@@ -334,12 +334,12 @@ const OP = `
 ${PRODEJCE_BLOK}
 
 <h2>2. Objednávka a uzavření kupní smlouvy</h2>
-<p>Zboží vložíš do košíku a objednávku odešleš přes formulář na webu. Odesláním objednávky potvrzuješ, že jsi se seznámil s těmito podmínkami. Kupní smlouva je uzavřena okamžikem, kdy ti prodávající potvrdí přijetí objednávky na uvedený e-mail.</p>
-<p>Nabídka zboží je informativní; každá karta je zpravidla skladem v jednom kuse. Pokud zboží nebude dostupné, prodávající tě bez zbytečného odkladu kontaktuje a případně přijatou platbu vrátí v plné výši.</p>
+<p>Zboží vložíte do košíku a objednávku odešlete přes formulář na webu. Odesláním objednávky potvrzujete, že jste se seznámil(a) s těmito podmínkami. Kupní smlouva je uzavřena okamžikem, kdy Vám prodávající potvrdí přijetí objednávky na uvedený e-mail.</p>
+<p>Nabídka zboží je informativní; každá karta je zpravidla skladem v jednom kuse. Pokud zboží nebude dostupné, prodávající Vás bez zbytečného odkladu kontaktuje a případně přijatou platbu vrátí v plné výši.</p>
 
 <h2>3. Ceny a platba</h2>
 <p>Ceny na webu jsou konečné, v korunách českých. Prodávající ${SELLER.dph ? 'je' : 'není'} plátcem DPH.</p>
-<p>Jediným způsobem platby je <b>bankovní převod</b> na účet <b>${SELLER.ucet}</b>. Variabilním symbolem je číslo objednávky, které se zobrazí po jejím odeslání a přijde ti i e-mailem.</p>
+<p>Jediným způsobem platby je <b>bankovní převod</b> na účet <b>${SELLER.ucet}</b>. Variabilním symbolem je číslo objednávky, které se zobrazí po jejím odeslání a přijde Vám i e-mailem.</p>
 <p>Splatnost je <b>7 kalendářních dnů</b> od potvrzení objednávky. Nebude-li platba do té doby připsána, objednávka bez dalšího zaniká a zboží se vrací do nabídky.</p>
 
 <h2>4. Dodání zboží</h2>
@@ -347,17 +347,17 @@ ${PRODEJCE_BLOK}
   <tr><th>Způsob</th><th>Cena</th><th>Doba dodání</th></tr>
   <tr><td>Zásilkovna — výdejní místo / Z-BOX</td><td>79 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
   <tr><td>Zásilkovna — doručení na adresu</td><td>109 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
-  <tr><td>Osobní předání (Brno / Vyškov)</td><td>zdarma</td><td>dle domluvy</td></tr>
+  <tr><td>Osobní předání — Brno, Hlavní nádraží</td><td>zdarma</td><td>dle domluvy, po připsání platby</td></tr>
 </table>
 <p>Zásilku prodávající podá do 3 pracovních dnů od připsání platby. Zásilky jsou standardní, do hmotnosti 5 kg. Zboží je baleno tak, aby nedošlo k poškození karet při přepravě.</p>
 <p>Nebezpečí škody na zboží přechází na kupujícího převzetím zboží.</p>
 
 <h2>5. Odstoupení od smlouvy do 14 dnů</h2>
-<p>Jsi-li spotřebitel, máš právo odstoupit od smlouvy bez udání důvodu do <b>14 dnů</b> ode dne převzetí zboží. Podrobnosti a vzorový formulář najdeš na stránce <a href="${SITE}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a>.</p>
+<p>Jste-li spotřebitel, máte právo odstoupit od smlouvy bez udání důvodu do <b>14 dnů</b> ode dne převzetí zboží. Podrobnosti a vzorový formulář najdete na stránce <a href="${SITE}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a>.</p>
 
 <h2>6. Práva z vadného plnění a reklamace</h2>
 <p>Prodávající odpovídá za to, že zboží při převzetí nemá vady a odpovídá popisu, zejména uvedenému stavu karty (Near Mint, Lightly Played, Moderately Played). U spotřebitele lze právo z vadného plnění uplatnit do 24 měsíců od převzetí; u zboží prodávaného jako použité se nevztahuje na opotřebení odpovídající uvedenému stavu a na vady, kvůli kterým byla sjednána nižší cena.</p>
-<p>Reklamaci uplatni e-mailem na <a href="mailto:${MAIL}">${MAIL}</a>. Uveď číslo objednávky, popis vady a fotografie. Reklamaci prodávající vyřídí do 30 dnů.</p>
+<p>Reklamaci uplatněte e-mailem na <a href="mailto:${MAIL}">${MAIL}</a>. Uveďte číslo objednávky, popis vady a fotografie. Reklamaci prodávající vyřídí do 30 dnů.</p>
 
 <h2>7. Mimosoudní řešení sporů</h2>
 <p>K mimosoudnímu řešení spotřebitelských sporů je příslušná <b>Česká obchodní inspekce</b>, Štěpánská 796/44, 110 00 Praha 1, <a href="https://www.coi.cz" target="_blank" rel="noopener">www.coi.cz</a>, formulář na <a href="https://adr.coi.cz" target="_blank" rel="noopener">adr.coi.cz</a>. Dozor nad dodržováním povinností podle zákona o ochraně spotřebitele vykonává rovněž Česká obchodní inspekce.</p>
@@ -400,23 +400,23 @@ ${PRODEJCE_BLOK}
   <li>vznést námitku proti zpracování</li>
   <li>podat stížnost u <a href="https://www.uoou.cz" target="_blank" rel="noopener">Úřadu pro ochranu osobních údajů</a></li>
 </ul>
-<p>Kdykoli nás můžeš kontaktovat na <a href="mailto:${MAIL}">${MAIL}</a>.</p>
+<p>Kdykoli nás můžete kontaktovat na <a href="mailto:${MAIL}">${MAIL}</a>.</p>
 
 <h2>Cookies</h2>
-<p>Web nepoužívá analytické ani reklamní cookies. Obsah košíku se ukládá pouze do místního úložiště tvého prohlížeče (localStorage) a neodesílá se nikam, dokud objednávku sám neodešleš.</p>
+<p>Web nepoužívá analytické ani reklamní cookies. Obsah košíku se ukládá pouze do místního úložiště Vašeho prohlížeče (localStorage) a neodesílá se nikam, dokud objednávku sami neodešlete.</p>
 `;
 
 const ODSTOUPENI = `
 <h1>Odstoupení od smlouvy</h1>
-<p>Jsi-li spotřebitel, máš právo odstoupit od kupní smlouvy bez udání důvodu ve lhůtě <b>14 dnů</b> ode dne, kdy jsi ty nebo tebou určená třetí osoba převzala zboží.</p>
+<p>Jste-li spotřebitel, máte právo odstoupit od kupní smlouvy bez udání důvodu ve lhůtě <b>14 dnů</b> ode dne, kdy jste Vy nebo Vámi určená třetí osoba převzali zboží.</p>
 
 <h2>Jak odstoupit</h2>
 <ol>
-  <li>Ve lhůtě 14 dnů pošli jednoznačné oznámení na <a href="mailto:${MAIL}">${MAIL}</a> — můžeš použít vzorový formulář níže.</li>
-  <li>Zboží odešli nebo předej nejpozději do 14 dnů od odstoupení. Náklady na vrácení zboží hradí kupující.</li>
+  <li>Ve lhůtě 14 dnů pošlete jednoznačné oznámení na <a href="mailto:${MAIL}">${MAIL}</a> — můžete použít vzorový formulář níže.</li>
+  <li>Zboží odešlete nebo předejte nejpozději do 14 dnů od odstoupení. Náklady na vrácení zboží hradí kupující.</li>
   <li>Peníze (včetně nákladů na dodání ve výši nejlevnějšího nabízeného způsobu) vrátíme do 14 dnů od odstoupení, nejdříve však po obdržení vráceného zboží nebo prokázání jeho odeslání. Vracíme je na účet, ze kterého platba přišla.</li>
 </ol>
-<p>Zboží vrať nepoškozené a v původním stavu. Odpovídáš za snížení hodnoty zboží, které vzniklo nakládáním s ním jinak, než je nutné k seznámení se s jeho povahou a vlastnostmi.</p>
+<p>Zboží vraťte nepoškozené a v původním stavu. Odpovídáte za snížení hodnoty zboží, které vzniklo nakládáním s ním jinak, než je nutné k seznámení se s jeho povahou a vlastnostmi.</p>
 
 <h2>Vzorový formulář pro odstoupení</h2>
 <div class="box">
@@ -437,7 +437,7 @@ Podpis (pouze pokud je formulář zasílán v listinné podobě): …………�
 
 for (const [slug, title, desc, body] of [
   ['obchodni-podminky', 'Obchodní podmínky', 'Obchodní podmínky prodeje sběratelských karet Pokémon TCG — objednávka, platba převodem, doprava Zásilkovnou, odstoupení do 14 dnů a reklamace.', OP],
-  ['ochrana-osobnich-udaju', 'Ochrana osobních údajů', 'Jak zpracováváme osobní údaje zákazníků podle GDPR — jaké údaje, proč, komu je předáváme a jaká máš práva.', GDPR],
+  ['ochrana-osobnich-udaju', 'Ochrana osobních údajů', 'Jak zpracováváme osobní údaje zákazníků podle GDPR — jaké údaje, proč, komu je předáváme a jaká máte práva.', GDPR],
   ['odstoupeni-od-smlouvy', 'Odstoupení od smlouvy', 'Poučení o právu spotřebitele odstoupit od smlouvy do 14 dnů včetně vzorového formuláře.', ODSTOUPENI]
 ]) {
   await mkdir(slug, { recursive: true });

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Volt Impact Cards – Prodej Pokémon karet | Bulk sety, singl karty, decky</title>
-  <meta name="description" content="Prodej Pokémon TCG karet — bulk sety, singl karty a hotové decky skladem. Objednávej online, platba převodem, doprava Zásilkovnou nebo osobní předání Brno / Vyškov." />
+  <meta name="description" content="Prodej Pokémon TCG karet — bulk sety, singl karty a hotové decky skladem. Objednávejte online, platba převodem, doprava Zásilkovnou nebo osobní předání v Brně." />
   <link rel="canonical" href="https://voltimpactcards.com/" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#080810" />
@@ -15,7 +15,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Volt Impact Cards" />
   <meta property="og:title" content="Volt Impact Cards – Prodej Pokémon karet" />
-  <meta property="og:description" content="Bulk sety, singl karty a decky Pokémon TCG skladem. Objednávej online — platba převodem, Zásilkovna nebo osobní předání." />
+  <meta property="og:description" content="Bulk sety, singl karty a decky Pokémon TCG skladem. Objednávejte online — platba převodem, Zásilkovna nebo osobní předání." />
   <meta property="og:url" content="https://voltimpactcards.com/" />
   <meta property="og:image" content="https://voltimpactcards.com/img/logo.png" />
   <meta property="og:locale" content="cs_CZ" />
@@ -23,7 +23,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Volt Impact Cards – Prodej Pokémon karet" />
-  <meta name="twitter:description" content="Bulk sety, singl karty a decky Pokémon TCG skladem. Brno / Vyškov & celá ČR." />
+  <meta name="twitter:description" content="Bulk sety, singl karty a decky Pokémon TCG skladem. Brno & celá ČR." />
   <meta name="twitter:image" content="https://voltimpactcards.com/img/logo.png" />
 
   <!-- Strukturovaná data -->
@@ -43,7 +43,7 @@
     "areaServed": "CZ",
     "address": [
       {"@type": "PostalAddress", "addressLocality": "Brno", "addressCountry": "CZ"},
-      {"@type": "PostalAddress", "addressLocality": "Vyškov", "addressCountry": "CZ"}
+      {"@type": "PostalAddress", "addressLocality": "Brno", "addressCountry": "CZ"}
     ],
     "sameAs": ["https://wa.me/420605886256"]
   }
@@ -932,7 +932,7 @@
     <div class="no-results" id="no-results">
       <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <p>Žádné produkty neodpovídají filtru</p>
-      <small>Zkus jiná kritéria nebo zobraz vše</small>
+      <small>Zkuste jiná kritéria nebo zobrazte vše</small>
     </div>
   </div>
 </section>
@@ -968,7 +968,7 @@
 <!-- ── ORDER CTA ── -->
 <section class="order-section">
   <h3>Máte zájem o karty?</h3>
-  <p>Vyber si z nabídky, vlož do košíku a objednej. Platba převodem, doprava Zásilkovnou nebo osobní předání.</p>
+  <p>Vyberte si z nabídky, vložte do košíku a objednejte. Platba převodem, doprava Zásilkovnou nebo osobní předání.</p>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
     <a href="#bulk" class="btn-primary">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -985,7 +985,7 @@
 <div class="mail-panel" id="mail-panel" onclick="if(event.target===this)closeMailMenu()">
   <div class="mail-box">
     <h3>Odeslat e-mailem</h3>
-    <div class="mail-note">Vyber, kde máš e-mail — zpráva se předvyplní.</div>
+    <div class="mail-note">Vyberte, kde máte e-mail — zpráva se předvyplní.</div>
     <div id="mail-opts"></div>
     <button class="mail-close" type="button" onclick="closeMailMenu()">Zavřít</button>
   </div>
@@ -1003,7 +1003,7 @@
     <!-- KROK 1: obsah košíku -->
     <div id="cart-step-1">
       <h3>Košík</h3>
-      <div class="cart-note">Zkontroluj objednávku a pokračuj k odeslání.</div>
+      <div class="cart-note">Zkontrolujte objednávku a pokračujte k odeslání.</div>
       <div id="cart-list"></div>
       <div class="cart-total">Zboží celkem <b id="cart-total">0 Kč</b></div>
       <div class="cart-actions">
@@ -1032,9 +1032,15 @@
         </label>
         <label class="ship-opt" id="ship-opt-osobni">
           <input type="radio" name="doprava" value="osobni" onchange="onShipChange()"/>
-          <span class="t">Osobní předání<small>Brno / Vyškov, domluvíme se na místě a čase</small></span>
+          <span class="t">Osobní předání — Brno, Hlavní nádraží</span>
           <span class="p">zdarma</span>
         </label>
+      </div>
+
+      <div class="ord-group" id="fld-cas" style="display:none">
+        <label>Kdy se Vám to hodí?</label>
+        <input type="text" id="ord-cas" placeholder="např. sobota dopoledne nebo všední dny po 17:00"/>
+        <div style="font-size:0.76rem;color:var(--grey);margin-top:6px">Termín potvrdíme e-mailem, jakmile dorazí platba.</div>
       </div>
 
       <div class="ord-group" id="fld-pobocka" style="display:none">
@@ -1121,7 +1127,7 @@
 
       <div class="pay-qr" id="pay-qr-wrap" style="display:none">
         <div id="pay-qr"></div>
-        <div>QR platba — načti v mobilním bankovnictví</div>
+        <div>QR platba — načtěte v mobilním bankovnictví</div>
       </div>
 
       <div class="cart-note" id="pay-hint"></div>
@@ -1146,6 +1152,7 @@
   <input type="text" name="doprava"/>
   <input type="text" name="vydejni-misto"/>
   <input type="text" name="vydejni-misto-id"/>
+  <input type="text" name="cas-setkani"/>
   <input type="text" name="adresa"/>
   <textarea name="polozky"></textarea>
   <input type="text" name="zbozi-celkem"/>
@@ -1161,7 +1168,7 @@
       <img src="img/logo_nav.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
       <span class="footer-logo-text">Volt Impact <span>Cards</span></span>
     </div>
-    <p class="footer-tagline">Pokémon TCG — Brno / Vyškov &amp; celá ČR</p>
+    <p class="footer-tagline">Pokémon TCG — Brno &amp; celá ČR</p>
     <div class="footer-grid">
       <div class="footer-col">
         <h4>Kontakt</h4>
@@ -1182,7 +1189,7 @@
         <h4>Doprava &amp; předání</h4>
         <div class="delivery-item">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Osobní předání Brno / Vyškov
+          Osobní předání — Brno, Hlavní nádraží
         </div>
         <div class="delivery-item">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
@@ -1196,7 +1203,7 @@
     </div>
     <div class="footer-legal">
       <p>Provozovatel a prodávající: <b>David Vaněček</b>, IČO 10895060, Nemojany 155, 683 03 Nemojany · Neplátce DPH</p>
-      <p>Platba převodem na účet <b>3429264010/3030</b> · Doprava Zásilkovnou nebo osobní předání Brno / Vyškov</p>
+      <p>Platba převodem na účet <b>3429264010/3030</b> · Doprava Zásilkovnou po celé ČR nebo osobní předání v Brně</p>
       <div class="links">
         <a href="/obchodni-podminky/">Obchodní podmínky</a>
         <a href="/ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
@@ -1635,7 +1642,7 @@ const UCET = '3429264010/3030';
 const SHIPPING = {
   vydejni: { cena: 79,  nazev: 'Zásilkovna — výdejní místo / Z-BOX' },
   adresa:  { cena: 109, nazev: 'Zásilkovna — doručení na adresu' },
-  osobni:  { cena: 0,   nazev: 'Osobní předání (Brno / Vyškov)' }
+  osobni:  { cena: 0,   nazev: 'Osobní předání — Brno, Hlavní nádraží' }
 };
 
 let _modalProduct = null;
@@ -1735,7 +1742,7 @@ function packetaPripraven(cb) {
 
 function vyberPobocku() {
   packetaPripraven(ok => {
-    if (!ok) { prepniNaRucniZadani('Mapu se nepodařilo načíst — vypiš výdejní místo ručně.'); return; }
+    if (!ok) { prepniNaRucniZadani('Mapu se nepodařilo načíst — vypište výdejní místo ručně.'); return; }
     window.Packeta.Widget.pick(PACKETA_API_KEY, bod => {
       if (!bod) return;
       const nazev = bod.formatedValue || bod.name || '';
@@ -1775,6 +1782,7 @@ function onShipChange() {
     if (o) o.classList.toggle('sel', k === _ship);
   });
   document.getElementById('fld-pobocka').style.display = _ship === 'vydejni' ? 'block' : 'none';
+  document.getElementById('fld-cas').style.display = _ship === 'osobni' ? 'block' : 'none';
   if (_ship === 'vydejni') nastavVyberPobocky();
   document.getElementById('fld-adresa').style.display  = _ship === 'adresa'  ? 'block' : 'none';
   renderTotals();
@@ -1812,7 +1820,7 @@ function renderCart() {
       </div>
       <div style="min-width:64px;text-align:right;font-size:.86rem">${i.price * i.qty} Kč</div>
       <button class="cart-del" type="button" onclick="cartRemove('${i.slug}')" aria-label="Odebrat">&#10005;</button>
-    </div>`).join('') : '<div class="cart-empty">Košík je prázdný. Otevři produkt a klikni na „Do košíku".</div>';
+    </div>`).join('') : '<div class="cart-empty">Košík je prázdný. Otevřete produkt a klikněte na „Do košíku".</div>';
 
   document.getElementById('cart-total').textContent = cartTotal() + ' Kč';
   const next = document.getElementById('cart-next');
@@ -1842,21 +1850,23 @@ function submitOrder() {
   const ul    = g('ord-ulice').value.trim();
   const me    = g('ord-mesto').value.trim();
   const psc   = g('ord-psc').value.trim();
+  const cas   = g('ord-cas').value.trim();
   const pozn  = g('ord-poznamka').value.trim();
   const souhlas = g('ord-souhlas').checked;
 
   const problems = [];
   if (!_cart.length) problems.push('Košík je prázdný.');
-  if (!_ship) problems.push('Vyber způsob dopravy.');
-  markErr(g('ord-jmeno'), !jmeno);       if (!jmeno) problems.push('Vyplň jméno a příjmení.');
-  markErr(g('ord-email'), !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) problems.push('Vyplň platný e-mail.');
-  markErr(g('ord-telefon'), tel.replace(/\D/g,'').length < 9); if (tel.replace(/\D/g,'').length < 9) problems.push('Vyplň telefon.');
-  if (_ship === 'vydejni') { markErr(g('ord-pobocka'), !pob); if (!pob) problems.push('Vyplň výdejní místo.'); }
+  if (!_ship) problems.push('Vyberte způsob dopravy.');
+  markErr(g('ord-jmeno'), !jmeno);       if (!jmeno) problems.push('Vyplňte jméno a příjmení.');
+  markErr(g('ord-email'), !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) problems.push('Vyplňte platný e-mail.');
+  markErr(g('ord-telefon'), tel.replace(/\D/g,'').length < 9); if (tel.replace(/\D/g,'').length < 9) problems.push('Vyplňte telefon.');
+  if (_ship === 'vydejni') { markErr(g('ord-pobocka'), !pob); if (!pob) problems.push('Vyberte výdejní místo.'); }
+  if (_ship === 'osobni') { markErr(g('ord-cas'), !cas); if (!cas) problems.push('Napište, kdy se Vám hodí předání.'); }
   if (_ship === 'adresa') {
     markErr(g('ord-ulice'), !ul); markErr(g('ord-mesto'), !me); markErr(g('ord-psc'), psc.replace(/\D/g,'').length !== 5);
-    if (!ul || !me || psc.replace(/\D/g,'').length !== 5) problems.push('Vyplň celou doručovací adresu.');
+    if (!ul || !me || psc.replace(/\D/g,'').length !== 5) problems.push('Vyplňte celou doručovací adresu.');
   }
-  if (!souhlas) problems.push('Potvrď souhlas s obchodními podmínkami.');
+  if (!souhlas) problems.push('Potvrďte souhlas s obchodními podmínkami.');
 
   if (problems.length) {
     err.textContent = problems[0];
@@ -1876,6 +1886,7 @@ function submitOrder() {
     'doprava': SHIPPING[_ship].nazev,
     'vydejni-misto': _ship === 'vydejni' ? pob : '',
     'vydejni-misto-id': _ship === 'vydejni' ? _pobockaId : '',
+    'cas-setkani': _ship === 'osobni' ? cas : '',
     'adresa': adresa,
     'polozky': orderText(),
     'zbozi-celkem': cartTotal() + ' Kč',
@@ -1897,6 +1908,7 @@ function submitOrder() {
     vydejniMisto: _ship === 'vydejni' ? pob : '',
     adresa,
     polozky: orderText(),
+    casSetkani: _ship === 'osobni' ? cas : '',
     zboziCelkem: cartTotal() + ' Kč',
     celkem: grandTotal() + ' Kč',
     poznamka: pozn
@@ -1914,8 +1926,8 @@ function submitOrder() {
       mailPromise.then(sent => {
         const el = document.getElementById('mail-status');
         if (el) el.textContent = sent
-          ? 'Potvrzení s údaji k platbě jsme ti poslali na ' + email + '. Zboží odešleme po připsání platby.'
-          : 'Údaje k platbě máš níže — zkopíruj si je nebo použij QR platbu. Zboží odešleme po připsání platby.';
+          ? 'Potvrzení s údaji k platbě jsme Vám poslali na ' + email + '. Zboží odešleme po připsání platby.'
+          : 'Údaje k platbě najdete níže — zkopírujte si je nebo použijte QR platbu. Zboží odešleme po připsání platby.';
       });
     })
     .catch(() => {
@@ -1925,7 +1937,7 @@ function submitOrder() {
         (adresa ? '\nAdresa: ' + adresa : '') + (pob ? '\nVýdejní místo: ' + pob : '') +
         (pozn ? '\nPoznámka: ' + pozn : '') + '\n';
       _fallbackOrder = { predmet: 'Objednávka ' + cislo, telo: zprava };
-      err.innerHTML = 'Objednávku se teď nepodařilo odeslat. Zkus to prosím za chvíli znovu — nebo nám ji pošli e-mailem.' +
+      err.innerHTML = 'Objednávku se teď nepodařilo odeslat. Zkuste to prosím za chvíli znovu — nebo nám ji pošlete e-mailem.' +
         '<br/><button type="button" onclick="posliObjednavkuMailem()">Odeslat e-mailem</button>';
       err.classList.add('show');
     })
@@ -1945,8 +1957,8 @@ function showThanks() {
   document.getElementById('pay-msg').textContent = 'Objednavka ' + o.cislo;
   document.getElementById('pay-hint').textContent =
     _ship === 'osobni'
-      ? 'Ozveme se ti a domluvíme místo a čas předání. Zaplatit můžeš předem převodem.'
-      : 'Jakmile platba dorazí, zásilku podáme a pošleme ti sledovací číslo.';
+      ? 'Ozveme se Vám a potvrdíme čas předání. Platbu prosíme převodem předem.'
+      : 'Jakmile platba dorazí, zásilku podáme a pošleme Vám sledovací číslo.';
   renderQr(o);
 }
 
