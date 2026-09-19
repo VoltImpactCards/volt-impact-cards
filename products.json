@@ -340,18 +340,19 @@
       ],
       "title": "SV: 151 Bulk (88 ks)",
       "price": 250,
-      "stock": 1,
+      "stock": 0,
       "series": "sv151",
+      "era": "sv",
       "seriesLabel": "SV: 151",
       "type": "Bulk",
       "desc": "88 karet z kolekce Scarlet & Violet 151 bez duplicit.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "88 karet bez duplicit",
         "Kolekce SV: 151",
-        "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -465,17 +466,18 @@
       ],
       "title": "Prismatic Evolutions Bulk (50 ks)",
       "price": 150,
-      "stock": 4,
+      "stock": 3,
       "series": "prismatic",
+      "era": "sv",
       "seriesLabel": "Prismatic Evolutions",
       "type": "Bulk",
       "desc": "Prismatic Evolutions Bulk 50 ks bez duplicit.",
       "features": [
         "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Originální karty",
         "Bez duplicit"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -643,18 +645,19 @@
       ],
       "title": "Eevee",
       "price": 15,
-      "stock": 2,
+      "stock": 0,
       "series": "sv151",
+      "era": "sv",
       "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Eevee single karta z kolekce SV: 151.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Single karta",
         "Kolekce SV: 151",
-        "Near Mint (NM) stav",
         "Originální neporušená karta"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -664,18 +667,19 @@
       ],
       "title": "Ivysaur SV: 151",
       "price": 15,
-      "stock": 1,
+      "stock": 0,
       "series": "sv151",
+      "era": "sv",
       "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Ivysaur single karta z kolekce SV: 151.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Single karta",
         "Kolekce SV: 151",
-        "Near Mint (NM) stav",
         "OriginÃ¡lnÃ­ neporuÅ¡enÃ¡ karta"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -685,18 +689,19 @@
       ],
       "title": "Old Amber  SV: 151",
       "price": 15,
-      "stock": 1,
+      "stock": 0,
       "series": "sv151",
+      "era": "sv",
       "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Old Amber single karta z kolekce SV: 151.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Single karta",
         "Kolekce SV: 151",
-        "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -746,18 +751,19 @@
       ],
       "title": "Snorlax  SV: 151",
       "price": 15,
-      "stock": 2,
+      "stock": 0,
       "series": "sv151",
+      "era": "sv",
       "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Snorlax single karta z kolekce SV: 151.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Single karta",
         "Kolekce SV: 151",
-        "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -766,18 +772,19 @@
       ],
       "title": "Squirtle  SV: 151",
       "price": 15,
-      "stock": 1,
+      "stock": 0,
       "series": "sv151",
+      "era": "sv",
       "seriesLabel": "SV: 151",
       "type": "Single",
       "desc": "Squirtle single karta z kolekce SV: 151.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Single karta",
         "Kolekce SV: 151",
-        "Near Mint (NM) stav",
         "Originální karta"
       ],
-      "era": "sv",
       "featured": false
     },
     {
