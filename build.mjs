@@ -85,11 +85,22 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding-top:20px;color
 .catlist a{display:block;padding:6px 0;color:#c9c9d4;text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--border)}
 .catlist a:hover{color:var(--yellow)}`;
 
+/* Google tag (gtag.js) — vkládá se do hlavičky všech generovaných stránek */
+const GTAG = `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18418072866"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18418072866');
+</script>`;
+
 const head = ({ title, desc, url, img, extraLd }) => `<!DOCTYPE html>
 <html lang="cs">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+${GTAG}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}"/>
 <link rel="canonical" href="${url}"/>
