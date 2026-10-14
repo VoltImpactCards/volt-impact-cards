@@ -9,6 +9,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
   gtag('config', 'AW-18418072866');
 </script>
 <title>Všechny karty a bulky | Volt Impact Cards</title>
@@ -112,7 +119,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding-top:20px;color
 <a href="https://voltimpactcards.com/karta/mega-evolutions-bulk-56-ks/">Mega Evolutions Bulk (56 ks) — 200 Kč</a>
 <a href="https://voltimpactcards.com/karta/mega-evolutions-bulk-95-ks/">Mega Evolutions Bulk (95 ks) — 300 Kč</a>
 <a href="https://voltimpactcards.com/karta/mega-evolutions-trainers-bulk-39-ks/">Mega Evolutions Trainers Bulk (39 ks) — 200 Kč</a>
-<a href="https://voltimpactcards.com/karta/sv-151-bulk-88-ks/">SV: 151 Bulk (88 ks) — 250 Kč</a>
+<a href="https://voltimpactcards.com/karta/sv-151-bulk-88-ks/">SV: 151 Bulk (88 ks) — 250 Kč (vyprodáno)</a>
 <a href="https://voltimpactcards.com/karta/sv-151-evoluce-mix-30-ks/">SV: 151 Evoluce mix (30 ks) — 100 Kč (vyprodáno)</a>
 <a href="https://voltimpactcards.com/karta/journey-together-mix-100-ks/">Journey Together Mix (100 ks) — 250 Kč</a>
 <a href="https://voltimpactcards.com/karta/shrouded-fable-bulk-48-ks/">Shrouded Fable Bulk (48 ks) — 150 Kč</a>
@@ -126,13 +133,13 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding-top:20px;color
 <a href="https://voltimpactcards.com/karta/mega-evolutions-bulk-84-ks/">Mega Evolutions Bulk (84 ks) — 250 Kč</a>
 <a href="https://voltimpactcards.com/karta/korejsky-bulk-500-ks/">Korejský Bulk (500 ks) — 1000 Kč</a>
 <a href="https://voltimpactcards.com/karta/charmander/">Charmander — 15 Kč</a>
-<a href="https://voltimpactcards.com/karta/eevee/">Eevee — 15 Kč</a>
-<a href="https://voltimpactcards.com/karta/ivysaur-sv-151/">Ivysaur SV: 151 — 15 Kč</a>
-<a href="https://voltimpactcards.com/karta/old-amber-sv-151/">Old Amber  SV: 151 — 15 Kč</a>
+<a href="https://voltimpactcards.com/karta/eevee/">Eevee — 15 Kč (vyprodáno)</a>
+<a href="https://voltimpactcards.com/karta/ivysaur-sv-151/">Ivysaur SV: 151 — 15 Kč (vyprodáno)</a>
+<a href="https://voltimpactcards.com/karta/old-amber-sv-151/">Old Amber  SV: 151 — 15 Kč (vyprodáno)</a>
 <a href="https://voltimpactcards.com/karta/pidgeotto-sv-151/">Pidgeotto SV: 151 — 15 Kč</a>
 <a href="https://voltimpactcards.com/karta/pikachu-sv-151/">Pikachu SV: 151 — 15 Kč</a>
-<a href="https://voltimpactcards.com/karta/snorlax-sv-151/">Snorlax  SV: 151 — 15 Kč</a>
-<a href="https://voltimpactcards.com/karta/squirtle-sv-151/">Squirtle  SV: 151 — 15 Kč</a>
+<a href="https://voltimpactcards.com/karta/snorlax-sv-151/">Snorlax  SV: 151 — 15 Kč (vyprodáno)</a>
+<a href="https://voltimpactcards.com/karta/squirtle-sv-151/">Squirtle  SV: 151 — 15 Kč (vyprodáno)</a>
 <a href="https://voltimpactcards.com/karta/sylveon-022-064/">Sylveon 022/064 — 30 Kč</a>
 <a href="https://voltimpactcards.com/karta/suicune-026-094/">Suicune 026/094 — 15 Kč</a>
 <a href="https://voltimpactcards.com/karta/togekiss-072-191/">Togekiss 072/191 — 30 Kč</a>
@@ -181,5 +188,69 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding-top:20px;color
   <p style="margin-top:10px;opacity:.7">Nejsme partnerem ani sponzorem The Pokémon Company.</p>
 </footer>
 </div>
+<!-- Lišta souhlasu s cookies -->
+<style>
+  .cc-lista {
+    position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 160%);
+    z-index: 500; width: calc(100% - 32px); max-width: 640px;
+    background: rgba(14,14,26,0.96); backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 16px;
+    padding: 18px 20px; box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    transition: transform .35s cubic-bezier(.2,.8,.3,1);
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif; color: #fff;
+  }
+  .cc-lista.cc-show { transform: translate(-50%, 0); }
+  .cc-lista p { font-size: 0.86rem; line-height: 1.6; color: #c9c9d4; margin: 0 0 14px; }
+  .cc-lista a { color: #f5c518; }
+  .cc-akce { display: flex; gap: 10px; flex-wrap: wrap; }
+  .cc-akce button {
+    flex: 1 1 140px; border-radius: 999px; cursor: pointer; font-family: inherit;
+    font-size: 0.85rem; font-weight: 700; padding: 11px 20px; border: 1px solid rgba(255,255,255,0.18);
+    background: none; color: #fff; transition: background .2s, border-color .2s;
+  }
+  .cc-akce button:hover { background: rgba(255,255,255,0.08); }
+  .cc-akce .cc-ano { background: linear-gradient(135deg, #f5c518, #ffd740); color: #1a1400; border: none; }
+  @media (max-width: 520px) { .cc-lista { padding: 16px; } .cc-lista p { font-size: 0.82rem; } }
+</style>
+<div class="cc-lista" id="cc-lista" role="dialog" aria-label="Souhlas s cookies">
+  <p>Pro měření účinnosti reklamy používáme soubory cookie společnosti Google. Bez Vašeho souhlasu je nespouštíme. Více v <a href="/ochrana-osobnich-udaju/">ochraně osobních údajů</a>.</p>
+  <div class="cc-akce">
+    <button type="button" class="cc-ano" onclick="ccSouhlas(true)">Přijmout</button>
+    <button type="button" onclick="ccSouhlas(false)">Odmítnout</button>
+  </div>
+</div>
+<script>
+  (function () {
+    var KLIC = 'vic_cookies';
+    var stav = null;
+    try { stav = localStorage.getItem(KLIC); } catch (e) {}
+
+    function udel(granted) {
+      if (typeof gtag !== 'function') return;
+      gtag('consent', 'update', {
+        ad_storage: granted ? 'granted' : 'denied',
+        ad_user_data: granted ? 'granted' : 'denied',
+        ad_personalization: granted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied'
+      });
+    }
+
+    window.ccSouhlas = function (granted) {
+      try { localStorage.setItem(KLIC, granted ? 'granted' : 'denied'); } catch (e) {}
+      udel(granted);
+      var el = document.getElementById('cc-lista');
+      if (el) el.classList.remove('cc-show');
+    };
+
+    if (stav === 'granted') { udel(true); }
+    else if (stav !== 'denied') {
+      window.addEventListener('load', function () {
+        var el = document.getElementById('cc-lista');
+        if (el) setTimeout(function () { el.classList.add('cc-show'); }, 800);
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>

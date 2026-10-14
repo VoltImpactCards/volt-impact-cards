@@ -92,6 +92,13 @@ const GTAG = `<!-- Google tag (gtag.js) -->
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
   gtag('config', 'AW-18418072866');
 </script>`;
 
@@ -131,6 +138,71 @@ ${extraLd || ''}
   <span>Volt Impact <i>Cards</i></span>
 </a>`;
 
+const CONSENT_BANNER = `<!-- Lišta souhlasu s cookies -->
+<style>
+  .cc-lista {
+    position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 160%);
+    z-index: 500; width: calc(100% - 32px); max-width: 640px;
+    background: rgba(14,14,26,0.96); backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 16px;
+    padding: 18px 20px; box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    transition: transform .35s cubic-bezier(.2,.8,.3,1);
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif; color: #fff;
+  }
+  .cc-lista.cc-show { transform: translate(-50%, 0); }
+  .cc-lista p { font-size: 0.86rem; line-height: 1.6; color: #c9c9d4; margin: 0 0 14px; }
+  .cc-lista a { color: #f5c518; }
+  .cc-akce { display: flex; gap: 10px; flex-wrap: wrap; }
+  .cc-akce button {
+    flex: 1 1 140px; border-radius: 999px; cursor: pointer; font-family: inherit;
+    font-size: 0.85rem; font-weight: 700; padding: 11px 20px; border: 1px solid rgba(255,255,255,0.18);
+    background: none; color: #fff; transition: background .2s, border-color .2s;
+  }
+  .cc-akce button:hover { background: rgba(255,255,255,0.08); }
+  .cc-akce .cc-ano { background: linear-gradient(135deg, #f5c518, #ffd740); color: #1a1400; border: none; }
+  @media (max-width: 520px) { .cc-lista { padding: 16px; } .cc-lista p { font-size: 0.82rem; } }
+</style>
+<div class="cc-lista" id="cc-lista" role="dialog" aria-label="Souhlas s cookies">
+  <p>Pro měření účinnosti reklamy používáme soubory cookie společnosti Google. Bez Vašeho souhlasu je nespouštíme. Více v <a href="/ochrana-osobnich-udaju/">ochraně osobních údajů</a>.</p>
+  <div class="cc-akce">
+    <button type="button" class="cc-ano" onclick="ccSouhlas(true)">Přijmout</button>
+    <button type="button" onclick="ccSouhlas(false)">Odmítnout</button>
+  </div>
+</div>
+<script>
+  (function () {
+    var KLIC = 'vic_cookies';
+    var stav = null;
+    try { stav = localStorage.getItem(KLIC); } catch (e) {}
+
+    function udel(granted) {
+      if (typeof gtag !== 'function') return;
+      gtag('consent', 'update', {
+        ad_storage: granted ? 'granted' : 'denied',
+        ad_user_data: granted ? 'granted' : 'denied',
+        ad_personalization: granted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied'
+      });
+    }
+
+    window.ccSouhlas = function (granted) {
+      try { localStorage.setItem(KLIC, granted ? 'granted' : 'denied'); } catch (e) {}
+      udel(granted);
+      var el = document.getElementById('cc-lista');
+      if (el) el.classList.remove('cc-show');
+    };
+
+    if (stav === 'granted') { udel(true); }
+    else if (stav !== 'denied') {
+      window.addEventListener('load', function () {
+        var el = document.getElementById('cc-lista');
+        if (el) setTimeout(function () { el.classList.add('cc-show'); }, 800);
+      });
+    }
+  })();
+</script>
+`;
+
 const foot = `<footer>
   <p>Volt Impact Cards — Pokémon TCG, Brno &amp; celá ČR</p>
   <p style="margin-top:6px">Prodávající: ${SELLER.jmeno}${SELLER.ico ? ', IČO ' + SELLER.ico : ''}${SELLER.adresa ? ', ' + SELLER.adresa : ''}${SELLER.dph ? '' : ' · Neplátce DPH'}</p>
@@ -139,6 +211,7 @@ const foot = `<footer>
   <p style="margin-top:10px;opacity:.7">Nejsme partnerem ani sponzorem The Pokémon Company.</p>
 </footer>
 </div>
+${CONSENT_BANNER}
 </body>
 </html>`;
 
@@ -398,6 +471,7 @@ ${PRODEJCE_BLOK}
 <ul>
   <li><b>Zásilkovna s.r.o.</b> — doručení zásilky (jméno, adresa nebo výdejní místo, telefon, e-mail)</li>
   <li><b>Netlify, Inc.</b> — provoz webu a doručení formuláře s objednávkou</li>
+  <li><b>Google Ireland Limited</b> — měření účinnosti reklamy, pouze po udělení souhlasu s cookies</li>
   <li>Případně účetní nebo daňový poradce v rozsahu nutném pro vedení evidence</li>
 </ul>
 <p>Údaje neprodáváme ani nepředáváme třetím stranám pro marketingové účely.</p>
@@ -413,8 +487,11 @@ ${PRODEJCE_BLOK}
 </ul>
 <p>Kdykoli nás můžete kontaktovat na <a href="mailto:${MAIL}">${MAIL}</a>.</p>
 
-<h2>Cookies</h2>
-<p>Web nepoužívá analytické ani reklamní cookies. Obsah košíku se ukládá pouze do místního úložiště Vašeho prohlížeče (localStorage) a neodesílá se nikam, dokud objednávku sami neodešlete.</p>
+<h2>Cookies a měření reklamy</h2>
+<p>Web používá měřicí kód <b>Google Ads (gtag.js)</b> společnosti Google Ireland Limited, který nám ukazuje, kolik návštěv a objednávek přinesla reklama. Může při tom ukládat soubory cookie do Vašeho prohlížeče.</p>
+<p>Tyto cookies <b>nespouštíme bez Vašeho souhlasu</b>. Při první návštěvě se zobrazí lišta, kde volbu potvrdíte nebo odmítnete; do té doby je měření nastaveno jako zakázané (tzv. Consent Mode). Volbu si web uloží do místního úložiště prohlížeče a kdykoli ji změníte smazáním dat webu v prohlížeči.</p>
+<p>Odmítnutí nijak neomezuje nákup — objednávku lze dokončit v plném rozsahu.</p>
+<p>Obsah košíku se ukládá pouze do místního úložiště Vašeho prohlížeče (localStorage) a neodesílá se nikam, dokud objednávku sami neodešlete. Nejde o cookies a neslouží k měření.
 `;
 
 const ODSTOUPENI = `
