@@ -63,6 +63,21 @@
     "sameAs": ["https://wa.me/420605886256"]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Jak probíhá objednávka?", "acceptedAnswer": {"@type": "Answer", "text": "Vložte karty do košíku, vyberte způsob dopravy a odešlete objednávku. Obratem Vám přijde e-mailem faktura s údaji k platbě a QR kódem."}},
+      {"@type": "Question", "name": "Jak mohu zaplatit?", "acceptedAnswer": {"@type": "Answer", "text": "Převodem na účet 3429264010/3030. Jako variabilní symbol uveďte číslo objednávky. Zboží odesíláme po připsání platby."}},
+      {"@type": "Question", "name": "Kolik stojí doprava a jak dlouho trvá?", "acceptedAnswer": {"@type": "Answer", "text": "Zásilkovna na výdejní místo nebo do Z-BOXu stojí 79 Kč, doručení na adresu 109 Kč. Zásilku podáme do 3 pracovních dnů od připsání platby, doručení obvykle trvá 1–2 pracovní dny."}},
+      {"@type": "Question", "name": "Je možné osobní převzetí?", "acceptedAnswer": {"@type": "Answer", "text": "Ano, v Brně na hlavním nádraží, a to zdarma. Preferovaný čas uvedete v objednávce a potvrdíme Vám ho e-mailem."}},
+      {"@type": "Question", "name": "Co znamenají zkratky NM, LP a MP?", "acceptedAnswer": {"@type": "Answer", "text": "Near Mint (NM) je karta bez viditelného opotřebení. Lightly Played (LP) má drobné stopy používání. Moderately Played (MP) má viditelné opotřebení, ale je plně hratelná."}},
+      {"@type": "Question", "name": "Jsou karty originální?", "acceptedAnswer": {"@type": "Answer", "text": "Ano, prodáváme výhradně originální karty Pokémon TCG."}},
+      {"@type": "Question", "name": "Mohu zboží vrátit?", "acceptedAnswer": {"@type": "Answer", "text": "Ano, jako spotřebitel můžete od nákupu odstoupit do 14 dnů bez udání důvodu."}}
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -153,17 +168,38 @@
       font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;
       margin-bottom: 20px; letter-spacing: 0.8px; text-transform: uppercase;
     }
-    .hero h1 {
+    .hero .hero-brand {
       font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 900; margin-bottom: 18px;
       letter-spacing: -1.5px; line-height: 1.1;
       background: linear-gradient(135deg, #fff 40%, #c8c8d8 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .hero h1 .accent {
+    .hero .hero-brand .accent {
       background: linear-gradient(135deg, var(--yellow), var(--yellow2));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .hero p { color: var(--grey); font-size: 1.05rem; max-width: 440px; margin: 0 auto 40px; }
+    .hero h1 { color: var(--white); font-size: clamp(1.05rem, 2.2vw, 1.25rem); font-weight: 700; line-height: 1.45; max-width: 560px; margin: 0 auto 12px; letter-spacing: -0.2px; }
+    .hero p { color: var(--grey); font-size: 1.05rem; max-width: 480px; margin: 0 auto 40px; }
+    .card-link { color: inherit; text-decoration: none; }
+    .card-link:hover { color: inherit; }
+
+    /* ── O OBCHODĚ + ČASTÉ OTÁZKY ── */
+    .about-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 36px; align-items: start; }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 24px; } }
+    .about-text p { color: #c9c9d4; font-size: 0.95rem; line-height: 1.75; margin-bottom: 14px; }
+    .about-text b { color: var(--white); }
+    .about-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .about-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; border: 1px solid var(--border2);
+      border-radius: 999px; padding: 6px 13px; transition: color .2s, border-color .2s; }
+    .about-links a:hover { color: var(--yellow); border-color: rgba(245,197,24,0.45); }
+    .faq details { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); margin-bottom: 10px; overflow: hidden; }
+    .faq summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 16px; font-size: 0.92rem; font-weight: 700; position: relative; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      color: var(--yellow); font-size: 1.2rem; font-weight: 400; transition: transform .2s; }
+    .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+    .faq details p { color: #c9c9d4; font-size: 0.88rem; line-height: 1.7; padding: 0 16px 15px; margin: 0; }
+    .faq details a { color: var(--yellow); }
     .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
@@ -833,8 +869,9 @@
     <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
     Pokémon TCG
   </div>
-  <h1>Volt Impact<br><span class="accent">Cards</span></h1>
-  <p>Prémiový výběr Pokémon karet pro sběratele i hráče. Bulk sety, singl karty a vzácné kousky.</p>
+  <div class="hero-brand">Volt Impact<br><span class="accent">Cards</span></div>
+  <h1>Pokémon karty skladem — bulk sety, singl karty a hotové decky</h1>
+  <p>Originální karty Pokémon TCG pro sběratele i hráče. Osobní předání v Brně, Zásilkovnou po celé ČR.</p>
   <div class="hero-cta">
     <a href="#bulk" class="btn-primary">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -945,6 +982,84 @@
   <div class="filter-count" id="filter-count">Zobrazeno <span id="count-num">…</span> z <span id="count-total">…</span> produktů</div>
 
   <div class="product-grid" id="product-grid">
+    <!--PRERENDER:bulks-->
+<div class="product-card prerendered featured">
+    <div class="product-img-wrap"><img src="img/img_1616.jpg" alt="Ultra Pack (100 ks)" loading="lazy"/><span class="featured-badge">⭐ Doporučujeme</span><span class="stock-badge">7 ks</span><span class="product-type-badge">Mix</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/ultra-pack-100-ks/">Ultra Pack (100 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered featured">
+    <div class="product-img-wrap"><img src="img/img_1659.jpg" alt="Evolution set - Lost Origin" loading="lazy"/><span class="featured-badge">⭐ Doporučujeme</span><span class="stock-badge">1 ks</span><span class="product-type-badge">Lost Origin</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/evolution-set-lost-origin/">Evolution set - Lost Origin</a></h3><div class="product-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1321.jpg" alt="Phantasmal Flames Bulk (71 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Phantasmal Flames</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/phantasmal-flames-bulk-71-ks/">Phantasmal Flames Bulk (71 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/flames34_1.jpg" alt="Phatasmal Flames Bulk (34 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Phantasmal Flames</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/phatasmal-flames-bulk-34-ks/">Phatasmal Flames Bulk (34 ks)</a></h3><div class="product-price">100 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1795_5.jpg" alt="Japonský Bulk (500 ks)" loading="lazy"/><span class="stock-badge">4 ks</span><span class="product-type-badge">Japan/Korea</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/japonsky-bulk-500-ks/">Japonský Bulk (500 ks)</a></h3><div class="product-price">1100 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1603.jpg" alt="Mega Evolutions Bulk (56 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-bulk-56-ks/">Mega Evolutions Bulk (56 ks)</a></h3><div class="product-price">200 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1506.jpg" alt="Mega Evolutions Bulk (95 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-bulk-95-ks/">Mega Evolutions Bulk (95 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1605.jpg" alt="Mega Evolutions Trainers Bulk (39 ks)" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-trainers-bulk-39-ks/">Mega Evolutions Trainers Bulk (39 ks)</a></h3><div class="product-price">200 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/jt_mix100_1.jpg" alt="Journey Together Mix (100 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Journey Together</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/journey-together-mix-100-ks/">Journey Together Mix (100 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/sfa_48_1.jpg" alt="Shrouded Fable Bulk (48 ks)" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Shrouded Fable</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/shrouded-fable-bulk-48-ks/">Shrouded Fable Bulk (48 ks)</a></h3><div class="product-price">150 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1295.jpg" alt="Obsidian Flames Bulk (82 ks)" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Obsidian Flames</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/obsidian-flames-bulk-82-ks/">Obsidian Flames Bulk (82 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1302.jpg" alt="Obsidian Flames Mix (100 ks)" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Obsidian Flames</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/obsidian-flames-mix-100-ks/">Obsidian Flames Mix (100 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1324.jpg" alt="Prismatic Evolutions Bulk (50 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Prismatic Evolutions</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/prismatic-evolutions-bulk-50-ks/">Prismatic Evolutions Bulk (50 ks)</a></h3><div class="product-price">150 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1511.jpg" alt="Mix Bulk (100 ks)" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Mix</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/mix-bulk-100-ks/">Mix Bulk (100 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_9818.jpeg" alt="Black &amp; White Pack (100 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mix</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/black-white-pack-100-ks/">Black &amp; White Pack (100 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1710.jpg" alt="Mega Evolutions Bulk (84 ks)" loading="lazy"/><span class="stock-badge">4 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-bulk-84-ks/">Mega Evolutions Bulk (84 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered">
+    <div class="product-img-wrap"><img src="img/img_1800_2.jpg" alt="Korejský Bulk (500 ks)" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Korean</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/korejsky-bulk-500-ks/">Korejský Bulk (500 ks)</a></h3><div class="product-price">1000 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered soldout">
+    <div class="product-img-wrap"><img src="img/sv151_88_1.jpg" alt="SV: 151 Bulk (88 ks)" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span><span class="product-type-badge">SV: 151</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/sv-151-bulk-88-ks/">SV: 151 Bulk (88 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
+  </div>
+<div class="product-card prerendered soldout">
+    <div class="product-img-wrap"><img src="img/sv151_evomix_1.jpg" alt="SV: 151 Evoluce mix (30 ks)" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span><span class="product-type-badge">SV: 151</span></div>
+    <div class="product-info"><h3><a class="card-link" href="/karta/sv-151-evoluce-mix-30-ks/">SV: 151 Evoluce mix (30 ks)</a></h3><div class="product-price">100 <small>Kč</small></div></div>
+  </div>
+<!--/PRERENDER:bulks-->
     <div class="no-results" id="no-results">
       <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <p>Žádné produkty neodpovídají filtru</p>
@@ -963,7 +1078,44 @@
     <p class="section-sub">Připravené decky k hraní — klikněte pro detail</p>
   </div>
   <div class="decks-grid" id="decks-grid">
-    <p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>
+    <!--PRERENDER:decks-->
+<div class="deck-card prerendered">
+    <div class="deck-img-wrap"><img src="img/sh1.jpg" alt="Sledge Hammer" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/sledge-hammer/">Sledge Hammer</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered">
+    <div class="deck-img-wrap"><img src="img/img_1625.jpg" alt="Shadowy Envoy" loading="lazy"/><span class="deck-stock-badge">2 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/shadowy-envoy/">Shadowy Envoy</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered">
+    <div class="deck-img-wrap"><img src="img/img_9812.jpeg" alt="Dragon Fist" loading="lazy"/><span class="deck-stock-badge">2 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/dragon-fist/">Dragon Fist</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered">
+    <div class="deck-img-wrap"><img src="img/img_1706.jpg" alt="Flash Impact" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/flash-impact/">Flash Impact</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered">
+    <div class="deck-img-wrap"><img src="img/img_1719.jpg" alt="Cast-Off Shell" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/cast-off-shell/">Cast-Off Shell</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered soldout">
+    <div class="deck-img-wrap"><img src="img/dw1.jpg" alt="Desert Wings" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/desert-wings/">Desert Wings</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered soldout">
+    <div class="deck-img-wrap"><img src="img/sf1.jpg" alt="Shadow Fang" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/shadow-fang/">Shadow Fang</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered soldout">
+    <div class="deck-img-wrap"><img src="img/sm1.jpg" alt="Sun &amp; Moon" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/sun-moon/">Sun &amp; Moon</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<div class="deck-card prerendered soldout">
+    <div class="deck-img-wrap"><img src="img/img_1366.jpg" alt="Volt Impact" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-info"><h3><a class="card-link" href="/karta/volt-impact/">Volt Impact</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
+  </div>
+<!--/PRERENDER:decks-->
   </div>
   <p class="grid-empty" id="decks-empty">Žádné decky neodpovídají filtru</p>
 </section>
@@ -977,9 +1129,242 @@
     <h2 class="section-title">Singl <span>karty</span></h2>
     <p class="section-sub">Vybrané karty pro doplnění kolekce — klikněte pro detail</p>
   </div>
-  <div class="singles-grid" id="singles-grid"></div>
+  <div class="singles-grid" id="singles-grid"><!--PRERENDER:singles-->
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/sv151_s_charmander.jpg" alt="Charmander" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/charmander/">Charmander</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/sv151_s_pidgeotto.jpg" alt="Pidgeotto SV: 151" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/pidgeotto-sv-151/">Pidgeotto SV: 151</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/sv151_s_pikachu.jpg" alt="Pikachu SV: 151" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-sv-151/">Pikachu SV: 151</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_sylveon.jpg" alt="Sylveon 022/064" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/sylveon-022-064/">Sylveon 022/064</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_suicune.jpg" alt="Suicune 026/094" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/suicune-026-094/">Suicune 026/094</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_togekiss.jpg" alt="Togekiss 072/191" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/togekiss-072-191/">Togekiss 072/191</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_darkrai.jpg" alt="Darkrai 136/197" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/darkrai-136-197/">Darkrai 136/197</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_reshiram.jpg" alt="Reshiram 017/094" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/reshiram-017-094/">Reshiram 017/094</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_thundurus.jpg" alt="Thundurus 070/191" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/thundurus-070-191/">Thundurus 070/191</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/misc_s_kyogre.jpg" alt="Kyogre 035/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/kyogre-035-132/">Kyogre 035/132</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1298.jpg" alt="Charmander 026/197" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/charmander-026-197/">Charmander 026/197</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1299.jpg" alt="Clefairy 081/197" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/clefairy-081-197/">Clefairy 081/197</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1300.jpg" alt="Cleffa 080/197" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/cleffa-080-197/">Cleffa 080/197</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1479.jpg" alt="Kirlia 059/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/kirlia-059-132/">Kirlia 059/132</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1478.jpg" alt="Ralts 058/132" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/ralts-058-132/">Ralts 058/132</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1489.jpg" alt="Eevee 050/064" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/eevee-050-064/">Eevee 050/064</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1490.jpg" alt="Espeon 086/197" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/espeon-086-197/">Espeon 086/197</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1493.jpg" alt="Umbreon  130/197" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/umbreon-130-197/">Umbreon  130/197</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1486.jpg" alt="Battle Cage 085/094" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/battle-cage-085-094/">Battle Cage 085/094</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1484.jpg" alt="Dawn 087/094" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/dawn-087-094/">Dawn 087/094</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1485.jpg" alt="Lillie's Determination 119/132" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/lillie-s-determination-119-132/">Lillie's Determination 119/132</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1483.jpg" alt="Bulbasaur 001/132" loading="lazy"/><span class="stock-badge">12 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/bulbasaur-001-132/">Bulbasaur 001/132</a></h3><div class="single-price">10 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1488.jpg" alt="Bayleef 009/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/bayleef-009-132/">Bayleef 009/132</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1491.jpg" alt="Chikorita 008/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/chikorita-008-132/">Chikorita 008/132</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1482.jpg" alt="Ivysaur 002/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/ivysaur-002-132/">Ivysaur 002/132</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1501.jpg" alt="Eevee 074/131" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/eevee-074-131/">Eevee 074/131</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1495.jpg" alt="Pikachu 051/162" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-051-162/">Pikachu 051/162</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1503.jpg" alt="Raichu 052/162" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/raichu-052-162/">Raichu 052/162</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1499.jpg" alt="Turtwig 010/162" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/turtwig-010-162/">Turtwig 010/162</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1500.jpg" alt="Grotle 011/162" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/grotle-011-162/">Grotle 011/162</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1497.jpg" alt="Totodile 039/162" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/totodile-039-162/">Totodile 039/162</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/img_1498.jpg" alt="Croconaw 040/162" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/croconaw-040-162/">Croconaw 040/162</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/swsh_s_pikachu_052196_1.jpg" alt="Pikachu 052/196" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-052-196/">Pikachu 052/196</a></h3><div class="single-price">40 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_pikachu_027078_1.jpg" alt="Pikachu 027/078" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-027-078/">Pikachu 027/078</a></h3><div class="single-price">30 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/swsh_s_morpeko_078202_1.jpg" alt="Morpeko 078/202" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/morpeko-078-202/">Morpeko 078/202</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_charmander_008078_1.jpg" alt="Charmander 008/078" loading="lazy"/><span class="stock-badge">5 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/charmander-008-078/">Charmander 008/078</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_charmeleon_009078_1.jpg" alt="Charmeleon 009/078" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/charmeleon-009-078/">Charmeleon 009/078</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_ivysaur_002078_1.jpg" alt="Ivysaur 002/078" loading="lazy"/><span class="stock-badge">5 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/ivysaur-002-078/">Ivysaur 002/078</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_bulbasaur_001078_1.jpg" alt="Bulbasaur 001/078" loading="lazy"/><span class="stock-badge">6 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/bulbasaur-001-078/">Bulbasaur 001/078</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_wartortle_016078_1.jpg" alt="Wartortle 016/078" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/wartortle-016-078/">Wartortle 016/078</a></h3><div class="single-price">20 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/go_s_squirtle_015078_1.jpg" alt="Squirtle 015/078" loading="lazy"/><span class="stock-badge">5 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/squirtle-015-078/">Squirtle 015/078</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered">
+    <div class="single-img-wrap"><img src="img/astral_s_glaceon_038189_1.jpg" alt="Glaceon 038/189" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/glaceon-038-189/">Glaceon 038/189</a></h3><div class="single-price">40 Kč</div></div>
+  </div>
+<div class="single-card prerendered soldout">
+    <div class="single-img-wrap"><img src="img/sv151_s_eevee.jpg" alt="Eevee" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/eevee/">Eevee</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered soldout">
+    <div class="single-img-wrap"><img src="img/sv151_s_ivysaur.jpg" alt="Ivysaur SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/ivysaur-sv-151/">Ivysaur SV: 151</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered soldout">
+    <div class="single-img-wrap"><img src="img/sv151_s_oldamber.jpg" alt="Old Amber  SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/old-amber-sv-151/">Old Amber  SV: 151</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered soldout">
+    <div class="single-img-wrap"><img src="img/sv151_s_snorlax.jpg" alt="Snorlax  SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/snorlax-sv-151/">Snorlax  SV: 151</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<div class="single-card prerendered soldout">
+    <div class="single-img-wrap"><img src="img/sv151_s_squirtle.jpg" alt="Squirtle  SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/squirtle-sv-151/">Squirtle  SV: 151</a></h3><div class="single-price">15 Kč</div></div>
+  </div>
+<!--/PRERENDER:singles--></div>
   <p class="grid-empty" id="singles-empty">Žádné singl karty neodpovídají filtru</p>
 </section>
+
+<!-- ── O OBCHODĚ + ČASTÉ OTÁZKY ── -->
+<section id="o-obchode">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-header" style="margin-bottom:22px">
+        <div class="section-tag">O obchodě</div>
+        <h2 class="section-title">Pokémon karty z <span>Brna</span></h2>
+      </div>
+      <p><b>Volt Impact Cards</b> je malý český obchod s originálními kartami Pokémon TCG. Nabízíme <b>bulk sety a mixy karet</b> z aktuálních i starších sérií, vybrané <b>singl karty</b> pro doplnění sbírky a <b>hotové decky</b> připravené ke hře.</p>
+      <p>U každé karty uvádíme sérii, éru, číslo karty a stav — <b>Near Mint, Lightly Played nebo Moderately Played</b> — abyste přesně věděli, co kupujete. Najdete u nás karty z éry Scarlet &amp; Violet, Mega Evolution i Sword &amp; Shield.</p>
+      <p>Zboží posíláme <b>Zásilkovnou po celé České republice</b> — na výdejní místo nebo do Z-BOXu za 79 Kč, na adresu za 109 Kč. V Brně je možné <b>osobní předání na hlavním nádraží</b> zdarma. Platí se převodem na účet a fakturu dostanete e-mailem hned po objednávce.</p>
+      <div class="about-links">
+        <a href="/serie/">Karty podle sérií</a>
+        <a href="/karta/">Seznam všech karet</a>
+        <a href="/obchodni-podminky/">Obchodní podmínky</a>
+      </div>
+    </div>
+    <div>
+      <div class="section-header" style="margin-bottom:22px">
+        <div class="section-tag">Časté otázky</div>
+        <h2 class="section-title">Jak to <span>funguje</span></h2>
+      </div>
+      <div class="faq">
+        <details><summary>Jak probíhá objednávka?</summary>
+          <p>Vložte karty do košíku, vyberte způsob dopravy a odešlete objednávku. Obratem Vám přijde e-mailem faktura s údaji k platbě a QR kódem.</p></details>
+        <details><summary>Jak mohu zaplatit?</summary>
+          <p>Převodem na účet 3429264010/3030. Jako variabilní symbol uveďte číslo objednávky. Zboží odesíláme po připsání platby.</p></details>
+        <details><summary>Kolik stojí doprava a jak dlouho trvá?</summary>
+          <p>Zásilkovna na výdejní místo nebo do Z-BOXu stojí 79 Kč, doručení na adresu 109 Kč. Zásilku podáme do 3 pracovních dnů od připsání platby, doručení obvykle trvá 1–2 pracovní dny.</p></details>
+        <details><summary>Je možné osobní převzetí?</summary>
+          <p>Ano, v Brně na hlavním nádraží, a to zdarma. Preferovaný čas uvedete v objednávce a potvrdíme Vám ho e-mailem.</p></details>
+        <details><summary>Co znamenají zkratky NM, LP a MP?</summary>
+          <p>Near Mint (NM) je karta bez viditelného opotřebení. Lightly Played (LP) má drobné stopy používání. Moderately Played (MP) má viditelné opotřebení, ale je plně hratelná.</p></details>
+        <details><summary>Jsou karty originální?</summary>
+          <p>Ano, prodáváme výhradně originální karty Pokémon TCG.</p></details>
+        <details><summary>Mohu zboží vrátit?</summary>
+          <p>Ano, jako spotřebitel můžete od nákupu odstoupit do 14 dnů bez udání důvodu. Postup najdete na stránce <a href="/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a>.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
 
 <!-- ── ORDER CTA ── -->
 <section class="order-section">
@@ -1225,6 +1610,7 @@
         <a href="/ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
         <a href="/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a>
         <a href="/karta/">Seznam všech karet</a>
+        <a href="/serie/">Karty podle sérií</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1519,7 +1905,7 @@ function buildBulkCard(p) {
       <span class="product-type-badge">${p.seriesLabel}</span>
     </div>
     <div class="product-info">
-      <h3>${p.title}</h3>
+      <h3><a class="card-link" href="/karta/${slugify(p.title)}/" onclick="cardLink(event)">${p.title}</a></h3>
       <div class="product-price">${p.price} <small>Kč</small></div>
       <div class="click-hint">${HINT_SVG} Zobrazit detail</div>
     </div>
@@ -1540,7 +1926,7 @@ function buildDeckCard(p) {
       <span class="deck-type-badge">${p.seriesLabel || 'Deck'}</span>
     </div>
     <div class="deck-info">
-      <h3>${p.title}</h3>
+      <h3><a class="card-link" href="/karta/${slugify(p.title)}/" onclick="cardLink(event)">${p.title}</a></h3>
       <div class="deck-price">${p.price} <small>Kč</small></div>
       <div class="deck-hint">${HINT_SVG} Zobrazit detail</div>
     </div>
@@ -1554,8 +1940,15 @@ function buildSingleCard(p) {
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title), stockNum:(Number(p.stock)||0)});
   return `<div class="single-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
-    <div class="single-info"><h3>${p.title}</h3><div class="single-price">${p.price} Kč</div></div>
+    <div class="single-info"><h3><a class="card-link" href="/karta/${slugify(p.title)}/" onclick="cardLink(event)">${p.title}</a></h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
+}
+
+/* Titulek karty je skutečný odkaz na stránku produktu (kvůli vyhledávačům).
+   Běžné kliknutí otevře detail v okně, Cmd/Ctrl+klik otevře stránku produktu v nové záložce. */
+function cardLink(e) {
+  if (e.metaKey || e.ctrlKey || e.shiftKey) { e.stopPropagation(); return; }
+  e.preventDefault();
 }
 
 function skeletonCards(n, ratio) {
@@ -1567,6 +1960,7 @@ function skeletonCards(n, ratio) {
 }
 
 function showSkeletons() {
+  if (document.querySelector('.prerendered')) return;
   const g = document.getElementById('product-grid');
   if (g) g.insertAdjacentHTML('afterbegin', skeletonCards(6, 'height:210px'));
   const s = document.getElementById('singles-grid');

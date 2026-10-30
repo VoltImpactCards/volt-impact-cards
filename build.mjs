@@ -206,7 +206,7 @@ const CONSENT_BANNER = `<!-- Lišta souhlasu s cookies -->
 const foot = `<footer>
   <p>Volt Impact Cards — Pokémon TCG, Brno &amp; celá ČR</p>
   <p style="margin-top:6px">Prodávající: ${SELLER.jmeno}${SELLER.ico ? ', IČO ' + SELLER.ico : ''}${SELLER.adresa ? ', ' + SELLER.adresa : ''}${SELLER.dph ? '' : ' · Neplátce DPH'}</p>
-  <p style="margin-top:6px"><a href="mailto:${MAIL}">${MAIL}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="${SITE}/">Zpět na nabídku</a></p>
+  <p style="margin-top:6px"><a href="mailto:${MAIL}">${MAIL}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="${SITE}/">Zpět na nabídku</a> · <a href="${SITE}/serie/">Karty podle sérií</a> · <a href="${SITE}/${OUT}/">Všechny karty</a></p>
   <p style="margin-top:6px"><a href="${SITE}/obchodni-podminky/">Obchodní podmínky</a> · <a href="${SITE}/ochrana-osobnich-udaju/">Ochrana osobních údajů</a> · <a href="${SITE}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a></p>
   <p style="margin-top:10px;opacity:.7">Nejsme partnerem ani sponzorem The Pokémon Company.</p>
 </footer>
@@ -215,15 +215,70 @@ ${CONSENT_BANNER}
 </body>
 </html>`;
 
+/* ── Strukturovaná data: doprava a vrácení (Google je doporučuje u produktů) ── */
+const ROK_DOPREDU = new Date(Date.now() + 365 * 86400000).toISOString().slice(0, 10);
+const dodani = (min, max) => ({
+  '@type': 'ShippingDeliveryTime',
+  handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 3, unitCode: 'DAY' },
+  transitTime: { '@type': 'QuantitativeValue', minValue: min, maxValue: max, unitCode: 'DAY' }
+});
+const SHIPPING_LD = [
+  { '@type': 'OfferShippingDetails', name: 'Zásilkovna — výdejní místo / Z-BOX',
+    shippingRate: { '@type': 'MonetaryAmount', value: 79, currency: 'CZK' },
+    shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CZ' }, deliveryTime: dodani(1, 2) },
+  { '@type': 'OfferShippingDetails', name: 'Zásilkovna — doručení na adresu',
+    shippingRate: { '@type': 'MonetaryAmount', value: 109, currency: 'CZK' },
+    shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CZ' }, deliveryTime: dodani(1, 2) }
+];
+const RETURN_LD = {
+  '@type': 'MerchantReturnPolicy', applicableCountry: 'CZ',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+  merchantReturnDays: 14,
+  returnMethod: 'https://schema.org/ReturnByMail',
+  returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility'
+};
+
+/* ── Popisy sérií a ér pro jejich stránky ── */
+const SERIE_POPIS = {
+  sv151: 'Scarlet & Violet — 151 je speciální rozšíření z roku 2023 věnované původním 151 Pokémonům z regionu Kanto. Patří k nejoblíbenějším sériím posledních let mezi sběrateli.',
+  obsidian: 'Obsidian Flames je rozšíření éry Scarlet & Violet z roku 2023. Proslavila ho karta Charizard ex v podobě Tera Pokémona temného typu.',
+  temporal: 'Temporal Forces je rozšíření éry Scarlet & Violet z roku 2024, které přineslo Ancient a Future Pokémony a návrat karet ACE SPEC.',
+  sfa: 'Shrouded Fable je speciální rozšíření éry Scarlet & Violet z roku 2024 zaměřené na Pokémony z oblasti Kitakami.',
+  surging: 'Surging Sparks je rozšíření éry Scarlet & Violet z roku 2024, na jehož obalech se objevuje Pikachu ex.',
+  prismatic: 'Prismatic Evolutions je speciální rozšíření z roku 2025 věnované Eevee a všem jeho vývojovým formám.',
+  jt: 'Journey Together je rozšíření éry Scarlet & Violet z roku 2025, které vrátilo do hry Pokémony trenérů.',
+  mega: 'Mega Evolution je série z roku 2025, která do Pokémon TCG vrátila Mega evoluce v podobě karet Mega Pokémon ex.',
+  flames: 'Phantasmal Flames je rozšíření série Mega Evolution z roku 2025.',
+  pokemongo: 'Pokémon GO je speciální rozšíření éry Sword & Shield z roku 2022 inspirované stejnojmennou mobilní hrou.',
+  lost: 'Lost Origin je rozšíření éry Sword & Shield z roku 2022, které přineslo mechaniku Lost Zone a karty Pokémon VSTAR.',
+  astral: 'Astral Radiance je rozšíření éry Sword & Shield z roku 2022 inspirované hrou Pokémon Legends: Arceus.',
+  swshbase: 'Sword & Shield je základní rozšíření stejnojmenné éry z roku 2020, které uvedlo karty Pokémon V a VMAX.'
+};
+const ERA_POPIS = {
+  sv: 'Scarlet & Violet je éra Pokémon TCG z let 2023–2025 navazující na hry Pokémon Scarlet a Violet. Přinesla karty Pokémon ex a Tera Pokémony.',
+  mega: 'Éra Mega Evolution začala v roce 2025 a vrátila do Pokémon TCG Mega evoluce.',
+  swsh: 'Sword & Shield je éra z let 2020–2023 inspirovaná hrami Pokémon Sword a Shield. Proslavily ji karty Pokémon V, VMAX a VSTAR.',
+  sm: 'Sun & Moon je éra z let 2017–2019 navazující na hry Pokémon Sun a Moon, známá kartami Pokémon GX.',
+  bw: 'Black & White je éra z let 2011–2013 navazující na hry Pokémon Black a White.'
+};
+// stránku dostanou jen skutečné série/éry s alespoň 2 produkty (žádné prázdné stránky)
+let SERIE_PAGES = new Set();
+let ERA_PAGES = new Set();
+
 function productPage(p, similar) {
   const url = `${SITE}/${OUT}/${p.slug}/`;
   const img = `${SITE}/${p.imgs[0]}`;
   const era = ERA_LABELS[p.era] || '';
   const so = p.stock === 0 || p.soldout === true;
   const kind = p.type === 'Single' ? 'Singl karta' : p.type === 'Deck' ? 'Deck' : 'Bulk set';
-  const title = `${p.title} — ${p.seriesLabel || ''} | Volt Impact Cards`.replace(/\s+—\s+\|/, ' |');
+  // Češi hledají „pokemon karta glaceon", ne jen „glaceon 038/189" — proto typ v titulku
+  const titleKind = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Pokémon deck' : (/bulk/i.test(p.title) ? 'Pokémon karty' : 'Pokémon karty bulk');
+  const descKind = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Hotový Pokémon deck' : 'Bulk Pokémon karet';
+  const seriesInTitle = p.type === 'Single' && p.seriesLabel && !p.title.includes(p.seriesLabel) ? ' ' + p.seriesLabel : '';
+  const title = `${p.title}${seriesInTitle} — ${titleKind} | Volt Impact Cards`;
+  const seriesUrl = SERIE_PAGES.has(p.series) ? `${SITE}/serie/${p.series}/` : '';
   const desc = [
-    `${kind} ${p.title}`,
+    `${descKind} ${p.title}`,
     p.seriesLabel ? `ze série ${p.seriesLabel}` : '',
     era ? `(${era})` : '',
     `za ${p.price} Kč.`,
@@ -237,11 +292,15 @@ function productPage(p, similar) {
     image: p.imgs.map(i => `${SITE}/${i}`),
     category: kind,
     brand: { '@type': 'Brand', name: 'Pokémon' },
+    sku: p.slug,
     offers: {
       '@type': 'Offer', url, price: p.price, priceCurrency: 'CZK',
+      priceValidUntil: ROK_DOPREDU,
       availability: so ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/UsedCondition',
-      seller: { '@type': 'Organization', name: 'Volt Impact Cards' }
+      seller: { '@type': 'Organization', name: 'Volt Impact Cards' },
+      shippingDetails: SHIPPING_LD,
+      hasMerchantReturnPolicy: RETURN_LD
     }
   };
   const crumbs = {
@@ -265,7 +324,7 @@ function productPage(p, similar) {
   <div>
     <h1>${esc(p.title)}</h1>
     <div class="badges">
-      ${p.seriesLabel ? `<span class="badge y">${esc(p.seriesLabel)}</span>` : ''}
+      ${p.seriesLabel ? (seriesUrl ? `<a class="badge y" href="${seriesUrl}" style="text-decoration:none">${esc(p.seriesLabel)}</a>` : `<span class="badge y">${esc(p.seriesLabel)}</span>`) : ''}
       ${era ? `<span class="badge">${esc(era)}</span>` : ''}
       <span class="badge">${kind}</span>
       <span class="badge ${so ? 'r' : ''}">${so ? 'Vyprodáno' : 'Skladem: ' + p.stock + ' ks'}</span>
@@ -366,12 +425,146 @@ for (const [group, items] of Object.entries(raw)) {
 if (existsSync(OUT)) await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 
+{
+  const pocty = {};
+  for (const p of all) if (p.series && SERIE_POPIS[p.series]) pocty[p.series] = (pocty[p.series] || 0) + 1;
+  SERIE_PAGES = new Set(Object.keys(pocty).filter(k => pocty[k] >= 2));
+}
+
 for (const p of all) {
   const similar = all.filter(x => x.slug !== p.slug && x.series === p.series && x.stock !== 0).slice(0, 4);
   await mkdir(`${OUT}/${p.slug}`, { recursive: true });
   await writeFile(`${OUT}/${p.slug}/index.html`, productPage(p, similar), 'utf8');
 }
+/* ── Stránky sérií a ér ── */
+function produktyGrid(items) {
+  return `<div class="mgrid">${items.map(s => `<a class="mcard" href="${SITE}/${OUT}/${s.slug}/">
+    <div class="im"><img src="${SITE}/${s.imgs[0]}" alt="${esc(s.title)}" loading="lazy"${(s.stock === 0 || s.soldout === true) ? ' style="filter:grayscale(1);opacity:.75"' : ''}/></div>
+    <div class="t">${esc(s.title)}</div><div class="pr">${s.price} Kč${(s.stock === 0 || s.soldout === true) ? ' · vyprodáno' : ''}</div></a>`).join('')}</div>`;
+}
+
+function skupinaPage(kind, key, label, popis, items) {
+  const base = kind === 'era' ? 'era' : 'serie';
+  const url = `${SITE}/${base}/${key}/`;
+  const skladem = items.filter(p => !(p.stock === 0 || p.soldout === true));
+  const ceny = skladem.map(p => p.price);
+  const od = ceny.length ? Math.min(...ceny) : null;
+  const nadpis = kind === 'era' ? `Pokémon karty z éry ${label}` : `${label} — Pokémon karty`;
+  const title = kind === 'era'
+    ? `Éra ${label} — Pokémon karty skladem | Volt Impact Cards`
+    : `${label} karty — Pokémon singly a bulky | Volt Impact Cards`;
+  const desc = `${nadpis}: ${items.length} produktů${od !== null ? ' od ' + od + ' Kč' : ''}. Originální karty, osobní předání v Brně, Zásilkovnou po celé ČR.`;
+  const crumbs = {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Nabídka', item: `${SITE}/` },
+      { '@type': 'ListItem', position: 2, name: 'Série a éry', item: `${SITE}/serie/` },
+      { '@type': 'ListItem', position: 3, name: label, item: url }
+    ]
+  };
+  const list = {
+    '@context': 'https://schema.org', '@type': 'ItemList', name: nadpis,
+    itemListElement: items.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/${OUT}/${p.slug}/`, name: p.title }))
+  };
+  const extraLd = `<script type="application/ld+json">${JSON.stringify(crumbs)}</script>
+<script type="application/ld+json">${JSON.stringify(list)}</script>`;
+  return head({ title, desc, url, img: `${SITE}/${items[0].imgs[0]}`, extraLd }) + `
+<div class="crumbs"><a href="${SITE}/">Nabídka</a> › <a href="${SITE}/serie/">Série a éry</a> › ${esc(label)}</div>
+<h1 style="margin-bottom:12px">${esc(nadpis)}</h1>
+<p class="desc" style="max-width:720px">${esc(popis)} Skladem máme ${skladem.length} ${skladem.length === 1 ? 'produkt' : (skladem.length < 5 ? 'produkty' : 'produktů')}${od !== null ? ' od ' + od + ' Kč' : ''}.</p>
+<div class="more" style="margin-top:28px">${produktyGrid(items)}</div>
+` + foot;
+}
+
+function serieIndexPage(serie, ery) {
+  const url = `${SITE}/serie/`;
+  const title = 'Pokémon karty podle sérií a ér | Volt Impact Cards';
+  const desc = 'Pokémon karty rozdělené podle sérií a ér — Scarlet & Violet, Mega Evolution, Sword & Shield a další. Originální karty skladem.';
+  const radek = (base, key, label, n) => `<a href="${SITE}/${base}/${key}/">${esc(label)} — ${n} ${n === 1 ? 'produkt' : (n < 5 ? 'produkty' : 'produktů')}</a>`;
+  return head({ title, desc, url, img: `${SITE}/img/logo.png` }) + `
+<div class="crumbs"><a href="${SITE}/">Nabídka</a> › Série a éry</div>
+<h1 style="margin-bottom:18px">Pokémon karty podle sérií a ér</h1>
+<h2 style="font-size:1.05rem;margin:18px 0 10px;color:var(--yellow)">Éry</h2>
+<div class="catlist">${ery.map(e => radek('era', e.key, e.label, e.items.length)).join('\n')}</div>
+<h2 style="font-size:1.05rem;margin:26px 0 10px;color:var(--yellow)">Série</h2>
+<div class="catlist">${serie.map(s => radek('serie', s.key, s.label, s.items.length)).join('\n')}</div>
+` + foot;
+}
+
 await writeFile(`${OUT}/index.html`, catalogPage(all), 'utf8');
+
+// série
+const serieMap = new Map();
+for (const p of all) {
+  if (!p.series || !SERIE_POPIS[p.series]) continue;
+  if (!serieMap.has(p.series)) serieMap.set(p.series, { key: p.series, label: p.seriesLabel || p.series, items: [] });
+  serieMap.get(p.series).items.push(p);
+}
+const serieList = [...serieMap.values()].filter(s => s.items.length >= 2).sort((a, b) => b.items.length - a.items.length);
+// éry
+const eraMap = new Map();
+for (const p of all) {
+  if (!p.era || !ERA_POPIS[p.era]) continue;
+  if (!eraMap.has(p.era)) eraMap.set(p.era, { key: p.era, label: ERA_LABELS[p.era] || p.era, items: [] });
+  eraMap.get(p.era).items.push(p);
+}
+const eraList = [...eraMap.values()].filter(e => e.items.length >= 2).sort((a, b) => b.items.length - a.items.length);
+
+for (const dir of ['serie', 'era']) if (existsSync(dir)) await rm(dir, { recursive: true, force: true });
+await mkdir('serie', { recursive: true });
+await mkdir('era', { recursive: true });
+const seradit = items => [...items].sort((a, b) => (a.stock === 0) - (b.stock === 0));
+for (const s of serieList) {
+  await mkdir(`serie/${s.key}`, { recursive: true });
+  await writeFile(`serie/${s.key}/index.html`, skupinaPage('serie', s.key, s.label, SERIE_POPIS[s.key], seradit(s.items)), 'utf8');
+}
+for (const e of eraList) {
+  await mkdir(`era/${e.key}`, { recursive: true });
+  await writeFile(`era/${e.key}/index.html`, skupinaPage('era', e.key, e.label, ERA_POPIS[e.key], seradit(e.items)), 'utf8');
+}
+await writeFile('serie/index.html', serieIndexPage(serieList, eraList), 'utf8');
+
+/* ── Předvykreslení produktů do index.html ──
+   Produkty se na domovské stránce vykreslují JavaScriptem. Sem je vložíme i přímo do HTML,
+   aby je viděly vyhledávače (hlavně Seznam) a vedly z nich odkazy na stránky produktů.
+   JavaScript je po načtení nahradí plnohodnotnými kartami. */
+function prerenderKarta(p) {
+  const so = p.stock === 0 || p.soldout === true;
+  const ft = p.featured === true && !so;
+  const odkaz = `<a class="card-link" href="/${OUT}/${p.slug}/">${esc(p.title)}</a>`;
+  const img = `<img src="${p.imgs[0]}" alt="${esc(p.title)}" loading="lazy"/>`;
+  const soldout = so ? '<div class="soldout-overlay"><span>Vyprodáno</span></div>' : '';
+  const featured = ft ? '<span class="featured-badge">\u2b50 Doporučujeme</span>' : '';
+  const sklad = so ? 'Vyprodáno' : p.stock + ' ks';
+  if (p.group === 'singles') return `<div class="single-card prerendered${so ? ' soldout' : ''}${ft ? ' featured' : ''}">
+    <div class="single-img-wrap">${img}${featured}${soldout}<span class="stock-badge${so ? ' soldout-badge' : ''}">${sklad}</span></div>
+    <div class="single-info"><h3>${odkaz}</h3><div class="single-price">${p.price} Kč</div></div>
+  </div>`;
+  if (p.group === 'decks') return `<div class="deck-card prerendered${so ? ' soldout' : ''}${ft ? ' featured' : ''}">
+    <div class="deck-img-wrap">${img}${soldout}${featured}<span class="deck-stock-badge${so ? ' soldout-badge' : ''}">${sklad}</span><span class="deck-type-badge">${esc(p.seriesLabel || 'Deck')}</span></div>
+    <div class="deck-info"><h3>${odkaz}</h3><div class="deck-price">${p.price} <small>Kč</small></div></div>
+  </div>`;
+  return `<div class="product-card prerendered${so ? ' soldout' : ''}${ft ? ' featured' : ''}">
+    <div class="product-img-wrap">${img}${soldout}${featured}<span class="stock-badge${so ? ' soldout-badge' : ''}">${sklad}</span><span class="product-type-badge">${esc(p.seriesLabel || '')}</span></div>
+    <div class="product-info"><h3>${odkaz}</h3><div class="product-price">${p.price} <small>Kč</small></div></div>
+  </div>`;
+}
+
+function poradi(items) {
+  const so = p => p.stock === 0 || p.soldout === true;
+  return [...items.filter(p => p.featured === true && !so(p)), ...items.filter(p => p.featured !== true && !so(p)), ...items.filter(so)];
+}
+
+if (existsSync('index.html')) {
+  let idx = await readFile('index.html', 'utf8');
+  for (const [skupina, prazdne] of [['bulks', ''], ['decks', '<p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>'], ['singles', '']]) {
+    const items = poradi(all.filter(p => p.group === skupina));
+    const html = items.length ? '\n' + items.map(prerenderKarta).join('\n') + '\n' : prazdne;
+    const re = new RegExp(`<!--PRERENDER:${skupina}-->[\\s\\S]*?<!--/PRERENDER:${skupina}-->`);
+    if (re.test(idx)) idx = idx.replace(re, `<!--PRERENDER:${skupina}-->${html}<!--/PRERENDER:${skupina}-->`);
+  }
+  await writeFile('index.html', idx, 'utf8');
+}
 
 
 /* ── Právní dokumenty ── */
@@ -538,6 +731,9 @@ const urls = [
   { loc: `${SITE}/`, pri: '1.0', freq: 'weekly' },
   { loc: `${SITE}/${OUT}/`, pri: '0.8', freq: 'weekly' },
   ...all.map(p => ({ loc: `${SITE}/${OUT}/${p.slug}/`, pri: '0.7', freq: 'monthly' })),
+  { loc: `${SITE}/serie/`, pri: '0.7', freq: 'weekly' },
+  ...serieList.map(s => ({ loc: `${SITE}/serie/${s.key}/`, pri: '0.8', freq: 'weekly' })),
+  ...eraList.map(e => ({ loc: `${SITE}/era/${e.key}/`, pri: '0.8', freq: 'weekly' })),
   ...LEGAL_SLUGS.map(s => ({ loc: `${SITE}/${s}/`, pri: '0.3', freq: 'yearly' }))
 ];
 await writeFile('sitemap.xml',
@@ -552,4 +748,4 @@ ${urls.map(u => `  <url>
 </urlset>
 `, 'utf8');
 
-console.log(`Vygenerováno ${all.length} stránek produktů + katalog + 3 právní dokumenty + sitemap.`);
+console.log(`Vygenerováno ${all.length} stránek produktů + katalog + ${serieList.length} sérií + ${eraList.length} ér + 3 právní dokumenty + sitemap.`);
