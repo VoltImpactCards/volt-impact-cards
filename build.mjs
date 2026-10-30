@@ -29,6 +29,37 @@ const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 const norm = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
 const slugify = s => norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 
+/* ── Zmenšené fotky ve WebP ──
+   Z každé fotky v img/ se při nasazení vyrobí 3 menší verze: img/s/ (400 px, karty v nabídce),
+   img/m/ (800 px, karty na velkých displejích) a img/l/ (1200 px, detail produktu).
+   Kdyby verze chyběla, obrázek si sám načte originál (onerror). */
+const VARIANTY = { s: 400, m: 800, l: 1200 };
+const lzeZmensit = src => /^img\/[^/]+\.(jpe?g|png)$/i.test(src || '');
+const vimg = (src, v) => lzeZmensit(src) ? `img/${v}/${src.slice(4)}.webp` : src;
+const FALLBACK = `onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig"`;
+// obrázek karty v mřížce (nabídka, série, podobné produkty)
+function kartaImg(src, alt, pre = '', extra = ' loading="lazy"') {
+  if (!lzeZmensit(src)) return `<img src="${pre}${src}" alt="${esc(alt)}" decoding="async"${extra}/>`;
+  return `<img src="${pre}${vimg(src, 's')}" srcset="${pre}${vimg(src, 's')} 400w, ${pre}${vimg(src, 'm')} 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="${pre}${src}" ${FALLBACK} alt="${esc(alt)}" width="400" height="400" decoding="async"${extra}/>`;
+}
+// velký obrázek (detail produktu)
+function velkyImg(src, alt, pre = '', extra = '') {
+  if (!lzeZmensit(src)) return `<img src="${pre}${src}" alt="${esc(alt)}"${extra}/>`;
+  return `<img src="${pre}${vimg(src, 'l')}" data-orig="${pre}${src}" ${FALLBACK} alt="${esc(alt)}"${extra}/>`;
+}
+// malý náhled (miniatury)
+function malyImg(src, alt, pre = '', extra = ' loading="lazy"') {
+  if (!lzeZmensit(src)) return `<img src="${pre}${src}" alt="${esc(alt)}"${extra}/>`;
+  return `<img src="${pre}${vimg(src, 's')}" data-orig="${pre}${src}" ${FALLBACK} alt="${esc(alt)}" width="64" height="64" decoding="async"${extra}/>`;
+}
+
+/* Písmo Inter hostujeme sami (rychlejší než Google Fonts a bez předávání IP adres Googlu) */
+const FONTS = `<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin-ext.woff2" as="font" type="font/woff2" crossorigin>`;
+const FONT_FACE = `@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-latin-ext.woff2) format('woff2');unicode-range:U+0100-017F}
+`;
+
 const CSS = `*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#080810;--bg2:#0e0e1a;--surface:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--yellow:#f5c518;--blue:#4fc3f7;--grey:#8a8a9a}
 body{font-family:'Inter','Segoe UI',Arial,sans-serif;background:var(--bg);color:#fff;line-height:1.6}
@@ -125,16 +156,14 @@ ${GTAG}
 <meta name="twitter:title" content="${esc(title)}"/>
 <meta name="twitter:description" content="${esc(desc)}"/>
 <meta name="twitter:image" content="${img}"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-<style>${CSS}</style>
+${FONTS}
+<style>${FONT_FACE}${CSS}</style>
 ${extraLd || ''}
 </head>
 <body>
 <div class="wrap">
 <a class="top" href="${SITE}/" style="text-decoration:none">
-  <img src="${SITE}/img/logo_nav.png" alt="Volt Impact Cards"/>
+  <img src="${SITE}/img/logo_nav.png" alt="Volt Impact Cards" width="24" height="34"/>
   <span>Volt Impact <i>Cards</i></span>
 </a>`;
 
@@ -318,8 +347,8 @@ function productPage(p, similar) {
 <div class="crumbs"><a href="${SITE}/">Nabídka</a> › <a href="${SITE}/${OUT}/">Karty</a> › ${esc(p.title)}</div>
 <div class="grid">
   <div>
-    <div class="ph"><img src="${SITE}/${p.imgs[0]}" alt="${esc(p.title)}"${so ? ' style="filter:grayscale(1);opacity:.8"' : ''}/></div>
-    ${p.imgs.length > 1 ? `<div class="thumbs">${p.imgs.slice(1).map(i => `<img src="${SITE}/${i}" alt="${esc(p.title)}" loading="lazy"/>`).join('')}</div>` : ''}
+    <div class="ph">${velkyImg(p.imgs[0], p.title, SITE + '/', ' fetchpriority="high"' + (so ? ' style="filter:grayscale(1);opacity:.8"' : ''))}</div>
+    ${p.imgs.length > 1 ? `<div class="thumbs">${p.imgs.slice(1).map(i => malyImg(i, p.title, SITE + '/')).join('')}</div>` : ''}
   </div>
   <div>
     <h1>${esc(p.title)}</h1>
@@ -341,7 +370,7 @@ function productPage(p, similar) {
 ${similar.length ? `<div class="more">
   <h2>Další z ${esc(p.seriesLabel || 'nabídky')}</h2>
   <div class="mgrid">${similar.map(s => `<a class="mcard" href="${SITE}/${OUT}/${s.slug}/">
-    <div class="im"><img src="${SITE}/${s.imgs[0]}" alt="${esc(s.title)}" loading="lazy"/></div>
+    <div class="im">${kartaImg(s.imgs[0], s.title, SITE + '/')}</div>
     <div class="t">${esc(s.title)}</div><div class="pr">${s.price} Kč</div></a>`).join('')}</div>
 </div>` : ''}
 ` + foot;
@@ -369,6 +398,7 @@ const MAX_PX = 1600;
 const MAX_KB = 500;
 
 async function optimizeImages() {
+  if (process.env.SKIP_OPTIMIZE) return; // při lokálním sestavení neměnit originály v gitu
   let sharp;
   try {
     sharp = (await import('sharp')).default;
@@ -407,6 +437,33 @@ async function optimizeImages() {
 
 await optimizeImages();
 
+async function vyrobVarianty() {
+  let sharp;
+  try { sharp = (await import('sharp')).default; }
+  catch { console.warn('sharp není k dispozici — zmenšené fotky se nevyrobí (web použije originály).'); return; }
+  let files = [];
+  try { files = (await readdir('img')).filter(f => /\.(jpe?g|png)$/i.test(f)); } catch { return; }
+  for (const v of Object.keys(VARIANTY)) await mkdir(`img/${v}`, { recursive: true });
+  const ukoly = [];
+  for (const f of files) for (const [v, px] of Object.entries(VARIANTY)) ukoly.push({ f, v, px });
+  let hotovo = 0, chyby = 0;
+  const zpracuj = async ({ f, v, px }) => {
+    const src = `img/${f}`, out = `img/${v}/${f}.webp`;
+    try {
+      if (existsSync(out) && (await stat(out)).mtimeMs >= (await stat(src)).mtimeMs) return;
+      await sharp(src).rotate()
+        .resize({ width: px, height: px, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: v === 'l' ? 76 : 74, effort: 4 })
+        .toFile(out);
+      hotovo++;
+    } catch (e) { chyby++; console.warn(`WebP ${out}: ${e.message}`); }
+  };
+  // 4 fotky současně — rychlé a nezahltí paměť
+  for (let i = 0; i < ukoly.length; i += 4) await Promise.all(ukoly.slice(i, i + 4).map(zpracuj));
+  console.log(`Zmenšené fotky: vyrobeno ${hotovo}, chyb ${chyby}.`);
+}
+await vyrobVarianty();
+
 const raw = JSON.parse(await readFile('products.json', 'utf8'));
 const all = [];
 const seen = new Set();
@@ -439,7 +496,7 @@ for (const p of all) {
 /* ── Stránky sérií a ér ── */
 function produktyGrid(items) {
   return `<div class="mgrid">${items.map(s => `<a class="mcard" href="${SITE}/${OUT}/${s.slug}/">
-    <div class="im"><img src="${SITE}/${s.imgs[0]}" alt="${esc(s.title)}" loading="lazy"${(s.stock === 0 || s.soldout === true) ? ' style="filter:grayscale(1);opacity:.75"' : ''}/></div>
+    <div class="im">${kartaImg(s.imgs[0], s.title, SITE + '/', ' loading="lazy"' + ((s.stock === 0 || s.soldout === true) ? ' style="filter:grayscale(1);opacity:.75"' : ''))}</div>
     <div class="t">${esc(s.title)}</div><div class="pr">${s.price} Kč${(s.stock === 0 || s.soldout === true) ? ' · vyprodáno' : ''}</div></a>`).join('')}</div>`;
 }
 
@@ -528,11 +585,12 @@ await writeFile('serie/index.html', serieIndexPage(serieList, eraList), 'utf8');
    Produkty se na domovské stránce vykreslují JavaScriptem. Sem je vložíme i přímo do HTML,
    aby je viděly vyhledávače (hlavně Seznam) a vedly z nich odkazy na stránky produktů.
    JavaScript je po načtení nahradí plnohodnotnými kartami. */
-function prerenderKarta(p) {
+function prerenderKarta(p, i = 99) {
   const so = p.stock === 0 || p.soldout === true;
   const ft = p.featured === true && !so;
   const odkaz = `<a class="card-link" href="/${OUT}/${p.slug}/">${esc(p.title)}</a>`;
-  const img = `<img src="${p.imgs[0]}" alt="${esc(p.title)}" loading="lazy"/>`;
+  // první řada nabídky se načítá hned (je vidět bez posunutí), ostatní až při posunu
+  const img = kartaImg(p.imgs[0], p.title, '', i < 4 ? '' : ' loading="lazy"');
   const soldout = so ? '<div class="soldout-overlay"><span>Vyprodáno</span></div>' : '';
   const featured = ft ? '<span class="featured-badge">\u2b50 Doporučujeme</span>' : '';
   const sklad = so ? 'Vyprodáno' : p.stock + ' ks';
@@ -559,7 +617,7 @@ if (existsSync('index.html')) {
   let idx = await readFile('index.html', 'utf8');
   for (const [skupina, prazdne] of [['bulks', ''], ['decks', '<p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>'], ['singles', '']]) {
     const items = poradi(all.filter(p => p.group === skupina));
-    const html = items.length ? '\n' + items.map(prerenderKarta).join('\n') + '\n' : prazdne;
+    const html = items.length ? '\n' + items.map((p, i) => prerenderKarta(p, skupina === 'bulks' ? i : 99)).join('\n') + '\n' : prazdne;
     const re = new RegExp(`<!--PRERENDER:${skupina}-->[\\s\\S]*?<!--/PRERENDER:${skupina}-->`);
     if (re.test(idx)) idx = idx.replace(re, `<!--PRERENDER:${skupina}-->${html}<!--/PRERENDER:${skupina}-->`);
   }

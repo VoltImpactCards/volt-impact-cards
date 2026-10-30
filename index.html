@@ -80,9 +80,12 @@
     ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-latin-ext.woff2) format('woff2');unicode-range:U+0100-017F}
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -848,7 +851,7 @@
 <!-- ── NAVBAR ── -->
 <nav>
   <a href="#" class="nav-logo">
-    <img src="img/logo_nav.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
+    <img src="img/logo_nav.png" alt="Volt Impact Cards" width="28" height="40" onerror="this.style.display='none'"/>
     <span class="nav-logo-text">Volt Impact <span>Cards</span></span>
   </a>
   <ul>
@@ -866,7 +869,7 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <img class="hero-logo" src="img/logo.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
+  <img class="hero-logo" src="img/logo.png" alt="Volt Impact Cards" width="240" height="240" fetchpriority="high" onerror="this.style.display='none'"/>
   <div class="hero-tag">
     <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
     Pokémon TCG
@@ -986,79 +989,79 @@
   <div class="product-grid" id="product-grid">
     <!--PRERENDER:bulks-->
 <div class="product-card prerendered featured">
-    <div class="product-img-wrap"><img src="img/img_1616.jpg" alt="Ultra Pack (100 ks)" loading="lazy"/><span class="featured-badge">⭐ Doporučujeme</span><span class="stock-badge">7 ks</span><span class="product-type-badge">Mix</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1616.jpg.webp" srcset="img/s/img_1616.jpg.webp 400w, img/m/img_1616.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1616.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Ultra Pack (100 ks)" width="400" height="400" decoding="async"/><span class="featured-badge">⭐ Doporučujeme</span><span class="stock-badge">7 ks</span><span class="product-type-badge">Mix</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/ultra-pack-100-ks/">Ultra Pack (100 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered featured">
-    <div class="product-img-wrap"><img src="img/img_1659.jpg" alt="Evolution set - Lost Origin" loading="lazy"/><span class="featured-badge">⭐ Doporučujeme</span><span class="stock-badge">1 ks</span><span class="product-type-badge">Lost Origin</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1659.jpg.webp" srcset="img/s/img_1659.jpg.webp 400w, img/m/img_1659.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1659.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Evolution set - Lost Origin" width="400" height="400" decoding="async"/><span class="featured-badge">⭐ Doporučujeme</span><span class="stock-badge">1 ks</span><span class="product-type-badge">Lost Origin</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/evolution-set-lost-origin/">Evolution set - Lost Origin</a></h3><div class="product-price">300 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1321.jpg" alt="Phantasmal Flames Bulk (71 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Phantasmal Flames</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1321.jpg.webp" srcset="img/s/img_1321.jpg.webp 400w, img/m/img_1321.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1321.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Phantasmal Flames Bulk (71 ks)" width="400" height="400" decoding="async"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Phantasmal Flames</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/phantasmal-flames-bulk-71-ks/">Phantasmal Flames Bulk (71 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/flames34_1.jpg" alt="Phatasmal Flames Bulk (34 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Phantasmal Flames</span></div>
+    <div class="product-img-wrap"><img src="img/s/flames34_1.jpg.webp" srcset="img/s/flames34_1.jpg.webp 400w, img/m/flames34_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/flames34_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Phatasmal Flames Bulk (34 ks)" width="400" height="400" decoding="async"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Phantasmal Flames</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/phatasmal-flames-bulk-34-ks/">Phatasmal Flames Bulk (34 ks)</a></h3><div class="product-price">100 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1795_5.jpg" alt="Japonský Bulk (500 ks)" loading="lazy"/><span class="stock-badge">4 ks</span><span class="product-type-badge">Japan/Korea</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1795_5.jpg.webp" srcset="img/s/img_1795_5.jpg.webp 400w, img/m/img_1795_5.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1795_5.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Japonský Bulk (500 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span><span class="product-type-badge">Japan/Korea</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/japonsky-bulk-500-ks/">Japonský Bulk (500 ks)</a></h3><div class="product-price">1100 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1603.jpg" alt="Mega Evolutions Bulk (56 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1603.jpg.webp" srcset="img/s/img_1603.jpg.webp 400w, img/m/img_1603.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1603.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Mega Evolutions Bulk (56 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-bulk-56-ks/">Mega Evolutions Bulk (56 ks)</a></h3><div class="product-price">200 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1506.jpg" alt="Mega Evolutions Bulk (95 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1506.jpg.webp" srcset="img/s/img_1506.jpg.webp 400w, img/m/img_1506.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1506.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Mega Evolutions Bulk (95 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-bulk-95-ks/">Mega Evolutions Bulk (95 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1605.jpg" alt="Mega Evolutions Trainers Bulk (39 ks)" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1605.jpg.webp" srcset="img/s/img_1605.jpg.webp 400w, img/m/img_1605.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1605.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Mega Evolutions Trainers Bulk (39 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-trainers-bulk-39-ks/">Mega Evolutions Trainers Bulk (39 ks)</a></h3><div class="product-price">200 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/jt_mix100_1.jpg" alt="Journey Together Mix (100 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Journey Together</span></div>
+    <div class="product-img-wrap"><img src="img/s/jt_mix100_1.jpg.webp" srcset="img/s/jt_mix100_1.jpg.webp 400w, img/m/jt_mix100_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/jt_mix100_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Journey Together Mix (100 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Journey Together</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/journey-together-mix-100-ks/">Journey Together Mix (100 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/sfa_48_1.jpg" alt="Shrouded Fable Bulk (48 ks)" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Shrouded Fable</span></div>
+    <div class="product-img-wrap"><img src="img/s/sfa_48_1.jpg.webp" srcset="img/s/sfa_48_1.jpg.webp 400w, img/m/sfa_48_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sfa_48_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Shrouded Fable Bulk (48 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Shrouded Fable</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/shrouded-fable-bulk-48-ks/">Shrouded Fable Bulk (48 ks)</a></h3><div class="product-price">150 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1295.jpg" alt="Obsidian Flames Bulk (82 ks)" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Obsidian Flames</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1295.jpg.webp" srcset="img/s/img_1295.jpg.webp 400w, img/m/img_1295.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1295.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Obsidian Flames Bulk (82 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Obsidian Flames</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/obsidian-flames-bulk-82-ks/">Obsidian Flames Bulk (82 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1302.jpg" alt="Obsidian Flames Mix (100 ks)" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Obsidian Flames</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1302.jpg.webp" srcset="img/s/img_1302.jpg.webp 400w, img/m/img_1302.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1302.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Obsidian Flames Mix (100 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Obsidian Flames</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/obsidian-flames-mix-100-ks/">Obsidian Flames Mix (100 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1324.jpg" alt="Prismatic Evolutions Bulk (50 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Prismatic Evolutions</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1324.jpg.webp" srcset="img/s/img_1324.jpg.webp 400w, img/m/img_1324.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1324.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Prismatic Evolutions Bulk (50 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Prismatic Evolutions</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/prismatic-evolutions-bulk-50-ks/">Prismatic Evolutions Bulk (50 ks)</a></h3><div class="product-price">150 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1511.jpg" alt="Mix Bulk (100 ks)" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Mix</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1511.jpg.webp" srcset="img/s/img_1511.jpg.webp 400w, img/m/img_1511.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1511.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Mix Bulk (100 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span><span class="product-type-badge">Mix</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/mix-bulk-100-ks/">Mix Bulk (100 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_9818.jpeg" alt="Black &amp; White Pack (100 ks)" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mix</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_9818.jpeg.webp" srcset="img/s/img_9818.jpeg.webp 400w, img/m/img_9818.jpeg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_9818.jpeg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Black &amp; White Pack (100 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span><span class="product-type-badge">Mix</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/black-white-pack-100-ks/">Black &amp; White Pack (100 ks)</a></h3><div class="product-price">300 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1710.jpg" alt="Mega Evolutions Bulk (84 ks)" loading="lazy"/><span class="stock-badge">4 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1710.jpg.webp" srcset="img/s/img_1710.jpg.webp 400w, img/m/img_1710.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1710.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Mega Evolutions Bulk (84 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span><span class="product-type-badge">Mega Evolutions</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/mega-evolutions-bulk-84-ks/">Mega Evolutions Bulk (84 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered">
-    <div class="product-img-wrap"><img src="img/img_1800_2.jpg" alt="Korejský Bulk (500 ks)" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Korean</span></div>
+    <div class="product-img-wrap"><img src="img/s/img_1800_2.jpg.webp" srcset="img/s/img_1800_2.jpg.webp 400w, img/m/img_1800_2.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1800_2.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Korejský Bulk (500 ks)" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span><span class="product-type-badge">Korean</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/korejsky-bulk-500-ks/">Korejský Bulk (500 ks)</a></h3><div class="product-price">1000 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered soldout">
-    <div class="product-img-wrap"><img src="img/sv151_88_1.jpg" alt="SV: 151 Bulk (88 ks)" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span><span class="product-type-badge">SV: 151</span></div>
+    <div class="product-img-wrap"><img src="img/s/sv151_88_1.jpg.webp" srcset="img/s/sv151_88_1.jpg.webp 400w, img/m/sv151_88_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_88_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="SV: 151 Bulk (88 ks)" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span><span class="product-type-badge">SV: 151</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/sv-151-bulk-88-ks/">SV: 151 Bulk (88 ks)</a></h3><div class="product-price">250 <small>Kč</small></div></div>
   </div>
 <div class="product-card prerendered soldout">
-    <div class="product-img-wrap"><img src="img/sv151_evomix_1.jpg" alt="SV: 151 Evoluce mix (30 ks)" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span><span class="product-type-badge">SV: 151</span></div>
+    <div class="product-img-wrap"><img src="img/s/sv151_evomix_1.jpg.webp" srcset="img/s/sv151_evomix_1.jpg.webp 400w, img/m/sv151_evomix_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_evomix_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="SV: 151 Evoluce mix (30 ks)" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span><span class="product-type-badge">SV: 151</span></div>
     <div class="product-info"><h3><a class="card-link" href="/karta/sv-151-evoluce-mix-30-ks/">SV: 151 Evoluce mix (30 ks)</a></h3><div class="product-price">100 <small>Kč</small></div></div>
   </div>
 <!--/PRERENDER:bulks-->
@@ -1082,39 +1085,39 @@
   <div class="decks-grid" id="decks-grid">
     <!--PRERENDER:decks-->
 <div class="deck-card prerendered">
-    <div class="deck-img-wrap"><img src="img/sh1.jpg" alt="Sledge Hammer" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/sh1.jpg.webp" srcset="img/s/sh1.jpg.webp 400w, img/m/sh1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sh1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Sledge Hammer" width="400" height="400" decoding="async" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/sledge-hammer/">Sledge Hammer</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered">
-    <div class="deck-img-wrap"><img src="img/img_1625.jpg" alt="Shadowy Envoy" loading="lazy"/><span class="deck-stock-badge">2 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/img_1625.jpg.webp" srcset="img/s/img_1625.jpg.webp 400w, img/m/img_1625.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1625.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Shadowy Envoy" width="400" height="400" decoding="async" loading="lazy"/><span class="deck-stock-badge">2 ks</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/shadowy-envoy/">Shadowy Envoy</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered">
-    <div class="deck-img-wrap"><img src="img/img_9812.jpeg" alt="Dragon Fist" loading="lazy"/><span class="deck-stock-badge">2 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/img_9812.jpeg.webp" srcset="img/s/img_9812.jpeg.webp 400w, img/m/img_9812.jpeg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_9812.jpeg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Dragon Fist" width="400" height="400" decoding="async" loading="lazy"/><span class="deck-stock-badge">2 ks</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/dragon-fist/">Dragon Fist</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered">
-    <div class="deck-img-wrap"><img src="img/img_1706.jpg" alt="Flash Impact" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/img_1706.jpg.webp" srcset="img/s/img_1706.jpg.webp 400w, img/m/img_1706.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1706.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Flash Impact" width="400" height="400" decoding="async" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/flash-impact/">Flash Impact</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered">
-    <div class="deck-img-wrap"><img src="img/img_1719.jpg" alt="Cast-Off Shell" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/img_1719.jpg.webp" srcset="img/s/img_1719.jpg.webp 400w, img/m/img_1719.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1719.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Cast-Off Shell" width="400" height="400" decoding="async" loading="lazy"/><span class="deck-stock-badge">1 ks</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/cast-off-shell/">Cast-Off Shell</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered soldout">
-    <div class="deck-img-wrap"><img src="img/dw1.jpg" alt="Desert Wings" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/dw1.jpg.webp" srcset="img/s/dw1.jpg.webp 400w, img/m/dw1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/dw1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Desert Wings" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/desert-wings/">Desert Wings</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered soldout">
-    <div class="deck-img-wrap"><img src="img/sf1.jpg" alt="Shadow Fang" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/sf1.jpg.webp" srcset="img/s/sf1.jpg.webp 400w, img/m/sf1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sf1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Shadow Fang" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/shadow-fang/">Shadow Fang</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered soldout">
-    <div class="deck-img-wrap"><img src="img/sm1.jpg" alt="Sun &amp; Moon" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/sm1.jpg.webp" srcset="img/s/sm1.jpg.webp 400w, img/m/sm1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sm1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Sun &amp; Moon" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/sun-moon/">Sun &amp; Moon</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <div class="deck-card prerendered soldout">
-    <div class="deck-img-wrap"><img src="img/img_1366.jpg" alt="Volt Impact" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
+    <div class="deck-img-wrap"><img src="img/s/img_1366.jpg.webp" srcset="img/s/img_1366.jpg.webp 400w, img/m/img_1366.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1366.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Volt Impact" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="deck-stock-badge soldout-badge">Vyprodáno</span><span class="deck-type-badge">Deck</span></div>
     <div class="deck-info"><h3><a class="card-link" href="/karta/volt-impact/">Volt Impact</a></h3><div class="deck-price">300 <small>Kč</small></div></div>
   </div>
 <!--/PRERENDER:decks-->
@@ -1133,191 +1136,191 @@
   </div>
   <div class="singles-grid" id="singles-grid"><!--PRERENDER:singles-->
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/sv151_s_charmander.jpg" alt="Charmander" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_charmander.jpg.webp" srcset="img/s/sv151_s_charmander.jpg.webp 400w, img/m/sv151_s_charmander.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_charmander.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Charmander" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/charmander/">Charmander</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/sv151_s_pidgeotto.jpg" alt="Pidgeotto SV: 151" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_pidgeotto.jpg.webp" srcset="img/s/sv151_s_pidgeotto.jpg.webp 400w, img/m/sv151_s_pidgeotto.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_pidgeotto.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Pidgeotto SV: 151" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/pidgeotto-sv-151/">Pidgeotto SV: 151</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/sv151_s_pikachu.jpg" alt="Pikachu SV: 151" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_pikachu.jpg.webp" srcset="img/s/sv151_s_pikachu.jpg.webp 400w, img/m/sv151_s_pikachu.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_pikachu.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Pikachu SV: 151" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-sv-151/">Pikachu SV: 151</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_sylveon.jpg" alt="Sylveon 022/064" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_sylveon.jpg.webp" srcset="img/s/misc_s_sylveon.jpg.webp 400w, img/m/misc_s_sylveon.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_sylveon.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Sylveon 022/064" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/sylveon-022-064/">Sylveon 022/064</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_suicune.jpg" alt="Suicune 026/094" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_suicune.jpg.webp" srcset="img/s/misc_s_suicune.jpg.webp 400w, img/m/misc_s_suicune.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_suicune.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Suicune 026/094" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/suicune-026-094/">Suicune 026/094</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_togekiss.jpg" alt="Togekiss 072/191" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_togekiss.jpg.webp" srcset="img/s/misc_s_togekiss.jpg.webp 400w, img/m/misc_s_togekiss.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_togekiss.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Togekiss 072/191" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/togekiss-072-191/">Togekiss 072/191</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_darkrai.jpg" alt="Darkrai 136/197" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_darkrai.jpg.webp" srcset="img/s/misc_s_darkrai.jpg.webp 400w, img/m/misc_s_darkrai.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_darkrai.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Darkrai 136/197" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/darkrai-136-197/">Darkrai 136/197</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_reshiram.jpg" alt="Reshiram 017/094" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_reshiram.jpg.webp" srcset="img/s/misc_s_reshiram.jpg.webp 400w, img/m/misc_s_reshiram.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_reshiram.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Reshiram 017/094" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/reshiram-017-094/">Reshiram 017/094</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_thundurus.jpg" alt="Thundurus 070/191" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_thundurus.jpg.webp" srcset="img/s/misc_s_thundurus.jpg.webp 400w, img/m/misc_s_thundurus.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_thundurus.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Thundurus 070/191" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/thundurus-070-191/">Thundurus 070/191</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/misc_s_kyogre.jpg" alt="Kyogre 035/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/misc_s_kyogre.jpg.webp" srcset="img/s/misc_s_kyogre.jpg.webp 400w, img/m/misc_s_kyogre.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/misc_s_kyogre.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Kyogre 035/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/kyogre-035-132/">Kyogre 035/132</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1298.jpg" alt="Charmander 026/197" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1298.jpg.webp" srcset="img/s/img_1298.jpg.webp 400w, img/m/img_1298.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1298.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Charmander 026/197" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/charmander-026-197/">Charmander 026/197</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1299.jpg" alt="Clefairy 081/197" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1299.jpg.webp" srcset="img/s/img_1299.jpg.webp 400w, img/m/img_1299.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1299.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Clefairy 081/197" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/clefairy-081-197/">Clefairy 081/197</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1300.jpg" alt="Cleffa 080/197" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1300.jpg.webp" srcset="img/s/img_1300.jpg.webp 400w, img/m/img_1300.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1300.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Cleffa 080/197" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/cleffa-080-197/">Cleffa 080/197</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1479.jpg" alt="Kirlia 059/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1479.jpg.webp" srcset="img/s/img_1479.jpg.webp 400w, img/m/img_1479.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1479.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Kirlia 059/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/kirlia-059-132/">Kirlia 059/132</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1478.jpg" alt="Ralts 058/132" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1478.jpg.webp" srcset="img/s/img_1478.jpg.webp 400w, img/m/img_1478.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1478.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Ralts 058/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/ralts-058-132/">Ralts 058/132</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1489.jpg" alt="Eevee 050/064" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1489.jpg.webp" srcset="img/s/img_1489.jpg.webp 400w, img/m/img_1489.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1489.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Eevee 050/064" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/eevee-050-064/">Eevee 050/064</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1490.jpg" alt="Espeon 086/197" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1490.jpg.webp" srcset="img/s/img_1490.jpg.webp 400w, img/m/img_1490.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1490.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Espeon 086/197" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/espeon-086-197/">Espeon 086/197</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1493.jpg" alt="Umbreon  130/197" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1493.jpg.webp" srcset="img/s/img_1493.jpg.webp 400w, img/m/img_1493.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1493.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Umbreon  130/197" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/umbreon-130-197/">Umbreon  130/197</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1486.jpg" alt="Battle Cage 085/094" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1486.jpg.webp" srcset="img/s/img_1486.jpg.webp 400w, img/m/img_1486.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1486.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Battle Cage 085/094" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/battle-cage-085-094/">Battle Cage 085/094</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1484.jpg" alt="Dawn 087/094" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1484.jpg.webp" srcset="img/s/img_1484.jpg.webp 400w, img/m/img_1484.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1484.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Dawn 087/094" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/dawn-087-094/">Dawn 087/094</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1485.jpg" alt="Lillie's Determination 119/132" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1485.jpg.webp" srcset="img/s/img_1485.jpg.webp 400w, img/m/img_1485.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1485.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Lillie's Determination 119/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/lillie-s-determination-119-132/">Lillie's Determination 119/132</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1483.jpg" alt="Bulbasaur 001/132" loading="lazy"/><span class="stock-badge">12 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1483.jpg.webp" srcset="img/s/img_1483.jpg.webp 400w, img/m/img_1483.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1483.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Bulbasaur 001/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">12 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/bulbasaur-001-132/">Bulbasaur 001/132</a></h3><div class="single-price">10 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1488.jpg" alt="Bayleef 009/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1488.jpg.webp" srcset="img/s/img_1488.jpg.webp 400w, img/m/img_1488.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1488.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Bayleef 009/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/bayleef-009-132/">Bayleef 009/132</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1491.jpg" alt="Chikorita 008/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1491.jpg.webp" srcset="img/s/img_1491.jpg.webp 400w, img/m/img_1491.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1491.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Chikorita 008/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/chikorita-008-132/">Chikorita 008/132</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1482.jpg" alt="Ivysaur 002/132" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1482.jpg.webp" srcset="img/s/img_1482.jpg.webp 400w, img/m/img_1482.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1482.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Ivysaur 002/132" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/ivysaur-002-132/">Ivysaur 002/132</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1501.jpg" alt="Eevee 074/131" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1501.jpg.webp" srcset="img/s/img_1501.jpg.webp 400w, img/m/img_1501.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1501.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Eevee 074/131" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/eevee-074-131/">Eevee 074/131</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1495.jpg" alt="Pikachu 051/162" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1495.jpg.webp" srcset="img/s/img_1495.jpg.webp 400w, img/m/img_1495.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1495.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Pikachu 051/162" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-051-162/">Pikachu 051/162</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1503.jpg" alt="Raichu 052/162" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1503.jpg.webp" srcset="img/s/img_1503.jpg.webp 400w, img/m/img_1503.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1503.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Raichu 052/162" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/raichu-052-162/">Raichu 052/162</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1499.jpg" alt="Turtwig 010/162" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1499.jpg.webp" srcset="img/s/img_1499.jpg.webp 400w, img/m/img_1499.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1499.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Turtwig 010/162" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/turtwig-010-162/">Turtwig 010/162</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1500.jpg" alt="Grotle 011/162" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1500.jpg.webp" srcset="img/s/img_1500.jpg.webp 400w, img/m/img_1500.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1500.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Grotle 011/162" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/grotle-011-162/">Grotle 011/162</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1497.jpg" alt="Totodile 039/162" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1497.jpg.webp" srcset="img/s/img_1497.jpg.webp 400w, img/m/img_1497.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1497.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Totodile 039/162" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/totodile-039-162/">Totodile 039/162</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/img_1498.jpg" alt="Croconaw 040/162" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/img_1498.jpg.webp" srcset="img/s/img_1498.jpg.webp 400w, img/m/img_1498.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/img_1498.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Croconaw 040/162" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/croconaw-040-162/">Croconaw 040/162</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/swsh_s_pikachu_052196_1.jpg" alt="Pikachu 052/196" loading="lazy"/><span class="stock-badge">4 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/swsh_s_pikachu_052196_1.jpg.webp" srcset="img/s/swsh_s_pikachu_052196_1.jpg.webp 400w, img/m/swsh_s_pikachu_052196_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/swsh_s_pikachu_052196_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Pikachu 052/196" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">4 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-052-196/">Pikachu 052/196</a></h3><div class="single-price">40 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_pikachu_027078_1.jpg" alt="Pikachu 027/078" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_pikachu_027078_1.jpg.webp" srcset="img/s/go_s_pikachu_027078_1.jpg.webp 400w, img/m/go_s_pikachu_027078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_pikachu_027078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Pikachu 027/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/pikachu-027-078/">Pikachu 027/078</a></h3><div class="single-price">30 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/swsh_s_morpeko_078202_1.jpg" alt="Morpeko 078/202" loading="lazy"/><span class="stock-badge">1 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/swsh_s_morpeko_078202_1.jpg.webp" srcset="img/s/swsh_s_morpeko_078202_1.jpg.webp 400w, img/m/swsh_s_morpeko_078202_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/swsh_s_morpeko_078202_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Morpeko 078/202" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">1 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/morpeko-078-202/">Morpeko 078/202</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_charmander_008078_1.jpg" alt="Charmander 008/078" loading="lazy"/><span class="stock-badge">5 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_charmander_008078_1.jpg.webp" srcset="img/s/go_s_charmander_008078_1.jpg.webp 400w, img/m/go_s_charmander_008078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_charmander_008078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Charmander 008/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">5 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/charmander-008-078/">Charmander 008/078</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_charmeleon_009078_1.jpg" alt="Charmeleon 009/078" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_charmeleon_009078_1.jpg.webp" srcset="img/s/go_s_charmeleon_009078_1.jpg.webp 400w, img/m/go_s_charmeleon_009078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_charmeleon_009078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Charmeleon 009/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/charmeleon-009-078/">Charmeleon 009/078</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_ivysaur_002078_1.jpg" alt="Ivysaur 002/078" loading="lazy"/><span class="stock-badge">5 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_ivysaur_002078_1.jpg.webp" srcset="img/s/go_s_ivysaur_002078_1.jpg.webp 400w, img/m/go_s_ivysaur_002078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_ivysaur_002078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Ivysaur 002/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">5 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/ivysaur-002-078/">Ivysaur 002/078</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_bulbasaur_001078_1.jpg" alt="Bulbasaur 001/078" loading="lazy"/><span class="stock-badge">6 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_bulbasaur_001078_1.jpg.webp" srcset="img/s/go_s_bulbasaur_001078_1.jpg.webp 400w, img/m/go_s_bulbasaur_001078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_bulbasaur_001078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Bulbasaur 001/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">6 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/bulbasaur-001-078/">Bulbasaur 001/078</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_wartortle_016078_1.jpg" alt="Wartortle 016/078" loading="lazy"/><span class="stock-badge">3 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_wartortle_016078_1.jpg.webp" srcset="img/s/go_s_wartortle_016078_1.jpg.webp 400w, img/m/go_s_wartortle_016078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_wartortle_016078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Wartortle 016/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">3 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/wartortle-016-078/">Wartortle 016/078</a></h3><div class="single-price">20 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/go_s_squirtle_015078_1.jpg" alt="Squirtle 015/078" loading="lazy"/><span class="stock-badge">5 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/go_s_squirtle_015078_1.jpg.webp" srcset="img/s/go_s_squirtle_015078_1.jpg.webp 400w, img/m/go_s_squirtle_015078_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/go_s_squirtle_015078_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Squirtle 015/078" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">5 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/squirtle-015-078/">Squirtle 015/078</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered">
-    <div class="single-img-wrap"><img src="img/astral_s_glaceon_038189_1.jpg" alt="Glaceon 038/189" loading="lazy"/><span class="stock-badge">2 ks</span></div>
+    <div class="single-img-wrap"><img src="img/s/astral_s_glaceon_038189_1.jpg.webp" srcset="img/s/astral_s_glaceon_038189_1.jpg.webp 400w, img/m/astral_s_glaceon_038189_1.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/astral_s_glaceon_038189_1.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Glaceon 038/189" width="400" height="400" decoding="async" loading="lazy"/><span class="stock-badge">2 ks</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/glaceon-038-189/">Glaceon 038/189</a></h3><div class="single-price">40 Kč</div></div>
   </div>
 <div class="single-card prerendered soldout">
-    <div class="single-img-wrap"><img src="img/sv151_s_eevee.jpg" alt="Eevee" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_eevee.jpg.webp" srcset="img/s/sv151_s_eevee.jpg.webp 400w, img/m/sv151_s_eevee.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_eevee.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Eevee" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/eevee/">Eevee</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered soldout">
-    <div class="single-img-wrap"><img src="img/sv151_s_ivysaur.jpg" alt="Ivysaur SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_ivysaur.jpg.webp" srcset="img/s/sv151_s_ivysaur.jpg.webp 400w, img/m/sv151_s_ivysaur.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_ivysaur.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Ivysaur SV: 151" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/ivysaur-sv-151/">Ivysaur SV: 151</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered soldout">
-    <div class="single-img-wrap"><img src="img/sv151_s_oldamber.jpg" alt="Old Amber  SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_oldamber.jpg.webp" srcset="img/s/sv151_s_oldamber.jpg.webp 400w, img/m/sv151_s_oldamber.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_oldamber.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Old Amber  SV: 151" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/old-amber-sv-151/">Old Amber  SV: 151</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered soldout">
-    <div class="single-img-wrap"><img src="img/sv151_s_snorlax.jpg" alt="Snorlax  SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_snorlax.jpg.webp" srcset="img/s/sv151_s_snorlax.jpg.webp 400w, img/m/sv151_s_snorlax.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_snorlax.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Snorlax  SV: 151" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/snorlax-sv-151/">Snorlax  SV: 151</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <div class="single-card prerendered soldout">
-    <div class="single-img-wrap"><img src="img/sv151_s_squirtle.jpg" alt="Squirtle  SV: 151" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
+    <div class="single-img-wrap"><img src="img/s/sv151_s_squirtle.jpg.webp" srcset="img/s/sv151_s_squirtle.jpg.webp 400w, img/m/sv151_s_squirtle.jpg.webp 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="img/sv151_s_squirtle.jpg" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig" alt="Squirtle  SV: 151" width="400" height="400" decoding="async" loading="lazy"/><div class="soldout-overlay"><span>Vyprodáno</span></div><span class="stock-badge soldout-badge">Vyprodáno</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/squirtle-sv-151/">Squirtle  SV: 151</a></h3><div class="single-price">15 Kč</div></div>
   </div>
 <!--/PRERENDER:singles--></div>
@@ -1568,7 +1571,7 @@
 <footer id="kontakt">
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="img/logo_nav.png" alt="Volt Impact Cards" onerror="this.style.display='none'"/>
+      <img src="img/logo_nav.png" alt="Volt Impact Cards" width="28" height="40" onerror="this.style.display='none'"/>
       <span class="footer-logo-text">Volt Impact <span>Cards</span></span>
     </div>
     <p class="footer-tagline">Pokémon TCG — Brno &amp; celá ČR</p>
@@ -1633,14 +1636,15 @@ function buildImgD(imgs) {
   const track = document.getElementById('modal-track');
   track.style.transition = 'none';
   track.style.transform = 'translateX(0)';
-  track.innerHTML = imgs.map(src =>
-    `<img class="modal-slide" src="${src}" alt="" onclick="openLightbox(this.src, this.alt)"/>`
+  track.innerHTML = imgs.map(src => lzeZmensit(src)
+    ? `<img class="modal-slide" src="${vimg(src,'l')}" data-orig="${src}" ${IMG_FALLBACK} alt="" onclick="openLightbox(this.dataset.orig, this.alt)"/>`
+    : `<img class="modal-slide" src="${src}" alt="" onclick="openLightbox(this.src, this.alt)"/>`
   ).join('');
   requestAnimationFrame(() => { track.style.transition = 'transform .3s ease'; });
   const hasMultiple = imgs.length > 1;
   const thumbs = document.getElementById('modal-thumbs');
   thumbs.innerHTML = hasMultiple
-    ? imgs.map((src,i) => `<img class="modal-thumb${i===0?' active':''}" src="${src}" alt="" onclick="selectImg(${i})"/>`).join('')
+    ? imgs.map((src,i) => `<img class="modal-thumb${i===0?' active':''}" src="${vimg(src,'s')}" data-orig="${src}" ${IMG_FALLBACK} alt="" onclick="selectImg(${i})"/>`).join('')
     : '';
   thumbs.style.display = hasMultiple ? 'flex' : 'none';
   const prevBtn = document.getElementById('modal-nav-prev');
@@ -1878,6 +1882,16 @@ function isNew(p) {
 }
 const NEW_BADGE = '<span class="new-badge">Novinka</span>';
 
+/* Zmenšené fotky ve WebP vyrábí build.mjs při nasazení (img/s 400 px, img/m 800 px, img/l 1200 px).
+   Když verze chybí, obrázek si přes onerror načte originál. */
+const IMG_FALLBACK = `onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig"`;
+function lzeZmensit(src) { return /^img\/[^\/]+\.(jpe?g|png)$/i.test(src || ''); }
+function vimg(src, v) { return lzeZmensit(src) ? 'img/' + v + '/' + src.slice(4) + '.webp' : src; }
+function cardImg(src, alt) {
+  if (!lzeZmensit(src)) return `<img src="${src}" alt="${alt}" loading="lazy" decoding="async"/>`;
+  return `<img src="${vimg(src,'s')}" srcset="${vimg(src,'s')} 400w, ${vimg(src,'m')} 800w" sizes="(max-width: 600px) 100vw, 320px" data-orig="${src}" ${IMG_FALLBACK} alt="${alt}" width="400" height="400" decoding="async" loading="lazy"/>`;
+}
+
 function norm(s) {
   return (s || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
@@ -1900,7 +1914,7 @@ function buildBulkCard(p) {
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:stockStr, series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title), stockNum:(Number(p.stock)||0)});
   return `<div class="product-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="product-img-wrap">
-      <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
+      ${cardImg(p.imgs[0], p.title)}
       ${so ? SOLDOUT_OVERLAY : ''}
       ${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}
       <span class="stock-badge${so ? ' soldout-badge' : ''}">${stockStr}</span>
@@ -1921,7 +1935,7 @@ function buildDeckCard(p) {
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title), stockNum:(Number(p.stock)||0)});
   return `<div class="deck-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
     <div class="deck-img-wrap">
-      <img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>
+      ${cardImg(p.imgs[0], p.title)}
       ${so ? SOLDOUT_OVERLAY : ''}
       ${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}
       <span class="deck-stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span>
@@ -1941,7 +1955,7 @@ function buildSingleCard(p) {
   const nw = isNew(p);
   const d = JSON.stringify({imgs:p.imgs, title:p.title, price:String(p.price), stock:so ? 'Vyprodáno' : p.stock+' ks', series:p.seriesLabel, era:p.era || '', type:p.type, desc:p.desc, features:p.features, soldout:so, featured:ft, isnew:nw, slug:slugify(p.title), stockNum:(Number(p.stock)||0)});
   return `<div class="single-card${so ? ' soldout' : ''}${ft ? ' featured' : ''}" data-price="${p.price}" data-series="${p.series}" data-era="${p.era || ''}" data-title="${norm(p.title)}" data-slug="${slugify(p.title)}" data-stock="${p.stock || 0}" data-added="${addedTs(p)}" onclick='openModal(${d.replace(/'/g,"&#39;")})'>
-    <div class="single-img-wrap"><img src="${p.imgs[0]}" alt="${p.title}" loading="lazy"/>${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
+    <div class="single-img-wrap">${cardImg(p.imgs[0], p.title)}${ft ? FEATURED_BADGE : ''}${nw ? NEW_BADGE : ''}${so ? SOLDOUT_OVERLAY : ''}<span class="stock-badge${so ? ' soldout-badge' : ''}">${so ? 'Vyprodáno' : p.stock + ' ks'}</span></div>
     <div class="single-info"><h3><a class="card-link" href="/karta/${slugify(p.title)}/" onclick="cardLink(event)">${p.title}</a></h3><div class="single-price">${p.price} Kč</div></div>
   </div>`;
 }

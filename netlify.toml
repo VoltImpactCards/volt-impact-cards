@@ -3,10 +3,16 @@
   publish = "."
   functions = "netlify/functions"
 
+# Fotky se nikdy nepřepisují (admin nové nahrává pod novým názvem), proto je lze cachovat déle
 [[headers]]
   for = "/img/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=2592000"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/products.json"

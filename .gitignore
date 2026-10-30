@@ -1,0 +1,5 @@
+# zmenšené fotky vyrábí build.mjs při nasazení
+img/s/
+img/m/
+img/l/
+node_modules/
