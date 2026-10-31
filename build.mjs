@@ -651,7 +651,9 @@ ${body}
 ` + foot;
 }
 
-const DNES = new Date().toLocaleDateString('cs-CZ');
+// Datum účinnosti právních dokumentů — měnit jen při skutečné změně textu podmínek
+// (dřív se sem dosazovalo dnešní datum, takže se „účinnost" posouvala při každém nasazení)
+const DNES = '31. 10. 2026';
 const PRODEJCE_BLOK = `<div class="box">
   <p><b>${SELLER.jmeno}</b>${SELLER.adresa ? '<br/>' + esc(SELLER.adresa) : ''}<br/>
   IČO: ${seller('ico')}<br/>
