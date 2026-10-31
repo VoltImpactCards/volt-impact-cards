@@ -806,4 +806,96 @@ ${urls.map(u => `  <url>
 </urlset>
 `, 'utf8');
 
+/* ── Produktové feedy pro srovnávače ──
+   /feeds/zbozi.xml  — Zboží.cz (Seznam), specifikace https://napoveda.sklik.cz/reklamy/xml-feed/specifikace/
+   /feeds/google.xml — Google Merchant Center (RSS 2.0 s atributy g:)
+   Generují se z products.json při každém nasazení, takže ceny a sklad jsou vždy aktuální. */
+const x = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '');
+const vyprodano = p => p.stock === 0 || p.soldout === true;
+const STAVY = { NM: 'Near Mint (NM)', LP: 'Lightly Played (LP)', MP: 'Moderately Played (MP)' };
+function stavKarty(p) {
+  const f = (p.features || []).join(' ');
+  if (/Moderately Played|\(MP\)/.test(f)) return 'MP';
+  if (/Lightly Played|\(LP\)/.test(f)) return 'LP';
+  return 'NM';
+}
+function feedNazev(p) {
+  const druh = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Pokémon deck' : 'Pokémon karty';
+  const serie = p.type === 'Single' && p.seriesLabel && !p.title.includes(p.seriesLabel) ? ' ' + p.seriesLabel : '';
+  return `${druh} ${p.title}${serie}`.replace(/\s+/g, ' ').trim();
+}
+function feedPopis(p) {
+  const vety = [p.desc, ...(p.features || [])]
+    .map(t => String(t || '').replace(/\s+/g, ' ').replace(/…|\.{3}/g, '.').trim())
+    .filter(Boolean)
+    .map(t => /[.!?]$/.test(t) ? t : t + '.');
+  if (!vety.some(v => /origin/i.test(v))) vety.push('Originální karty Pokémon TCG.');
+  return vety.join(' ');
+}
+function feedTyp(p) {
+  return p.type === 'Single' ? 'Singl karty' : p.type === 'Deck' ? 'Hotové decky' : 'Bulk sety karet';
+}
+const absImg = i => `${SITE}/${i}`;
+
+// Zboží.cz — vyprodané nabídky vynecháváme (feed nemá stav „vyprodáno")
+const zboziItems = all.filter(p => !vyprodano(p)).map(p => {
+  const stav = stavKarty(p);
+  return `<SHOPITEM>
+  <ITEM_ID>${x(p.slug)}</ITEM_ID>
+  <PRODUCTNAME>${x(feedNazev(p))}</PRODUCTNAME>
+  <PRODUCT>${x(feedNazev(p))}</PRODUCT>
+  <DESCRIPTION>${x(feedPopis(p))}</DESCRIPTION>
+  <URL>${SITE}/${OUT}/${p.slug}/</URL>
+  <PRICE_VAT>${Number(p.price)}</PRICE_VAT>
+  <DELIVERY_DATE>0</DELIVERY_DATE>
+  <IMGURL>${x(absImg(p.imgs[0]))}</IMGURL>
+${p.imgs.slice(1, 10).map(i => `  <IMGURL_ALTERNATIVE>${x(absImg(i))}</IMGURL_ALTERNATIVE>`).join('\n')}
+  <MANUFACTURER>Pokémon</MANUFACTURER>
+  <CATEGORYTEXT>Kultura a zábava | Volný čas | Společenské hry | Karetní hry | Sběratelské karetní hry</CATEGORYTEXT>
+  <PARAM><PARAM_NAME>Motiv sběratelských karet</PARAM_NAME><VAL>Pokémon</VAL></PARAM>
+  <CONDITION>used</CONDITION>
+  <CONDITION_DESC>${x(`Stav ${STAVY[stav]}. Originální karty Pokémon TCG, stav odpovídá uvedenému označení.`)}</CONDITION_DESC>
+  <WARRANTY>24</WARRANTY>
+  <DELIVERY><DELIVERY_ID>ZASILKOVNA</DELIVERY_ID><DELIVERY_PRICE>79</DELIVERY_PRICE></DELIVERY>
+  <DELIVERY><DELIVERY_ID>ZASILKOVNA_NA_ADRESU</DELIVERY_ID><DELIVERY_PRICE>109</DELIVERY_PRICE></DELIVERY>
+</SHOPITEM>`.replace(/\n\n/g, '\n');
+});
+
+// Google Merchant Center — i vyprodané (Google je jen označí jako nedostupné)
+const googleItems = all.map(p => `<item>
+  <g:id>${x(p.slug)}</g:id>
+  <title>${x(feedNazev(p).slice(0, 150))}</title>
+  <description>${x(feedPopis(p).slice(0, 5000))}</description>
+  <link>${SITE}/${OUT}/${p.slug}/</link>
+  <g:image_link>${x(absImg(p.imgs[0]))}</g:image_link>
+${p.imgs.slice(1, 11).map(i => `  <g:additional_image_link>${x(absImg(i))}</g:additional_image_link>`).join('\n')}
+  <g:availability>${vyprodano(p) ? 'out_of_stock' : 'in_stock'}</g:availability>
+  <g:price>${Number(p.price).toFixed(2)} CZK</g:price>
+  <g:condition>used</g:condition>
+  <g:brand>Pokémon</g:brand>
+  <g:identifier_exists>no</g:identifier_exists>
+  <g:google_product_category>6997</g:google_product_category>
+  <g:product_type>${x('Pokémon karty > ' + feedTyp(p))}</g:product_type>
+  <g:shipping><g:country>CZ</g:country><g:service>Zásilkovna výdejní místo</g:service><g:price>79.00 CZK</g:price></g:shipping>
+  <g:shipping><g:country>CZ</g:country><g:service>Zásilkovna na adresu</g:service><g:price>109.00 CZK</g:price></g:shipping>
+</item>`.replace(/\n\n/g, '\n'));
+
+await mkdir('feeds', { recursive: true });
+await writeFile('feeds/zbozi.xml', `<?xml version="1.0" encoding="utf-8"?>
+<SHOP xmlns="http://www.zbozi.cz/ns/offer/1.0">
+${zboziItems.join('\n')}
+</SHOP>
+`, 'utf8');
+await writeFile('feeds/google.xml', `<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+<channel>
+<title>Volt Impact Cards</title>
+<link>${SITE}/</link>
+<description>Pokémon karty skladem — bulk sety, singl karty a hotové decky</description>
+${googleItems.join('\n')}
+</channel>
+</rss>
+`, 'utf8');
+console.log(`Feedy: Zboží.cz ${zboziItems.length} nabídek, Google ${googleItems.length} produktů.`);
+
 console.log(`Vygenerováno ${all.length} stránek produktů + katalog + ${serieList.length} sérií + ${eraList.length} ér + 3 právní dokumenty + sitemap.`);
