@@ -282,7 +282,7 @@
     .copy-link:hover { color: var(--white); border-color: rgba(255,255,255,0.25); background: var(--surface2); transform: translateY(-2px); }
     .copy-link.done { color: #6ee7a8; border-color: rgba(110,231,168,0.4); }
     .filter-group-label {
-      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      display: block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
       letter-spacing: 1px; color: var(--grey);
     }
     .filter-select {
@@ -775,8 +775,8 @@
     .footer-legal a:hover { color: var(--yellow); }
     .footer-legal .links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.82rem; }
     .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .copyright { font-size: 0.8rem; color: #444455; }
-    .footer-disclaimer { font-size: 0.75rem; color: #333344; }
+    .copyright { font-size: 0.8rem; color: #8a8a9a; }
+    .footer-disclaimer { font-size: 0.75rem; color: #7d7d90; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -897,7 +897,7 @@
   <!-- FILTRY -->
   <div class="filters">
     <div class="filter-group grow">
-      <div class="filter-group-label">Hledat</div>
+      <label class="filter-group-label" for="filter-search">Hledat</label>
       <div class="search-wrap">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="search" class="search-input" id="filter-search" placeholder="Název nebo číslo karty…" autocomplete="off"/>
@@ -905,7 +905,7 @@
       </div>
     </div>
     <div class="filter-group">
-      <div class="filter-group-label">Cena</div>
+      <label class="filter-group-label" for="filter-price">Cena</label>
       <select class="filter-select" id="filter-price" onchange="activeFilters.price=this.value;applyFilters()">
         <option value="all">Všechny ceny</option>
         <option value="0-200">Do 200 Kč</option>
@@ -914,7 +914,7 @@
       </select>
     </div>
     <div class="filter-group">
-      <div class="filter-group-label">Série</div>
+      <label class="filter-group-label" for="filter-series">Série</label>
       <select class="filter-select" id="filter-series" onchange="activeFilters.series=this.value;applyFilters()">
         <option value="all">Všechny série</option>
         <optgroup label="Scarlet &amp; Violet">
@@ -957,7 +957,7 @@
       </select>
     </div>
     <div class="filter-group">
-      <div class="filter-group-label">Éra</div>
+      <label class="filter-group-label" for="filter-era">Éra</label>
       <select class="filter-select" id="filter-era" onchange="activeFilters.era=this.value;applyFilters()">
         <option value="all">Všechny éry</option>
         <option value="original">Original (1999–2003)</option>
@@ -974,7 +974,7 @@
       </select>
     </div>
     <div class="filter-group">
-      <div class="filter-group-label">Řadit</div>
+      <label class="filter-group-label" for="filter-sort">Řadit</label>
       <select class="filter-select" id="filter-sort" onchange="activeSort=this.value;applySort();applyFilters()">
         <option value="default">Doporučené</option>
         <option value="new">Nejnovější</option>
