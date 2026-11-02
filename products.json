@@ -1535,6 +1535,72 @@
       ],
       "featured": false,
       "addedAt": "2026-11-02"
+    },
+    {
+      "imgs": [
+        "img/img_0723.jpg",
+        "img/img_0724.jpg"
+      ],
+      "title": "Bronzong [G] Lv.58 (WCD10 PL 41)",
+      "price": 350,
+      "stock": 1,
+      "series": "mix",
+      "era": "platinum",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "Originální raritní karta Bronzong [G] ze speciální edice Pokémon World Championships 2010. Uncommon karta č. 41/127.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "WCD 2010",
+        "Raritní"
+      ],
+      "featured": true,
+      "addedAt": "2026-11-02"
+    },
+    {
+      "imgs": [
+        "img/img_0725.jpg"
+      ],
+      "title": "Bidoof (PRC 117)",
+      "price": 50,
+      "stock": 1,
+      "series": "mix",
+      "era": "xy",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "Full art karta Bidoof 117 ze série Primal Clash (rok 2015). Uncommon karta č. 117/160.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "Full Art",
+        "XY: Primal Clash"
+      ],
+      "featured": false,
+      "addedAt": "2026-11-02"
+    },
+    {
+      "imgs": [
+        "img/img_0726.jpg",
+        "img/img_0727.jpg"
+      ],
+      "title": "Azelf Lv.55 (WCD10 LA 19)",
+      "price": 599,
+      "stock": 1,
+      "series": "mix",
+      "era": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "Originální raritní karta Azelf ze speciální edice Pokémon World Championships 2010. Rare karta č. 19/146.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "WCD 2010",
+        "Raritní",
+        "Speciální edice"
+      ],
+      "featured": true,
+      "addedAt": "2026-11-02"
     }
   ]
 }
