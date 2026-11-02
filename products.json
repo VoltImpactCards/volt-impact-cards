@@ -1515,6 +1515,26 @@
       ],
       "featured": false,
       "addedAt": "2026-08-08"
+    },
+    {
+      "imgs": [
+        "img/img_0721.jpg"
+      ],
+      "title": "Bronzong FCO 61/124",
+      "price": 50,
+      "stock": 1,
+      "series": "mix",
+      "era": "xy",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "Pokémon karta Bronzong (HP 100, Stage 1) ze série Fates Collide. Ability Metal Fortress, útok Guard Press za 60 poškození. Rare karta č. 61/124.",
+      "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
+        "Originální karty"
+      ],
+      "featured": false,
+      "addedAt": "2026-11-02"
     }
   ]
 }
