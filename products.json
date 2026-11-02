@@ -1601,6 +1601,28 @@
       ],
       "featured": true,
       "addedAt": "2026-11-02"
+    },
+    {
+      "imgs": [
+        "img/img_0737.jpg",
+        "img/img_0738.jpg"
+      ],
+      "title": "Rattata (BS 61)",
+      "price": 100,
+      "stock": 1,
+      "series": "mix",
+      "era": "mix",
+      "seriesLabel": "Mix",
+      "type": "Single",
+      "desc": "Pokémon Rattata ze série Base Set z roku 1999. Common karta č. 61/102.",
+      "features": [
+        "Lightly Played (LP) stav",
+        "Originální neporušené karty",
+        "Base Set",
+        "Vintage"
+      ],
+      "featured": false,
+      "addedAt": "2026-11-02"
     }
   ]
 }
