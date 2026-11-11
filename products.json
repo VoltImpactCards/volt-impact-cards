@@ -427,17 +427,18 @@
       ],
       "title": "Obsidian Flames Bulk (82 ks)",
       "price": 250,
-      "stock": 2,
+      "stock": 1,
       "series": "obsidian",
+      "era": "sv",
       "seriesLabel": "Obsidian Flames",
       "type": "Bulk",
       "desc": "82 karet ze série Obsidian Flames bez duplicit.",
       "features": [
         "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "Bez duplicit",
         "Originální karty"
       ],
-      "era": "sv",
       "featured": false
     },
     {
@@ -509,7 +510,7 @@
       ],
       "title": "Ultra Pack (100 ks)",
       "price": 300,
-      "stock": 7,
+      "stock": 5,
       "series": "mix",
       "era": "mix",
       "seriesLabel": "Mix",
