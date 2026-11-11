@@ -11,7 +11,7 @@ const WA = '420605886256';
 const OUT = 'karta';
 
 /* ── Údaje prodávajícího ──
-   Doplň IČO (a případně adresu sídla) — promítne se do zápatí i do všech právních dokumentů. */
+   Doplň IČO (a případně adresu sídla) – promítne se do zápatí i do všech právních dokumentů. */
 const SELLER = {
   jmeno: 'David Vaněček',
   ico: '10895060',
@@ -36,6 +36,26 @@ const slugify = s => norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const VARIANTY = { s: 400, m: 800, l: 1200 };
 const lzeZmensit = src => /^img\/[^/]+\.(jpe?g|png)$/i.test(src || '');
 const vimg = (src, v) => lzeZmensit(src) ? `img/${v}/${src.slice(4)}.webp` : src;
+/* ── Česká typografie ──
+   Před zápisem každé stránky doplníme nezlomitelné mezery (U+00A0), aby na konci řádku nezůstávaly
+   jednopísmenné předložky a spojky, čísla se neoddělovala od jednotek a pomlčka nezačínala řádek.
+   Mění se jen text mezi značkami — skripty, styly a atributy zůstávají beze změny. */
+const NBSP = ' ';
+function typoText(t) {
+  return t
+    .replace(/(?<![\p{L}\p{N}&#;])([ksvzouaiKSVZOUAI]) +(?=\S)/gu, `$1${NBSP}`)          // v Brně, k hraní, a…
+    .replace(/(\d) +(?=(?:Kč|ks|kg|dnů|dny|dní|dne|let|měsíců|hodin|pracovní|pracovních|kalendářních|%|×)(?!\p{L}))/gu, `$1${NBSP}`) // 79 Kč, 14 dnů
+    .replace(/(?<!\d)(\d{1,3})(\d{3})(?= Kč)/g, `$1${NBSP}$2`)                        // 1100 Kč → 1 100 Kč
+    .replace(/(?<![\p{L}])(č\.|IČO:?|tel\.) +(?=\d)/gu, `$1${NBSP}`)                        // č. 038/189, IČO 108…
+    .replace(/(\d{1,2})\. (\d{1,2})\. (\d{4})/g, `$1.${NBSP}$2.${NBSP}$3`)                  // 31. 10. 2026
+    .replace(/\+420 (\d{3}) (\d{3}) (\d{3})/g, `+420${NBSP}$1${NBSP}$2${NBSP}$3`)
+    .replace(/ – /g, `${NBSP}– `);                                                         // pomlčka nezačne řádek
+}
+function typografie(html) {
+  return html.split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<textarea[\s\S]*?<\/textarea>|<[^>]*>)/)
+    .map((cast, i) => i % 2 ? cast : typoText(cast)).join('');
+}
+const zapisHtml = (soubor, html) => writeFile(soubor, typografie(html), 'utf8');
 const FALLBACK = `onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.orig"`;
 // obrázek karty v mřížce (nabídka, série, podobné produkty)
 function kartaImg(src, alt, pre = '', extra = ' loading="lazy"') {
@@ -116,7 +136,7 @@ footer{border-top:1px solid var(--border);margin-top:60px;padding-top:20px;color
 .catlist a{display:block;padding:6px 0;color:#c9c9d4;text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--border)}
 .catlist a:hover{color:var(--yellow)}`;
 
-/* Google tag (gtag.js) — vkládá se do hlavičky všech generovaných stránek */
+/* Google tag (gtag.js) – vkládá se do hlavičky všech generovaných stránek */
 const GTAG = `<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18418072866"></script>
 <script>
@@ -233,7 +253,7 @@ const CONSENT_BANNER = `<!-- Lišta souhlasu s cookies -->
 `;
 
 const foot = `<footer>
-  <p>Volt Impact Cards — Pokémon TCG, Brno &amp; celá ČR</p>
+  <p>Volt Impact Cards – Pokémon TCG, Brno a celá ČR</p>
   <p style="margin-top:6px">Prodávající: ${SELLER.jmeno}${SELLER.ico ? ', IČO ' + SELLER.ico : ''}${SELLER.adresa ? ', ' + SELLER.adresa : ''}${SELLER.dph ? '' : ' · Neplátce DPH'}</p>
   <p style="margin-top:6px"><a href="mailto:${MAIL}">${MAIL}</a> · <a href="https://wa.me/${WA}">WhatsApp</a> · <a href="${SITE}/">Zpět na nabídku</a> · <a href="${SITE}/serie/">Karty podle sérií</a> · <a href="${SITE}/${OUT}/">Všechny karty</a></p>
   <p style="margin-top:6px"><a href="${SITE}/obchodni-podminky/">Obchodní podmínky</a> · <a href="${SITE}/ochrana-osobnich-udaju/">Ochrana osobních údajů</a> · <a href="${SITE}/odstoupeni-od-smlouvy/">Odstoupení od smlouvy</a></p>
@@ -252,10 +272,10 @@ const dodani = (min, max) => ({
   transitTime: { '@type': 'QuantitativeValue', minValue: min, maxValue: max, unitCode: 'DAY' }
 });
 const SHIPPING_LD = [
-  { '@type': 'OfferShippingDetails', name: 'Zásilkovna — výdejní místo / Z-BOX',
+  { '@type': 'OfferShippingDetails', name: 'Zásilkovna – výdejní místo / Z-BOX',
     shippingRate: { '@type': 'MonetaryAmount', value: 79, currency: 'CZK' },
     shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CZ' }, deliveryTime: dodani(1, 2) },
-  { '@type': 'OfferShippingDetails', name: 'Zásilkovna — doručení na adresu',
+  { '@type': 'OfferShippingDetails', name: 'Zásilkovna – doručení na adresu',
     shippingRate: { '@type': 'MonetaryAmount', value: 109, currency: 'CZK' },
     shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CZ' }, deliveryTime: dodani(1, 2) }
 ];
@@ -269,7 +289,7 @@ const RETURN_LD = {
 
 /* ── Popisy sérií a ér pro jejich stránky ── */
 const SERIE_POPIS = {
-  sv151: 'Scarlet & Violet — 151 je speciální rozšíření z roku 2023 věnované původním 151 Pokémonům z regionu Kanto. Patří k nejoblíbenějším sériím posledních let mezi sběrateli.',
+  sv151: 'Scarlet & Violet – 151 je speciální rozšíření z roku 2023 věnované původním 151 Pokémonům z regionu Kanto. Patří k nejoblíbenějším sériím posledních let mezi sběrateli.',
   obsidian: 'Obsidian Flames je rozšíření éry Scarlet & Violet z roku 2023. Proslavila ho karta Charizard ex v podobě Tera Pokémona temného typu.',
   temporal: 'Temporal Forces je rozšíření éry Scarlet & Violet z roku 2024, které přineslo Ancient a Future Pokémony a návrat karet ACE SPEC.',
   sfa: 'Shrouded Fable je speciální rozšíření éry Scarlet & Violet z roku 2024 zaměřené na Pokémony z oblasti Kitakami.',
@@ -300,11 +320,11 @@ function productPage(p, similar) {
   const era = ERA_LABELS[p.era] || '';
   const so = p.stock === 0 || p.soldout === true;
   const kind = p.type === 'Single' ? 'Singl karta' : p.type === 'Deck' ? 'Deck' : 'Bulk set';
-  // Češi hledají „pokemon karta glaceon", ne jen „glaceon 038/189" — proto typ v titulku
+  // Češi hledají „pokemon karta glaceon", ne jen „glaceon 038/189" – proto typ v titulku
   const titleKind = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Pokémon deck' : (/bulk/i.test(p.title) ? 'Pokémon karty' : 'Pokémon karty bulk');
   const descKind = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Hotový Pokémon deck' : 'Bulk Pokémon karet';
   const seriesInTitle = p.type === 'Single' && p.seriesLabel && !p.title.includes(p.seriesLabel) ? ' ' + p.seriesLabel : '';
-  const title = `${p.title}${seriesInTitle} — ${titleKind} | Volt Impact Cards`;
+  const title = `${p.title}${seriesInTitle} – ${titleKind} | Volt Impact Cards`;
   const seriesUrl = SERIE_PAGES.has(p.series) ? `${SITE}/serie/${p.series}/` : '';
   const desc = [
     `${descKind} ${p.title}`,
@@ -362,7 +382,7 @@ function productPage(p, similar) {
     ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ''}
     ${(p.features || []).length ? `<ul class="feat">${p.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
     <div class="cta">
-      ${so ? '' : `<a class="p" href="${SITE}/#p=${p.slug}">Koupit — do košíku</a>`}
+      ${so ? '' : `<a class="p" href="${SITE}/#p=${p.slug}">Koupit – do košíku</a>`}
       <a class="s" href="${SITE}/">Zpět do nabídky</a>
     </div>
   </div>
@@ -379,12 +399,12 @@ ${similar.length ? `<div class="more">
 function catalogPage(all) {
   const url = `${SITE}/${OUT}/`;
   const title = 'Všechny karty a bulky | Volt Impact Cards';
-  const desc = `Kompletní seznam ${all.length} produktů — Pokémon TCG bulk sety, singl karty a decky skladem. Brno a celá ČR.`;
+  const desc = `Kompletní seznam ${all.length} produktů – Pokémon TCG bulk sety, singl karty a decky skladem. Brno a celá ČR.`;
   return head({ title, desc, url, img: `${SITE}/img/logo.png` }) + `
 <div class="crumbs"><a href="${SITE}/">Nabídka</a> › Karty</div>
 <h1 style="margin-bottom:18px">Všechny produkty</h1>
 <div class="catlist">
-${all.map(p => `<a href="${SITE}/${OUT}/${p.slug}/">${esc(p.title)} — ${p.price} Kč${p.stock === 0 ? ' (vyprodáno)' : ''}</a>`).join('\n')}
+${all.map(p => `<a href="${SITE}/${OUT}/${p.slug}/">${esc(p.title)} – ${p.price} Kč${p.stock === 0 ? ' (vyprodáno)' : ''}</a>`).join('\n')}
 </div>
 ` + foot;
 }
@@ -393,7 +413,7 @@ ${all.map(p => `<a href="${SITE}/${OUT}/${p.slug}/">${esc(p.title)} — ${p.pric
    Fotky nahrané přes administraci jdou z telefonu v původní velikosti (často 5–7 MB)
    a v Apple formátu MPO/HDR, který některé prohlížeče (Chrome) nezobrazí.
    Při každém nasazení je tady zmenšíme a převedeme na čistý JPEG.
-   Originály zůstávají v gitu — mění se jen to, co se nasazuje. */
+   Originály zůstávají v gitu – mění se jen to, co se nasazuje. */
 const MAX_PX = 1600;
 const MAX_KB = 500;
 
@@ -403,7 +423,7 @@ async function optimizeImages() {
   try {
     sharp = (await import('sharp')).default;
   } catch {
-    console.warn('sharp není k dispozici — přeskakuji optimalizaci fotek.');
+    console.warn('sharp není k dispozici – přeskakuji optimalizaci fotek.');
     return;
   }
   let files = [];
@@ -440,7 +460,7 @@ await optimizeImages();
 async function vyrobVarianty() {
   let sharp;
   try { sharp = (await import('sharp')).default; }
-  catch { console.warn('sharp není k dispozici — zmenšené fotky se nevyrobí (web použije originály).'); return; }
+  catch { console.warn('sharp není k dispozici – zmenšené fotky se nevyrobí (web použije originály).'); return; }
   let files = [];
   try { files = (await readdir('img')).filter(f => /\.(jpe?g|png)$/i.test(f)); } catch { return; }
   for (const v of Object.keys(VARIANTY)) await mkdir(`img/${v}`, { recursive: true });
@@ -458,7 +478,7 @@ async function vyrobVarianty() {
       hotovo++;
     } catch (e) { chyby++; console.warn(`WebP ${out}: ${e.message}`); }
   };
-  // 4 fotky současně — rychlé a nezahltí paměť
+  // 4 fotky současně – rychlé a nezahltí paměť
   for (let i = 0; i < ukoly.length; i += 4) await Promise.all(ukoly.slice(i, i + 4).map(zpracuj));
   console.log(`Zmenšené fotky: vyrobeno ${hotovo}, chyb ${chyby}.`);
 }
@@ -491,7 +511,7 @@ await mkdir(OUT, { recursive: true });
 for (const p of all) {
   const similar = all.filter(x => x.slug !== p.slug && x.series === p.series && x.stock !== 0).slice(0, 4);
   await mkdir(`${OUT}/${p.slug}`, { recursive: true });
-  await writeFile(`${OUT}/${p.slug}/index.html`, productPage(p, similar), 'utf8');
+  await zapisHtml(`${OUT}/${p.slug}/index.html`, productPage(p, similar));
 }
 /* ── Stránky sérií a ér ── */
 function produktyGrid(items) {
@@ -506,10 +526,10 @@ function skupinaPage(kind, key, label, popis, items) {
   const skladem = items.filter(p => !(p.stock === 0 || p.soldout === true));
   const ceny = skladem.map(p => p.price);
   const od = ceny.length ? Math.min(...ceny) : null;
-  const nadpis = kind === 'era' ? `Pokémon karty z éry ${label}` : `${label} — Pokémon karty`;
+  const nadpis = kind === 'era' ? `Pokémon karty z éry ${label}` : `${label} – Pokémon karty`;
   const title = kind === 'era'
-    ? `Éra ${label} — Pokémon karty skladem | Volt Impact Cards`
-    : `${label} karty — Pokémon singly a bulky | Volt Impact Cards`;
+    ? `Éra ${label} – Pokémon karty skladem | Volt Impact Cards`
+    : `${label} karty – Pokémon singly a bulky | Volt Impact Cards`;
   const desc = `${nadpis}: ${items.length} produktů${od !== null ? ' od ' + od + ' Kč' : ''}. Originální karty, osobní předání v Brně, Zásilkovnou po celé ČR.`;
   const crumbs = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -536,8 +556,8 @@ function skupinaPage(kind, key, label, popis, items) {
 function serieIndexPage(serie, ery) {
   const url = `${SITE}/serie/`;
   const title = 'Pokémon karty podle sérií a ér | Volt Impact Cards';
-  const desc = 'Pokémon karty rozdělené podle sérií a ér — Scarlet & Violet, Mega Evolution, Sword & Shield a další. Originální karty skladem.';
-  const radek = (base, key, label, n) => `<a href="${SITE}/${base}/${key}/">${esc(label)} — ${n} ${n === 1 ? 'produkt' : (n < 5 ? 'produkty' : 'produktů')}</a>`;
+  const desc = 'Pokémon karty rozdělené podle sérií a ér – Scarlet & Violet, Mega Evolution, Sword & Shield a další. Originální karty skladem.';
+  const radek = (base, key, label, n) => `<a href="${SITE}/${base}/${key}/">${esc(label)} – ${n} ${n === 1 ? 'produkt' : (n < 5 ? 'produkty' : 'produktů')}</a>`;
   return head({ title, desc, url, img: `${SITE}/img/logo.png` }) + `
 <div class="crumbs"><a href="${SITE}/">Nabídka</a> › Série a éry</div>
 <h1 style="margin-bottom:18px">Pokémon karty podle sérií a ér</h1>
@@ -548,7 +568,7 @@ function serieIndexPage(serie, ery) {
 ` + foot;
 }
 
-await writeFile(`${OUT}/index.html`, catalogPage(all), 'utf8');
+await zapisHtml(`${OUT}/index.html`, catalogPage(all));
 
 // série
 const serieMap = new Map();
@@ -573,13 +593,13 @@ await mkdir('era', { recursive: true });
 const seradit = items => [...items].sort((a, b) => (a.stock === 0) - (b.stock === 0));
 for (const s of serieList) {
   await mkdir(`serie/${s.key}`, { recursive: true });
-  await writeFile(`serie/${s.key}/index.html`, skupinaPage('serie', s.key, s.label, SERIE_POPIS[s.key], seradit(s.items)), 'utf8');
+  await zapisHtml(`serie/${s.key}/index.html`, skupinaPage('serie', s.key, s.label, SERIE_POPIS[s.key], seradit(s.items)));
 }
 for (const e of eraList) {
   await mkdir(`era/${e.key}`, { recursive: true });
-  await writeFile(`era/${e.key}/index.html`, skupinaPage('era', e.key, e.label, ERA_POPIS[e.key], seradit(e.items)), 'utf8');
+  await zapisHtml(`era/${e.key}/index.html`, skupinaPage('era', e.key, e.label, ERA_POPIS[e.key], seradit(e.items)));
 }
-await writeFile('serie/index.html', serieIndexPage(serieList, eraList), 'utf8');
+await zapisHtml('serie/index.html', serieIndexPage(serieList, eraList));
 
 /* ── Předvykreslení produktů do index.html ──
    Produkty se na domovské stránce vykreslují JavaScriptem. Sem je vložíme i přímo do HTML,
@@ -615,13 +635,37 @@ function poradi(items) {
 
 if (existsSync('index.html')) {
   let idx = await readFile('index.html', 'utf8');
-  for (const [skupina, prazdne] of [['bulks', ''], ['decks', '<p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky — brzy naskladníme!</p>'], ['singles', '']]) {
+  for (const [skupina, prazdne] of [['bulks', ''], ['decks', '<p style="color:var(--grey);font-size:0.9rem;">Zatím žádné decky – brzy naskladníme!</p>'], ['singles', '']]) {
     const items = poradi(all.filter(p => p.group === skupina));
     const html = items.length ? '\n' + items.map((p, i) => prerenderKarta(p, skupina === 'bulks' ? i : 99)).join('\n') + '\n' : prazdne;
     const re = new RegExp(`<!--PRERENDER:${skupina}-->[\\s\\S]*?<!--/PRERENDER:${skupina}-->`);
     if (re.test(idx)) idx = idx.replace(re, `<!--PRERENDER:${skupina}-->${html}<!--/PRERENDER:${skupina}-->`);
   }
-  await writeFile('index.html', idx, 'utf8');
+  // ── Recenze obchodu (schválené v adminu → reviews.json) ──
+  let recenze = [];
+  try { recenze = JSON.parse(await readFile('reviews.json', 'utf8')); } catch {}
+  recenze = (Array.isArray(recenze) ? recenze : [])
+    .filter(r => r && r.text)
+    .map(r => ({ ...r, hodnoceni: Math.min(5, Math.max(1, Number(r.hodnoceni) || 5)) }))
+    .sort((a, b) => String(b.datum || '').localeCompare(String(a.datum || '')));
+  const hvezdy = n => `<span class="rev-stars" aria-label="${n} z 5 hvězdiček">${'★'.repeat(n)}<span class="off">${'★'.repeat(5 - n)}</span></span>`;
+  const datumCz = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? `${+m[3]}. ${+m[2]}. ${m[1]}` : ''; };
+  const sklon = n => n === 1 ? 'recenze' : (n >= 2 && n <= 4 ? 'recenze' : 'recenzí');
+  let souhrn = '<p class="rev-sum">Zatím tu žádné recenze nejsou.</p>';
+  let karty = '<p class="rev-empty">Nakupovali jste u nás? Budeme rádi, když napíšete první recenzi.</p>';
+  if (recenze.length) {
+    const prumer = recenze.reduce((s, r) => s + r.hodnoceni, 0) / recenze.length;
+    souhrn = `<p class="rev-sum">${hvezdy(Math.round(prumer))} <b>${prumer.toFixed(1).replace('.', ',')}</b> z 5 · ${recenze.length} ${sklon(recenze.length)}</p>`;
+    karty = '\n' + recenze.map(r => `<figure class="rev-card">
+  ${hvezdy(r.hodnoceni)}
+  <blockquote>${esc(r.text)}</blockquote>
+  <figcaption><b>${esc(r.jmeno || 'Zákazník')}</b>${datumCz(r.datum) ? ' · ' + datumCz(r.datum) : ''}</figcaption>
+</figure>`).join('\n') + '\n';
+  }
+  idx = idx.replace(/<!--RECENZE-SOUHRN-->[\s\S]*?<!--\/RECENZE-SOUHRN-->/, `<!--RECENZE-SOUHRN-->${souhrn}<!--/RECENZE-SOUHRN-->`)
+           .replace(/<!--RECENZE-->[\s\S]*?<!--\/RECENZE-->/, `<!--RECENZE-->${karty}<!--/RECENZE-->`);
+
+  await zapisHtml('index.html', idx);
 }
 
 
@@ -651,7 +695,7 @@ ${body}
 ` + foot;
 }
 
-// Datum účinnosti právních dokumentů — měnit jen při skutečné změně textu podmínek
+// Datum účinnosti právních dokumentů – měnit jen při skutečné změně textu podmínek
 // (dřív se sem dosazovalo dnešní datum, takže se „účinnost" posouvala při každém nasazení)
 const DNES = '31. 10. 2026';
 const PRODEJCE_BLOK = `<div class="box">
@@ -682,9 +726,9 @@ ${PRODEJCE_BLOK}
 <h2>4. Dodání zboží</h2>
 <table>
   <tr><th>Způsob</th><th>Cena</th><th>Doba dodání</th></tr>
-  <tr><td>Zásilkovna — výdejní místo / Z-BOX</td><td>79 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
-  <tr><td>Zásilkovna — doručení na adresu</td><td>109 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
-  <tr><td>Osobní předání — Brno, Hlavní nádraží</td><td>zdarma</td><td>dle domluvy, po připsání platby</td></tr>
+  <tr><td>Zásilkovna – výdejní místo / Z-BOX</td><td>79 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
+  <tr><td>Zásilkovna – doručení na adresu</td><td>109 Kč</td><td>zpravidla 1–2 pracovní dny od podání</td></tr>
+  <tr><td>Osobní předání – Brno, Hlavní nádraží</td><td>zdarma</td><td>dle domluvy, po připsání platby</td></tr>
 </table>
 <p>Zásilku prodávající podá do 3 pracovních dnů od připsání platby. Zásilky jsou standardní, do hmotnosti 5 kg. Zboží je baleno tak, aby nedošlo k poškození karet při přepravě.</p>
 <p>Nebezpečí škody na zboží přechází na kupujícího převzetím zboží.</p>
@@ -718,18 +762,20 @@ ${PRODEJCE_BLOK}
   <tr><th>Údaje</th><th>Účel</th><th>Právní základ</th><th>Doba uchování</th></tr>
   <tr><td>Jméno a příjmení, e-mail, telefon, doručovací adresa nebo výdejní místo</td><td>Vyřízení objednávky, doručení zboží, komunikace</td><td>Plnění smlouvy</td><td>Po dobu vyřízení objednávky</td></tr>
   <tr><td>Údaje o objednávce a platbě</td><td>Vedení evidence a plnění daňových povinností</td><td>Právní povinnost</td><td>Dle zákona, zpravidla 10 let</td></tr>
+  <tr><td>Jméno, hodnocení a text recenze, případně číslo objednávky (to se nezveřejňuje)</td><td>Zveřejnění recenze na webu</td><td>Souhlas</td><td>Do odvolání souhlasu; recenzi na požádání odstraníme</td></tr>
 </table>
 
 <h2>Komu údaje předáváme</h2>
 <ul>
-  <li><b>Zásilkovna s.r.o.</b> — doručení zásilky (jméno, adresa nebo výdejní místo, telefon, e-mail)</li>
-  <li><b>Netlify, Inc.</b> — provoz webu a doručení formuláře s objednávkou</li>
-  <li><b>Google Ireland Limited</b> — měření účinnosti reklamy, pouze po udělení souhlasu s cookies</li>
+  <li><b>Zásilkovna s.r.o.</b> – doručení zásilky (jméno, adresa nebo výdejní místo, telefon, e-mail)</li>
+  <li><b>Netlify, Inc.</b> – provoz webu a doručení formulářů s objednávkou a recenzí</li>
+  <li><b>Google Ireland Limited</b> – měření účinnosti reklamy, pouze po udělení souhlasu s cookies</li>
   <li>Případně účetní nebo daňový poradce v rozsahu nutném pro vedení evidence</li>
 </ul>
 <p>Údaje neprodáváme ani nepředáváme třetím stranám pro marketingové účely.</p>
 
-<h2>Tvá práva</h2>
+<h2>Vaše práva</h2>
+<p>Máte právo:</p>
 <ul>
   <li>na přístup ke svým údajům a na jejich kopii</li>
   <li>na opravu nepřesných údajů</li>
@@ -743,7 +789,7 @@ ${PRODEJCE_BLOK}
 <h2>Cookies a měření reklamy</h2>
 <p>Web používá měřicí kód <b>Google Ads (gtag.js)</b> společnosti Google Ireland Limited, který nám ukazuje, kolik návštěv a objednávek přinesla reklama. Může při tom ukládat soubory cookie do Vašeho prohlížeče.</p>
 <p>Tyto cookies <b>nespouštíme bez Vašeho souhlasu</b>. Při první návštěvě se zobrazí lišta, kde volbu potvrdíte nebo odmítnete; do té doby je měření nastaveno jako zakázané (tzv. Consent Mode). Volbu si web uloží do místního úložiště prohlížeče a kdykoli ji změníte smazáním dat webu v prohlížeči.</p>
-<p>Odmítnutí nijak neomezuje nákup — objednávku lze dokončit v plném rozsahu.</p>
+<p>Odmítnutí nijak neomezuje nákup – objednávku lze dokončit v plném rozsahu.</p>
 <p>Obsah košíku se ukládá pouze do místního úložiště Vašeho prohlížeče (localStorage) a neodesílá se nikam, dokud objednávku sami neodešlete. Nejde o cookies a neslouží k měření.
 `;
 
@@ -753,7 +799,7 @@ const ODSTOUPENI = `
 
 <h2>Jak odstoupit</h2>
 <ol>
-  <li>Ve lhůtě 14 dnů pošlete jednoznačné oznámení na <a href="mailto:${MAIL}">${MAIL}</a> — můžete použít vzorový formulář níže.</li>
+  <li>Ve lhůtě 14 dnů pošlete jednoznačné oznámení na <a href="mailto:${MAIL}">${MAIL}</a> – můžete použít vzorový formulář níže.</li>
   <li>Zboží odešlete nebo předejte nejpozději do 14 dnů od odstoupení. Náklady na vrácení zboží hradí kupující.</li>
   <li>Peníze (včetně nákladů na dodání ve výši nejlevnějšího nabízeného způsobu) vrátíme do 14 dnů od odstoupení, nejdříve však po obdržení vráceného zboží nebo prokázání jeho odeslání. Vracíme je na účet, ze kterého platba přišla.</li>
 </ol>
@@ -777,12 +823,12 @@ Podpis (pouze pokud je formulář zasílán v listinné podobě): …………�
 `;
 
 for (const [slug, title, desc, body] of [
-  ['obchodni-podminky', 'Obchodní podmínky', 'Obchodní podmínky prodeje sběratelských karet Pokémon TCG — objednávka, platba převodem, doprava Zásilkovnou, odstoupení do 14 dnů a reklamace.', OP],
-  ['ochrana-osobnich-udaju', 'Ochrana osobních údajů', 'Jak zpracováváme osobní údaje zákazníků podle GDPR — jaké údaje, proč, komu je předáváme a jaká máte práva.', GDPR],
+  ['obchodni-podminky', 'Obchodní podmínky', 'Obchodní podmínky prodeje sběratelských karet Pokémon TCG – objednávka, platba převodem, doprava Zásilkovnou, odstoupení do 14 dnů a reklamace.', OP],
+  ['ochrana-osobnich-udaju', 'Ochrana osobních údajů', 'Jak zpracováváme osobní údaje zákazníků podle GDPR – jaké údaje, proč, komu je předáváme a jaká máte práva.', GDPR],
   ['odstoupeni-od-smlouvy', 'Odstoupení od smlouvy', 'Poučení o právu spotřebitele odstoupit od smlouvy do 14 dnů včetně vzorového formuláře.', ODSTOUPENI]
 ]) {
   await mkdir(slug, { recursive: true });
-  await writeFile(`${slug}/index.html`, legalPage(slug, title, desc, body), 'utf8');
+  await zapisHtml(`${slug}/index.html`, legalPage(slug, title, desc, body));
 }
 const LEGAL_SLUGS = ['obchodni-podminky', 'ochrana-osobnich-udaju', 'odstoupeni-od-smlouvy'];
 
@@ -809,8 +855,8 @@ ${urls.map(u => `  <url>
 `, 'utf8');
 
 /* ── Produktové feedy pro srovnávače ──
-   /feeds/zbozi.xml  — Zboží.cz (Seznam), specifikace https://napoveda.sklik.cz/reklamy/xml-feed/specifikace/
-   /feeds/google.xml — Google Merchant Center (RSS 2.0 s atributy g:)
+   /feeds/zbozi.xml  – Zboží.cz (Seznam), specifikace https://napoveda.sklik.cz/reklamy/xml-feed/specifikace/
+   /feeds/google.xml – Google Merchant Center (RSS 2.0 s atributy g:)
    Generují se z products.json při každém nasazení, takže ceny a sklad jsou vždy aktuální. */
 const x = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '');
 const vyprodano = p => p.stock === 0 || p.soldout === true;
@@ -839,7 +885,7 @@ function feedTyp(p) {
 }
 const absImg = i => `${SITE}/${i}`;
 
-// Zboží.cz — vyprodané nabídky vynecháváme (feed nemá stav „vyprodáno")
+// Zboží.cz – vyprodané nabídky vynecháváme (feed nemá stav „vyprodáno")
 const zboziItems = all.filter(p => !vyprodano(p)).map(p => {
   const stav = stavKarty(p);
   return `<SHOPITEM>
@@ -863,7 +909,7 @@ ${p.imgs.slice(1, 10).map(i => `  <IMGURL_ALTERNATIVE>${x(absImg(i))}</IMGURL_AL
 </SHOPITEM>`.replace(/\n\n/g, '\n');
 });
 
-// Google Merchant Center — i vyprodané (Google je jen označí jako nedostupné)
+// Google Merchant Center – i vyprodané (Google je jen označí jako nedostupné)
 const googleItems = all.map(p => `<item>
   <g:id>${x(p.slug)}</g:id>
   <title>${x(feedNazev(p).slice(0, 150))}</title>
@@ -893,7 +939,7 @@ await writeFile('feeds/google.xml', `<?xml version="1.0" encoding="utf-8"?>
 <channel>
 <title>Volt Impact Cards</title>
 <link>${SITE}/</link>
-<description>Pokémon karty skladem — bulk sety, singl karty a hotové decky</description>
+<description>Pokémon karty skladem – bulk sety, singl karty a hotové decky</description>
 ${googleItems.join('\n')}
 </channel>
 </rss>

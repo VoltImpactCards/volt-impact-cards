@@ -343,6 +343,7 @@
     <div class="tab" onclick="switchTab('singles')" id="tab-singles">Singl karty <span class="tab-count" id="cnt-singles">0</span></div>
     <div class="tab" onclick="switchTab('decks')" id="tab-decks">Decky <span class="tab-count" id="cnt-decks">0</span></div>
     <div class="tab" onclick="switchTab('faktury')" id="tab-faktury">Faktury <span class="tab-count" id="cnt-faktury">0</span></div>
+    <div class="tab" onclick="switchTab('recenze')" id="tab-recenze">Recenze <span class="tab-count" id="cnt-recenze">–</span></div>
   </div>
 
   <!-- TOOLBAR -->
@@ -401,6 +402,19 @@
       </div>
     </div>
     <div id="faktury-list"></div>
+  </div>
+
+  <!-- RECENZE -->
+  <div id="recenze-view" style="display:none">
+    <div class="settings-card" style="margin-bottom:16px">
+      <h2>Recenze od zákazníků</h2>
+      <div class="settings-row">
+        <input type="password" class="token-input" id="nl-token-r" placeholder="Netlify Personal Access Token"/>
+        <button class="btn btn-yellow" onclick="nactiRecenze()">Načíst recenze</button>
+      </div>
+      <p class="token-hint">Recenze odeslané z webu čekají na schválení. Po kliknutí na <b>Zveřejnit</b> se uloží do souboru reviews.json na GitHubu a za ~30 s se objeví na webu. <b>Skrýt</b> ji z webu zase odebere. Potřebuješ Netlify token (stejný jako u faktur) a připojený GitHub token. Spam stačí nezveřejnit; smazat ho můžeš v Netlify → Forms.</p>
+      <div id="recenze-list" style="margin-top:12px"></div>
+    </div>
   </div>
 
 </div>
@@ -586,12 +600,16 @@ function switchTab(tab) {
   document.getElementById('tab-' + tab).classList.add('active');
 
   const jeFaktury = tab === 'faktury';
+  const jeRecenze = tab === 'recenze';
+  const jinyPohled = jeFaktury || jeRecenze;
   document.getElementById('faktury-view').style.display = jeFaktury ? 'block' : 'none';
-  document.getElementById('product-list').style.display = jeFaktury ? 'none' : 'block';
-  document.querySelectorAll('.main > .toolbar').forEach(t => { t.style.display = jeFaktury ? 'none' : ''; });
+  document.getElementById('recenze-view').style.display = jeRecenze ? 'block' : 'none';
+  document.getElementById('product-list').style.display = jinyPohled ? 'none' : 'block';
+  document.querySelectorAll('.main > .toolbar').forEach(t => { t.style.display = jinyPohled ? 'none' : ''; });
   const gh = document.getElementById('settings-card');
-  if (gh) gh.style.display = jeFaktury ? 'none' : '';
+  if (gh) gh.style.display = jinyPohled ? 'none' : '';
   if (jeFaktury) { renderFaktury(); renderObjednavky(); return; }
+  if (jeRecenze) { document.getElementById('nl-token-r').value = nlToken; renderRecenze(); return; }
 
   currentTab = tab;
   const descs = { bulks: 'Bulk sety a mix balíčky', singles: 'Singl karty', decks: 'Hotové decky k hraní' };
@@ -871,6 +889,102 @@ function renderObjednavky() {
         <td><button class="btn btn-yellow btn-sm" onclick="fakturaZObjednavky(${i})">${f ? 'Vystavit znovu' : 'Vystavit fakturu'}</button></td>
       </tr>`;
     }).join('') + '</tbody></table>';
+}
+
+/* ── Recenze: Netlify Forms (formulář „recenze") → schválení → reviews.json na GitHubu ── */
+const REVIEWS_PATH = 'reviews.json';
+let recenzeOdeslane = [];   // všechny odeslané recenze z Netlify
+let recenzeWeb = [];        // zveřejněné (obsah reviews.json)
+let recenzeSha = null;
+
+async function nactiRecenzeZGitHubu() {
+  try {
+    const f = await ghGet(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${REVIEWS_PATH}`);
+    recenzeSha = f.sha;
+    recenzeWeb = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g, ''))))) || [];
+  } catch (e) {
+    if (String(e.message).includes('404')) { recenzeSha = null; recenzeWeb = []; } else throw e;
+  }
+}
+
+async function nactiRecenze() {
+  const t = document.getElementById('nl-token-r').value.trim();
+  if (!t) { toast('Zadej Netlify token', 'err'); return; }
+  if (!ghToken) { toast('Nejdřív se připoj k GitHubu (záložka produktů)', 'err'); return; }
+  nlToken = t; localStorage.setItem('vic_nl_token', t);
+  showLoading('Načítám recenze...');
+  try {
+    const r = await fetch(`https://api.netlify.com/api/v1/sites/${NL_SITE_ID}/submissions?per_page=100`, {
+      headers: { Authorization: 'Bearer ' + nlToken }
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const subs = await r.json();
+    recenzeOdeslane = subs.filter(s => s.form_name === 'recenze').map(s => {
+      const d = s.data || {};
+      return {
+        id: s.id,
+        datum: (s.created_at || '').slice(0, 10),
+        jmeno: String(d.jmeno || '').trim().slice(0, 60),
+        hodnoceni: Math.min(5, Math.max(1, parseInt(d.hodnoceni, 10) || 5)),
+        text: String(d.text || '').trim().slice(0, 1500),
+        objednavka: String(d.objednavka || '').trim()
+      };
+    }).filter(x => x.text);
+    await nactiRecenzeZGitHubu();
+    renderRecenze();
+    toast(`Načteno ${recenzeOdeslane.length} recenzí ✓`, 'ok');
+  } catch (e) {
+    toast('Nepodařilo se načíst: ' + e.message, 'err');
+  } finally { hideLoading(); }
+}
+
+function renderRecenze() {
+  const el = document.getElementById('recenze-list');
+  const cekajici = recenzeOdeslane.filter(r => !recenzeWeb.some(w => w.id === r.id)).length;
+  document.getElementById('cnt-recenze').textContent = recenzeOdeslane.length ? cekajici : '–';
+  // zveřejněné, které už v Netlify nejsou (např. smazané), ukážeme taky, ať jdou skrýt
+  const vse = [...recenzeOdeslane, ...recenzeWeb.filter(w => !recenzeOdeslane.some(r => r.id === w.id))];
+  if (!vse.length) { el.innerHTML = '<p style="color:var(--grey);font-size:.85rem">Zatím žádné recenze. Načti je tlačítkem výše.</p>'; return; }
+  vse.sort((a, b) => (b.datum || '').localeCompare(a.datum || ''));
+  el.innerHTML = `<table class="product-table"><thead><tr>
+      <th>Datum</th><th>Jméno</th><th>Hodnocení</th><th>Text</th><th>Stav</th><th style="width:120px"></th>
+    </tr></thead><tbody>` + vse.map(r => {
+      const verejna = recenzeWeb.some(w => w.id === r.id);
+      return `<tr>
+        <td>${esc(r.datum)}</td>
+        <td>${esc(r.jmeno)}${r.objednavka ? '<br/><span style="color:var(--grey);font-size:.75rem">obj. ' + esc(r.objednavka) + '</span>' : ''}</td>
+        <td style="color:var(--yellow);white-space:nowrap">${'★'.repeat(r.hodnoceni)}<span style="color:var(--grey)">${'★'.repeat(5 - r.hodnoceni)}</span></td>
+        <td style="max-width:380px;font-size:.82rem">${esc(r.text)}</td>
+        <td>${verejna ? '<span style="color:#6ee7a8">Zveřejněno</span>' : '<span style="color:var(--grey)">Čeká</span>'}</td>
+        <td>${verejna
+          ? `<button class="btn btn-ghost btn-sm" onclick="nastavRecenzi('${r.id}', false)">Skrýt</button>`
+          : `<button class="btn btn-yellow btn-sm" onclick="nastavRecenzi('${r.id}', true)">Zveřejnit</button>`}</td>
+      </tr>`;
+    }).join('') + '</tbody></table>';
+}
+
+async function nastavRecenzi(id, zverejnit) {
+  if (!ghToken) { toast('Nejdřív se připoj k GitHubu', 'err'); return; }
+  showLoading(zverejnit ? 'Zveřejňuji recenzi...' : 'Skrývám recenzi...');
+  try {
+    await nactiRecenzeZGitHubu(); // vždy z aktuální verze, ať se nic nepřepíše
+    if (zverejnit) {
+      const r = recenzeOdeslane.find(x => x.id === id);
+      if (r && !recenzeWeb.some(w => w.id === id)) recenzeWeb.push({ id: r.id, jmeno: r.jmeno || 'Zákazník', hodnoceni: r.hodnoceni, text: r.text, datum: r.datum });
+    } else {
+      recenzeWeb = recenzeWeb.filter(w => w.id !== id);
+    }
+    recenzeWeb.sort((a, b) => (b.datum || '').localeCompare(a.datum || ''));
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(recenzeWeb, null, 2))));
+    const body = { message: zverejnit ? 'Admin: zveřejněna recenze' : 'Admin: skryta recenze', content };
+    if (recenzeSha) body.sha = recenzeSha;
+    const res = await ghPut(`repos/${REPO_OWNER}/${REPO_NAME}/contents/${REVIEWS_PATH}`, body);
+    recenzeSha = res.content.sha;
+    renderRecenze();
+    toast(zverejnit ? 'Zveřejněno – na webu za ~30 s ✓' : 'Skryto ✓', 'ok');
+  } catch (e) {
+    toast('Chyba: ' + e.message, 'err');
+  } finally { hideLoading(); }
 }
 
 function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }

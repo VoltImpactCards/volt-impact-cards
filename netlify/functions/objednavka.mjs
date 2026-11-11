@@ -23,7 +23,7 @@ export function zpravaProZakaznika(o) {
 
   <table style="width:100%;border-collapse:collapse;margin-bottom:18px">
     ${radky.map(r => `<tr><td style="padding:6px 0;border-bottom:1px solid #eee;font-size:14px">${esc(r)}</td></tr>`).join('')}
-    <tr><td style="padding:8px 0;font-size:14px">Doprava — ${esc(o.doprava)}: <b>${esc(o.dopravaCena)}</b></td></tr>
+    <tr><td style="padding:8px 0;font-size:14px">Doprava – ${esc(o.doprava)}: <b>${esc(o.dopravaCena)}</b></td></tr>
     <tr><td style="padding:8px 0;border-top:2px solid #1a1a1a;font-size:16px"><b>Celkem k úhradě: ${esc(o.celkem)}</b></td></tr>
   </table>
 
@@ -36,7 +36,7 @@ export function zpravaProZakaznika(o) {
     <p style="margin:10px 0 0;font-size:13px;color:#666">Prosíme o úhradu do 7 dnů. Zboží odešleme, jakmile platba dorazí.</p>
   </div>
 
-  <p style="font-size:14px">Doručení: ${esc(o.doprava)}${o.vydejniMisto ? ' — ' + esc(o.vydejniMisto) : ''}${o.adresa ? ' — ' + esc(o.adresa) : ''}</p>
+  <p style="font-size:14px">Doručení: ${esc(o.doprava)}${o.vydejniMisto ? ' – ' + esc(o.vydejniMisto) : ''}${o.adresa ? ' – ' + esc(o.adresa) : ''}</p>
   ${o.poznamka ? `<p style="font-size:14px">Poznámka: ${esc(o.poznamka)}</p>` : ''}
 
   <p style="font-size:13px;color:#666;margin-top:24px">
@@ -50,7 +50,7 @@ export function zpravaProZakaznika(o) {
 
 export function zpravaProProdejce(o) {
   return `<div style="font-family:Arial,Helvetica,sans-serif;color:#1a1a1a">
-  <h2>Nová objednávka ${esc(o.cislo)} — ${esc(o.celkem)}</h2>
+  <h2>Nová objednávka ${esc(o.cislo)} – ${esc(o.celkem)}</h2>
   <p><b>${esc(o.jmeno)}</b><br/>${esc(o.email)}<br/>${esc(o.telefon)}</p>
   <p>Doprava: ${esc(o.doprava)} (${esc(o.dopravaCena)})<br/>
   ${o.vydejniMisto ? 'Výdejní místo: ' + esc(o.vydejniMisto) + '<br/>' : ''}
@@ -117,14 +117,14 @@ export default async (req) => {
       from: `"Volt Impact Cards" <${cfg.from}>`,
       to: o.email,
       replyTo: cfg.from,
-      subject: `Faktura ${faktura.cislo} — objednávka ${o.cislo}`,
+      subject: `Faktura ${faktura.cislo} – objednávka ${o.cislo}`,
       html: fakturaHtml(faktura)
     });
     await t.sendMail({
       from: `"Volt Impact Cards" <${cfg.from}>`,
       to: kopieProProdejce(cfg),
       replyTo: o.email,
-      subject: `Nová objednávka ${o.cislo} — ${o.celkem}`,
+      subject: `Nová objednávka ${o.cislo} – ${o.celkem}`,
       html: zpravaProProdejce(o)
     });
     return Response.json({ ok: true, kanal: cfg.kanal });

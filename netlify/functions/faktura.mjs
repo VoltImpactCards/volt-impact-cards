@@ -109,7 +109,7 @@ export default async (req) => {
       from: `"Volt Impact Cards" <${cfg.from}>`,
       to: f.odberatel.email,
       replyTo: cfg.from,
-      subject: `Faktura ${f.cislo} — Volt Impact Cards`,
+      subject: `Faktura ${f.cislo} – Volt Impact Cards`,
       html
     });
     return Response.json({ ok: true, kanal: cfg.kanal });

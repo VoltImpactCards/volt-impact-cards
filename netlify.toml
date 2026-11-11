@@ -18,3 +18,9 @@
   for = "/products.json"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Přejmenovaný produkt (oprava překlepu v názvu) – stará adresa vede na novou
+[[redirects]]
+  from = "/karta/phatasmal-flames-bulk-34-ks/*"
+  to = "/karta/phantasmal-flames-bulk-34-ks/"
+  status = 301
