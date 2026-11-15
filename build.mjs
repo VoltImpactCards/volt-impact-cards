@@ -266,6 +266,7 @@ ${CONSENT_BANNER}
 
 /* ── Strukturovaná data: doprava a vrácení (Google je doporučuje u produktů) ── */
 const ROK_DOPREDU = new Date(Date.now() + 365 * 86400000).toISOString().slice(0, 10);
+const DNES_ISO = new Date().toISOString().slice(0, 10);
 const dodani = (min, max) => ({
   '@type': 'ShippingDeliveryTime',
   handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 3, unitCode: 'DAY' },
@@ -310,6 +311,31 @@ const ERA_POPIS = {
   sm: 'Sun & Moon je éra z let 2017–2019 navazující na hry Pokémon Sun a Moon, známá kartami Pokémon GX.',
   bw: 'Black & White je éra z let 2011–2013 navazující na hry Pokémon Black a White.'
 };
+/* Doplňující odstavce pro stránky sérií a ér (víc obsahu = lepší šance na indexaci a hledání) */
+const SERIE_VICE = {
+  sv151: 'Hlavní sada má 165 karet a obsahuje Pokémony z původního Pokédexu Kanto – od Bulbasaura po Mew. Mezi sběrateli jsou nejžádanější ilustrace Charizard ex, Mew ex a Erika’s Invitation, hráči ocení hlavně karty pro stavbu decků s klasickými Pokémony.',
+  obsidian: 'Hlavní sada má 197 karet. Kromě Charizarda ex nabízí řadu Tera Pokémonů ex a karet trenérů, které se uplatní v herních balíčcích. Bulk z této série je ideální základ sbírky z éry Scarlet & Violet.',
+  temporal: 'Hlavní sada má 162 karet. Najdete v ní Pokémony Ancient a Future, například Walking Wake ex a Iron Leaves ex, a karty ACE SPEC, ze kterých může mít každý deck jen jednu.',
+  sfa: 'Hlavní sada má 64 karet a točí se kolem Pecharunta ex a trojice Okidogi, Munkidori a Fezandipiti. Díky malému rozsahu je to oblíbená série pro kompletování celé sady.',
+  surging: 'Hlavní sada má 191 karet. Kromě Pikachu ex obsahuje dračí a psychické Pokémony ex a řadu trenérů, kteří se dobře hodí do herních decků.',
+  prismatic: 'Hlavní sada má 131 karet a soustředí se na Eevee a jeho evoluce – Vaporeon, Jolteon, Flareon, Espeon, Umbreon, Leafeon, Glaceon a Sylveon. Patří k nejžádanějším sériím posledních let a karty z ní rychle mizí z trhu.',
+  jt: 'Hlavní sada má 159 karet. Vrací se v ní Pokémoni trenérů, například N’s Zoroark ex nebo Lillie’s Clefairy ex, kteří mají vlastní herní synergie s kartami svých trenérů.',
+  mega: 'Hlavní sada má 132 karet a přináší Mega Pokémony ex, například Mega Lucario ex a Mega Gardevoir ex. Je to vstupní bod do nejnovější éry Pokémon TCG.',
+  flames: 'Hlavní sada má 94 karet a hlavní hvězdou je Mega Charizard X ex. Mezi sběrateli je o ni velký zájem už od vydání.',
+  pokemongo: 'Hlavní sada má 78 karet a obsahuje Pokémony známé z mobilní hry, například Mewtwo VSTAR, Radiant Charizarda nebo Dragonite V. Je to dostupná série vhodná i pro začínající sběratele.',
+  lost: 'Hlavní sada má 196 karet. Kromě Giratiny VSTAR a mechaniky Lost Zone obsahuje i podsadu Trainer Gallery s ilustracemi Pokémonů a jejich trenérů.',
+  astral: 'Hlavní sada má 189 karet. Přinesla Origin Forme Dialgu a Palkiu VSTAR, Radiant Pokémony a podsadu Trainer Gallery.',
+  swshbase: 'Hlavní sada má 202 karet a uvedla Pokémony V a VMAX, například Zaciana V a Zamazentu V. Je to začátek celé éry Sword & Shield.'
+};
+const ERA_VICE = {
+  sv: 'Do éry patří například série 151, Obsidian Flames, Temporal Forces, Shrouded Fable, Surging Sparks, Prismatic Evolutions a Journey Together. Karty z ní jsou dnes nejsnáze dostupné a hodí se pro sběratele i hráče.',
+  mega: 'Éru otevřela základní série Mega Evolution a navázala na ni Phantasmal Flames. Mega Pokémoni ex patří k nejvýraznějším kartám současného Pokémon TCG.',
+  swsh: 'Do éry patří například základní série Sword & Shield, Astral Radiance, Pokémon GO a Lost Origin. Karty Pokémon V, VMAX a VSTAR jsou oblíbené u sběratelů i dnes.',
+  sm: 'Éra Sun & Moon je typická kartami Pokémon GX a Tag Team GX, které jsou dnes vyhledávané hlavně sběrateli.',
+  bw: 'Karty z éry Black & White jsou dnes už starší a mezi sběrateli oblíbené pro svůj vzhled a nostalgii.'
+};
+const SKUPINA_INFO = 'U každé karty uvádíme stav – Near Mint (NM), Lightly Played (LP) nebo Moderately Played (MP) – a prodáváme výhradně originální karty. Zboží posíláme Zásilkovnou po celé ČR (výdejní místo 79 Kč, na adresu 109 Kč), v Brně je možné osobní předání na hlavním nádraží zdarma.';
+
 // stránku dostanou jen skutečné série/éry s alespoň 2 produkty (žádné prázdné stránky)
 let SERIE_PAGES = new Set();
 let ERA_PAGES = new Set();
@@ -324,16 +350,22 @@ function productPage(p, similar) {
   const titleKind = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Pokémon deck' : (/bulk/i.test(p.title) ? 'Pokémon karty' : 'Pokémon karty bulk');
   const descKind = p.type === 'Single' ? 'Pokémon karta' : p.type === 'Deck' ? 'Hotový Pokémon deck' : 'Bulk Pokémon karet';
   const seriesInTitle = p.type === 'Single' && p.seriesLabel && !p.title.includes(p.seriesLabel) ? ' ' + p.seriesLabel : '';
-  const title = `${p.title}${seriesInTitle} – ${titleKind} | Volt Impact Cards`;
+  // Cena přímo v titulku zvyšuje proklik z výsledků hledání; značku přidáme jen když se vejde (~65 znaků)
+  const cenaTxt = Number(p.price).toLocaleString('cs-CZ');
+  const titleBase = `${p.title}${seriesInTitle} – ${titleKind} za ${cenaTxt} Kč`;
+  const title = titleBase.length <= 45 ? `${titleBase} | Volt Impact Cards` : titleBase;
   const seriesUrl = SERIE_PAGES.has(p.series) ? `${SITE}/serie/${p.series}/` : '';
+  const ff = (p.features || []).join(' ');
+  // stav uvádíme jen pokud je u produktu opravdu vyplněný
+  const stavTxt = /Moderately Played|\(MP\)/.test(ff) ? 'Moderately Played (MP)' : /Lightly Played|\(LP\)/.test(ff) ? 'Lightly Played (LP)' : /Near Mint|\(NM\)/.test(ff) ? 'Near Mint (NM)' : '';
+  const descLead = p.type === 'Single'
+    ? `Pokémon karta ${p.title}${p.seriesLabel && !p.title.includes(p.seriesLabel) ? ' (' + p.seriesLabel + ')' : ''}`
+    : p.type === 'Deck' ? `Hotový Pokémon deck ${p.title}` : `Pokémon karty ${p.title}`;
   const desc = [
-    `${descKind} ${p.title}`,
-    p.seriesLabel ? `ze série ${p.seriesLabel}` : '',
-    era ? `(${era})` : '',
-    `za ${p.price} Kč.`,
-    so ? 'Momentálně vyprodáno.' : `Skladem ${p.stock} ks.`,
-    'Osobní předání v Brně, zaslání po celé ČR.'
-  ].filter(Boolean).join(' ');
+    `${descLead} za ${cenaTxt} Kč –`,
+    so ? 'momentálně vyprodáno.' : `skladem ${p.stock} ks${stavTxt ? ', stav ' + stavTxt : ''}.`,
+    'Originální karty, Zásilkovnou po celé ČR od 79 Kč, osobní předání v Brně zdarma.'
+  ].join(' ');
 
   const ld = {
     '@context': 'https://schema.org', '@type': 'Product',
@@ -345,6 +377,7 @@ function productPage(p, similar) {
     offers: {
       '@type': 'Offer', url, price: p.price, priceCurrency: 'CZK',
       priceValidUntil: ROK_DOPREDU,
+      validFrom: DNES_ISO,
       availability: so ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/UsedCondition',
       seller: { '@type': 'Organization', name: 'Volt Impact Cards' },
@@ -550,6 +583,12 @@ function skupinaPage(kind, key, label, popis, items) {
 <h1 style="margin-bottom:12px">${esc(nadpis)}</h1>
 <p class="desc" style="max-width:720px">${esc(popis)} Skladem máme ${skladem.length} ${skladem.length === 1 ? 'produkt' : (skladem.length < 5 ? 'produkty' : 'produktů')}${od !== null ? ' od ' + od + ' Kč' : ''}.</p>
 <div class="more" style="margin-top:28px">${produktyGrid(items)}</div>
+<div style="max-width:720px;margin-top:32px">
+  <h2 style="font-size:1.05rem;margin-bottom:10px">${kind === 'era' ? 'O éře ' + esc(label) : 'O sérii ' + esc(label)}</h2>
+  ${(kind === 'era' ? ERA_VICE[key] : SERIE_VICE[key]) ? `<p class="desc">${esc(kind === 'era' ? ERA_VICE[key] : SERIE_VICE[key])}</p>` : ''}
+  <p class="desc">${esc(SKUPINA_INFO)}</p>
+  <p class="desc"><a href="${SITE}/serie/" style="color:var(--yellow)">Všechny série a éry</a> · <a href="${SITE}/karta/" style="color:var(--yellow)">Seznam všech karet</a></p>
+</div>
 ` + foot;
 }
 
