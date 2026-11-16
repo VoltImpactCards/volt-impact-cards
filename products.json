@@ -227,18 +227,19 @@
       ],
       "title": "Phantasmal Flames Bulk (34 ks)",
       "price": 100,
-      "stock": 3,
+      "stock": 2,
       "series": "flames",
+      "era": "mega",
       "seriesLabel": "Phantasmal Flames",
       "type": "Bulk",
       "desc": "34 karet z kolekce Mega Evolutions: Phantasmal Flames bez duplicit. Menší balíček pro doplnění kolekce.",
       "features": [
+        "Near Mint (NM) stav",
+        "Originální neporušené karty",
         "34 karet bez duplicit",
         "Kolekce Phantasmal Flames",
-        "Near Mint (NM) stav",
         "Originální karty"
       ],
-      "era": "mega",
       "featured": false
     },
     {
